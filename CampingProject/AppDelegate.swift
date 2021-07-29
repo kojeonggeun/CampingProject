@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // 스플래시 이미지 시간 조절 테스트
+        // sleep(3)
         return true
     }
 
@@ -31,6 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+ 
+}
 
+extension UIViewController{
+    // 화면을 터치하면 키보드 내려가게
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+           self.view.endEditing(true)
+       }
 }
 
