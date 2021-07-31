@@ -3,9 +3,10 @@
 //  CampingProject
 //
 //  Created by 고정근 on 2021/07/29.
-//
+
 
 import UIKit
+
 
 class SignUpViewController: UIViewController,UITextFieldDelegate {
 
@@ -17,7 +18,6 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     @IBAction func backScreen(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
     
     var user: [User] = []
     
@@ -33,6 +33,32 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         print(email, password, passwordConform)
         print(user)
         print(user[0].email)
+        
+        // 임시 코드
+        // vapor로 mysql 연동하여 get 테스트
+        var url = URLComponents(string: "http://127.0.0.1:8080/userAll/")!
+        let requestURL = url.url!
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        
+        let dataTask = session.dataTask(with: requestURL) { (data: Data?, response: URLResponse?, error: Error?) in
+            
+            guard error == nil else {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+
+            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                return
+            }
+
+            guard let jsonToArray = try? JSONSerialization.jsonObject(with: data, options: []) else {
+                print("json to Any Error")
+                return
+            }
+            
+            print(jsonToArray)
+        }
+        print(dataTask.resume())
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +73,8 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    
 }
 
 
