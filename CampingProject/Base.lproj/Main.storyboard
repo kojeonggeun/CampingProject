@@ -104,12 +104,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LyM-0u-qVR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-407.24637681159425" y="-520.3125"/>
+            <point key="canvasLocation" x="-454" y="-520"/>
         </scene>
-        <!--View Controller-->
+        <!--Item 2-->
+        <scene sceneID="fS9-0x-u7y">
+            <objects>
+                <viewController id="CCU-UH-tao" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cev-1E-XrL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="j5f-mP-n1V"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="lMN-nQ-yaC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sRn-gX-WWE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="941" y="340"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="QTQ-UQ-H0d">
+            <objects>
+                <viewController id="Cux-C8-lc4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sAx-JQ-vS9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="w0o-td-odk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="9gl-zF-oqy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s1s-v2-Yrs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="941" y="-268"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Xlj-gh-7o4">
+            <objects>
+                <tabBarController id="qJU-l5-s67" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="kko-gx-b0l"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FNy-Pa-twu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Cux-C8-lc4" kind="relationship" relationship="viewControllers" id="NHN-SO-91y"/>
+                        <segue destination="CCU-UH-tao" kind="relationship" relationship="viewControllers" id="jML-pB-DjT"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ldt-7J-2u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-125" y="195"/>
+        </scene>
+        <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,6 +195,9 @@
                                 <rect key="frame" x="188" y="461" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="로그인"/>
+                                <connections>
+                                    <action selector="loginBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hkP-lV-9vp"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gc5-Ci-sCw">
                                 <rect key="frame" x="182" y="499" width="52" height="30"/>
@@ -157,6 +211,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="uqb-PF-qkB" id="Bdo-gI-myY"/>
+                        <outlet property="passwordTextField" destination="74c-nf-WwY" id="d8s-Ne-pDX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

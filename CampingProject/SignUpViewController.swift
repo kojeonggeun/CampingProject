@@ -6,7 +6,7 @@
 
 
 import UIKit
-
+import Alamofire
 
 class SignUpViewController: UIViewController,UITextFieldDelegate {
 
@@ -20,46 +20,20 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     }
     
     var user: [User] = []
-    
+//    TODO : POST로 넘기는 작업 해야 함 
     @IBAction func signUpBtn(_ sender: Any) {
         guard let email = emailTextField.text else{ return }
         guard let password = passwordTextField.text else{ return }
         guard let passwordConform = passwordConformTextField.text else{ return }
         
-        
-        
-        user.append(User(email: email, password: password))
+//        user.append(User(id: <#String#>, email: email, password: password))
     
-        print(email, password, passwordConform)
-        print(user)
-        print(user[0].email)
+//        print(email, password, passwordConform)
+//        print(user)
+//        print(user[0].email)
         
-        // 임시 코드
-        // vapor로 mysql 연동하여 get 테스트
-        var url = URLComponents(string: "http://127.0.0.1:8080/userAll/")!
-        let requestURL = url.url!
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        
-        let dataTask = session.dataTask(with: requestURL) { (data: Data?, response: URLResponse?, error: Error?) in
-            
-            guard error == nil else {
-                print("Error occur: \(String(describing: error))")
-                return
-            }
-
-            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                return
-            }
-
-            guard let jsonToArray = try? JSONSerialization.jsonObject(with: data, options: []) else {
-                print("json to Any Error")
-                return
-            }
-            
-            print(jsonToArray)
-        }
-        print(dataTask.resume())
     }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
