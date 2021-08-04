@@ -19,21 +19,37 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    var user: [User] = []
+    let userManager: UserManager = UserManager()
 //    TODO : POST로 넘기는 작업 해야 함 
     @IBAction func signUpBtn(_ sender: Any) {
-        guard let email = emailTextField.text else{ return }
+        guard let email = emailTextField.text  else{ return }
         guard let password = passwordTextField.text else{ return }
         guard let passwordConform = passwordConformTextField.text else{ return }
         
-//        user.append(User(id: <#String#>, email: email, password: password))
-    
-//        print(email, password, passwordConform)
-//        print(user)
-//        print(user[0].email)
         
+        let encrypt: String = AES256Util.encrypt(string: password)
+        
+        if password == passwordConform && password != "" {
+            userManager.Register(email: email, password: encrypt)
+            
+            
+        } else {
+            UIView.animate(withDuration: 0.2, animations: {
+            self.passwordTextField.frame.origin.x -= 10
+            self.passwordConformTextField.frame.origin.x -= 10
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.passwordTextField.frame.origin.x += 20
+                    self.passwordConformTextField.frame.origin.x += 20
+                }, completion: { _ in
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.passwordTextField.frame.origin.x -= 10
+                        self.passwordConformTextField.frame.origin.x -= 10
+                    })
+                })
+            })
+        }
     }
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         

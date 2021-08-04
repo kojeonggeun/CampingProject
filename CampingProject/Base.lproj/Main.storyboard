@@ -11,9 +11,9 @@
         <!--Sign Up View Controller-->
         <scene sceneID="4h1-RN-XsF">
             <objects>
-                <viewController id="oLR-L4-H28" customClass="SignUpViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="oLR-L4-H28" customClass="SignUpViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M5n-Nl-ukV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9NR-K6-Zpz">
@@ -42,7 +42,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPx-kU-B2T">
-                                <rect key="frame" x="20" y="115" width="374" height="36"/>
+                                <rect key="frame" x="20" y="159" width="374" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -104,58 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LyM-0u-qVR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-454" y="-520"/>
-        </scene>
-        <!--Item 2-->
-        <scene sceneID="fS9-0x-u7y">
-            <objects>
-                <viewController id="CCU-UH-tao" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cev-1E-XrL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="j5f-mP-n1V"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="lMN-nQ-yaC"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sRn-gX-WWE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="941" y="340"/>
-        </scene>
-        <!--Item 1-->
-        <scene sceneID="QTQ-UQ-H0d">
-            <objects>
-                <viewController id="Cux-C8-lc4" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sAx-JQ-vS9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="w0o-td-odk"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="9gl-zF-oqy"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s1s-v2-Yrs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="941" y="-268"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="Xlj-gh-7o4">
-            <objects>
-                <tabBarController id="qJU-l5-s67" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="kko-gx-b0l"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FNy-Pa-twu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Cux-C8-lc4" kind="relationship" relationship="viewControllers" id="NHN-SO-91y"/>
-                        <segue destination="CCU-UH-tao" kind="relationship" relationship="viewControllers" id="jML-pB-DjT"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ldt-7J-2u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-125" y="195"/>
+            <point key="canvasLocation" x="9" y="-360"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -218,7 +167,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1188.4057971014495" y="-520.3125"/>
+            <point key="canvasLocation" x="-833" y="-360"/>
         </scene>
     </scenes>
     <resources>

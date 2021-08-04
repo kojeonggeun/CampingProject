@@ -10,9 +10,11 @@ import UIKit
 
 class SignInViewController: UIViewController{
     
-    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    
+    let userManager = UserManager()
     
     
     @IBAction func loginBtn(_ sender: Any) {
@@ -21,16 +23,25 @@ class SignInViewController: UIViewController{
         guard let password = passwordTextField.text else { return }
         
 //      TODO : 아이디와 비밀번호 입력 받아 DB에 있는 데이터와 비교해서 로그인 성공 유무 체크 해야 함
-        UserAPI.loginResult(email: email, password: password ){ user in
-            print(user)
+        userManager.login(email: email, password: password ){ user in
+
+            
+        }
+        
+//        performSegue(withIdentifier: "navi", sender: nil)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? TabBarViewController {
+            vc.segueText = segue.identifier
         }
     }
-  
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         passwordTextField.isSecureTextEntry = true
+        userManager.loadData()
         
     }
 }
