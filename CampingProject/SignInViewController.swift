@@ -14,7 +14,7 @@ class SignInViewController: UIViewController{
     @IBOutlet weak var passwordTextField: UITextField!
     
     
-    let userManager = UserManager()
+    let userManager: UserManager = UserManager.shared
     
     
     @IBAction func loginBtn(_ sender: Any) {
@@ -23,10 +23,14 @@ class SignInViewController: UIViewController{
         guard let password = passwordTextField.text else { return }
         
 //      TODO : 아이디와 비밀번호 입력 받아 DB에 있는 데이터와 비교해서 로그인 성공 유무 체크 해야 함
-        userManager.login(email: email, password: password ){ user in
+        if userManager.loginCheck(email: email, password: password){
+            print("login")
+        }
+        
+//        userManager.login(email: email, password: password ){ user in
 
             
-        }
+        
         
 //        performSegue(withIdentifier: "navi", sender: nil)
         
