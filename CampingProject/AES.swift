@@ -9,6 +9,7 @@ import Foundation
 import CryptoSwift
 
 
+
 class AES256Util {
 //키값 32바이트: AES256(24bytes: AES192, 16bytes: AES128)
     private static let SECRET_KEY = "01234567890123450123456789012340"

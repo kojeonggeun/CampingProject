@@ -74,7 +74,7 @@ class UserManager {
         let url = "http://127.0.0.1:8080/api/users"
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
-
+        
         AF.request(url,method: .post,parameters: params,encoding:JSONEncoding.default,headers: nil).validate(statusCode: 200..<300).responseData { response in
             
             switch response.result {
@@ -82,8 +82,8 @@ class UserManager {
                 print("POST 성공")
                 
                 guard let data = String(data: value, encoding: .utf8) else { return }
-                let a = self.convertStringToDictionary(text: data)
-                guard let userData = a as? [String: String] else { return }
+                let jsonData = self.convertStringToDictionary(text: data)
+                guard let userData = jsonData as? [String: String] else { return }
                 
                 self.user.append(User(id: userData["id"]!, email: userData["email"]!, password: userData["password"]!))
                 
