@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB19B4CF26B940F700473DF4 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CE26B940F700473DF4 /* TabBarViewController.swift */; };
+		CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */; };
+		CB534DF726C2664A0022EA20 /* FirstViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB534DF626C2664A0022EA20 /* FirstViewCell.swift */; };
 		CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037BA26B2728E0023042F /* AppDelegate.swift */; };
 		CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037BC26B2728E0023042F /* SceneDelegate.swift */; };
 		CB6037BF26B2728E0023042F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037BE26B2728E0023042F /* ViewController.swift */; };
@@ -18,13 +19,17 @@
 		CB6037D326B28A530023042F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037D226B28A530023042F /* UserModel.swift */; };
 		CBA2326E26BA57C500946DA0 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2326D26BA57C500946DA0 /* AES.swift */; };
 		CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */; };
+		CBA2327126BE609700946DA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBA2327026BE609700946DA0 /* GoogleService-Info.plist */; };
+		CBA2327326BE763200946DA0 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2327226BE763200946DA0 /* FirstViewController.swift */; };
+		CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2327426BE803600946DA0 /* SecondViewController.swift */; };
 		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		41765E29EA73FAA1FE98B10C /* Pods-CampingProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.debug.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.debug.xcconfig"; sourceTree = "<group>"; };
 		CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		CB19B4CE26B940F700473DF4 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		CB534DF626C2664A0022EA20 /* FirstViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewCell.swift; sourceTree = "<group>"; };
 		CB6037B726B2728E0023042F /* CampingProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampingProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6037BA26B2728E0023042F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB6037BC26B2728E0023042F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +41,9 @@
 		CB6037D026B289980023042F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		CB6037D226B28A530023042F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CBA2326D26BA57C500946DA0 /* AES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
+		CBA2327026BE609700946DA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CBA2327226BE763200946DA0 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		CBA2327426BE803600946DA0 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
 		DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampingProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -90,18 +98,22 @@
 		CB6037B926B2728E0023042F /* CampingProject */ = {
 			isa = PBXGroup;
 			children = (
+				CBA2327026BE609700946DA0 /* GoogleService-Info.plist */,
 				CB6037BA26B2728E0023042F /* AppDelegate.swift */,
 				CB6037BC26B2728E0023042F /* SceneDelegate.swift */,
 				CB6037BE26B2728E0023042F /* ViewController.swift */,
-				CB6037D226B28A530023042F /* UserModel.swift */,
-				CB6037D026B289980023042F /* SignUpViewController.swift */,
 				CB6037C026B2728E0023042F /* Main.storyboard */,
+				CB6037D226B28A530023042F /* UserModel.swift */,
 				CB6037C326B2728F0023042F /* Assets.xcassets */,
 				CB6037C526B2728F0023042F /* LaunchScreen.storyboard */,
 				CB6037C826B2728F0023042F /* Info.plist */,
-				CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */,
-				CB19B4CE26B940F700473DF4 /* TabBarViewController.swift */,
+				CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */,
 				CBA2326D26BA57C500946DA0 /* AES.swift */,
+				CB6037D026B289980023042F /* SignUpViewController.swift */,
+				CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */,
+				CB534DF626C2664A0022EA20 /* FirstViewCell.swift */,
+				CBA2327226BE763200946DA0 /* FirstViewController.swift */,
+				CBA2327426BE803600946DA0 /* SecondViewController.swift */,
 			);
 			path = CampingProject;
 			sourceTree = "<group>";
@@ -166,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB6037C726B2728F0023042F /* LaunchScreen.storyboard in Resources */,
+				CBA2327126BE609700946DA0 /* GoogleService-Info.plist in Resources */,
 				CB6037C426B2728F0023042F /* Assets.xcassets in Resources */,
 				CB6037C226B2728F0023042F /* Main.storyboard in Resources */,
 			);
@@ -221,13 +234,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB6037BF26B2728E0023042F /* ViewController.swift in Sources */,
+				CB534DF726C2664A0022EA20 /* FirstViewCell.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
-				CB19B4CF26B940F700473DF4 /* TabBarViewController.swift in Sources */,
+				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
 				CBA2326E26BA57C500946DA0 /* AES.swift in Sources */,
 				CB6037D326B28A530023042F /* UserModel.swift in Sources */,
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,
+				CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */,
+				CBA2327326BE763200946DA0 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

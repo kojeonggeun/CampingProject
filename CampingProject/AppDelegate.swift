@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // 스플래시 이미지 시간 조절 테스트
-        // sleep(3)
+        FirebaseApp.configure()
+         sleep(2)
         return true
     }
 

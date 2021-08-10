@@ -127,12 +127,125 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LyM-0u-qVR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="552" y="-354"/>
+            <point key="canvasLocation" x="-1332" y="-690"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="jxC-cN-LOs">
+            <objects>
+                <viewController id="gsg-uE-dRg" customClass="SecondViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="grC-9c-pMq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="3vb-r8-8Oa"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="hD9-4c-vCT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KJP-SK-onK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-572" y="656"/>
+        </scene>
+        <!--내 장비-->
+        <scene sceneID="K7R-5g-2sD">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="jsH-H6-KFl" customClass="FirstViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aYB-cG-jT3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NEy-xL-aYf">
+                                <rect key="frame" x="0.0" y="244" width="414" height="469"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstViewCell" id="Dic-Bd-iK6" customClass="FirstViewCell" customModule="CampingProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dic-Bd-iK6" id="iWi-UY-rLo">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GB7-fS-y1u">
+                                                    <rect key="frame" x="0.0" y="4" width="61" height="30.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkl-zv-yK3">
+                                                    <rect key="frame" x="377" y="4" width="17" height="30"/>
+                                                    <state key="normal" image="arrow.down" catalog="system"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tkl-zv-yK3" firstAttribute="top" secondItem="iWi-UY-rLo" secondAttribute="top" constant="4" id="1Nk-o3-rlk"/>
+                                                <constraint firstItem="GB7-fS-y1u" firstAttribute="leading" secondItem="iWi-UY-rLo" secondAttribute="leading" id="AwD-86-adD"/>
+                                                <constraint firstAttribute="bottom" secondItem="GB7-fS-y1u" secondAttribute="bottom" constant="9" id="B1T-RA-iBe"/>
+                                                <constraint firstAttribute="bottom" secondItem="tkl-zv-yK3" secondAttribute="bottom" constant="9.5" id="hcc-64-bch"/>
+                                                <constraint firstAttribute="trailing" secondItem="tkl-zv-yK3" secondAttribute="trailing" constant="20" symbolic="YES" id="m0l-cX-O1e"/>
+                                                <constraint firstItem="tkl-zv-yK3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GB7-fS-y1u" secondAttribute="trailing" constant="10" id="nf1-OA-IJc"/>
+                                                <constraint firstItem="GB7-fS-y1u" firstAttribute="top" secondItem="iWi-UY-rLo" secondAttribute="top" constant="4" id="pHv-Pz-ap8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="tableViewCellText" destination="GB7-fS-y1u" id="6Ke-m3-E16"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="jsH-H6-KFl" id="pXw-Yb-vbE"/>
+                                    <outlet property="delegate" destination="jsH-H6-KFl" id="cYs-uF-4F2"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 장비" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1p-oB-H5b">
+                                <rect key="frame" x="20" y="76" width="194" height="148"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="l1a-oT-yIM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="l1a-oT-yIM" firstAttribute="trailing" secondItem="c1p-oB-H5b" secondAttribute="trailing" constant="200" id="HCg-ph-gfu"/>
+                            <constraint firstItem="c1p-oB-H5b" firstAttribute="leading" secondItem="l1a-oT-yIM" secondAttribute="leading" constant="20" id="IT7-aH-UIe"/>
+                            <constraint firstItem="NEy-xL-aYf" firstAttribute="leading" secondItem="l1a-oT-yIM" secondAttribute="leading" id="KBP-DI-ScR"/>
+                            <constraint firstItem="NEy-xL-aYf" firstAttribute="top" secondItem="l1a-oT-yIM" secondAttribute="top" constant="200" id="hFL-lA-mw8"/>
+                            <constraint firstItem="NEy-xL-aYf" firstAttribute="top" secondItem="c1p-oB-H5b" secondAttribute="bottom" constant="20" id="mZf-a9-dM9"/>
+                            <constraint firstItem="c1p-oB-H5b" firstAttribute="top" secondItem="l1a-oT-yIM" secondAttribute="top" constant="32" id="nqj-nj-pOW"/>
+                            <constraint firstItem="l1a-oT-yIM" firstAttribute="bottom" secondItem="NEy-xL-aYf" secondAttribute="bottom" constant="100" id="pGN-fG-tB7"/>
+                            <constraint firstItem="l1a-oT-yIM" firstAttribute="trailing" secondItem="NEy-xL-aYf" secondAttribute="trailing" id="tYI-KO-dFz"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="내 장비" id="2Dv-iz-eTR"/>
+                    <connections>
+                        <outlet property="tableView" destination="NEy-xL-aYf" id="23L-FX-Fux"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kv9-Wn-kWl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-700" y="-53.571428571428569"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="25e-BD-S0r">
+            <objects>
+                <tabBarController modalPresentationStyle="fullScreen" id="3kT-bX-9Nt" customClass="MainTabBarController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PmC-XR-ndE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="jsH-H6-KFl" kind="relationship" relationship="viewControllers" id="3fp-tF-a6Q"/>
+                        <segue destination="gsg-uE-dRg" kind="relationship" relationship="viewControllers" id="a9L-1j-5Im"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vUl-2D-EZH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2191" y="243"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="SignInViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -280,14 +393,16 @@
                     <connections>
                         <outlet property="emailTextField" destination="uqb-PF-qkB" id="Bdo-gI-myY"/>
                         <outlet property="passwordTextField" destination="74c-nf-WwY" id="d8s-Ne-pDX"/>
+                        <segue destination="3kT-bX-9Nt" kind="presentation" identifier="MainTabBarController" id="Etg-3G-MQt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-545" y="-364"/>
+            <point key="canvasLocation" x="-2061" y="-690"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.down" catalog="system" width="120" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

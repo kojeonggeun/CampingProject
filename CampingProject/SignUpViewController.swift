@@ -4,13 +4,11 @@
 //
 //  Created by 고정근 on 2021/07/29.
 
-
 import UIKit
 import Alamofire
 
 class SignUpViewController: UIViewController,UITextFieldDelegate {
 
-    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordConformTextField: UITextField!
@@ -40,7 +38,9 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
             checkTextField.text = "이메일 형식이 맞지 않습니다."
             emailAnimation()
             return
+            
         }
+        
         if !userManager.isValidPassword(password: password){
             checkTextField.isHidden = false
             checkTextField.text = "비밀번호는 영어+숫자+특수문자, 8~20자리로 해야합니다."
@@ -48,16 +48,17 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
             return
         }
         
-        let encrypt: String = AES256Util.encrypt(string: password)
+//        let encrypt: String = AES256Util.encrypt(string: password)
         
         if password == passwordConform && password != "" {
-            userManager.Register(email: email, password: encrypt)
+            userManager.Register(email: email, password: password)
             checkTextField.isHidden = true
             
         } else {
             checkTextField.isHidden = false
             checkTextField.text = "비밀번호가 서로 다릅니다."
             passwordAnimation()
+            return
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -110,8 +111,4 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
-    
 }
-
-

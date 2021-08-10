@@ -26,7 +26,6 @@ class AES256Util {
         guard datas != nil else {
             return ""
         }
-
         let bytes = datas!.bytes
         let decode = try! getAESObject().decrypt(bytes)
 

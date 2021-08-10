@@ -15,14 +15,15 @@ struct User: Codable {
     var password: String
 }
 
-
-
 class UserManager {
     var user: [User] = []
+    let userDefaults = UserDefaults.standard
     
     static let shared = UserManager()
     
     func loadData(){
+        print("Www")
+//        self.userDefaults.set("ww", forKey: "ww")
         let url = "http://127.0.0.1:8080/api/users"
         AF.request(url,
                    method: .get,
@@ -39,61 +40,39 @@ class UserManager {
                         let json = try decoder.decode([User].self, from: result)
                         for i in json{
                             self.user.append(i)
-                            
                         }
                     } catch {
                         print("error!\(error)") } default: return }
         }
     }
     
-//    func login(email: String, password: String, completion: @escaping (Bool)-> Void) {
-//            let url = "http://127.0.0.1:8080/api/users"
-//            var check: Bool = false
-//            AF.request(url,
-//                       method: .get,
-//                       parameters: nil,
-//                       encoding: URLEncoding.default,
-//                       headers: ["Content-Type":"application/json", "Accept":"application/json"])
-//                .validate(statusCode: 200..<300)
-//                .responseJSON { (response) in
-//                    switch response.result{
-//                    case .success:
-//                        guard let result = response.data else {return}
-//                        do {
-//                            let decoder = JSONDecoder()
-//                            let json = try decoder.decode([User].self, from: result)
-//                            completion(check)
-//
-//
-//                        } catch {
-//                            print("error!\(error)") } default: return }
-//            }
-//        }
+
     
     func Register(email: String, password: String){
-        let url = "http://127.0.0.1:8080/api/users"
+//        지금은 HTTP가 되도록 설정해 놓음 추후에 INFO.PLIST 수정해야 한다
+        let url = "http://camtorage.bamdule.com/camtorage/api/user"
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
         
-        AF.request(url,method: .post,parameters: params,encoding:JSONEncoding.default,headers: nil).validate(statusCode: 200..<300).responseData { response in
+        AF.request(url,method: .post,parameters: params,encoding:URLEncoding.default,headers: ["Content-Type":"application/x-www-form-urlencoded"]).validate(statusCode: 200..<300).responseData { response in
             
             switch response.result {
             case .success(let value):
                 print("POST 성공")
-                
+
                 guard let data = String(data: value, encoding: .utf8) else { return }
-                let jsonData = self.convertStringToDictionary(text: data)
-                guard let userData = jsonData as? [String: String] else { return }
-                
-                self.user.append(User(id: userData["id"]!, email: userData["email"]!, password: userData["password"]!))
+                print(data)
+//                let jsonData = self.convertStringToDictionary(text: data)
+//                guard let userData = jsonData as? [String: String] else { return }
+//
+//                self.user.append(User(id: userData["id"]!, email: userData["email"]!, password: userData["password"]!))
                 
                 
             case .failure(let error):
-                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
+                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
-    
     
     func convertStringToDictionary(text: String) -> [String:AnyObject]? {
        if let data = text.data(using: .utf8) {
@@ -106,19 +85,39 @@ class UserManager {
        }
        return nil
    }
-  
-    
-    
-    func loginCheck(email:String, password: String) -> Bool{
-        for i in user{
-            if i.email == email && AES256Util.decrypt(encoded: i.password) == password {
-                return true
-            }
-        }
-        return false
+
+    func loginCheck(email:String, password: String){
+        let url = "http://camtorage.bamdule.com/camtorage/api/user/login"
+                AF.request(url,
+                           method: .post,
+                           parameters: ["email":email,"password":password],
+                           encoding: URLEncoding.default,
+                           headers: nil)
+                    .validate(statusCode: 200..<300)
+                    .responseJSON { (response) in
+                        switch response.result {
+                        case .success(let value):
+                            print("POST 성공")
+
+                            
+                            print(value)
+            //                let jsonData = self.convertStringToDictionary(text: data)
+            //                guard let userData = jsonData as? [String: String] else { return }
+            //
+            //                self.user.append(User(id: userData["id"]!, email: userData["email"]!, password: userData["password"]!))
+                            
+                            
+                        case .failure(let error):
+                            print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                        }
+                        
+                    }
+            
     }
     
+    
     func isValidEmail(email: String) -> Bool{
+        print(userDefaults.string(forKey: "ww") as! String)
         let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return predicate.evaluate(with: email)

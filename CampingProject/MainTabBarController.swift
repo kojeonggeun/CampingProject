@@ -8,17 +8,12 @@
 import Foundation
 import UIKit
 
-class TabBarViewController: UIViewController {
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    var segueText: String?
-    
+class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("awdawdawda")
         
-        
-        nameLabel.text = segueText
+        print(self.viewControllers)
     }
 }
+
 

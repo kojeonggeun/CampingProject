@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AuthenticationServices
 
 class SignInViewController: UIViewController{
     
@@ -23,27 +24,25 @@ class SignInViewController: UIViewController{
         guard let password = passwordTextField.text else { return }
         
 //      TODO : 아이디와 비밀번호 입력 받아 DB에 있는 데이터와 비교해서 로그인 성공 유무 체크 해야 함
-        if userManager.loginCheck(email: email, password: password){
-            print("login")
-        }
-        
-//        userManager.login(email: email, password: password ){ user in
-
+        userManager.loginCheck(email: email, password: password)
+        performSegue(withIdentifier: "MainTabBarController", sender: nil)
             
         
         
-//        performSegue(withIdentifier: "navi", sender: nil)
-        
     }
     
+    @IBAction func appleLogin(_ sender: Any) {
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? TabBarViewController {
-            vc.segueText = segue.identifier
-        }
+        if let barVC = segue.destination as? MainTabBarController {
+//                barVC.viewControllers?.forEach {
+//                }
+            }
     }
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         passwordTextField.isSecureTextEntry = true
         userManager.loadData()
         
