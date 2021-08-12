@@ -22,6 +22,8 @@
 		CBA2327126BE609700946DA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBA2327026BE609700946DA0 /* GoogleService-Info.plist */; };
 		CBA2327326BE763200946DA0 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2327226BE763200946DA0 /* FirstViewController.swift */; };
 		CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2327426BE803600946DA0 /* SecondViewController.swift */; };
+		CBAB103326C5510A0058F440 /* AddGearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103226C5510A0058F440 /* AddGearViewController.swift */; };
+		CBAB103626C552460058F440 /* GearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103526C552460058F440 /* GearModel.swift */; };
 		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,8 @@
 		CBA2327026BE609700946DA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CBA2327226BE763200946DA0 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		CBA2327426BE803600946DA0 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		CBAB103226C5510A0058F440 /* AddGearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGearViewController.swift; sourceTree = "<group>"; };
+		CBAB103526C552460058F440 /* GearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearModel.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
 		DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampingProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,6 +102,7 @@
 		CB6037B926B2728E0023042F /* CampingProject */ = {
 			isa = PBXGroup;
 			children = (
+				CBAB103426C552380058F440 /* Gear */,
 				CBA2327026BE609700946DA0 /* GoogleService-Info.plist */,
 				CB6037BA26B2728E0023042F /* AppDelegate.swift */,
 				CB6037BC26B2728E0023042F /* SceneDelegate.swift */,
@@ -116,6 +121,15 @@
 				CBA2327426BE803600946DA0 /* SecondViewController.swift */,
 			);
 			path = CampingProject;
+			sourceTree = "<group>";
+		};
+		CBAB103426C552380058F440 /* Gear */ = {
+			isa = PBXGroup;
+			children = (
+				CBAB103226C5510A0058F440 /* AddGearViewController.swift */,
+				CBAB103526C552460058F440 /* GearModel.swift */,
+			);
+			path = Gear;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,9 +251,11 @@
 				CB534DF726C2664A0022EA20 /* FirstViewCell.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
+				CBAB103326C5510A0058F440 /* AddGearViewController.swift in Sources */,
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
 				CBA2326E26BA57C500946DA0 /* AES.swift in Sources */,
+				CBAB103626C552460058F440 /* GearModel.swift in Sources */,
 				CB6037D326B28A530023042F /* UserModel.swift in Sources */,
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,
 				CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */,

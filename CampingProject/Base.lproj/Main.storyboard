@@ -216,6 +216,9 @@
                                 <state key="normal" image="plus.app" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                 </state>
+                                <connections>
+                                    <segue destination="hWv-Lq-Ccj" kind="presentation" identifier="AddGearViewController" id="icH-Ug-iaK"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비 리스트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1p-oB-H5b">
                                 <rect key="frame" x="20" y="122" width="136.5" height="36"/>
@@ -254,6 +257,31 @@
                 <exit id="Pke-rv-TyW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-700" y="-53.571428571428569"/>
+        </scene>
+        <!--Add Gear View Controller-->
+        <scene sceneID="PX8-u3-Jwu">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="hWv-Lq-Ccj" customClass="AddGearViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="70K-4n-Vmp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1r-Yh-62w">
+                                <rect key="frame" x="52" y="75" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="closeButton:" destination="hWv-Lq-Ccj" eventType="touchUpInside" id="DhR-GE-p0d"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="F0V-oW-Fmx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eHr-eo-Pah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="133" y="-4"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="25e-BD-S0r">
