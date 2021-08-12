@@ -12,8 +12,10 @@ import Alamofire
 struct User: Codable {
     var id: String
     var email: String
-    var password: String
+    
 }
+
+
 
 class UserManager {
     var user: [User] = []
@@ -22,14 +24,13 @@ class UserManager {
     static let shared = UserManager()
     
     func loadData(){
-        print("Www")
 //        self.userDefaults.set("ww", forKey: "ww")
-        let url = "http://127.0.0.1:8080/api/users"
+        let url = "http://camtorage.bamdule.com/camtorage/api/user"
         AF.request(url,
                    method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,
-                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
+                   headers: nil)
             .validate(statusCode: 200..<300)
             .responseJSON { (response) in
                 switch response.result{
@@ -54,19 +55,11 @@ class UserManager {
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
         
-        AF.request(url,method: .post,parameters: params,encoding:URLEncoding.default,headers: ["Content-Type":"application/x-www-form-urlencoded"]).validate(statusCode: 200..<300).responseData { response in
+        AF.request(url,method: .post,parameters: params,encoding:URLEncoding.default,headers: ["Content-Type":"application/x-www-form-urlencoded"]).validate(statusCode: 200..<300).responseJSON { response in
             
             switch response.result {
             case .success(let value):
                 print("POST 성공")
-
-                guard let data = String(data: value, encoding: .utf8) else { return }
-                print(data)
-//                let jsonData = self.convertStringToDictionary(text: data)
-//                guard let userData = jsonData as? [String: String] else { return }
-//
-//                self.user.append(User(id: userData["id"]!, email: userData["email"]!, password: userData["password"]!))
-                
                 
             case .failure(let error):
                 print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -97,27 +90,22 @@ class UserManager {
                     .responseJSON { (response) in
                         switch response.result {
                         case .success(let value):
-                            print("POST 성공")
-
+                            let json = value as! NSDictionary
+                            self.userDefaults.set(["token":json["jwt"], "email" : email],forKey: "token")
+                            print(self.userDefaults.dictionaryRepresentation().keys)
+                            print(self.userDefaults.dictionaryRepresentation().values)
                             
-                            print(value)
-            //                let jsonData = self.convertStringToDictionary(text: data)
-            //                guard let userData = jsonData as? [String: String] else { return }
-            //
-            //                self.user.append(User(id: userData["id"]!, email: userData["email"]!, password: userData["password"]!))
                             
                             
                         case .failure(let error):
                             print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                         }
-                        
                     }
-            
     }
     
     
     func isValidEmail(email: String) -> Bool{
-        print(userDefaults.string(forKey: "ww") as! String)
+        // print(userDefaults.string(forKey: "ww") as! String)
         let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return predicate.evaluate(with: email)

@@ -10,7 +10,7 @@ import UIKit
 
 class FirstViewCell: UITableViewCell {
     @IBOutlet weak var tableViewCellText: UILabel!
-    
+    @IBOutlet weak var expandButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

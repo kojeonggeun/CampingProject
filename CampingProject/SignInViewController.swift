@@ -17,26 +17,32 @@ class SignInViewController: UIViewController{
     
     let userManager: UserManager = UserManager.shared
     
+    @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
     
     @IBAction func loginBtn(_ sender: Any) {
         
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-//      TODO : 아이디와 비밀번호 입력 받아 DB에 있는 데이터와 비교해서 로그인 성공 유무 체크 해야 함
+
         userManager.loginCheck(email: email, password: password)
-        performSegue(withIdentifier: "MainTabBarController", sender: nil)
-            
-        
+        performSegue(withIdentifier: "MainTabBarController", sender: email)
+
         
     }
     
     @IBAction func appleLogin(_ sender: Any) {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let email = sender as? String else { return }
+  
+        
         if let barVC = segue.destination as? MainTabBarController {
-//                barVC.viewControllers?.forEach {
-//                }
+                barVC.viewControllers?.forEach {
+                    if let vc = $0 as? FirstViewController{
+                        vc.segueText = email
+                    }
+                }
             }
     }
         
@@ -44,7 +50,7 @@ class SignInViewController: UIViewController{
         super.viewDidLoad()
         
         passwordTextField.isSecureTextEntry = true
-        userManager.loadData()
+//        userManager.loadData()
         
     }
 }
