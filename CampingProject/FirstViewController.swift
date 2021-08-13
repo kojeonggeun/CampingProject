@@ -67,7 +67,6 @@ extension FirstViewController: UITableViewDataSource{
             if indexPath.row != 0{
                 cell.backgroundColor = .white
                 cell.expandButton.isHidden = true
-                
             }
             return cell
         }

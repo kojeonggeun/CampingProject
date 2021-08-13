@@ -15,9 +15,10 @@ class AddGearViewController: UIViewController{
         dismiss(animated: true, completion: nil)
     }
     
+    let gearManager = GearManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     

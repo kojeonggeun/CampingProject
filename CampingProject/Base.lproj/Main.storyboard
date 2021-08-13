@@ -261,17 +261,17 @@
         <!--Add Gear View Controller-->
         <scene sceneID="PX8-u3-Jwu">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="hWv-Lq-Ccj" customClass="AddGearViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="hWv-Lq-Ccj" customClass="AddGearViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="70K-4n-Vmp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1r-Yh-62w">
-                                <rect key="frame" x="52" y="75" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hb-mP-zdY">
+                                <rect key="frame" x="66" y="130" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="closeButton:" destination="hWv-Lq-Ccj" eventType="touchUpInside" id="DhR-GE-p0d"/>
+                                    <action selector="closeButton:" destination="hWv-Lq-Ccj" eventType="touchUpInside" id="waJ-lL-tSk"/>
                                 </connections>
                             </button>
                         </subviews>

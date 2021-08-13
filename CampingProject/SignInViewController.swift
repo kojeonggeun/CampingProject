@@ -50,7 +50,8 @@ class SignInViewController: UIViewController{
         super.viewDidLoad()
         
         passwordTextField.isSecureTextEntry = true
-//        userManager.loadData()
+        GearManager.shared.loadGearType()
+        
         
     }
 }

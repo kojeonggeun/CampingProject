@@ -25,7 +25,7 @@ class UserManager {
     
     func loadData(){
 //        self.userDefaults.set("ww", forKey: "ww")
-        let url = "http://camtorage.bamdule.com/camtorage/api/user"
+        let url = "https://camtorage.bamdule.com/camtorage/api/user"
         AF.request(url,
                    method: .get,
                    parameters: nil,
@@ -51,7 +51,7 @@ class UserManager {
     
     func Register(email: String, password: String){
 //        지금은 HTTP가 되도록 설정해 놓음 추후에 INFO.PLIST 수정해야 한다
-        let url = "http://camtorage.bamdule.com/camtorage/api/user"
+        let url = "https://camtorage.bamdule.com/camtorage/api/user"
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
         
@@ -80,7 +80,7 @@ class UserManager {
    }
 
     func loginCheck(email:String, password: String){
-        let url = "http://camtorage.bamdule.com/camtorage/api/user/login"
+        let url = "https://camtorage.bamdule.com/camtorage/api/user/login"
                 AF.request(url,
                            method: .post,
                            parameters: ["email":email,"password":password],
@@ -91,7 +91,8 @@ class UserManager {
                         switch response.result {
                         case .success(let value):
                             let json = value as! NSDictionary
-                            self.userDefaults.set(["token":json["jwt"], "email" : email],forKey: "token")
+                            self.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
+                            print(self.userDefaults.value(forKey: "token"))
                             print(self.userDefaults.dictionaryRepresentation().keys)
                             print(self.userDefaults.dictionaryRepresentation().values)
                             
