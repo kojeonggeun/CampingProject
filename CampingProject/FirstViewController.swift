@@ -55,9 +55,8 @@ extension FirstViewController: UITableViewDataSource{
         
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? FirstViewCell else { return UITableViewCell() }
             cell.tableViewCellText.text = tableViewData[indexPath.section].title
-//            cell.backgroundColor = .purple
             cell.expandButton.isHidden = false
-            cell.expandButton.isSelected = true
+            
             return cell
             
         } else {
