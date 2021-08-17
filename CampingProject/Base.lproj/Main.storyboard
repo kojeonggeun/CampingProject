@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -129,7 +130,7 @@
             </objects>
             <point key="canvasLocation" x="-1332" y="-690"/>
         </scene>
-        <!--Item 2-->
+        <!--마이페이지-->
         <scene sceneID="jxC-cN-LOs">
             <objects>
                 <viewController id="gsg-uE-dRg" customClass="SecondViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -139,7 +140,7 @@
                         <viewLayoutGuide key="safeArea" id="3vb-r8-8Oa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="hD9-4c-vCT"/>
+                    <tabBarItem key="tabBarItem" title="마이페이지" id="hD9-4c-vCT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KJP-SK-onK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -267,9 +268,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hb-mP-zdY">
-                                <rect key="frame" x="66" y="130" width="46" height="30"/>
+                                <rect key="frame" x="61" y="130" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="뒤로 가기"/>
                                 <connections>
                                     <action selector="closeButton:" destination="hWv-Lq-Ccj" eventType="touchUpInside" id="waJ-lL-tSk"/>
                                 </connections>
@@ -353,16 +354,61 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aKj-4e-gOY">
-                                <rect key="frame" x="202" y="516" width="124" height="180"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbd-QF-N2R">
-                                <rect key="frame" x="230" y="722" width="46" height="30"/>
+                                <rect key="frame" x="219" y="722" width="69" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="이미지 선택"/>
                                 <connections>
                                     <action selector="didTapButton:" destination="hWv-Lq-Ccj" eventType="touchUpInside" id="ge1-Kp-h1H"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WeG-f7-vTD">
+                                <rect key="frame" x="99" y="538" width="191" height="168"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="q1I-1v-hpm">
+                                    <size key="itemSize" width="131" height="169.66666666666666"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearImageCollectionViewCell" id="Z93-CQ-lnu" customClass="GearImageCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="-0.66666666666666663" width="131" height="169.66666666666666"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="O3T-GB-89L">
+                                            <rect key="frame" x="0.0" y="0.0" width="131" height="169.66666666666666"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aKj-4e-gOY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="129" height="173"/>
+                                                    <color key="backgroundColor" systemColor="linkColor"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="aKj-4e-gOY" secondAttribute="bottom" constant="1" id="8h0-p3-NNU"/>
+                                                <constraint firstAttribute="trailing" secondItem="aKj-4e-gOY" secondAttribute="trailing" constant="215" id="Yet-CW-tQa"/>
+                                                <constraint firstItem="aKj-4e-gOY" firstAttribute="top" secondItem="O3T-GB-89L" secondAttribute="top" id="YzC-tP-g5k"/>
+                                                <constraint firstItem="aKj-4e-gOY" firstAttribute="leading" secondItem="O3T-GB-89L" secondAttribute="leading" id="o09-Lq-rHy"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="131" height="169.66666666666666"/>
+                                        <connections>
+                                            <outlet property="gearImage" destination="aKj-4e-gOY" id="KMu-d3-3Is"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="hWv-Lq-Ccj" id="c5g-Xf-iXv"/>
+                                    <outlet property="delegate" destination="hWv-Lq-Ccj" id="5p2-Hq-V51"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="63Y-N1-hhI">
+                                <rect key="frame" x="79" y="752" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="저장"/>
+                                <connections>
+                                    <action selector="gearSave:" destination="hWv-Lq-Ccj" eventType="touchUpInside" id="Shs-4l-I0L"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -370,14 +416,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="gearImage" destination="aKj-4e-gOY" id="ahO-UV-PEn"/>
+                        <outlet property="gearCapacity" destination="wH7-Y1-k8e" id="Z7p-9j-7uC"/>
+                        <outlet property="gearCollectionView" destination="WeG-f7-vTD" id="tOw-Xp-Dp8"/>
+                        <outlet property="gearColor" destination="xYB-2F-GcM" id="qGq-Hw-x0d"/>
+                        <outlet property="gearCompany" destination="fZZ-sl-bR1" id="TY6-qE-F1K"/>
+                        <outlet property="gearName" destination="TCa-Ij-R7o" id="uNZ-DB-7SM"/>
                         <outlet property="gearTypeLabel" destination="VgR-sj-oKM" id="jvM-HN-uKA"/>
                         <outlet property="gearTypeTextField" destination="lXO-GD-25q" id="l40-BG-R8x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eHr-eo-Pah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29.23076923076923" y="-50.473933649289094"/>
+            <point key="canvasLocation" x="36.92307692307692" y="-65.402843601895725"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="25e-BD-S0r">
@@ -560,6 +610,9 @@
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

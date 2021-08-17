@@ -13,6 +13,7 @@ import Alamofire
 class GearManager{
   
     static let shared = GearManager()
+    let userDefaults = UserDefaults.standard
     var gears: [GearType] = []
     
     func loadGearType() {
@@ -48,6 +49,12 @@ class GearManager{
             print("--> parsing error: \(error.localizedDescription)")
           
         }
+    }
+    
+    
+    func gearSave(name: String, type: Int, color: String, company: String, capacity: String, image: [UIImage] ){
+        let url = "https://camtorage.bamdule.com/camtorage/api/gear"
+        
     }
     
     

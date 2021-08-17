@@ -104,7 +104,6 @@ class UserManager {
                     }
     }
     
-    
     func isValidEmail(email: String) -> Bool{
         // print(userDefaults.string(forKey: "ww") as! String)
         let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
