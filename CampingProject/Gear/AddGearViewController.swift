@@ -34,9 +34,9 @@ class AddGearViewController: UIViewController{
     
     @IBAction func gearSave(_ sender: Any) {
         guard let name = gearName.text else { return }
-        guard let color = gearName.text else { return }
-        guard let company = gearName.text else { return }
-        guard let capacity = gearName.text else { return }
+        guard let color = gearColor.text else { return }
+        guard let company = gearCompany.text else { return }
+        guard let capacity = gearCapacity.text else { return }
         
         gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, image: photoArray)
     }
@@ -131,22 +131,22 @@ extension AddGearViewController: UIPickerViewDataSource{
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return gearManager.gears.count
-//        return gg.count
+//        return gearManager.gears.count
+        return gg.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return gearManager.gears[row].gearName
-//        return gg[row]
+//        return gearManager.gears[row].gearName
+        return gg[row]
     }
 }
 
 extension AddGearViewController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        gearTypeTextField.text = gearManager.gears[row].gearName
-        gearTypeId = gearManager.gears[row].gearID
-
-//        gearTypeLabel.text = gg[row]
+//        gearTypeTextField.text = gearManager.gears[row].gearName
+//        gearTypeId = gearManager.gears[row].gearID
+        gearTypeId = 25
+        gearTypeLabel.text = gg[row]
 
 
     }
@@ -161,7 +161,7 @@ extension AddGearViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GearImageCollectionViewCell", for: indexPath) as? GearImageCollectionViewCell else { return UICollectionViewCell() }
-        print(self.photoArray[indexPath.row].pngData())
+        
         
         cell.updateUI(item: self.photoArray[indexPath.row])
         return cell
@@ -176,7 +176,7 @@ extension AddGearViewController: UICollectionViewDelegate{
 
 
 extension AddGearViewController: UICollectionViewDelegateFlowLayout {
-    // 셀 사이즈 어떻게 할까?
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // 5 - card(width) - 5 - card(width) - 5
         let width: CGFloat = (collectionView.bounds.width - (5 * 3))/2

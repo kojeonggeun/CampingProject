@@ -78,15 +78,9 @@ extension FirstViewController: UITableViewDataSource{
             tableView.reloadSections([indexPath.section], with: .none)
             
         } else {
-            print("이건 sectionData 선택한 거야")
             test()
         }
-        
-        print([indexPath.section], [indexPath.row])
-
-        
     }
-    
     
 }
 

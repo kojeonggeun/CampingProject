@@ -53,8 +53,45 @@ class GearManager{
     
     
     func gearSave(name: String, type: Int, color: String, company: String, capacity: String, image: [UIImage] ){
-        let url = "https://camtorage.bamdule.com/camtorage/api/gear"
+        // 먼저 image를 Data형식으로 바꿔줘야 한다.
+        // jpegData or pngData를 통해서 바꿔주고
+        // multipartFormData에 바꾼 Data타입의 이미지를 append해준다.
         
+        let url = "https://camtorage.bamdule.com/camtorage/api/gear"
+        guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
+        let headers: HTTPHeaders = [
+                    "Content-type": "multipart/form-data",
+                    "Authorization" : token["token"] as! String
+                ]
+        let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
+                                          "color": color, "company": company,
+                                          "capacity": capacity
+        ]
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            for (key, value) in parameters {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                
+            }
+            // withName에 디비와 매칭되는 값을 넣어야함
+            for i in image{
+                multipartFormData.append(i.jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: "image.jpg",mimeType: "image/jpg")
+            }
+        }, to: url,method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
+            
+            print("Upload Progress: \(progress.fractionCompleted)")
+            
+        }).responseJSON { response in
+            switch response.result {
+            case .success(let data):
+                print(data)
+            case .failure(let error):
+                print(error)
+            }
+
+
+            
+        }
     }
     
     
