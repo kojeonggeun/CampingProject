@@ -9,22 +9,21 @@ import Foundation
 import UIKit
 
 class GearImageCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var gearImage: UIImageView!
     
+    @IBOutlet weak var gearImage: UIImageView!
+    @IBOutlet weak var imageRemoveButton: UIButton!
     
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
 //
-//        trackThumbnail.layer.cornerRadius = 4
-//        trackArtist.textColor = UIColor.systemGray2
+//
 //    }
-    
+
     func updateUI(item: UIImage?) {
         guard let image = item else { return }
         
         gearImage.image = image
         
-        
-     
     }
+    
 }

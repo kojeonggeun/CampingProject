@@ -23,16 +23,21 @@ class AddGearViewController: UIViewController{
     @IBOutlet weak var gearCompany: UITextField!
     @IBOutlet weak var gearCapacity: UITextField!
     
+    
+    
     let gearManager = GearManager.shared
     let btn: UIButton = UIButton()
     
     var selectedAssets = [PHAsset]()
     var photoArray = [UIImage]()
     var gearTypeId: Int = 0
+    var total: Int = 0
+  
     
     let gg: [String] = ["텐트","타프","난로","식기","코펠","컵","이것","저것","텐트","타프","난로","식기","코펠","컵","이것","저것","텐트","타프","난로","식기","코펠","컵","이것","저것","텐트","타프","난로","식기","코펠","컵","이것","저것"]
     
     @IBAction func gearSave(_ sender: Any) {
+        
         guard let name = gearName.text else { return }
         guard let color = gearColor.text else { return }
         guard let company = gearCompany.text else { return }
@@ -64,61 +69,53 @@ class AddGearViewController: UIViewController{
         }, finish: { (assets) in
             for asset in assets {
                 self.selectedAssets.append(asset)
+                
             }
             self.convertAssetToImages()
-            self.gearCollectionView.reloadData()
+            
             // User finished selection assets.
         })
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         createPickerView()
         gearTypeTextField.tintColor = .clear
         
-
     }
 
     func createPickerView(){
         let pickerView = UIPickerView()
         pickerView.delegate = self
         gearTypeTextField.inputView = pickerView
-        
     }
-    
-
 
 }
 
 extension AddGearViewController {
-    
     func convertAssetToImages(){
-        if selectedAssets.count != 0{
-
-            for i in 0..<selectedAssets.count{
-
+    
+            for i in total..<selectedAssets.count{
                 let manager = PHImageManager.default()
                 let option = PHImageRequestOptions()
-
+                
                 var thumbnail = UIImage()
 
                 option.isSynchronous = true
-
                 manager.requestImage(for: selectedAssets[i], targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: option, resultHandler: {(result,info) -> Void in
                     thumbnail = result!
                 })
 
                 let data = thumbnail.jpegData(compressionQuality: 0.7)
                 let newImage = UIImage(data: data!)
+    
                 self.photoArray.append(newImage! as UIImage)
                 
-
+                self.gearCollectionView.reloadData()
             }
-
-        }
-
+            self.total = selectedAssets.count
     }
 }
 
@@ -155,32 +152,63 @@ extension AddGearViewController: UIPickerViewDelegate{
 
 
 extension AddGearViewController: UICollectionViewDataSource {
+   
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.selectedAssets.count
+        return self.photoArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GearImageCollectionViewCell", for: indexPath) as? GearImageCollectionViewCell else { return UICollectionViewCell() }
         
         
+        cell.imageRemoveButton.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
+        
         cell.updateUI(item: self.photoArray[indexPath.row])
+        
+        
         return cell
     }
     
+    @objc func buttonAction(_ sender: UIButton){
+        
+        self.total -= 1
+        
+        let cell: UICollectionViewCell? = (sender.superview?.superview as? UICollectionViewCell) 
+        
+        if let indexpath: IndexPath = self.gearCollectionView?.indexPath(for: cell!) {
+            print(indexpath.row)
+            self.selectedAssets.remove(at: indexpath.row)
+            self.photoArray.remove(at: indexpath.row)
+            self.gearCollectionView.deleteItems(at: [indexpath])
+        }
+        
+        
+     
+    }
     
+
 }
+
 
 extension AddGearViewController: UICollectionViewDelegate{
-    
-}
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-
-extension AddGearViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 5 - card(width) - 5 - card(width) - 5
-        let width: CGFloat = (collectionView.bounds.width - (5 * 3))/2
-        let height: CGFloat = width + 60
-        return CGSize(width: width, height: height)
+        
     }
+ 
+   
 }
+
+//extension AddGearViewController: UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        // 5 - card(width) - 5 - card(width) - 5
+//        let width: CGFloat = (collectionView.bounds.width - (30 * 3))
+//
+//        let height: CGFloat = width + 60
+//        return CGSize(width: width, height: height)
+//    }
+//}
+
+
