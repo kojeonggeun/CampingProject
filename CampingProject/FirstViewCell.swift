@@ -19,11 +19,34 @@ class FirstViewCell: UITableViewCell {
     }
 }
 
-struct cellData {
+struct TableViewCellData {
     var opened = Bool()
-    var title = String()
-    var sectionData = [String]()
+    var gearTypeName = String()
+    var name = [String]()
     
 }
 
+
+struct CellData: Codable {
+    var id: Int
+    var name: String
+    var gearTypeId: Int
+    var gearTypeName: String
+    var color: String
+    var company: String
+    var capacity: String
+    var gearImages: [ImageData]
+    
+}
+
+struct ImageData: Codable {
+
+    var imageId: Int
+    var orgFilename: String
+    var url: String
+}
+
+struct CellDataResponse: Codable {
+    var gears: [CellData] = []
+}
 

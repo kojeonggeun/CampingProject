@@ -353,7 +353,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="이미지 선택"/>
                                 <connections>
-                                    <action selector="didTapButton:" destination="hWv-Lq-Ccj" eventType="touchUpInside" id="ge1-Kp-h1H"/>
+                                    <action selector="imageSelectButton:" destination="hWv-Lq-Ccj" eventType="touchUpInside" id="W7S-Co-heK"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WeG-f7-vTD">

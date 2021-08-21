@@ -22,31 +22,41 @@ class UserManager {
     let userDefaults = UserDefaults.standard
     
     static let shared = UserManager()
-    
-    func loadData(){
-//        self.userDefaults.set("ww", forKey: "ww")
-        let url = "https://camtorage.bamdule.com/camtorage/api/user"
-        AF.request(url,
-                   method: .get,
-                   parameters: nil,
-                   encoding: URLEncoding.default,
-                   headers: nil)
-            .validate(statusCode: 200..<300)
-            .responseJSON { (response) in
-                switch response.result{
-                case .success:
-                    guard let result = response.data else {return}
-                    do {
-                        let decoder = JSONDecoder()
-                        let json = try decoder.decode([User].self, from: result)
-                        for i in json{
-                            self.user.append(i)
-                        }
-                    } catch {
-                        print("error!\(error)") } default: return }
+
+    func loadUserData(completion: @escaping (Any) -> Void){
+        let url = "https://camtorage.bamdule.com/camtorage/api/gear"
+        guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
+        let headers: HTTPHeaders = [
+                    "Authorization" : token["token"] as! String
+                ]
+        AF.request(url, method: .get ,encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                guard let result = response.data else { return }
+                let data = self.parseUserGear(result)
+                print(data)
+                completion(data)
+                
+            case .failure(let error):
+                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
         }
+        
     }
     
+    func parseUserGear(_ data: Data) -> [CellData] {
+        let decoder = JSONDecoder()
+        do {
+            let response = try decoder.decode([CellData].self, from: data)
+            let userGear = response
+            return userGear
+            
+        } catch let error {
+            print("--> parsing error: \(error.localizedDescription)")
+            return []
+        }
+        
+    }
 
     
     func Register(email: String, password: String){
@@ -66,18 +76,19 @@ class UserManager {
             }
         }
     }
+        
     
-    func convertStringToDictionary(text: String) -> [String:AnyObject]? {
-       if let data = text.data(using: .utf8) {
-           do {
-               let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
-               return json
-           } catch {
-               print("Something went wrong")
-           }
-       }
-       return nil
-   }
+//    func convertStringToDictionary(text: String) -> [String:AnyObject]? {
+//       if let data = text.data(using: .utf8) {
+//           do {
+//               let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
+//               return json
+//           } catch {
+//               print("Something went wrong")
+//           }
+//       }
+//       return nil
+//   }
 
     func loginCheck(email:String, password: String){
         let url = "https://camtorage.bamdule.com/camtorage/api/user/login"
@@ -94,10 +105,6 @@ class UserManager {
                             self.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
                             guard let token = self.userDefaults.value(forKey: "token") as? NSDictionary else { return }
                             print(token["token"])
-                            
-                            
-                            
-                            
                         case .failure(let error):
                             print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                         }
@@ -118,4 +125,5 @@ class UserManager {
         let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         return predicate.evaluate(with: password)
     }
+
 }

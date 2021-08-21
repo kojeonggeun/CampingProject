@@ -26,7 +26,9 @@ class GearManager{
             .validate(statusCode: 200..<300)
             .responseJSON { (response) in
                 switch response.result{
+                
                 case .success:
+
                     guard let result = response.data else {return}
                     self.parseGears(result)
                   
@@ -88,11 +90,10 @@ class GearManager{
             case .failure(let error):
                 print(error)
             }
-
-
             
         }
     }
+    
     
     
 }

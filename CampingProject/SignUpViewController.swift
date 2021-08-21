@@ -103,7 +103,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         passwordTextField.isSecureTextEntry = true
         passwordConformTextField.isSecureTextEntry = true
         checkTextField.isHidden = true
-        print(GearManager.shared.gears.self)
+
         
     }
     

@@ -51,13 +51,8 @@ class AddGearViewController: UIViewController{
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func didTapButton(_ sender: Any) {
-//        let vc = UIImagePickerController()
-//        vc.sourceType = .photoLibrary
-//        vc.delegate = self
-//        vc.allowsEditing = true
-//        present(vc, animated: true, completion: nil)
-        
+    @IBAction func imageSelectButton(_ sender: Any) {
+
         let imagePicker = ImagePickerController()
         imagePicker.settings.selection.max = 5
         
