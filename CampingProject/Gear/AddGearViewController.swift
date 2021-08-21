@@ -30,6 +30,7 @@ class AddGearViewController: UIViewController{
     
     var selectedAssets = [PHAsset]()
     var photoArray = [UIImage]()
+    var imageFileName = [String]()
     var gearTypeId: Int = 0
     var total: Int = 0
   
@@ -43,7 +44,7 @@ class AddGearViewController: UIViewController{
         guard let company = gearCompany.text else { return }
         guard let capacity = gearCapacity.text else { return }
         
-        gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, image: photoArray)
+        gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, image: photoArray, imageName: imageFileName)
     }
     
     @IBAction func closeButton(_ sender: Any) {
@@ -100,6 +101,7 @@ extension AddGearViewController {
             for i in total..<selectedAssets.count{
                 let manager = PHImageManager.default()
                 let option = PHImageRequestOptions()
+                let asset = PHAssetResource.assetResources(for: selectedAssets[i])
                 
                 var thumbnail = UIImage()
 
@@ -112,6 +114,7 @@ extension AddGearViewController {
                 let newImage = UIImage(data: data!)
     
                 self.photoArray.append(newImage! as UIImage)
+                self.imageFileName.append(asset.first!.originalFilename)
                 
                 self.gearCollectionView.reloadData()
             }
@@ -128,22 +131,22 @@ extension AddGearViewController: UIPickerViewDataSource{
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return gearManager.gears.count
-        return gg.count
+        return gearManager.gears.count
+//        return gg.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return gearManager.gears[row].gearName
-        return gg[row]
+        return gearManager.gears[row].gearName
+//        return gg[row]
     }
 }
 
 extension AddGearViewController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        gearTypeTextField.text = gearManager.gears[row].gearName
-//        gearTypeId = gearManager.gears[row].gearID
-        gearTypeId = 25
-        gearTypeLabel.text = gg[row]
+        gearTypeTextField.text = gearManager.gears[row].gearName
+        gearTypeId = gearManager.gears[row].gearID
+//        gearTypeId = 25
+//        gearTypeLabel.text = gg[row]
 
 
     }
@@ -161,7 +164,8 @@ extension AddGearViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GearImageCollectionViewCell", for: indexPath) as? GearImageCollectionViewCell else { return UICollectionViewCell() }
         
-        
+        cell.imageRemoveButton.superview?.tag = indexPath.section
+        cell.imageRemoveButton.tag = indexPath.row
         cell.imageRemoveButton.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
         
         cell.updateUI(item: self.photoArray[indexPath.row])
@@ -174,19 +178,13 @@ extension AddGearViewController: UICollectionViewDataSource {
         
         self.total -= 1
         
-        let cell: UICollectionViewCell? = (sender.superview?.superview as? UICollectionViewCell) 
-        
+        let cell: UICollectionViewCell? = (sender.superview?.superview as? UICollectionViewCell)
         if let indexpath: IndexPath = self.gearCollectionView?.indexPath(for: cell!) {
-            print(indexpath.row)
             self.selectedAssets.remove(at: indexpath.row)
             self.photoArray.remove(at: indexpath.row)
             self.gearCollectionView.deleteItems(at: [indexpath])
         }
-        
-        
-     
     }
-    
 
 }
 

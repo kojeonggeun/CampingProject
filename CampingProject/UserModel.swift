@@ -92,10 +92,9 @@ class UserManager {
                         case .success(let value):
                             let json = value as! NSDictionary
                             self.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
-                            guard let e = self.userDefaults.value(forKey: "token") as? NSDictionary else { return }
-                            print(e["token"])
-                            print(self.userDefaults.dictionaryRepresentation().keys)
-                            print(self.userDefaults.dictionaryRepresentation().values)
+                            guard let token = self.userDefaults.value(forKey: "token") as? NSDictionary else { return }
+                            print(token["token"])
+                            
                             
                             
                             

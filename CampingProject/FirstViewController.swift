@@ -25,7 +25,7 @@ class FirstViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         for i in category{
-            tableViewData.append(cellData(opened: false, title: i, sectionData: ["Cell1", "Cell2", "Cell3"]))
+            tableViewData.append(cellData(opened: false, title: i, sectionData: ["우드테이블", "Cell2", "Cell3"]))
         }
         emailText.text = segueText
     }
@@ -40,10 +40,10 @@ extension FirstViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableViewData[section].opened == true {
-            // tableView Section이 열려있으면 Section Cell 하나에 sectionData 개수만큼 추가해줘야 함
+            // tableView Section이 true면 title + sectionData 개수만큼 추가
             return tableViewData[section].sectionData.count + 1 }
         else {
-            // tableView Section이 닫혀있을 경우에는 Section Cell 하나만 보여주면 됨
+            // tableView Section이 false면 title 한개만 리턴
             return 1
         }
     }
@@ -71,6 +71,14 @@ extension FirstViewController: UITableViewDataSource{
         }
     }
     
+
+
+
+    
+}
+
+extension FirstViewController: UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
@@ -78,13 +86,12 @@ extension FirstViewController: UITableViewDataSource{
             tableView.reloadSections([indexPath.section], with: .none)
             
         } else {
+            print(indexPath)
             test()
         }
     }
     
-}
-
-extension FirstViewController: UITableViewDelegate{
+    
     
     func test(){
         print("Test")

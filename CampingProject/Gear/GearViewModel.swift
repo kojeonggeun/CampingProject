@@ -52,7 +52,7 @@ class GearManager{
     }
     
     
-    func gearSave(name: String, type: Int, color: String, company: String, capacity: String, image: [UIImage] ){
+    func gearSave(name: String, type: Int, color: String, company: String, capacity: String, image: [UIImage], imageName: [String]){
         // 먼저 image를 Data형식으로 바꿔줘야 한다.
         // jpegData or pngData를 통해서 바꿔주고
         // multipartFormData에 바꾼 Data타입의 이미지를 append해준다.
@@ -74,8 +74,8 @@ class GearManager{
                 
             }
             // withName에 디비와 매칭되는 값을 넣어야함
-            for i in image{
-                multipartFormData.append(i.jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: "image.jpg",mimeType: "image/jpg")
+            for i in 0..<image.count{
+                multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: imageName[i],mimeType: "image/jpg")
             }
         }, to: url,method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
             
