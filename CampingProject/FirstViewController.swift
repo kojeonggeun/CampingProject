@@ -15,27 +15,38 @@ class FirstViewController: UIViewController{
     
     @IBAction func unwind(_ sender: Any) {
         performSegue(withIdentifier: "unwindVC1", sender: self)
-        
     }
+    
     let userManager: UserManager = UserManager.shared
-    let category: [String] = ["텐트/타프", "의자/테이블","침낭/매트","랜턴","코펠/식기","버너/난로/난방","가스/연료","배낭","의류","캠핑 악세서리"]
+    
+    let category: [String] = ["텐트","타프", "의자","테이블","침낭","매트","랜턴","코펠","식기","버너","난방","가스","배낭","의류","캠핑 악세서리"]
     var tableViewData = [TableViewCellData]()
+    
     var tableData = [CellData]()
+    
     var segueText: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        GearManager.shared.loadGearType()
+
+        
         for i in category{
-            tableViewData.append(TableViewCellData(opened: false, gearTypeName: i, name: ["우드테이블", "Cell2", "Cell3"]))
+            tableViewData.append(TableViewCellData(opened: false, gearTypeName: i, name: "우드테이블"))
         }
         emailText.text = segueText
         
-
-        print(userManager.loadUserData(completion: { data in
-            
-        }))
+        
+        userManager.loadUserData(completion: { data in
+            self.tableData = data
+//            for i in self.category{
+//
+//                self.tableViewData.append(TableViewCellData(opened: false, gearTypeName: i, name: "없음" ))
+//            
+//            }
+//            print(self.tableViewData)
+        })
     }
-
   
 }
 
@@ -67,8 +78,8 @@ extension FirstViewController: UITableViewDataSource{
             
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? FirstViewCell else { return UITableViewCell() }
-            cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row - 1]
-            
+//            cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row - 1]
+            cell.tableViewCellText.text = tableViewData[indexPath.section].name
             if indexPath.row != 0{
                 cell.backgroundColor = .white
                 cell.expandButton.isHidden = true

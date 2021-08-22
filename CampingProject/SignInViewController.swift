@@ -25,8 +25,16 @@ class SignInViewController: UIViewController{
         guard let password = passwordTextField.text else { return }
         
 
-        userManager.loginCheck(email: email, password: password)
-        performSegue(withIdentifier: "MainTabBarController", sender: email)
+        userManager.loginCheck(email: email, password: password) { completion in
+            if completion {
+                self.performSegue(withIdentifier: "MainTabBarController", sender: email)
+            } else {
+                print("로그인 실패 시 코드 작성 해야 함")
+            }
+        }
+        
+        
+        
 
         
     }
@@ -50,7 +58,7 @@ class SignInViewController: UIViewController{
         super.viewDidLoad()
         
         passwordTextField.isSecureTextEntry = true
-        GearManager.shared.loadGearType()
+        
         
         
     }

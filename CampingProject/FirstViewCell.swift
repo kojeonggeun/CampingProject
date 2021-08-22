@@ -22,7 +22,8 @@ class FirstViewCell: UITableViewCell {
 struct TableViewCellData {
     var opened = Bool()
     var gearTypeName = String()
-    var name = [String]()
+    var name = String()
+    
     
 }
 
@@ -40,7 +41,6 @@ struct CellData: Codable {
 }
 
 struct ImageData: Codable {
-
     var imageId: Int
     var orgFilename: String
     var url: String

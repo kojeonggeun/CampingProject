@@ -14,18 +14,16 @@ struct User: Codable {
     var email: String
     
 }
-
-
-
 class UserManager {
     var user: [User] = []
     let userDefaults = UserDefaults.standard
     
     static let shared = UserManager()
 
-    func loadUserData(completion: @escaping (Any) -> Void){
+    func loadUserData(completion: @escaping ([CellData]) -> Void){
         let url = "https://camtorage.bamdule.com/camtorage/api/gear"
         guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
+        print(token,"loadUserData")
         let headers: HTTPHeaders = [
                     "Authorization" : token["token"] as! String
                 ]
@@ -34,7 +32,7 @@ class UserManager {
             case .success(let value):
                 guard let result = response.data else { return }
                 let data = self.parseUserGear(result)
-                print(data)
+                
                 completion(data)
                 
             case .failure(let error):
@@ -90,25 +88,68 @@ class UserManager {
 //       return nil
 //   }
 
-    func loginCheck(email:String, password: String){
+    func loginCheck(email:String, password: String, completion: @escaping (Bool) -> Void){
+//        URLSession 코드
+//        let config = URLSessionConfiguration.default
+//        let session = URLSession(configuration: config)
+        
+        
+//        var request = URLRequest(url: url!)
+//
+//        request.httpMethod = "POST"
+//
+//        let body: NSMutableDictionary = NSMutableDictionary()
+//        body.setValue(email, forKey: "email")
+//        body.setValue(password, forKey: "password")
+//
+//        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.httpBody = "email=\(String(describing: body.value(forKey: "email")!))&password=\(String(describing: body.value(forKey: "password")!))".data(using: .utf8)
+//
+//        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+//
+//                    // 서버가 응답이 없거나 통신이 실패
+//                    if let e = error {
+//                      NSLog("An error has occured: \(e.localizedDescription)")
+//                      return
+//                    }
+//
+//                    // 응답 처리 로직
+//                    DispatchQueue.main.async() {
+//                        // 서버로부터 응답된 스트링 표시
+//                        let outputStr = String(data: data!, encoding: String.Encoding.utf8)
+//                        print("result: \(outputStr!)")
+//                        completion(true)
+//                    }
+//
+//                }
+//                // POST 전송
+//                task.resume()
+        
         let url = "https://camtorage.bamdule.com/camtorage/api/user/login"
-                AF.request(url,
-                           method: .post,
-                           parameters: ["email":email,"password":password],
-                           encoding: URLEncoding.default,
-                           headers: nil)
-                    .validate(statusCode: 200..<300)
-                    .responseJSON { (response) in
-                        switch response.result {
-                        case .success(let value):
-                            let json = value as! NSDictionary
-                            self.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
-                            guard let token = self.userDefaults.value(forKey: "token") as? NSDictionary else { return }
-                            print(token["token"])
-                        case .failure(let error):
-                            print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-                        }
-                    }
+        AF.request(url,
+                   method: .post,
+                   parameters: ["email":email,"password":password],
+                   encoding: URLEncoding.default,
+                   headers: nil)
+            .validate(statusCode: 200..<300)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+
+
+                    let json = value as! NSDictionary
+                    self.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
+                    guard let token = self.userDefaults.value(forKey: "token") as? NSDictionary else { return }
+                    completion(true)
+
+
+                case .failure(let error):
+                    print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                    completion(false)
+                }
+            }
+    
+   
     }
     
     func isValidEmail(email: String) -> Bool{
