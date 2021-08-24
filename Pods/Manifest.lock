@@ -1,0 +1,92 @@
+PODS:
+  - Alamofire (5.4.3)
+  - BSImagePicker (3.3.1)
+  - CryptoSwift (1.4.1)
+  - Firebase/Auth (8.5.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 8.5.0)
+  - Firebase/CoreOnly (8.5.0):
+    - FirebaseCore (= 8.5.0)
+  - FirebaseAuth (8.5.0):
+    - FirebaseCore (~> 8.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GTMSessionFetcher/Core (~> 1.5)
+  - FirebaseCore (8.5.0):
+    - FirebaseCoreDiagnostics (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/Logger (~> 7.4)
+  - FirebaseCoreDiagnostics (8.5.0):
+    - GoogleDataTransport (~> 9.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/Logger (~> 7.4)
+    - nanopb (~> 2.30908.0)
+  - GoogleDataTransport (9.1.0):
+    - GoogleUtilities/Environment (~> 7.2)
+    - nanopb (~> 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/AppDelegateSwizzler (7.5.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.5.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.5.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/Network (7.5.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.5.0)"
+  - GoogleUtilities/Reachability (7.5.0):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher/Core (1.6.1)
+  - nanopb (2.30908.0):
+    - nanopb/decode (= 2.30908.0)
+    - nanopb/encode (= 2.30908.0)
+  - nanopb/decode (2.30908.0)
+  - nanopb/encode (2.30908.0)
+  - PromisesObjC (2.0.0)
+  - SwiftKeychainWrapper (3.0.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - BSImagePicker (~> 3.1)
+  - CryptoSwift (~> 1.4.1)
+  - Firebase/Auth
+  - SwiftKeychainWrapper (~> 3.0.1)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - BSImagePicker
+    - CryptoSwift
+    - Firebase
+    - FirebaseAuth
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - GoogleDataTransport
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - nanopb
+    - PromisesObjC
+    - SwiftKeychainWrapper
+
+SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  CryptoSwift: 0bc800a7e6a24c4fc9ebeab97d44b0d5f73a78bd
+  Firebase: ff8c73105b90e33e1dc6c8e5445d7adc2ccdc7c1
+  FirebaseAuth: b152ea261b60eeb9419ae7e5bf34761382b33277
+  FirebaseCore: 1c1ca72483b59b17050f5b4cec4fb748425a3901
+  FirebaseCoreDiagnostics: 7bf55d386f9fc690d971b70a582142321a390eb8
+  GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
+  GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
+  GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
+  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+
+PODFILE CHECKSUM: 23af6030c6a43c9fcae2a1708e1172c2322f5d28
+
+COCOAPODS: 1.10.2

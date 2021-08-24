@@ -9,57 +9,20 @@ import Foundation
 import Alamofire
 
 
-struct User: Codable {
-    var id: String
-    var email: String
-    
-}
+
 class UserManager {
-    var user: [User] = []
+    
     let userDefaults = UserDefaults.standard
     
     static let shared = UserManager()
 
-    func loadUserData(completion: @escaping ([CellData]) -> Void){
-        let url = "https://camtorage.bamdule.com/camtorage/api/gear"
-        guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
-        print(token,"loadUserData")
-        let headers: HTTPHeaders = [
-                    "Authorization" : token["token"] as! String
-                ]
-        AF.request(url, method: .get ,encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                guard let result = response.data else { return }
-                let data = self.parseUserGear(result)
-                
-                completion(data)
-                
-            case .failure(let error):
-                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-            }
-        }
-        
-    }
+
     
-    func parseUserGear(_ data: Data) -> [CellData] {
-        let decoder = JSONDecoder()
-        do {
-            let response = try decoder.decode([CellData].self, from: data)
-            let userGear = response
-            return userGear
-            
-        } catch let error {
-            print("--> parsing error: \(error.localizedDescription)")
-            return []
-        }
-        
-    }
 
     
     func Register(email: String, password: String){
 //        지금은 HTTP가 되도록 설정해 놓음 추후에 INFO.PLIST 수정해야 한다
-        let url = "https://camtorage.bamdule.com/camtorage/api/user"
+        let url = API.BASE_URL + "user"
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
         
@@ -125,7 +88,7 @@ class UserManager {
 //                // POST 전송
 //                task.resume()
         
-        let url = "https://camtorage.bamdule.com/camtorage/api/user/login"
+        let url = API.BASE_URL + "user/login"
         AF.request(url,
                    method: .post,
                    parameters: ["email":email,"password":password],
@@ -140,6 +103,7 @@ class UserManager {
                     let json = value as! NSDictionary
                     self.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
                     guard let token = self.userDefaults.value(forKey: "token") as? NSDictionary else { return }
+                    print(token)
                     completion(true)
 
 

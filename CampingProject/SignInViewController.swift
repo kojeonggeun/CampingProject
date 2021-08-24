@@ -27,6 +27,7 @@ class SignInViewController: UIViewController{
 
         userManager.loginCheck(email: email, password: password) { completion in
             if completion {
+              
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
             } else {
                 print("로그인 실패 시 코드 작성 해야 함")

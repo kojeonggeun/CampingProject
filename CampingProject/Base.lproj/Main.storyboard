@@ -304,7 +304,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 인원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LmR-Tr-Qxb">
-                                <rect key="frame" x="70" y="450.66666666666669" width="64" height="21"/>
+                                <rect key="frame" x="70" y="411" width="64" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -343,7 +343,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wH7-Y1-k8e">
-                                <rect key="frame" x="216" y="444" width="32" height="34"/>
+                                <rect key="frame" x="216" y="405" width="32" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -413,6 +413,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fn-lC-9Dk">
+                                <rect key="frame" x="70" y="446" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PRV-fk-m3A">
+                                <rect key="frame" x="216" y="440" width="32" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="F0V-oW-Fmx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -423,6 +436,7 @@
                         <outlet property="gearColor" destination="xYB-2F-GcM" id="qGq-Hw-x0d"/>
                         <outlet property="gearCompany" destination="fZZ-sl-bR1" id="TY6-qE-F1K"/>
                         <outlet property="gearName" destination="TCa-Ij-R7o" id="uNZ-DB-7SM"/>
+                        <outlet property="gearPrice" destination="PRV-fk-m3A" id="E2q-uS-qhg"/>
                         <outlet property="gearTypeLabel" destination="VgR-sj-oKM" id="jvM-HN-uKA"/>
                         <outlet property="gearTypeTextField" destination="lXO-GD-25q" id="l40-BG-R8x"/>
                     </connections>

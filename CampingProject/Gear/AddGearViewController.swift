@@ -22,7 +22,7 @@ class AddGearViewController: UIViewController{
     @IBOutlet weak var gearColor: UITextField!
     @IBOutlet weak var gearCompany: UITextField!
     @IBOutlet weak var gearCapacity: UITextField!
-    
+    @IBOutlet weak var gearPrice: UITextField!
     
     
     let gearManager = GearManager.shared
@@ -43,8 +43,9 @@ class AddGearViewController: UIViewController{
         guard let color = gearColor.text else { return }
         guard let company = gearCompany.text else { return }
         guard let capacity = gearCapacity.text else { return }
+        guard let price = gearPrice.text else { return }
         
-        gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, image: photoArray, imageName: imageFileName)
+        gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, price: price, image: photoArray, imageName: imageFileName)
     }
     
     @IBAction func closeButton(_ sender: Any) {

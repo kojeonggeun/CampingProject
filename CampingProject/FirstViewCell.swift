@@ -20,13 +20,15 @@ class FirstViewCell: UITableViewCell {
 }
 
 struct TableViewCellData {
-    var opened = Bool()
+    var isOpened = Bool()
     var gearTypeName = String()
-    var name = String()
+    var name = [String]()
     
+    mutating func update(name:String){
+        self.name.append(name)
+    }
     
 }
-
 
 struct CellData: Codable {
     var id: Int
@@ -36,6 +38,7 @@ struct CellData: Codable {
     var color: String
     var company: String
     var capacity: String
+    var price: Int?
     var gearImages: [ImageData]
     
 }
@@ -46,7 +49,5 @@ struct ImageData: Codable {
     var url: String
 }
 
-struct CellDataResponse: Codable {
-    var gears: [CellData] = []
-}
+
 

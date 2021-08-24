@@ -17,6 +17,7 @@
 		CB6037C726B2728F0023042F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6037C526B2728F0023042F /* LaunchScreen.storyboard */; };
 		CB6037D126B289980023042F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037D026B289980023042F /* SignUpViewController.swift */; };
 		CB6037D326B28A530023042F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037D226B28A530023042F /* UserModel.swift */; };
+		CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB93BE1726D3BEAF0018AB0D /* Constants.swift */; };
 		CBA2326E26BA57C500946DA0 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2326D26BA57C500946DA0 /* AES.swift */; };
 		CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */; };
 		CBA2327126BE609700946DA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBA2327026BE609700946DA0 /* GoogleService-Info.plist */; };
@@ -44,6 +45,7 @@
 		CB6037C826B2728F0023042F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB6037D026B289980023042F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		CB6037D226B28A530023042F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		CB93BE1726D3BEAF0018AB0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CBA2326D26BA57C500946DA0 /* AES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
 		CBA2327026BE609700946DA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CBA2327226BE763200946DA0 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		CB6037B926B2728E0023042F /* CampingProject */ = {
 			isa = PBXGroup;
 			children = (
+				CB93BE1626D3BE970018AB0D /* Utils */,
 				CBAB103426C552380058F440 /* Gear */,
 				CBA2327026BE609700946DA0 /* GoogleService-Info.plist */,
 				CB6037BA26B2728E0023042F /* AppDelegate.swift */,
@@ -125,6 +128,14 @@
 				CBA2327426BE803600946DA0 /* SecondViewController.swift */,
 			);
 			path = CampingProject;
+			sourceTree = "<group>";
+		};
+		CB93BE1626D3BE970018AB0D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CB93BE1726D3BEAF0018AB0D /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		CBAB103426C552380058F440 /* Gear */ = {
@@ -260,6 +271,7 @@
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
 				CBAB103326C5510A0058F440 /* AddGearViewController.swift in Sources */,
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
+				CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
 				CBA2326E26BA57C500946DA0 /* AES.swift in Sources */,
 				CBAB103626C552460058F440 /* GearViewModel.swift in Sources */,

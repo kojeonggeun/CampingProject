@@ -17,46 +17,56 @@ class FirstViewController: UIViewController{
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
     
-    let userManager: UserManager = UserManager.shared
+    var gearManager: GearManager = GearManager.shared
     
-    let category: [String] = ["텐트","타프", "의자","테이블","침낭","매트","랜턴","코펠","식기","버너","난방","가스","배낭","의류","캠핑 악세서리"]
+    
     var tableViewData = [TableViewCellData]()
-    
+    var gearType = [GearType]()
     var tableData = [CellData]()
-    
-    var segueText: String = ""
 
+    var segueText: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        GearManager.shared.loadGearType()
-
         
-        for i in category{
-            tableViewData.append(TableViewCellData(opened: false, gearTypeName: i, name: "우드테이블"))
+        DispatchQueue.main.async {
+            self.gearManager.loadGearType(completion: { data in
+                
+                self.gearType = data
+                
+                for i in 0..<data.count{
+                    self.tableViewData.append(TableViewCellData(isOpened: false, gearTypeName: data[i].gearName))
+                    
+                    for j in self.gearManager.userGear{
+                        print(j)
+                        if data[i].gearName == j.gearTypeName{
+                            
+                            self.tableViewData[i].update(name: j.name)
+                        }
+                    }
+                }
+                self.tableView.reloadData()
+            })
         }
+        gearManager.loadUserData(completion: { data in
+            
+        })
         emailText.text = segueText
         
-        
-        userManager.loadUserData(completion: { data in
-            self.tableData = data
-//            for i in self.category{
-//
-//                self.tableViewData.append(TableViewCellData(opened: false, gearTypeName: i, name: "없음" ))
-//            
-//            }
-//            print(self.tableViewData)
-        })
     }
   
+
 }
 
 extension FirstViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return category.count
+        
+        return gearType.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableViewData[section].opened == true {
+        
+        if tableViewData[section].isOpened == true {
             // tableView Section이 true면 title + sectionData 개수만큼 추가
             return tableViewData[section].name.count + 1 }
         else {
@@ -79,7 +89,8 @@ extension FirstViewController: UITableViewDataSource{
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? FirstViewCell else { return UITableViewCell() }
 //            cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row - 1]
-            cell.tableViewCellText.text = tableViewData[indexPath.section].name
+        
+            cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row - 1]
             if indexPath.row != 0{
                 cell.backgroundColor = .white
                 cell.expandButton.isHidden = true
@@ -95,17 +106,13 @@ extension FirstViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
-            tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
+            tableViewData[indexPath.section].isOpened = !tableViewData[indexPath.section].isOpened
             tableView.reloadSections([indexPath.section], with: .none)
             
         } else {
             print(indexPath)
-            test()
+            
         }
-    }
-    
-    func test(){
-        print("Test")
     }
 }
 

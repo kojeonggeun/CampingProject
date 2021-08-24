@@ -7,8 +7,8 @@
 
 
 struct GearType: Codable {
-    let gearID: Int
-    let gearName: String
+    var gearID: Int
+    var gearName: String
     
     enum CodingKeys : String, CodingKey{
         case gearID = "id"
