@@ -25,7 +25,7 @@ class UserManager {
         AF.request(url,method: .post,parameters: params,encoding:URLEncoding.default,headers: ["Content-Type":"application/x-www-form-urlencoded"]).validate(statusCode: 200..<300).responseJSON { response in
             
             switch response.result {
-            case .success(let value):
+            case .success(_):
                 print("POST 성공")
                 
             case .failure(let error):
