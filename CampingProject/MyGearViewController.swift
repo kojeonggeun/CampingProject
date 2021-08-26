@@ -7,13 +7,15 @@
 
 import UIKit
 
-class FirstViewController: UIViewController{
+class MyGearViewController: UIViewController{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emailText: UILabel!
     
     
     @IBAction func unwind(_ sender: Any) {
+        UserDefaults.standard.removeObject(forKey: "token")
+        
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
     
@@ -29,38 +31,41 @@ class FirstViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DispatchQueue.main.async {
-            self.gearManager.loadGearType(completion: { data in
-                
-                self.gearType = data
-                
-                for i in 0..<data.count{
-                    self.tableViewData.append(TableViewCellData(isOpened: false, gearTypeName: data[i].gearName))
-                    
-                    for j in self.gearManager.userGear{
-                        print(j)
-                        if data[i].gearName == j.gearTypeName{
-                            
-                            self.tableViewData[i].update(name: j.name)
-                        }
-                    }
-                }
-                self.tableView.reloadData()
-            })
-        }
-        gearManager.loadUserData(completion: { data in
-            
-        })
         emailText.text = segueText
         
-    }
-  
-
-}
-
-extension FirstViewController: UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
+        gearManager.loadUserData(completion: { data in
+            if data {
+                
+                DispatchQueue.main.async {
+                    self.gearManager.loadGearType(completion: { data in
+                        self.gearType = data
+                        for i in 0..<self.gearType.count{
+                            self.tableViewData.append(TableViewCellData(isOpened: false, gearTypeName: self.gearType[i].gearName))
+                            
+                            for j in self.gearManager.userGear{
+                                if self.gearType[i].gearName == j.gearTypeName{
+                                  
+                                    self.tableViewData[i].update(name: j.name)  
+                                }
+                            }
+                        }
+                        self.tableView.reloadData()
+                    })
+                } // end main.async
+                
+            } else {
+                print("data Empty")
+            }
+        })
         
+
+        
+   
+    } // end viewDidLoad
+}// end FirstViewController
+
+extension MyGearViewController: UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
         return gearType.count
     }
     
@@ -80,14 +85,14 @@ extension FirstViewController: UITableViewDataSource{
         
         if indexPath.row == 0 {
         
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? FirstViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell() }
             cell.tableViewCellText.text = tableViewData[indexPath.section].gearTypeName
             cell.expandButton.isHidden = false
             
             return cell
             
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? FirstViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell() }
 //            cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row - 1]
         
             cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row - 1]
@@ -101,7 +106,7 @@ extension FirstViewController: UITableViewDataSource{
     
 }
 
-extension FirstViewController: UITableViewDelegate{
+extension MyGearViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -110,9 +115,11 @@ extension FirstViewController: UITableViewDelegate{
             tableView.reloadSections([indexPath.section], with: .none)
             
         } else {
+            
             print(indexPath)
             
         }
     }
 }
+
 

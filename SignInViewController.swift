@@ -24,19 +24,15 @@ class SignInViewController: UIViewController{
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-
-        userManager.loginCheck(email: email, password: password) { completion in
+        userManager.login(email: email, password: password) { completion in
             if completion {
-              
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
+        
             } else {
                 print("로그인 실패 시 코드 작성 해야 함")
             }
         }
-        
-        
-        
-
+    
         
     }
     
@@ -48,7 +44,7 @@ class SignInViewController: UIViewController{
         
         if let barVC = segue.destination as? MainTabBarController {
                 barVC.viewControllers?.forEach {
-                    if let vc = $0 as? FirstViewController{
+                    if let vc = $0 as? MyGearViewController{
                         vc.segueText = email
                     }
                 }
@@ -59,6 +55,27 @@ class SignInViewController: UIViewController{
         super.viewDidLoad()
         
         passwordTextField.isSecureTextEntry = true
+ 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        
+        
+        if UserDefaults.standard.object(forKey: "token") != nil {
+            guard let user = UserDefaults.standard.value(forKey: "token") as? NSDictionary else { return }
+            userManager.loginCheck(user: user){ (completion) in
+                if completion {
+                    self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])
+                }
+            }
+        }
+        
+   
+        
         
         
         

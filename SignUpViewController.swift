@@ -21,7 +21,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     }
     
     let userManager: UserManager = UserManager.shared
-//    TODO : POST로 넘기는 작업 해야 함 
+
     @IBAction func signUpBtn(_ sender: Any) {
         guard let email = emailTextField.text  else{ return }
         guard let password = passwordTextField.text else{ return }
@@ -60,6 +60,10 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
             passwordAnimation()
             return
         }
+        
+        let alert = UIAlertController(title: nil, message: "회원가입이 완료 되었습니다.!!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alert, animated: true)
         
         self.dismiss(animated: true, completion: nil)
     }

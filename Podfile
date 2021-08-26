@@ -11,5 +11,5 @@ target 'CampingProject' do
  pod 'CryptoSwift', '~> 1.4.1'
  pod 'Firebase/Auth'
  pod "BSImagePicker", "~> 3.1"
-
+ pod 'TextFieldEffects'
 end

@@ -13,11 +13,7 @@ import Alamofire
 class UserManager {
     
     let userDefaults = UserDefaults.standard
-    
     static let shared = UserManager()
-
-
-    
 
     
     func Register(email: String, password: String){
@@ -51,7 +47,7 @@ class UserManager {
 //       return nil
 //   }
 
-    func loginCheck(email:String, password: String, completion: @escaping (Bool) -> Void){
+    func login(email:String, password: String, completion: @escaping (Bool) -> Void){
 //        URLSession 코드
 //        let config = URLSessionConfiguration.default
 //        let session = URLSession(configuration: config)
@@ -89,6 +85,8 @@ class UserManager {
 //                task.resume()
         
         let url = API.BASE_URL + "user/login"
+        
+      
         AF.request(url,
                    method: .post,
                    parameters: ["email":email,"password":password],
@@ -98,23 +96,49 @@ class UserManager {
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
-
-
+                    
                     let json = value as! NSDictionary
                     self.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
                     guard let token = self.userDefaults.value(forKey: "token") as? NSDictionary else { return }
-                    print(token)
+                    
                     completion(true)
 
 
                 case .failure(let error):
                     print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                    
                     completion(false)
                 }
             }
     
    
     }
+    
+    func loginCheck(user: NSDictionary ,completion: @escaping (Bool)-> Void ) {
+        let url = API.BASE_URL + "user"
+        
+        let headers: HTTPHeaders = ["Authorization" : user["token"] as! String]
+    
+        AF.request(url,
+                   method: .get,
+                   encoding: URLEncoding.default,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(_):
+                    
+                    completion(true)
+                    
+                case .failure(let error):
+                    print("🚫 Error:\(error._code), Message: \(error.errorDescription!),\(error)")
+                    completion(false)
+                    
+                }
+            }
+    }
+    
+  
     
     func isValidEmail(email: String) -> Bool{
         // print(userDefaults.string(forKey: "ww") as! String)

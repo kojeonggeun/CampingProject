@@ -11,13 +11,13 @@ import Alamofire
 
 
 class GearManager{
-  
-    static let shared = GearManager()
     
     let userDefaults = UserDefaults.standard
+    static let shared = GearManager()
+    
     var gears: [GearType] = []
     var userGear: [CellData] = []
-    let semaphore = DispatchSemaphore(value: 0)
+    
     
     func loadGearType(completion: @escaping ([GearType]) -> ()) {
         let url = API.BASE_URL + "common/config"
@@ -36,6 +36,7 @@ class GearManager{
                 case .success:
                     guard let result = response.data else {return}
                     let data = self.parseGears(result)
+                    
                     for i in data {
                         self.gears.append(i)
                     }
@@ -51,13 +52,15 @@ class GearManager{
     
     func parseGears(_ data: Data) -> [GearType]  {
         let decoder = JSONDecoder()
+        self.gears = []
+
         do {
             let response = try decoder.decode(Response.self, from: data)
             let gears = response.gearTypes
             return gears
    
         } catch let error {
-            print("--> parsing error: \(error.localizedDescription)")
+            print("--> GearType parsing error: \(error.localizedDescription)")
           
         }
         return []
@@ -118,12 +121,13 @@ class GearManager{
             switch response.result {
             case .success(let value):
                 guard let result = response.data else { return }
-                print(value)
+                
                 let data = self.parseUserGear(result)
                
                 for i in data {
                     self.userGear.append(i)
                 }
+
                 completion(true)
                 
             case .failure(let error):
@@ -134,13 +138,15 @@ class GearManager{
     
     func parseUserGear(_ data: Data) -> [CellData] {
         let decoder = JSONDecoder()
+        self.userGear = []
+
         do {
             
             let response = try decoder.decode([CellData].self, from: data)
             return response
             
         } catch let error {
-            print("--> parsing error: \(error.localizedDescription)")
+            print("--> CellData parsing error: \(error.localizedDescription)")
             return []
         }
         

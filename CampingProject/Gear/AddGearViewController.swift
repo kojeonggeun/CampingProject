@@ -10,12 +10,12 @@ import UIKit
 
 import Photos
 import BSImagePicker
+import TextFieldEffects
+
 
 class AddGearViewController: UIViewController{
     
-    
     @IBOutlet weak var gearTypeTextField: UITextField!
-    @IBOutlet weak var gearTypeLabel: UILabel!
     @IBOutlet weak var gearCollectionView: UICollectionView!
     
     @IBOutlet weak var gearName: UITextField!
@@ -24,8 +24,9 @@ class AddGearViewController: UIViewController{
     @IBOutlet weak var gearCapacity: UITextField!
     @IBOutlet weak var gearPrice: UITextField!
     
+    @IBOutlet weak var imageCount: UILabel!
     
-    let gearManager = GearManager.shared
+    var gearManager: GearManager = GearManager.shared
     let btn: UIButton = UIButton()
     
     var selectedAssets = [PHAsset]()
@@ -34,10 +35,8 @@ class AddGearViewController: UIViewController{
     var gearTypeId: Int = 0
     var total: Int = 0
   
-    
-    let gg: [String] = ["텐트","타프","난로","식기","코펠","컵","이것","저것","텐트","타프","난로","식기","코펠","컵","이것","저것","텐트","타프","난로","식기","코펠","컵","이것","저것","텐트","타프","난로","식기","코펠","컵","이것","저것"]
-    
     @IBAction func gearSave(_ sender: Any) {
+        
         
         guard let name = gearName.text else { return }
         guard let color = gearColor.text else { return }
@@ -46,6 +45,14 @@ class AddGearViewController: UIViewController{
         guard let price = gearPrice.text else { return }
         
         gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, price: price, image: photoArray, imageName: imageFileName)
+     
+        let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alert, animated: true)
+        
+        self.dismiss(animated: true, completion: nil)
+        
+        
     }
     
     @IBAction func closeButton(_ sender: Any) {
@@ -53,7 +60,10 @@ class AddGearViewController: UIViewController{
     }
     
     @IBAction func imageSelectButton(_ sender: Any) {
-
+        if self.photoArray.count >= 5{
+            imageErrorAlert()
+        }
+        
         let imagePicker = ImagePickerController()
         imagePicker.settings.selection.max = 5
         
@@ -64,31 +74,42 @@ class AddGearViewController: UIViewController{
         }, cancel: { (assets) in
             // User canceled selection.
         }, finish: { (assets) in
+            
             for asset in assets {
                 self.selectedAssets.append(asset)
-                
+            
             }
             self.convertAssetToImages()
+            self.imageCount.text = "(\(self.photoArray.count) / 5"
             
             // User finished selection assets.
         })
         
+        
     }
     
+    func imageErrorAlert(){
+        
+        let alert = UIAlertController(title: nil, message: "이미지는 5장까지 등록 가능합니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alert, animated: true)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createPickerView()
         gearTypeTextField.tintColor = .clear
+        imageCount.text = "(\(self.photoArray.count) / 5"
         
     }
 
+ 
     func createPickerView(){
         let pickerView = UIPickerView()
         pickerView.delegate = self
         gearTypeTextField.inputView = pickerView
     }
-
 }
 
 extension AddGearViewController {
@@ -128,12 +149,13 @@ extension AddGearViewController: UIPickerViewDataSource{
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return gearManager.gears.count
-//        return gg.count
+
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         return gearManager.gears[row].gearName
-//        return gg[row]
+
     }
 }
 
@@ -141,8 +163,7 @@ extension AddGearViewController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         gearTypeTextField.text = gearManager.gears[row].gearName
         gearTypeId = gearManager.gears[row].gearID
-//        gearTypeId = 25
-//        gearTypeLabel.text = gg[row]
+
 
 
     }
@@ -180,6 +201,7 @@ extension AddGearViewController: UICollectionViewDataSource {
             self.photoArray.remove(at: indexpath.row)
             self.gearCollectionView.deleteItems(at: [indexpath])
         }
+        self.imageCount.text = "(\(self.photoArray.count) / 5"
     }
 
 }

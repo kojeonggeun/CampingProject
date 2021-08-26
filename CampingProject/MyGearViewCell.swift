@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FirstViewCell: UITableViewCell {
+class MyGearViewCell: UITableViewCell {
     @IBOutlet weak var tableViewCellText: UILabel!
     @IBOutlet weak var expandButton: UIButton!
     
@@ -33,8 +33,8 @@ struct TableViewCellData {
 struct CellData: Codable {
     var id: Int
     var name: String
-    var gearTypeId: Int
-    var gearTypeName: String
+    var gearTypeId: Int?
+    var gearTypeName: String?
     var color: String
     var company: String
     var capacity: String
