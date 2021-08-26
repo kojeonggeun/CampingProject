@@ -87,15 +87,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		CB3C9F1426D79C6700404D05 /* Login */ = {
+		CB3C9F1726D79E7000404D05 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				CB6037D226B28A530023042F /* UserModel.swift */,
 				CB6037D026B289980023042F /* SignUpViewController.swift */,
 				CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */,
 			);
-			name = Login;
-			path = ..;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		CB6037AE26B2728E0023042F = {
@@ -120,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				CB93BE1626D3BE970018AB0D /* Utils */,
-				CB3C9F1426D79C6700404D05 /* Login */,
+				CB3C9F1726D79E7000404D05 /* Login */,
 				CBAB103426C552380058F440 /* Gear */,
 				CBA2327026BE609700946DA0 /* GoogleService-Info.plist */,
 				CB6037BA26B2728E0023042F /* AppDelegate.swift */,

@@ -74,10 +74,6 @@ class SignInViewController: UIViewController{
             }
         }
         
-   
-        
-        
-        
-        
+ 
     }
 }
