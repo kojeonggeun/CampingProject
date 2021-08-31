@@ -20,8 +20,14 @@ class GearDetailViewCell: UICollectionViewCell {
 //
 //    }
     func updateUI(item: UIImage?) {
+        
         guard let image = item else { return }
-        gearDetailImage.image = image
+        
+        
+        self.gearDetailImage.image = image
+        
+        
+        
     }
     
 }

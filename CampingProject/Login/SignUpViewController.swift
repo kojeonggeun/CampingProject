@@ -61,9 +61,9 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
             return
         }
         
-        let alert = UIAlertController(title: nil, message: "회원가입이 완료 되었습니다.!!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-        self.present(alert, animated: true)
+//        let alert = UIAlertController(title: nil, message: "회원가입이 완료 되었습니다.!!", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+//        self.present(alert, animated: true)
         
         self.dismiss(animated: true, completion: nil)
     }

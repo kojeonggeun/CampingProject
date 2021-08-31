@@ -50,8 +50,9 @@ class AddGearViewController: UIViewController{
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         self.present(alert, animated: true)
         
-        self.dismiss(animated: true, completion: nil)
-        
+        print(alert.isBeingPresented)
+        print(alert.isBeingDismissed)
+//        TODO 등록 완료 된 후 장비리스트 창으로 이동 후 리로드되야 함
         
     }
     
@@ -60,6 +61,7 @@ class AddGearViewController: UIViewController{
     }
     
     @IBAction func imageSelectButton(_ sender: Any) {
+//        ERROR : 사진 4장 고른 후 다시 사진 선택창에서 2장이상 고르면 등록되는 에러
         if self.photoArray.count >= 5{
             imageErrorAlert()
         }
@@ -79,6 +81,7 @@ class AddGearViewController: UIViewController{
                 self.selectedAssets.append(asset)
             
             }
+            
             self.convertAssetToImages()
             self.imageCount.text = "(\(self.photoArray.count) / 5"
             
@@ -130,11 +133,8 @@ extension AddGearViewController {
                 manager.requestImage(for: selectedAssets[i], targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: option, resultHandler: {(result,info) -> Void in
                     thumbnail = result!
                 })
-
-                let data = thumbnail.jpegData(compressionQuality: 0.7)
-                let newImage = UIImage(data: data!)
-    
-                self.photoArray.append(newImage! as UIImage)
+                    
+                self.photoArray.append(thumbnail)
                 self.imageFileName.append(asset.first!.originalFilename)
                 
                 self.gearCollectionView.reloadData()
@@ -230,5 +230,5 @@ extension AddGearViewController: UICollectionViewDelegate{
 //        return CGSize(width: width, height: height)
 //    }
 //}
-
-
+//
+//

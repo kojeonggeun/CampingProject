@@ -626,50 +626,45 @@
                                     <action selector="closeButton:" destination="gV7-yI-l1A" eventType="touchUpInside" id="jIZ-jJ-4lf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elC-Cs-j64">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elC-Cs-j64">
                                 <rect key="frame" x="30" y="149" width="74" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비 가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul9-KX-bxA">
-                                <rect key="frame" x="30" y="259" width="74" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QuW-jQ-xmd">
-                                <rect key="frame" x="30" y="483" width="330" height="128"/>
+                                <rect key="frame" x="0.0" y="576" width="390" height="203"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="s6U-6s-3GP">
-                                    <size key="itemSize" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="203" id="MMO-to-Sse"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="s6U-6s-3GP">
+                                    <size key="itemSize" width="389" height="192"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="NnE-fM-Swa" customClass="GearDetailViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="5.666666666666667" width="389" height="192"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yTB-K4-Puf">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="389" height="192"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dg3-Vx-qPc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="128" id="HqW-8d-lh1"/>
-                                                        <constraint firstAttribute="width" constant="128" id="KUY-Ct-tAg"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="0.0" y="0.0" width="389" height="192"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="dg3-Vx-qPc" firstAttribute="leading" secondItem="yTB-K4-Puf" secondAttribute="leading" id="7qI-UI-Yvc"/>
-                                                <constraint firstItem="dg3-Vx-qPc" firstAttribute="top" secondItem="yTB-K4-Puf" secondAttribute="top" id="95N-nM-aAT"/>
-                                                <constraint firstAttribute="trailing" secondItem="dg3-Vx-qPc" secondAttribute="trailing" id="HEN-9j-B63"/>
-                                                <constraint firstAttribute="bottom" secondItem="dg3-Vx-qPc" secondAttribute="bottom" id="fAr-il-0WL"/>
+                                                <constraint firstItem="dg3-Vx-qPc" firstAttribute="top" secondItem="yTB-K4-Puf" secondAttribute="top" id="MKN-ND-wUS"/>
+                                                <constraint firstAttribute="bottom" secondItem="dg3-Vx-qPc" secondAttribute="bottom" id="Su1-vm-fSf"/>
+                                                <constraint firstAttribute="trailing" secondItem="dg3-Vx-qPc" secondAttribute="trailing" id="a44-Pg-7RA"/>
+                                                <constraint firstItem="dg3-Vx-qPc" firstAttribute="leading" secondItem="yTB-K4-Puf" secondAttribute="leading" id="hvY-Zn-HvM"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="389" height="192"/>
                                         <connections>
                                             <outlet property="gearDetailImage" destination="dg3-Vx-qPc" id="Ne5-Ry-c9s"/>
                                         </connections>
@@ -680,18 +675,20 @@
                                     <outlet property="delegate" destination="gV7-yI-l1A" id="Gpv-mL-sE2"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul9-KX-bxA">
+                                <rect key="frame" x="30" y="272" width="74" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JUt-HM-WIL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="JUt-HM-WIL" firstAttribute="trailing" secondItem="QuW-jQ-xmd" secondAttribute="trailing" constant="30" id="DXz-Hn-loX"/>
-                            <constraint firstItem="Ul9-KX-bxA" firstAttribute="top" secondItem="elC-Cs-j64" secondAttribute="bottom" constant="86" id="EhR-pk-A08"/>
-                            <constraint firstItem="Ul9-KX-bxA" firstAttribute="leading" secondItem="elC-Cs-j64" secondAttribute="leading" id="Lke-Z0-4Ce"/>
-                            <constraint firstItem="JUt-HM-WIL" firstAttribute="bottom" secondItem="QuW-jQ-xmd" secondAttribute="bottom" constant="199" id="XeN-ix-cak"/>
-                            <constraint firstItem="QuW-jQ-xmd" firstAttribute="top" secondItem="Ul9-KX-bxA" secondAttribute="bottom" constant="200" id="hnf-KV-Zyt"/>
-                            <constraint firstItem="QuW-jQ-xmd" firstAttribute="leading" secondItem="JUt-HM-WIL" secondAttribute="leading" constant="30" id="pc3-ye-lae"/>
-                            <constraint firstItem="Ul9-KX-bxA" firstAttribute="top" secondItem="C8r-qI-MAw" secondAttribute="top" constant="259" id="sbY-zL-WFp"/>
-                            <constraint firstItem="Ul9-KX-bxA" firstAttribute="leading" secondItem="QuW-jQ-xmd" secondAttribute="leading" id="yjw-4W-yxG"/>
+                            <constraint firstItem="JUt-HM-WIL" firstAttribute="bottom" secondItem="QuW-jQ-xmd" secondAttribute="bottom" constant="31" id="6OS-W7-l5i"/>
+                            <constraint firstItem="JUt-HM-WIL" firstAttribute="trailing" secondItem="QuW-jQ-xmd" secondAttribute="trailing" id="TTP-SR-TkJ"/>
+                            <constraint firstItem="QuW-jQ-xmd" firstAttribute="leading" secondItem="JUt-HM-WIL" secondAttribute="leading" id="nPJ-0s-JIb"/>
                         </constraints>
                     </view>
                     <connections>

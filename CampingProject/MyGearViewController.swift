@@ -38,7 +38,7 @@ class MyGearViewController: UIViewController{
         gearManager.loadUserData(completion: { data in
             if data {
                 
-                DispatchQueue.main.async {
+                DispatchQueue.global().async {
                     self.gearManager.loadGearType(completion: { data in
                         self.gearType = data
                         for i in 0..<self.gearType.count{
@@ -52,7 +52,7 @@ class MyGearViewController: UIViewController{
                         }
                         self.tableView.reloadData()
                     })
-                } // end main.async
+                } // end global.async
                 
             } else {
                 print("data Empty")
@@ -144,15 +144,15 @@ extension MyGearViewController: UITableViewDataSource{
 }
 
 extension MyGearViewController: UITableViewDelegate{
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
 
         guard let first = gearManager.userGear.firstIndex(where: { $0.id == tableViewData[indexPath.section].gearId[indexPath.row] }) else { return }
-        print("Awdawdawawdawdawdawdawdawd")
+
         self.performSegue(withIdentifier: "GearDetailViewController", sender: first)
-        print("Awdawdaw2131")
-            
+
+
         }
     }
    

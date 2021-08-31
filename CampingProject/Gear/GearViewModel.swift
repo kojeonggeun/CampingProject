@@ -18,7 +18,6 @@ class GearManager{
     var gears: [GearType] = []
     var userGear: [CellData] = []
     
-    
     func loadGearType(completion: @escaping ([GearType]) -> ()) {
         let url = API.BASE_URL + "common/config"
         
@@ -121,7 +120,7 @@ class GearManager{
             switch response.result {
             case .success(let value):
                 guard let result = response.data else { return }
-                
+
                 let data = self.parseUserGear(result)
                
                 for i in data {
@@ -141,8 +140,8 @@ class GearManager{
         self.userGear = []
 
         do {
-            
             let response = try decoder.decode([CellData].self, from: data)
+            
             return response
             
         } catch let error {
