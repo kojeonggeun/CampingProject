@@ -110,6 +110,10 @@ class AddGearViewController: UIViewController{
         pickerView.delegate = self
         gearTypeTextField.inputView = pickerView
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(sender)
+    }
 }
 
 extension AddGearViewController {
@@ -183,7 +187,7 @@ extension AddGearViewController: UICollectionViewDataSource {
         
         cell.imageRemoveButton.superview?.tag = indexPath.section
         cell.imageRemoveButton.tag = indexPath.row
-        cell.imageRemoveButton.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
+        cell.imageRemoveButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         cell.updateUI(item: self.photoArray[indexPath.row])
         

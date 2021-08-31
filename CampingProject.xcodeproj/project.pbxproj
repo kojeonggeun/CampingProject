@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */; };
+		CB3347A626DCABEB00DE0126 /* GearDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3347A526DCABEB00DE0126 /* GearDetailViewController.swift */; };
+		CB3347A826DD16C200DE0126 /* GearDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3347A726DD16C200DE0126 /* GearDetailViewCell.swift */; };
+		CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */; };
 		CB534DF726C2664A0022EA20 /* MyGearViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB534DF626C2664A0022EA20 /* MyGearViewCell.swift */; };
 		CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037BA26B2728E0023042F /* AppDelegate.swift */; };
 		CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037BC26B2728E0023042F /* SceneDelegate.swift */; };
@@ -34,6 +37,9 @@
 		41765E29EA73FAA1FE98B10C /* Pods-CampingProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.debug.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.debug.xcconfig"; sourceTree = "<group>"; };
 		CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		CB3347A526DCABEB00DE0126 /* GearDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearDetailViewController.swift; sourceTree = "<group>"; };
+		CB3347A726DD16C200DE0126 /* GearDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearDetailViewCell.swift; sourceTree = "<group>"; };
+		CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearModel.swift; sourceTree = "<group>"; };
 		CB534DF626C2664A0022EA20 /* MyGearViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewCell.swift; sourceTree = "<group>"; };
 		CB6037B726B2728E0023042F /* CampingProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampingProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6037BA26B2728E0023042F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,10 +136,13 @@
 				CB6037C526B2728F0023042F /* LaunchScreen.storyboard */,
 				CB6037C826B2728F0023042F /* Info.plist */,
 				CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */,
+				CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */,
 				CB534DF626C2664A0022EA20 /* MyGearViewCell.swift */,
-				CBA2326D26BA57C500946DA0 /* AES.swift */,
 				CBA2327226BE763200946DA0 /* MyGearViewController.swift */,
+				CBA2326D26BA57C500946DA0 /* AES.swift */,
 				CBA2327426BE803600946DA0 /* SecondViewController.swift */,
+				CB3347A726DD16C200DE0126 /* GearDetailViewCell.swift */,
+				CB3347A526DCABEB00DE0126 /* GearDetailViewController.swift */,
 			);
 			path = CampingProject;
 			sourceTree = "<group>";
@@ -151,8 +160,8 @@
 			children = (
 				CBAB103226C5510A0058F440 /* AddGearViewController.swift */,
 				CBAB103526C552460058F440 /* GearViewModel.swift */,
-				CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */,
 				CBAB103726C666FA0058F440 /* GearTypeModel.swift */,
+				CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */,
 			);
 			path = Gear;
 			sourceTree = "<group>";
@@ -274,7 +283,9 @@
 			files = (
 				CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */,
 				CB6037BF26B2728E0023042F /* ViewController.swift in Sources */,
+				CB3347A626DCABEB00DE0126 /* GearDetailViewController.swift in Sources */,
 				CB534DF726C2664A0022EA20 /* MyGearViewCell.swift in Sources */,
+				CB3347A826DD16C200DE0126 /* GearDetailViewCell.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
 				CBAB103326C5510A0058F440 /* AddGearViewController.swift in Sources */,
@@ -282,6 +293,7 @@
 				CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
 				CBA2326E26BA57C500946DA0 /* AES.swift in Sources */,
+				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,
 				CBAB103626C552460058F440 /* GearViewModel.swift in Sources */,
 				CB6037D326B28A530023042F /* UserModel.swift in Sources */,
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,

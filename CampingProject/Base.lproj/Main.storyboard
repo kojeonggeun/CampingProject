@@ -232,41 +232,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NEy-xL-aYf">
-                                <rect key="frame" x="0.0" y="174" width="390" height="587"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NEy-xL-aYf">
+                                <rect key="frame" x="10" y="174" width="370" height="587"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstViewCell" id="Dic-Bd-iK6" customClass="MyGearViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="43"/>
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="370" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dic-Bd-iK6" id="iWi-UY-rLo">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GB7-fS-y1u">
-                                                    <rect key="frame" x="10" y="4" width="61" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                                    <rect key="frame" x="20" y="4" width="45" height="31"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkl-zv-yK3">
-                                                    <rect key="frame" x="350.66666666666669" y="4.0000000000000018" width="19.333333333333314" height="29.666666666666671"/>
-                                                    <state key="normal" image="arrow.right" catalog="system"/>
-                                                    <state key="selected" image="arrow.down" catalog="system"/>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="tkl-zv-yK3" firstAttribute="top" secondItem="iWi-UY-rLo" secondAttribute="top" constant="4" id="1Nk-o3-rlk"/>
-                                                <constraint firstItem="GB7-fS-y1u" firstAttribute="leading" secondItem="iWi-UY-rLo" secondAttribute="leading" constant="10" id="AwD-86-adD"/>
+                                                <constraint firstItem="GB7-fS-y1u" firstAttribute="leading" secondItem="iWi-UY-rLo" secondAttribute="leading" constant="20" id="AwD-86-adD"/>
                                                 <constraint firstAttribute="bottom" secondItem="GB7-fS-y1u" secondAttribute="bottom" constant="9" id="B1T-RA-iBe"/>
-                                                <constraint firstAttribute="bottom" secondItem="tkl-zv-yK3" secondAttribute="bottom" constant="9.5" id="hcc-64-bch"/>
-                                                <constraint firstAttribute="trailing" secondItem="tkl-zv-yK3" secondAttribute="trailing" constant="20" symbolic="YES" id="m0l-cX-O1e"/>
-                                                <constraint firstItem="tkl-zv-yK3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GB7-fS-y1u" secondAttribute="trailing" constant="10" id="nf1-OA-IJc"/>
                                                 <constraint firstItem="GB7-fS-y1u" firstAttribute="top" secondItem="iWi-UY-rLo" secondAttribute="top" constant="4" id="pHv-Pz-ap8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="expandButton" destination="tkl-zv-yK3" id="KdE-BV-nw4"/>
                                             <outlet property="tableViewCellText" destination="GB7-fS-y1u" id="6Ke-m3-E16"/>
                                         </connections>
                                     </tableViewCell>
@@ -277,16 +267,16 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toY-JU-L5I">
-                                <rect key="frame" x="279" y="122" width="91" height="30"/>
-                                <state key="normal" title="로그인화면으로"/>
+                                <rect key="frame" x="318" y="122" width="52" height="30"/>
+                                <state key="normal" title="로그아웃"/>
                                 <connections>
                                     <action selector="unwind:" destination="jsH-H6-KFl" eventType="touchUpInside" id="fKQ-qW-kRo"/>
                                     <segue destination="Pke-rv-TyW" kind="unwind" identifier="unwindVC1" unwindAction="unwindVC1WithSegue:" id="e3X-P5-hOu"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="이메일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yN5-Fe-MwH">
-                                <rect key="frame" x="20" y="68" width="52" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <rect key="frame" x="20.000000000000004" y="68" width="36.333333333333343" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -296,12 +286,13 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                 </state>
                                 <connections>
-                                    <segue destination="hWv-Lq-Ccj" kind="presentation" identifier="AddGearViewController" id="icH-Ug-iaK"/>
+                                    <action selector="addGear:" destination="jsH-H6-KFl" eventType="touchUpInside" id="X7f-x1-gHk"/>
+                                    <segue destination="hWv-Lq-Ccj" kind="presentation" identifier="AddGearViewController" id="NVx-5t-8Qh"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비 리스트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1p-oB-H5b">
-                                <rect key="frame" x="20" y="110" width="136.66666666666666" height="36"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <rect key="frame" x="20.000000000000007" y="110" width="113.66666666666669" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -311,7 +302,7 @@
                         <constraints>
                             <constraint firstItem="c1p-oB-H5b" firstAttribute="leading" secondItem="l1a-oT-yIM" secondAttribute="leading" constant="20" id="AMt-Sn-xDC"/>
                             <constraint firstItem="toY-JU-L5I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c1p-oB-H5b" secondAttribute="trailing" constant="10" id="J4C-DE-Lb6"/>
-                            <constraint firstItem="NEy-xL-aYf" firstAttribute="leading" secondItem="l1a-oT-yIM" secondAttribute="leading" id="KBP-DI-ScR"/>
+                            <constraint firstItem="NEy-xL-aYf" firstAttribute="leading" secondItem="l1a-oT-yIM" secondAttribute="leading" constant="10" id="KBP-DI-ScR"/>
                             <constraint firstItem="toY-JU-L5I" firstAttribute="top" secondItem="3nP-62-9Km" secondAttribute="bottom" constant="20" id="O3h-14-XIp"/>
                             <constraint firstItem="l1a-oT-yIM" firstAttribute="trailing" secondItem="toY-JU-L5I" secondAttribute="trailing" constant="20" id="a7n-8j-0N0"/>
                             <constraint firstItem="yN5-Fe-MwH" firstAttribute="top" secondItem="l1a-oT-yIM" secondAttribute="top" constant="24" id="bPN-dj-7NN"/>
@@ -320,21 +311,22 @@
                             <constraint firstItem="l1a-oT-yIM" firstAttribute="trailing" secondItem="3nP-62-9Km" secondAttribute="trailing" constant="31" id="j27-Y9-XVi"/>
                             <constraint firstItem="l1a-oT-yIM" firstAttribute="bottom" secondItem="NEy-xL-aYf" secondAttribute="bottom" id="pGN-fG-tB7"/>
                             <constraint firstItem="yN5-Fe-MwH" firstAttribute="leading" secondItem="l1a-oT-yIM" secondAttribute="leading" constant="20" id="rH9-SZ-hTH"/>
-                            <constraint firstItem="l1a-oT-yIM" firstAttribute="trailing" secondItem="NEy-xL-aYf" secondAttribute="trailing" id="tYI-KO-dFz"/>
+                            <constraint firstItem="l1a-oT-yIM" firstAttribute="trailing" secondItem="NEy-xL-aYf" secondAttribute="trailing" constant="10" id="tYI-KO-dFz"/>
                             <constraint firstItem="3nP-62-9Km" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yN5-Fe-MwH" secondAttribute="trailing" constant="5" id="urt-46-sDr"/>
-                            <constraint firstItem="c1p-oB-H5b" firstAttribute="top" secondItem="yN5-Fe-MwH" secondAttribute="bottom" constant="18" id="zAw-9c-5h9"/>
+                            <constraint firstItem="c1p-oB-H5b" firstAttribute="top" secondItem="yN5-Fe-MwH" secondAttribute="bottom" constant="25" id="zAw-9c-5h9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="내 장비" id="2Dv-iz-eTR"/>
                     <connections>
                         <outlet property="emailText" destination="yN5-Fe-MwH" id="l4c-Er-aQR"/>
                         <outlet property="tableView" destination="NEy-xL-aYf" id="23L-FX-Fux"/>
+                        <segue destination="gV7-yI-l1A" kind="showDetail" identifier="GearDetailViewController" id="WhZ-0e-JWy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kv9-Wn-kWl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Pke-rv-TyW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1098" y="146"/>
+            <point key="canvasLocation" x="-1098.4615384615383" y="145.73459715639811"/>
         </scene>
         <!--Add Gear View Controller-->
         <scene sceneID="PX8-u3-Jwu">
@@ -602,6 +594,7 @@
                             <constraint firstItem="fZZ-sl-bR1" firstAttribute="top" secondItem="xYB-2F-GcM" secondAttribute="bottom" constant="15" id="xcX-If-dex"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="uko-Am-lvL"/>
                     <connections>
                         <outlet property="gearCapacity" destination="wH7-Y1-k8e" id="Z7p-9j-7uC"/>
                         <outlet property="gearCollectionView" destination="WeG-f7-vTD" id="tOw-Xp-Dp8"/>
@@ -616,6 +609,99 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eHr-eo-Pah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-77" y="146"/>
+        </scene>
+        <!--Gear Detail View Controller-->
+        <scene sceneID="IVD-Ey-Xsl">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="gV7-yI-l1A" customClass="GearDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C8r-qI-MAw">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msd-Ke-Qgq">
+                                <rect key="frame" x="50" y="79" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="closeButton:" destination="gV7-yI-l1A" eventType="touchUpInside" id="jIZ-jJ-4lf"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elC-Cs-j64">
+                                <rect key="frame" x="30" y="149" width="74" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비 가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul9-KX-bxA">
+                                <rect key="frame" x="30" y="259" width="74" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QuW-jQ-xmd">
+                                <rect key="frame" x="30" y="483" width="330" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="s6U-6s-3GP">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="NnE-fM-Swa" customClass="GearDetailViewCell" customModule="CampingProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yTB-K4-Puf">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dg3-Vx-qPc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="128" id="HqW-8d-lh1"/>
+                                                        <constraint firstAttribute="width" constant="128" id="KUY-Ct-tAg"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dg3-Vx-qPc" firstAttribute="leading" secondItem="yTB-K4-Puf" secondAttribute="leading" id="7qI-UI-Yvc"/>
+                                                <constraint firstItem="dg3-Vx-qPc" firstAttribute="top" secondItem="yTB-K4-Puf" secondAttribute="top" id="95N-nM-aAT"/>
+                                                <constraint firstAttribute="trailing" secondItem="dg3-Vx-qPc" secondAttribute="trailing" id="HEN-9j-B63"/>
+                                                <constraint firstAttribute="bottom" secondItem="dg3-Vx-qPc" secondAttribute="bottom" id="fAr-il-0WL"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="gearDetailImage" destination="dg3-Vx-qPc" id="Ne5-Ry-c9s"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="gV7-yI-l1A" id="MBb-aZ-7fd"/>
+                                    <outlet property="delegate" destination="gV7-yI-l1A" id="Gpv-mL-sE2"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JUt-HM-WIL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JUt-HM-WIL" firstAttribute="trailing" secondItem="QuW-jQ-xmd" secondAttribute="trailing" constant="30" id="DXz-Hn-loX"/>
+                            <constraint firstItem="Ul9-KX-bxA" firstAttribute="top" secondItem="elC-Cs-j64" secondAttribute="bottom" constant="86" id="EhR-pk-A08"/>
+                            <constraint firstItem="Ul9-KX-bxA" firstAttribute="leading" secondItem="elC-Cs-j64" secondAttribute="leading" id="Lke-Z0-4Ce"/>
+                            <constraint firstItem="JUt-HM-WIL" firstAttribute="bottom" secondItem="QuW-jQ-xmd" secondAttribute="bottom" constant="199" id="XeN-ix-cak"/>
+                            <constraint firstItem="QuW-jQ-xmd" firstAttribute="top" secondItem="Ul9-KX-bxA" secondAttribute="bottom" constant="200" id="hnf-KV-Zyt"/>
+                            <constraint firstItem="QuW-jQ-xmd" firstAttribute="leading" secondItem="JUt-HM-WIL" secondAttribute="leading" constant="30" id="pc3-ye-lae"/>
+                            <constraint firstItem="Ul9-KX-bxA" firstAttribute="top" secondItem="C8r-qI-MAw" secondAttribute="top" constant="259" id="sbY-zL-WFp"/>
+                            <constraint firstItem="Ul9-KX-bxA" firstAttribute="leading" secondItem="QuW-jQ-xmd" secondAttribute="leading" id="yjw-4W-yxG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gearName" destination="elC-Cs-j64" id="PYz-fG-o5j"/>
+                        <outlet property="gearPrice" destination="Ul9-KX-bxA" id="h0Z-Gl-3Tn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QT9-uM-6eM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-78.461538461538453" y="870.85308056872032"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="25e-BD-S0r">
@@ -817,8 +903,6 @@
         </designable>
     </designables>
     <resources>
-        <image name="arrow.down" catalog="system" width="120" height="128"/>
-        <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>

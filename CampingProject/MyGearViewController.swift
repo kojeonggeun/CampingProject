@@ -19,19 +19,21 @@ class MyGearViewController: UIViewController{
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
     
+    @IBAction func addGear(_ sender: Any) {
+        self.performSegue(withIdentifier: "AddGearViewController", sender: tableView)
+    }
+    
     var gearManager: GearManager = GearManager.shared
-    
-    
     var tableViewData = [TableViewCellData]()
     var gearType = [GearType]()
-    var tableData = [CellData]()
-
     var segueText: String = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         emailText.text = segueText
+        tableView.showsVerticalScrollIndicator = false
         
         gearManager.loadUserData(completion: { data in
             if data {
@@ -44,8 +46,7 @@ class MyGearViewController: UIViewController{
                             
                             for j in self.gearManager.userGear{
                                 if self.gearType[i].gearName == j.gearTypeName{
-                                  
-                                    self.tableViewData[i].update(name: j.name)  
+                                    self.tableViewData[i].update(id: j.id, name: j.name)
                                 }
                             }
                         }
@@ -57,11 +58,16 @@ class MyGearViewController: UIViewController{
                 print("data Empty")
             }
         })
-        
-
-        
-   
     } // end viewDidLoad
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GearDetailViewController"{
+            let vc = segue.destination as! GearDetailViewController
+            vc.gearIndex = sender as! Int
+            
+        }
+    }
+    
 }// end FirstViewController
 
 extension MyGearViewController: UITableViewDataSource{
@@ -72,54 +78,87 @@ extension MyGearViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if tableViewData[section].isOpened == true {
-            // tableView Section이 true면 title + sectionData 개수만큼 추가
-            return tableViewData[section].name.count + 1 }
+            
+            return tableViewData[section].name.count}
         else {
-            // tableView Section이 false면 title 한개만 리턴
-            return 1
+            
+            return 0
         }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let button = UIButton(type: .system)
+        let item = tableViewData[section].gearTypeName
+        let itemCount = tableViewData[section].name.count
+        
+        button.setTitle("\(item) (\(itemCount)) 보유 중", for: .normal)
+        button.addTarget(self, action: #selector(clicked), for: .touchUpInside)
+        button.tintColor = .white
+        
+        button.titleLabel?.font = UIFont.systemFont(ofSize:15, weight: .bold)
+        
+        button.backgroundColor = UIColor.lightGray
+        button.layer.cornerRadius = 8
+
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets.left = 20
+
+        button.tag = section
+        
+        return button
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 5))
+        footerView.backgroundColor = UIColor.clear
+        return footerView
+
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        10
+    }
+  
+    
+    @objc func clicked(_ sender: UIButton){
+        let row = sender.tag
+        tableViewData[row].isOpened = !tableViewData[row].isOpened
+        tableView.reloadSections([row], with: .automatic)
+        
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell()}
         
-        if indexPath.row == 0 {
+        cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row]
         
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell() }
-            cell.tableViewCellText.text = tableViewData[indexPath.section].gearTypeName
-            cell.expandButton.isHidden = false
-            
-            return cell
-            
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell() }
-//            cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row - 1]
         
-            cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row - 1]
-            if indexPath.row != 0{
-                cell.backgroundColor = .white
-                cell.expandButton.isHidden = true
-            }
-            return cell
-        }
+        return cell
     }
-    
+  
 }
 
 extension MyGearViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0 {
-            tableViewData[indexPath.section].isOpened = !tableViewData[indexPath.section].isOpened
-            tableView.reloadSections([indexPath.section], with: .none)
-            
-        } else {
-            
-            print(indexPath)
+
+        guard let first = gearManager.userGear.firstIndex(where: { $0.id == tableViewData[indexPath.section].gearId[indexPath.row] }) else { return }
+        print("Awdawdawawdawdawdawdawdawd")
+        self.performSegue(withIdentifier: "GearDetailViewController", sender: first)
+        print("Awdawdaw2131")
             
         }
     }
-}
+   
+
+
+
+
 
 

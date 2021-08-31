@@ -33,7 +33,6 @@ class SignInViewController: UIViewController{
             }
         }
     
-        
     }
     
     @IBAction func appleLogin(_ sender: Any) {

@@ -118,7 +118,7 @@ class UserManager {
         let url = API.BASE_URL + "user"
         
         let headers: HTTPHeaders = ["Authorization" : user["token"] as! String]
-    
+        print(user["token"])
         AF.request(url,
                    method: .get,
                    encoding: URLEncoding.default,

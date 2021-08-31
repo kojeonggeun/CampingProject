@@ -18,12 +18,9 @@ class GearImageCollectionViewCell: UICollectionViewCell {
 //
 //
 //    }
-
     func updateUI(item: UIImage?) {
         guard let image = item else { return }
-        
         gearImage.image = image
-        
     }
     
 }
