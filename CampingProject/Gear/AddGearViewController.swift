@@ -67,19 +67,27 @@ class AddGearViewController: UIViewController{
         
         let imagePicker = ImagePickerController()
         imagePicker.settings.selection.max = 5
+        
         var tempAssets = [PHAsset]()
+        
         self.presentImagePicker(imagePicker, select: { (asset) in
             // User selected an asset. Do something with it. Perhaps begin processing/upload?
             
             tempAssets.append(asset)
             
-            
             if self.selectedAssets.count + tempAssets.count > 5 {
                 self.imageErrorAlert(vc: imagePicker)
                 imagePicker.deselect(asset: asset)
+                tempAssets.remove(at: tempAssets.endIndex - 1)
             }
+            
         }, deselect: { (asset) in
             
+            guard let first = tempAssets.firstIndex(where: { $0 == asset }) else { return }
+            
+            tempAssets.remove(at: first)
+                
+        
             // User deselected an asset. Cancel whatever you did when asset was selected.
         }, cancel: { (assets) in
             // User canceled selection.
