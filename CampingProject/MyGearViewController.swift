@@ -13,6 +13,11 @@ class MyGearViewController: UIViewController{
     @IBOutlet weak var emailText: UILabel!
     
     
+    var gearManager: GearManager = GearManager.shared
+    var tableViewData = [TableViewCellData]()
+    var gearType = [GearType]()
+    var segueText: String = ""
+    
     @IBAction func unwind(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "token")
         
@@ -22,12 +27,6 @@ class MyGearViewController: UIViewController{
     @IBAction func addGear(_ sender: Any) {
         self.performSegue(withIdentifier: "AddGearViewController", sender: tableView)
     }
-    
-    var gearManager: GearManager = GearManager.shared
-    var tableViewData = [TableViewCellData]()
-    var gearType = [GearType]()
-    var segueText: String = ""
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +46,12 @@ class MyGearViewController: UIViewController{
                             for j in self.gearManager.userGear{
                                 if self.gearType[i].gearName == j.gearTypeName{
                                     self.tableViewData[i].update(id: j.id, name: j.name)
-                                }
+                                }// end if
                             }
+                        }// end first for
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
                         }
-                        self.tableView.reloadData()
                     })
                 } // end global.async
                 
@@ -149,9 +150,8 @@ extension MyGearViewController: UITableViewDelegate{
 
 
         guard let first = gearManager.userGear.firstIndex(where: { $0.id == tableViewData[indexPath.section].gearId[indexPath.row] }) else { return }
-
+      
         self.performSegue(withIdentifier: "GearDetailViewController", sender: first)
-
 
         }
     }

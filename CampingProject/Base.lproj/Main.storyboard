@@ -320,7 +320,7 @@
                     <connections>
                         <outlet property="emailText" destination="yN5-Fe-MwH" id="l4c-Er-aQR"/>
                         <outlet property="tableView" destination="NEy-xL-aYf" id="23L-FX-Fux"/>
-                        <segue destination="gV7-yI-l1A" kind="showDetail" identifier="GearDetailViewController" id="WhZ-0e-JWy"/>
+                        <segue destination="gV7-yI-l1A" kind="show" identifier="GearDetailViewController" id="S1h-a6-r5H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kv9-Wn-kWl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -608,7 +608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eHr-eo-Pah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-77" y="146"/>
+            <point key="canvasLocation" x="903" y="146"/>
         </scene>
         <!--Gear Detail View Controller-->
         <scene sceneID="IVD-Ey-Xsl">
@@ -618,21 +618,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msd-Ke-Qgq">
-                                <rect key="frame" x="50" y="79" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="closeButton:" destination="gV7-yI-l1A" eventType="touchUpInside" id="jIZ-jJ-4lf"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elC-Cs-j64">
-                                <rect key="frame" x="30" y="149" width="74" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QuW-jQ-xmd">
                                 <rect key="frame" x="0.0" y="576" width="390" height="203"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -675,6 +660,29 @@
                                     <outlet property="delegate" destination="gV7-yI-l1A" id="Gpv-mL-sE2"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNR-PF-SZJ">
+                                <rect key="frame" x="167" y="422" width="56" height="30"/>
+                                <state key="normal" title="장비 삭제"/>
+                                <connections>
+                                    <action selector="closeButton:" destination="gV7-yI-l1A" eventType="touchUpInside" id="xsw-SD-dNv"/>
+                                    <action selector="deleteGearAction:" destination="gV7-yI-l1A" eventType="touchUpInside" id="td3-Ea-5AI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msd-Ke-Qgq">
+                                <rect key="frame" x="50" y="79" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="closeButton:" destination="gV7-yI-l1A" eventType="touchUpInside" id="jIZ-jJ-4lf"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elC-Cs-j64">
+                                <rect key="frame" x="30" y="149" width="74" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul9-KX-bxA">
                                 <rect key="frame" x="30" y="272" width="74" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -687,10 +695,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="JUt-HM-WIL" firstAttribute="bottom" secondItem="QuW-jQ-xmd" secondAttribute="bottom" constant="31" id="6OS-W7-l5i"/>
+                            <constraint firstItem="JUt-HM-WIL" firstAttribute="trailing" secondItem="zNR-PF-SZJ" secondAttribute="trailing" constant="167" id="Mtb-Gp-Om3"/>
+                            <constraint firstItem="zNR-PF-SZJ" firstAttribute="top" secondItem="JUt-HM-WIL" secondAttribute="top" constant="378" id="NqE-le-b4n"/>
                             <constraint firstItem="JUt-HM-WIL" firstAttribute="trailing" secondItem="QuW-jQ-xmd" secondAttribute="trailing" id="TTP-SR-TkJ"/>
                             <constraint firstItem="QuW-jQ-xmd" firstAttribute="leading" secondItem="JUt-HM-WIL" secondAttribute="leading" id="nPJ-0s-JIb"/>
+                            <constraint firstItem="QuW-jQ-xmd" firstAttribute="top" secondItem="zNR-PF-SZJ" secondAttribute="bottom" constant="124" id="pyB-7w-Ghv"/>
+                            <constraint firstItem="zNR-PF-SZJ" firstAttribute="leading" secondItem="JUt-HM-WIL" secondAttribute="leading" constant="167" id="rbh-Ig-aJS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="gGd-5a-TSk"/>
                     <connections>
                         <outlet property="gearName" destination="elC-Cs-j64" id="PYz-fG-o5j"/>
                         <outlet property="gearPrice" destination="Ul9-KX-bxA" id="h0Z-Gl-3Tn"/>
@@ -698,7 +711,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QT9-uM-6eM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-78.461538461538453" y="870.85308056872032"/>
+            <point key="canvasLocation" x="175" y="894"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="25e-BD-S0r">

@@ -27,8 +27,8 @@ class AddGearViewController: UIViewController{
     @IBOutlet weak var imageCount: UILabel!
     
     var gearManager: GearManager = GearManager.shared
-    let btn: UIButton = UIButton()
     
+    let btn: UIButton = UIButton()
     var selectedAssets = [PHAsset]()
     var photoArray = [UIImage]()
     var imageFileName = [String]()
@@ -49,9 +49,7 @@ class AddGearViewController: UIViewController{
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         self.present(alert, animated: true)
-        
-        print(alert.isBeingPresented)
-        print(alert.isBeingDismissed)
+
 //        TODO 등록 완료 된 후 장비리스트 창으로 이동 후 리로드되야 함
         
     }
@@ -63,15 +61,25 @@ class AddGearViewController: UIViewController{
     @IBAction func imageSelectButton(_ sender: Any) {
 //        ERROR : 사진 4장 고른 후 다시 사진 선택창에서 2장이상 고르면 등록되는 에러
         if self.photoArray.count >= 5{
-            imageErrorAlert()
+            imageErrorAlert(vc: self)
+            return
         }
         
         let imagePicker = ImagePickerController()
         imagePicker.settings.selection.max = 5
-        
+        var tempAssets = [PHAsset]()
         self.presentImagePicker(imagePicker, select: { (asset) in
             // User selected an asset. Do something with it. Perhaps begin processing/upload?
+            
+            tempAssets.append(asset)
+            
+            
+            if self.selectedAssets.count + tempAssets.count > 5 {
+                self.imageErrorAlert(vc: imagePicker)
+                imagePicker.deselect(asset: asset)
+            }
         }, deselect: { (asset) in
+            
             // User deselected an asset. Cancel whatever you did when asset was selected.
         }, cancel: { (assets) in
             // User canceled selection.
@@ -89,16 +97,17 @@ class AddGearViewController: UIViewController{
         })
         
         
+        
     }
     
-    func imageErrorAlert(){
+    func imageErrorAlert(vc: UIViewController){
         
         let alert = UIAlertController(title: nil, message: "이미지는 5장까지 등록 가능합니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-        self.present(alert, animated: true)
+        vc.present(alert, animated: true)
         
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createPickerView()

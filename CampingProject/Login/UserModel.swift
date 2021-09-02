@@ -14,15 +14,15 @@ class UserManager {
     
     let userDefaults = UserDefaults.standard
     static let shared = UserManager()
-
+    let url = API.BASE_URL
     
     func Register(email: String, password: String){
 //        지금은 HTTP가 되도록 설정해 놓음 추후에 INFO.PLIST 수정해야 한다
-        let url = API.BASE_URL + "user"
+       
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
         
-        AF.request(url,method: .post,parameters: params,encoding:URLEncoding.default,headers: ["Content-Type":"application/x-www-form-urlencoded"]).validate(statusCode: 200..<300).responseJSON { response in
+        AF.request(url + "user",method: .post,parameters: params,encoding:URLEncoding.default,headers: ["Content-Type":"application/x-www-form-urlencoded"]).validate(statusCode: 200..<300).responseJSON { response in
             
             switch response.result {
             case .success(_):
@@ -84,10 +84,7 @@ class UserManager {
 //                // POST 전송
 //                task.resume()
         
-        let url = API.BASE_URL + "user/login"
-        
-      
-        AF.request(url,
+        AF.request(url + "user/login",
                    method: .post,
                    parameters: ["email":email,"password":password],
                    encoding: URLEncoding.default,
@@ -115,11 +112,10 @@ class UserManager {
     }
     
     func loginCheck(user: NSDictionary ,completion: @escaping (Bool)-> Void ) {
-        let url = API.BASE_URL + "user"
         
         let headers: HTTPHeaders = ["Authorization" : user["token"] as! String]
         print(user["token"])
-        AF.request(url,
+        AF.request(url + "user",
                    method: .get,
                    encoding: URLEncoding.default,
                    headers: headers)

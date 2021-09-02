@@ -57,12 +57,14 @@ class SignInViewController: UIViewController{
  
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         emailTextField.text = ""
         passwordTextField.text = ""
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         if UserDefaults.standard.object(forKey: "token") != nil {
             guard let user = UserDefaults.standard.value(forKey: "token") as? NSDictionary else { return }

@@ -18,11 +18,11 @@ class GearManager{
     var gears: [GearType] = []
     var userGear: [CellData] = []
     
+    let url = API.BASE_URL
+    
     func loadGearType(completion: @escaping ([GearType]) -> ()) {
-        let url = API.BASE_URL + "common/config"
         
-        
-        AF.request(url,
+        AF.request(url + "common/config",
                    method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,
@@ -31,7 +31,6 @@ class GearManager{
             .responseJSON { (response) in
                 
                 switch response.result{
-                
                 case .success:
                     guard let result = response.data else {return}
                     let data = self.parseGears(result)
@@ -44,11 +43,8 @@ class GearManager{
                 case .failure(let error):
                     print(error)
                 }
-            
             }
-    
     }
-    
     func parseGears(_ data: Data) -> [GearType]  {
         let decoder = JSONDecoder()
         self.gears = []
@@ -71,7 +67,7 @@ class GearManager{
         // jpegData or pngData를 통해서 바꿔주고
         // multipartFormData에 바꾼 Data타입의 이미지를 append해준다.
         
-        let url = API.BASE_URL + "gear"
+        
         guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
@@ -93,7 +89,7 @@ class GearManager{
                 multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: imageName[i],mimeType: "image/jpg")
             }
             
-        }, to: url,method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
+        }, to: url + "gear",method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
             
             print("Upload Progress: \(progress.fractionCompleted)")
             
@@ -109,14 +105,14 @@ class GearManager{
     }
     
     func loadUserData(completion: @escaping (Bool) -> ()){
-        let url = API.BASE_URL + "gear"
+        
         guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
         
         let headers: HTTPHeaders = [
                     "Authorization" : token["token"] as! String
                 ]
         
-        AF.request(url, method: .get ,encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(url + "gear", method: .get ,encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 guard let result = response.data else { return }
@@ -134,7 +130,6 @@ class GearManager{
             }
         }
     }
-    
     func parseUserGear(_ data: Data) -> [CellData] {
         let decoder = JSONDecoder()
         self.userGear = []
@@ -149,6 +144,18 @@ class GearManager{
             return []
         }
         
+    }
+    
+    
+    func deleteGear(gearId: Int) {
+        guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
+        let headers: HTTPHeaders = [
+                    "Authorization" : token["token"] as! String
+                ]
+        
+        AF.request(url + "gear"+"/\(gearId)", method: .delete,headers: headers).validate(statusCode: 200..<300).response { (response) in
+            print(response)
+        }
     }
     
     
