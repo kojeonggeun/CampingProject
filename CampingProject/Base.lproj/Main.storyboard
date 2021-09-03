@@ -227,7 +227,7 @@
         <!--내 장비-->
         <scene sceneID="K7R-5g-2sD">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="jsH-H6-KFl" customClass="MyGearViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyGearViewController" modalPresentationStyle="fullScreen" id="jsH-H6-KFl" customClass="MyGearViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aYB-cG-jT3">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -608,7 +608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eHr-eo-Pah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="146"/>
+            <point key="canvasLocation" x="174" y="151"/>
         </scene>
         <!--Gear Detail View Controller-->
         <scene sceneID="IVD-Ey-Xsl">
@@ -884,7 +884,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="uqb-PF-qkB" id="Bdo-gI-myY"/>
                         <outlet property="passwordTextField" destination="74c-nf-WwY" id="d8s-Ne-pDX"/>
-                        <segue destination="3kT-bX-9Nt" kind="presentation" identifier="MainTabBarController" id="Etg-3G-MQt"/>
+                        <segue destination="3kT-bX-9Nt" kind="presentation" identifier="MainTabBarController" id="Agz-tT-q9r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

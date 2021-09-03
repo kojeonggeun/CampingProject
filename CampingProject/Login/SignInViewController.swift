@@ -66,11 +66,16 @@ class SignInViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        
         if UserDefaults.standard.object(forKey: "token") != nil {
+        
             guard let user = UserDefaults.standard.value(forKey: "token") as? NSDictionary else { return }
+            
             userManager.loginCheck(user: user){ (completion) in
                 if completion {
+                
                     self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])
+                    
                 }
             }
         }

@@ -15,6 +15,7 @@ class UserManager {
     let userDefaults = UserDefaults.standard
     static let shared = UserManager()
     let url = API.BASE_URL
+    let urlUser = API.BASE_URL_MYSELF
     
     func Register(email: String, password: String){
 //        지금은 HTTP가 되도록 설정해 놓음 추후에 INFO.PLIST 수정해야 한다
@@ -29,7 +30,7 @@ class UserManager {
                 print("POST 성공")
                 
             case .failure(let error):
-                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                print("🚫 Register Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
@@ -102,7 +103,7 @@ class UserManager {
 
 
                 case .failure(let error):
-                    print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                    print("🚫 login Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                     
                     completion(false)
                 }
@@ -115,7 +116,7 @@ class UserManager {
         
         let headers: HTTPHeaders = ["Authorization" : user["token"] as! String]
         print(user["token"])
-        AF.request(url + "user",
+        AF.request(urlUser,
                    method: .get,
                    encoding: URLEncoding.default,
                    headers: headers)
@@ -123,11 +124,9 @@ class UserManager {
             .responseJSON { (response) in
                 switch response.result {
                 case .success(_):
-                    
                     completion(true)
-                    
                 case .failure(let error):
-                    print("🚫 Error:\(error._code), Message: \(error.errorDescription!),\(error)")
+                    print("🚫 loginCheck Error:\(error._code), Message: \(error.errorDescription!),\(error)")
                     completion(false)
                     
                 }

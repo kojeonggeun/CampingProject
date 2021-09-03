@@ -8,7 +8,8 @@
 import UIKit
 
 class MyGearViewController: UIViewController{
-
+    
+  
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emailText: UILabel!
     
@@ -25,7 +26,8 @@ class MyGearViewController: UIViewController{
     }
     
     @IBAction func addGear(_ sender: Any) {
-        self.performSegue(withIdentifier: "AddGearViewController", sender: tableView)
+        
+        performSegue(withIdentifier: "AddGearViewController", sender: tableView)
     }
     
     override func viewDidLoad() {
@@ -59,13 +61,22 @@ class MyGearViewController: UIViewController{
                 print("data Empty")
             }
         })
+        NotificationCenter.default.addObserver(self, selector: #selector(self.DidDismissPost(_:)), name: NSNotification.Name("DidDismissPostMyGearViewController"), object: nil)
+        
     } // end viewDidLoad
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GearDetailViewController"{
             let vc = segue.destination as! GearDetailViewController
             vc.gearIndex = sender as! Int
-            
+        }
+
+    }
+    @objc func DidDismissPost(_ noti: Notification) {
+// self.tableViewData에 데이터 추가 해야 함
+//  데이터세이브할때 구조 변경 필요
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
@@ -73,6 +84,7 @@ class MyGearViewController: UIViewController{
 
 extension MyGearViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
+        
         return gearType.count
     }
     
@@ -141,7 +153,6 @@ extension MyGearViewController: UITableViewDataSource{
         
         return cell
     }
-  
 }
 
 extension MyGearViewController: UITableViewDelegate{
@@ -149,10 +160,14 @@ extension MyGearViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
 
-        guard let first = gearManager.userGear.firstIndex(where: { $0.id == tableViewData[indexPath.section].gearId[indexPath.row] }) else { return }
-      
-        self.performSegue(withIdentifier: "GearDetailViewController", sender: first)
-
+        if let first = gearManager.userGear.firstIndex(where: { $0.id == tableViewData[indexPath.section].gearId[indexPath.row]})
+        {
+            
+            self.performSegue(withIdentifier: "GearDetailViewController", sender: first)
+        } else {
+            return
+        }
+        
         }
     }
    

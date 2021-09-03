@@ -13,11 +13,11 @@ import BSImagePicker
 import TextFieldEffects
 
 
-class AddGearViewController: UIViewController{
+class AddGearViewController: UIViewController {
     
-    @IBOutlet weak var gearTypeTextField: UITextField!
     @IBOutlet weak var gearCollectionView: UICollectionView!
     
+    @IBOutlet weak var gearTypeTextField: UITextField!
     @IBOutlet weak var gearName: UITextField!
     @IBOutlet weak var gearColor: UITextField!
     @IBOutlet weak var gearCompany: UITextField!
@@ -33,8 +33,12 @@ class AddGearViewController: UIViewController{
     var photoArray = [UIImage]()
     var imageFileName = [String]()
     var gearTypeId: Int = 0
+    
     var total: Int = 0
-  
+    
+    let DidDismissPostMyGearViewController: Notification.Name = Notification.Name("DidDismissPostMyGearViewController")
+    
+    
     @IBAction func gearSave(_ sender: Any) {
         
         
@@ -47,9 +51,13 @@ class AddGearViewController: UIViewController{
         gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, price: price, image: photoArray, imageName: imageFileName)
      
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
+            
+            self.dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: self.DidDismissPostMyGearViewController, object: nil, userInfo: nil)
+     
+        })
         self.present(alert, animated: true)
-
 //        TODO 등록 완료 된 후 장비리스트 창으로 이동 후 리로드되야 함
         
     }
@@ -59,7 +67,6 @@ class AddGearViewController: UIViewController{
     }
     
     @IBAction func imageSelectButton(_ sender: Any) {
-//        ERROR : 사진 4장 고른 후 다시 사진 선택창에서 2장이상 고르면 등록되는 에러
         if self.photoArray.count >= 5{
             imageErrorAlert(vc: self)
             return
@@ -71,7 +78,6 @@ class AddGearViewController: UIViewController{
         var tempAssets = [PHAsset]()
         
         self.presentImagePicker(imagePicker, select: { (asset) in
-            // User selected an asset. Do something with it. Perhaps begin processing/upload?
             
             tempAssets.append(asset)
             
@@ -82,30 +88,23 @@ class AddGearViewController: UIViewController{
             }
             
         }, deselect: { (asset) in
-            
-            guard let first = tempAssets.firstIndex(where: { $0 == asset }) else { return }
-            
-            tempAssets.remove(at: first)
+            if let firstIndex = tempAssets.firstIndex(where: { $0 == asset }) {
+                tempAssets.remove(at: firstIndex)
+            }
+            else {
+                return
                 
-        
-            // User deselected an asset. Cancel whatever you did when asset was selected.
+            }
         }, cancel: { (assets) in
             // User canceled selection.
         }, finish: { (assets) in
             
             for asset in assets {
                 self.selectedAssets.append(asset)
-            
             }
-            
             self.convertAssetToImages()
             self.imageCount.text = "(\(self.photoArray.count) / 5"
-            
-            // User finished selection assets.
         })
-        
-        
-        
     }
     
     func imageErrorAlert(vc: UIViewController){

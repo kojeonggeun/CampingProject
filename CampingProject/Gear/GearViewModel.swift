@@ -8,8 +8,6 @@
 import Foundation
 import Alamofire
 
-
-
 class GearManager{
     
     let userDefaults = UserDefaults.standard
@@ -18,11 +16,12 @@ class GearManager{
     var gears: [GearType] = []
     var userGear: [CellData] = []
     
-    let url = API.BASE_URL
+    let url = API.BASE_URL_MYSELF
+    let urlUser = API.BASE_URL
     
     func loadGearType(completion: @escaping ([GearType]) -> ()) {
         
-        AF.request(url + "common/config",
+        AF.request(urlUser + "common/config",
                    method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,
@@ -106,13 +105,9 @@ class GearManager{
     
     func loadUserData(completion: @escaping (Bool) -> ()){
         
-        guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
+
         
-        let headers: HTTPHeaders = [
-                    "Authorization" : token["token"] as! String
-                ]
-        
-        AF.request(url + "gear", method: .get ,encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(url + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 guard let result = response.data else { return }
@@ -126,7 +121,7 @@ class GearManager{
                 completion(true)
                 
             case .failure(let error):
-                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                print("🚫loadUserData  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
@@ -148,16 +143,31 @@ class GearManager{
     
     
     func deleteGear(gearId: Int) {
-        guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
-        let headers: HTTPHeaders = [
-                    "Authorization" : token["token"] as! String
-                ]
         
-        AF.request(url + "gear"+"/\(gearId)", method: .delete,headers: headers).validate(statusCode: 200..<300).response { (response) in
+        AF.request(url + "gear"+"/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
             print(response)
         }
     }
     
+    func loadGearImages(gearId: Int){
+//  ID를 받아서 통신을 통해서 이미지를 받아와야함
+        
+        AF.request(url + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
+//            이미지가 들어올것이다
+        }
+        
+    }
     
+    func headerInfo() -> HTTPHeaders {
+        if let token = userDefaults.value(forKey: "token") as? NSDictionary  {
+            
+            let headers: HTTPHeaders = [
+                        "Authorization" : token["token"] as! String
+                    ]
+            return headers
+        } else {
+            return HTTPHeaders()
+        }
+    }
     
 }
