@@ -36,31 +36,7 @@ class MyGearViewController: UIViewController{
         emailText.text = segueText
         tableView.showsVerticalScrollIndicator = false
         
-        gearManager.loadUserData(completion: { data in
-            if data {
-                
-                DispatchQueue.global().async {
-                    self.gearManager.loadGearType(completion: { data in
-                        self.gearType = data
-                        for i in 0..<self.gearType.count{
-                            self.tableViewData.append(TableViewCellData(isOpened: false, gearTypeName: self.gearType[i].gearName))
-                            
-                            for j in self.gearManager.userGear{
-                                if self.gearType[i].gearName == j.gearTypeName{
-                                    self.tableViewData[i].update(id: j.id, name: j.name)
-                                }// end if
-                            }
-                        }// end first for
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    })
-                } // end global.async
-                
-            } else {
-                print("data Empty")
-            }
-        })
+        self.loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(self.DidDismissPost(_:)), name: NSNotification.Name("DidDismissPostMyGearViewController"), object: nil)
         
     } // end viewDidLoad
@@ -70,17 +46,51 @@ class MyGearViewController: UIViewController{
             let vc = segue.destination as! GearDetailViewController
             vc.gearIndex = sender as! Int
         }
-
-    }
-    @objc func DidDismissPost(_ noti: Notification) {
-// self.tableViewData에 데이터 추가 해야 함
-//  데이터세이브할때 구조 변경 필요
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        
     }
     
+    func loadData(){
+        gearManager.loadUserData()
+                
+        DispatchQueue.global().async {
+            self.gearManager.loadGearType(completion: { data in
+                self.gearType = data
+                for i in 0..<self.gearType.count{
+                    self.tableViewData.append(TableViewCellData(isOpened: false, gearTypeName: self.gearType[i].gearName))
+                    
+                    for j in self.gearManager.userGear{
+                        if self.gearType[i].gearName == j.gearTypeName{
+                            self.tableViewData[i].update(id: j.id, name: j.name)
+                        }// end if
+                    }
+                }// end first for
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            })
+        } // end global.async
+    }
+    
+    @objc func DidDismissPost(_ noti: Notification) {
+//          self.tableViewData[섹션값].update(id: gearId, name: name)
+//        tableViewData에 추가된 데이터를 넣어주고 Table를 reload를 시켜줘야한다.
+//        코드 수정 해야 함 
+        let gearIndex = self.gearManager.userGear.endIndex - 1
+        guard let gearId = noti.userInfo?["gearTypeId"] as? Int else {return}
+        
+        if let first = gearType.firstIndex(where: { $0.gearID == gearId}) {
+            gearManager.loadUserData()
+            self.tableViewData[first].update(id: self.gearManager.userGear[gearIndex].id, name: self.gearManager.userGear[gearIndex].name)
+            
+            self.tableView.reloadData()
+                    
+        }
+    }
+  
+    
 }// end FirstViewController
+
+
 
 extension MyGearViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,10 +101,9 @@ extension MyGearViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if tableViewData[section].isOpened == true {
-            
-            return tableViewData[section].name.count}
+            return tableViewData[section].name.count
+        }
         else {
-            
             return 0
         }
     }
@@ -126,6 +135,7 @@ extension MyGearViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 5))
         footerView.backgroundColor = UIColor.clear
@@ -162,8 +172,8 @@ extension MyGearViewController: UITableViewDelegate{
 
         if let first = gearManager.userGear.firstIndex(where: { $0.id == tableViewData[indexPath.section].gearId[indexPath.row]})
         {
-            
             self.performSegue(withIdentifier: "GearDetailViewController", sender: first)
+            
         } else {
             return
         }

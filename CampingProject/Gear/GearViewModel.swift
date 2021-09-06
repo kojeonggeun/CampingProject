@@ -65,8 +65,7 @@ class GearManager{
         // 먼저 image를 Data형식으로 바꿔줘야 한다.
         // jpegData or pngData를 통해서 바꿔주고
         // multipartFormData에 바꾼 Data타입의 이미지를 append해준다.
-        
-        
+      
         guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
@@ -99,27 +98,20 @@ class GearManager{
             case .failure(let error):
                 print(error)
             }
-            
         }
     }
     
-    func loadUserData(completion: @escaping (Bool) -> ()){
-        
+    func loadUserData(){
 
-        
         AF.request(url + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 guard let result = response.data else { return }
 
                 let data = self.parseUserGear(result)
-               
                 for i in data {
                     self.userGear.append(i)
                 }
-
-                completion(true)
-                
             case .failure(let error):
                 print("🚫loadUserData  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
@@ -149,13 +141,30 @@ class GearManager{
         }
     }
     
-    func loadGearImages(gearId: Int){
-//  ID를 받아서 통신을 통해서 이미지를 받아와야함
-        
-        AF.request(url + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
-//            이미지가 들어올것이다
+    func loadGearImages(gearId: Int, completion: @escaping ([ImageData]) -> Void){
+
+        AF.request(url + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                guard let result = response.data else { return }
+                completion(self.parseGearImages(result))
+                
+            case .failure(let error):
+                print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
         }
         
+    }
+    func parseGearImages(_ data: Data) -> [ImageData] {
+        let decoder = JSONDecoder()
+ 
+        do {
+            let response = try decoder.decode([ImageData].self, from: data)
+            return response
+        } catch let error {
+            print("--> CellData parsing error: \(error.localizedDescription)")
+            return []
+        }
     }
     
     func headerInfo() -> HTTPHeaders {
@@ -166,6 +175,7 @@ class GearManager{
                     ]
             return headers
         } else {
+            
             return HTTPHeaders()
         }
     }

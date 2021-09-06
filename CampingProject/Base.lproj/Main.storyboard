@@ -320,7 +320,7 @@
                     <connections>
                         <outlet property="emailText" destination="yN5-Fe-MwH" id="l4c-Er-aQR"/>
                         <outlet property="tableView" destination="NEy-xL-aYf" id="23L-FX-Fux"/>
-                        <segue destination="gV7-yI-l1A" kind="show" identifier="GearDetailViewController" id="S1h-a6-r5H"/>
+                        <segue destination="yZo-S3-NzY" kind="presentation" identifier="GearDetailViewController" id="u3e-Xe-TWf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kv9-Wn-kWl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -594,7 +594,6 @@
                             <constraint firstItem="fZZ-sl-bR1" firstAttribute="top" secondItem="xYB-2F-GcM" secondAttribute="bottom" constant="15" id="xcX-If-dex"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uko-Am-lvL"/>
                     <connections>
                         <outlet property="gearCapacity" destination="wH7-Y1-k8e" id="Z7p-9j-7uC"/>
                         <outlet property="gearCollectionView" destination="WeG-f7-vTD" id="tOw-Xp-Dp8"/>
@@ -611,107 +610,96 @@
             <point key="canvasLocation" x="174" y="151"/>
         </scene>
         <!--Gear Detail View Controller-->
-        <scene sceneID="IVD-Ey-Xsl">
+        <scene sceneID="SFk-cM-F5z">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="gV7-yI-l1A" customClass="GearDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="C8r-qI-MAw">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                <viewController id="yZo-S3-NzY" customClass="GearDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iBE-cG-K76">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QuW-jQ-xmd">
-                                <rect key="frame" x="0.0" y="576" width="390" height="203"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6d-EN-rUm">
+                                <rect key="frame" x="123" y="326" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="장비 삭제"/>
+                                <connections>
+                                    <action selector="showDeleteAlert:" destination="yZo-S3-NzY" eventType="touchUpInside" id="IXa-Nv-3zZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIz-UY-NRH">
+                                <rect key="frame" x="64" y="28" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="closeBtn:" destination="yZo-S3-NzY" eventType="touchUpInside" id="Yka-BH-Sts"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZM-rB-tX6">
+                                <rect key="frame" x="44" y="98" width="74" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7b-Fk-5DZ">
+                                <rect key="frame" x="44" y="221" width="74" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PIy-om-oFh">
+                                <rect key="frame" x="0.0" y="509" width="390" height="203"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="203" id="MMO-to-Sse"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="s6U-6s-3GP">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5E1-1l-ryp">
                                     <size key="itemSize" width="389" height="192"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="NnE-fM-Swa" customClass="GearDetailViewCell" customModule="CampingProject" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="8OO-3a-RwP" customClass="GearDetailViewCell" customModule="CampingProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5.666666666666667" width="389" height="192"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yTB-K4-Puf">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="YXh-w9-Ibi">
                                             <rect key="frame" x="0.0" y="0.0" width="389" height="192"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dg3-Vx-qPc">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vrb-ir-wbS">
                                                     <rect key="frame" x="0.0" y="0.0" width="389" height="192"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="dg3-Vx-qPc" firstAttribute="top" secondItem="yTB-K4-Puf" secondAttribute="top" id="MKN-ND-wUS"/>
-                                                <constraint firstAttribute="bottom" secondItem="dg3-Vx-qPc" secondAttribute="bottom" id="Su1-vm-fSf"/>
-                                                <constraint firstAttribute="trailing" secondItem="dg3-Vx-qPc" secondAttribute="trailing" id="a44-Pg-7RA"/>
-                                                <constraint firstItem="dg3-Vx-qPc" firstAttribute="leading" secondItem="yTB-K4-Puf" secondAttribute="leading" id="hvY-Zn-HvM"/>
+                                                <constraint firstAttribute="trailing" secondItem="Vrb-ir-wbS" secondAttribute="trailing" id="Bo1-9l-tcF"/>
+                                                <constraint firstAttribute="bottom" secondItem="Vrb-ir-wbS" secondAttribute="bottom" id="L2v-uM-SmT"/>
+                                                <constraint firstItem="Vrb-ir-wbS" firstAttribute="top" secondItem="YXh-w9-Ibi" secondAttribute="top" id="bVd-wt-2E7"/>
+                                                <constraint firstItem="Vrb-ir-wbS" firstAttribute="leading" secondItem="YXh-w9-Ibi" secondAttribute="leading" id="tpi-o2-dHM"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="389" height="192"/>
                                         <connections>
-                                            <outlet property="gearDetailImage" destination="dg3-Vx-qPc" id="Ne5-Ry-c9s"/>
+                                            <outlet property="gearDetailImage" destination="Vrb-ir-wbS" id="ESR-Kx-P1P"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="gV7-yI-l1A" id="MBb-aZ-7fd"/>
-                                    <outlet property="delegate" destination="gV7-yI-l1A" id="Gpv-mL-sE2"/>
+                                    <outlet property="dataSource" destination="yZo-S3-NzY" id="bYH-ap-QnS"/>
+                                    <outlet property="delegate" destination="yZo-S3-NzY" id="0UH-Sb-dex"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNR-PF-SZJ">
-                                <rect key="frame" x="167" y="422" width="56" height="30"/>
-                                <state key="normal" title="장비 삭제"/>
-                                <connections>
-                                    <action selector="closeButton:" destination="gV7-yI-l1A" eventType="touchUpInside" id="xsw-SD-dNv"/>
-                                    <action selector="deleteGearAction:" destination="gV7-yI-l1A" eventType="touchUpInside" id="td3-Ea-5AI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msd-Ke-Qgq">
-                                <rect key="frame" x="50" y="79" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="closeButton:" destination="gV7-yI-l1A" eventType="touchUpInside" id="jIZ-jJ-4lf"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elC-Cs-j64">
-                                <rect key="frame" x="30" y="149" width="74" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ul9-KX-bxA">
-                                <rect key="frame" x="30" y="272" width="74" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="JUt-HM-WIL"/>
+                        <viewLayoutGuide key="safeArea" id="kRs-u7-vVR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="JUt-HM-WIL" firstAttribute="bottom" secondItem="QuW-jQ-xmd" secondAttribute="bottom" constant="31" id="6OS-W7-l5i"/>
-                            <constraint firstItem="JUt-HM-WIL" firstAttribute="trailing" secondItem="zNR-PF-SZJ" secondAttribute="trailing" constant="167" id="Mtb-Gp-Om3"/>
-                            <constraint firstItem="zNR-PF-SZJ" firstAttribute="top" secondItem="JUt-HM-WIL" secondAttribute="top" constant="378" id="NqE-le-b4n"/>
-                            <constraint firstItem="JUt-HM-WIL" firstAttribute="trailing" secondItem="QuW-jQ-xmd" secondAttribute="trailing" id="TTP-SR-TkJ"/>
-                            <constraint firstItem="QuW-jQ-xmd" firstAttribute="leading" secondItem="JUt-HM-WIL" secondAttribute="leading" id="nPJ-0s-JIb"/>
-                            <constraint firstItem="QuW-jQ-xmd" firstAttribute="top" secondItem="zNR-PF-SZJ" secondAttribute="bottom" constant="124" id="pyB-7w-Ghv"/>
-                            <constraint firstItem="zNR-PF-SZJ" firstAttribute="leading" secondItem="JUt-HM-WIL" secondAttribute="leading" constant="167" id="rbh-Ig-aJS"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="gGd-5a-TSk"/>
                     <connections>
-                        <outlet property="gearName" destination="elC-Cs-j64" id="PYz-fG-o5j"/>
-                        <outlet property="gearPrice" destination="Ul9-KX-bxA" id="h0Z-Gl-3Tn"/>
+                        <outlet property="gearName" destination="SZM-rB-tX6" id="7AF-K9-1PW"/>
+                        <outlet property="gearPrice" destination="Q7b-Fk-5DZ" id="AWt-Wx-hTC"/>
+                        <outlet property="imageCollectionView" destination="PIy-om-oFh" id="l0C-Hi-dNk"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QT9-uM-6eM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KgY-pt-FYF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="175" y="894"/>
+            <point key="canvasLocation" x="-285" y="880"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="25e-BD-S0r">

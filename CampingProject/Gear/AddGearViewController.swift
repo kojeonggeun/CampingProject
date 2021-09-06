@@ -41,7 +41,6 @@ class AddGearViewController: UIViewController {
     
     @IBAction func gearSave(_ sender: Any) {
         
-        
         guard let name = gearName.text else { return }
         guard let color = gearColor.text else { return }
         guard let company = gearCompany.text else { return }
@@ -49,12 +48,11 @@ class AddGearViewController: UIViewController {
         guard let price = gearPrice.text else { return }
         
         gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, price: price, image: photoArray, imageName: imageFileName)
-     
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
             
             self.dismiss(animated: true, completion: nil)
-            NotificationCenter.default.post(name: self.DidDismissPostMyGearViewController, object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: self.DidDismissPostMyGearViewController, object: nil, userInfo: ["gearTypeId": self.gearTypeId, "gearName": name])
      
         })
         self.present(alert, animated: true)
@@ -65,6 +63,7 @@ class AddGearViewController: UIViewController {
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
     
     @IBAction func imageSelectButton(_ sender: Any) {
         if self.photoArray.count >= 5{
@@ -98,7 +97,6 @@ class AddGearViewController: UIViewController {
         }, cancel: { (assets) in
             // User canceled selection.
         }, finish: { (assets) in
-            
             for asset in assets {
                 self.selectedAssets.append(asset)
             }
@@ -128,11 +126,12 @@ class AddGearViewController: UIViewController {
         let pickerView = UIPickerView()
         pickerView.delegate = self
         gearTypeTextField.inputView = pickerView
+        
+//      초기 pickerView값 초기화
+        gearTypeTextField.text = gearManager.gears[0].gearName
+        gearTypeId = gearManager.gears[0].gearID
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(sender)
-    }
 }
 
 extension AddGearViewController {
@@ -183,8 +182,6 @@ extension AddGearViewController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         gearTypeTextField.text = gearManager.gears[row].gearName
         gearTypeId = gearManager.gears[row].gearID
-
-
 
     }
 

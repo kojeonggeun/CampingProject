@@ -14,9 +14,8 @@ class SignInViewController: UIViewController{
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    
     let userManager: UserManager = UserManager.shared
-    
+
     @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
     
     @IBAction func loginBtn(_ sender: Any) {
@@ -32,7 +31,6 @@ class SignInViewController: UIViewController{
                 print("로그인 실패 시 코드 작성 해야 함")
             }
         }
-    
     }
     
     @IBAction func appleLogin(_ sender: Any) {
@@ -40,7 +38,6 @@ class SignInViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let email = sender as? String else { return }
   
-        
         if let barVC = segue.destination as? MainTabBarController {
                 barVC.viewControllers?.forEach {
                     if let vc = $0 as? MyGearViewController{
@@ -52,9 +49,7 @@ class SignInViewController: UIViewController{
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         passwordTextField.isSecureTextEntry = true
- 
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,23 +58,17 @@ class SignInViewController: UIViewController{
         passwordTextField.text = ""
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
         if UserDefaults.standard.object(forKey: "token") != nil {
-        
             guard let user = UserDefaults.standard.value(forKey: "token") as? NSDictionary else { return }
-            
             userManager.loginCheck(user: user){ (completion) in
                 if completion {
-                
                     self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])
-                    
                 }
             }
         }
-        
- 
     }
 }

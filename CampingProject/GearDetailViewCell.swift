@@ -22,11 +22,7 @@ class GearDetailViewCell: UICollectionViewCell {
     func updateUI(item: UIImage?) {
         
         guard let image = item else { return }
-        
-        
         self.gearDetailImage.image = image
-        
-        
         
     }
     
