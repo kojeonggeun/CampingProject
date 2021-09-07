@@ -36,7 +36,7 @@ class AddGearViewController: UIViewController {
     
     var total: Int = 0
     
-    let DidDismissPostMyGearViewController: Notification.Name = Notification.Name("DidDismissPostMyGearViewController")
+    let DidReloadPostMyGearViewController: Notification.Name = Notification.Name("DidDismissPostMyGearViewController")
     
     
     @IBAction func gearSave(_ sender: Any) {
@@ -52,7 +52,7 @@ class AddGearViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
             
             self.dismiss(animated: true, completion: nil)
-            NotificationCenter.default.post(name: self.DidDismissPostMyGearViewController, object: nil, userInfo: ["gearTypeId": self.gearTypeId, "gearName": name])
+            NotificationCenter.default.post(name: self.DidReloadPostMyGearViewController, object: nil, userInfo: ["gearAddId": self.gearTypeId])
      
         })
         self.present(alert, animated: true)
@@ -226,11 +226,7 @@ extension AddGearViewController: UICollectionViewDataSource {
 
 extension AddGearViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        
     }
- 
-   
 }
 
 //extension AddGearViewController: UICollectionViewDelegateFlowLayout {

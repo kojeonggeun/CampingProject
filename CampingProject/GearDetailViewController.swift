@@ -20,25 +20,27 @@ class GearDetailViewController: UIViewController {
     var imageArray = [ImageData]()
     let gearManager = GearManager.shared
     
+    let DidDeleteGearPost: Notification.Name = Notification.Name("DidDeleteGearPost")
+    
     @IBAction func closeBtn(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func showDeleteAlert(_ sender: Any) {
 
-        let id: Int = self.gearManager.userGear[self.gearIndex].id
-
+        let id: Int = self.gearManager.userGear[gearIndex].id
+        let typeId: Int? = self.gearManager.userGear[gearIndex].gearTypeId
+        
+            
         let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
             self.gearManager.deleteGear(gearId: id)
+            NotificationCenter.default.post(name: self.DidDeleteGearPost, object: nil, userInfo: ["gearDeleteIndex": typeId])
+            self.dismiss(animated: true, completion: nil)
         })
-        
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in
             return
         })
-        
-        
-    
         present(alert, animated: true, completion: nil)
 
     }

@@ -19,7 +19,7 @@ class GearManager{
     let url = API.BASE_URL_MYSELF
     let urlUser = API.BASE_URL
     
-    func loadGearType(completion: @escaping ([GearType]) -> ()) {
+    func loadGearType(completion: @escaping ([GearType]) -> Void ) {
         
         AF.request(urlUser + "common/config",
                    method: .get,
@@ -101,8 +101,7 @@ class GearManager{
         }
     }
     
-    func loadUserData(){
-
+    func loadUserData(completion: @escaping (Bool) -> Void){
         AF.request(url + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(let value):
@@ -112,8 +111,11 @@ class GearManager{
                 for i in data {
                     self.userGear.append(i)
                 }
+                completion(true)
+                
             case .failure(let error):
                 print("🚫loadUserData  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                completion(false)
             }
         }
     }
