@@ -10,16 +10,15 @@ import Alamofire
 
 
 
-class UserManager {
+class UserViewModel {
     
     let userDefaults = UserDefaults.standard
-    static let shared = UserManager()
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
     
+    
+//    회원가입
     func Register(email: String, password: String){
-//        지금은 HTTP가 되도록 설정해 놓음 추후에 INFO.PLIST 수정해야 한다
-       
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
         
@@ -34,57 +33,10 @@ class UserManager {
             }
         }
     }
-        
-    
-//    func convertStringToDictionary(text: String) -> [String:AnyObject]? {
-//       if let data = text.data(using: .utf8) {
-//           do {
-//               let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
-//               return json
-//           } catch {
-//               print("Something went wrong")
-//           }
-//       }
-//       return nil
-//   }
 
+//  로그인
     func login(email:String, password: String, completion: @escaping (Bool) -> Void){
-//        URLSession 코드
-//        let config = URLSessionConfiguration.default
-//        let session = URLSession(configuration: config)
-        
-        
-//        var request = URLRequest(url: url!)
-//
-//        request.httpMethod = "POST"
-//
-//        let body: NSMutableDictionary = NSMutableDictionary()
-//        body.setValue(email, forKey: "email")
-//        body.setValue(password, forKey: "password")
-//
-//        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-//        request.httpBody = "email=\(String(describing: body.value(forKey: "email")!))&password=\(String(describing: body.value(forKey: "password")!))".data(using: .utf8)
-//
-//        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-//
-//                    // 서버가 응답이 없거나 통신이 실패
-//                    if let e = error {
-//                      NSLog("An error has occured: \(e.localizedDescription)")
-//                      return
-//                    }
-//
-//                    // 응답 처리 로직
-//                    DispatchQueue.main.async() {
-//                        // 서버로부터 응답된 스트링 표시
-//                        let outputStr = String(data: data!, encoding: String.Encoding.utf8)
-//                        print("result: \(outputStr!)")
-//                        completion(true)
-//                    }
-//
-//                }
-//                // POST 전송
-//                task.resume()
-        
+
         AF.request(url + "user/login",
                    method: .post,
                    parameters: ["email":email,"password":password],
@@ -108,10 +60,9 @@ class UserManager {
                     completion(false)
                 }
             }
-    
-   
     }
     
+//    토큰 유무 확인하여 로그인
     func loginCheck(user: NSDictionary ,completion: @escaping (Bool)-> Void ) {
         
         let headers: HTTPHeaders = ["Authorization" : user["token"] as! String]
@@ -132,7 +83,6 @@ class UserManager {
                 }
             }
     }
-    
   
     
     func isValidEmail(email: String) -> Bool{

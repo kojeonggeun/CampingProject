@@ -19,7 +19,7 @@
 		CB6037C426B2728F0023042F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB6037C326B2728F0023042F /* Assets.xcassets */; };
 		CB6037C726B2728F0023042F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6037C526B2728F0023042F /* LaunchScreen.storyboard */; };
 		CB6037D126B289980023042F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037D026B289980023042F /* SignUpViewController.swift */; };
-		CB6037D326B28A530023042F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037D226B28A530023042F /* UserModel.swift */; };
+		CB6037D326B28A530023042F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037D226B28A530023042F /* UserViewModel.swift */; };
 		CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB93BE1726D3BEAF0018AB0D /* Constants.swift */; };
 		CBA2326E26BA57C500946DA0 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2326D26BA57C500946DA0 /* AES.swift */; };
 		CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */; };
@@ -50,7 +50,7 @@
 		CB6037C626B2728F0023042F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB6037C826B2728F0023042F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB6037D026B289980023042F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		CB6037D226B28A530023042F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		CB6037D226B28A530023042F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		CB93BE1726D3BEAF0018AB0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CBA2326D26BA57C500946DA0 /* AES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
 		CBA2327026BE609700946DA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		CB3C9F1726D79E7000404D05 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				CB6037D226B28A530023042F /* UserModel.swift */,
+				CB6037D226B28A530023042F /* UserViewModel.swift */,
 				CB6037D026B289980023042F /* SignUpViewController.swift */,
 				CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */,
 			);
@@ -294,7 +294,7 @@
 				CBA2326E26BA57C500946DA0 /* AES.swift in Sources */,
 				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,
 				CBAB103626C552460058F440 /* GearViewModel.swift in Sources */,
-				CB6037D326B28A530023042F /* UserModel.swift in Sources */,
+				CB6037D326B28A530023042F /* UserViewModel.swift in Sources */,
 				CB58A79826E5F136006C80EA /* GearDetailViewController.swift in Sources */,
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,
 				CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */,

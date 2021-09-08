@@ -286,7 +286,6 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                 </state>
                                 <connections>
-                                    <action selector="addGear:" destination="jsH-H6-KFl" eventType="touchUpInside" id="X7f-x1-gHk"/>
                                     <segue destination="hWv-Lq-Ccj" kind="presentation" identifier="AddGearViewController" id="NVx-5t-8Qh"/>
                                 </connections>
                             </button>
@@ -326,7 +325,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kv9-Wn-kWl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Pke-rv-TyW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1098.4615384615383" y="145.73459715639811"/>
+            <point key="canvasLocation" x="846" y="146"/>
         </scene>
         <!--Add Gear View Controller-->
         <scene sceneID="PX8-u3-Jwu">
@@ -404,7 +403,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비 등록" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b08-fY-Iut">
-                                <rect key="frame" x="103" y="69" width="184" height="60"/>
+                                <rect key="frame" x="103" y="54" width="184" height="60"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -429,11 +428,29 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제조사" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZZ-sl-bR1" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제조사" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZZ-sl-bR1" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="294" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용 가능 인원" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wH7-Y1-k8e" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="20" y="353" width="350" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="51" id="aJX-HS-51w"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -451,33 +468,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용 가능 인원" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wH7-Y1-k8e" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="419" width="350" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="51" id="QqZ-RE-vUr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 종류" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lXO-GD-25q" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="155" width="350" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="51" id="Udb-ZC-ZkQ"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 종류" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lXO-GD-25q" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="117" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -495,8 +488,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 가격" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PRV-fk-m3A" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="485" width="350" height="51"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 가격" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PRV-fk-m3A" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="481" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -514,18 +508,16 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TCa-Ij-R7o" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="221" width="350" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="51" id="afE-Jj-Kjv"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="색상" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xYB-2F-GcM" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="235" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
                                         <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
                                         <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
@@ -536,11 +528,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="색상" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xYB-2F-GcM" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="287" width="350" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="51" id="i9T-ia-f4q"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Ww-11-jLv" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="414" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -548,6 +538,26 @@
                                         <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TCa-Ij-R7o" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="176" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
                                         <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
@@ -563,38 +573,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="F0V-oW-Fmx" firstAttribute="trailing" secondItem="63Y-N1-hhI" secondAttribute="trailing" constant="96" id="28d-kD-Jku"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="trailing" secondItem="TCa-Ij-R7o" secondAttribute="trailing" id="2HY-76-VYQ"/>
                             <constraint firstItem="6Hb-mP-zdY" firstAttribute="leading" secondItem="b08-fY-Iut" secondAttribute="leading" id="2Ya-OK-9gU"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="leading" secondItem="TCa-Ij-R7o" secondAttribute="leading" id="66V-i7-PRX"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="leading" secondItem="lXO-GD-25q" secondAttribute="leading" id="6NW-bx-pBT"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="trailing" secondItem="lXO-GD-25q" secondAttribute="trailing" id="78L-5V-MWW"/>
                             <constraint firstItem="63Y-N1-hhI" firstAttribute="baseline" secondItem="6Hb-mP-zdY" secondAttribute="baseline" id="7fo-9l-rEQ"/>
-                            <constraint firstItem="xYB-2F-GcM" firstAttribute="top" secondItem="TCa-Ij-R7o" secondAttribute="bottom" constant="15" id="G8a-zD-CYu"/>
                             <constraint firstAttribute="bottom" secondItem="WeG-f7-vTD" secondAttribute="bottom" constant="107" id="Him-JU-tsW"/>
                             <constraint firstItem="63Y-N1-hhI" firstAttribute="top" secondItem="WeG-f7-vTD" secondAttribute="bottom" constant="25" id="IjM-va-0Xa"/>
                             <constraint firstItem="F0V-oW-Fmx" firstAttribute="trailing" secondItem="b08-fY-Iut" secondAttribute="trailing" constant="103" id="M1A-OS-SwB"/>
-                            <constraint firstItem="TCa-Ij-R7o" firstAttribute="top" secondItem="lXO-GD-25q" secondAttribute="bottom" constant="15" id="MdH-si-w52"/>
-                            <constraint firstItem="lXO-GD-25q" firstAttribute="top" secondItem="b08-fY-Iut" secondAttribute="bottom" constant="26" id="QId-uh-IVn"/>
                             <constraint firstItem="WeG-f7-vTD" firstAttribute="centerY" secondItem="tNN-yF-FxB" secondAttribute="centerY" id="SRf-DC-jlH"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="trailing" secondItem="xYB-2F-GcM" secondAttribute="trailing" id="Sba-g7-oNF"/>
-                            <constraint firstItem="b08-fY-Iut" firstAttribute="top" secondItem="F0V-oW-Fmx" secondAttribute="top" constant="25" id="ZSI-UC-ZDw"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="leading" secondItem="xYB-2F-GcM" secondAttribute="leading" id="dKf-xJ-abz"/>
+                            <constraint firstItem="b08-fY-Iut" firstAttribute="top" secondItem="F0V-oW-Fmx" secondAttribute="top" constant="10" id="ZSI-UC-ZDw"/>
                             <constraint firstItem="WeG-f7-vTD" firstAttribute="leading" secondItem="tNN-yF-FxB" secondAttribute="trailing" constant="25" id="eXk-oR-Zhf"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="leading" secondItem="F0V-oW-Fmx" secondAttribute="leading" constant="20" id="edY-EM-ftQ"/>
-                            <constraint firstItem="wH7-Y1-k8e" firstAttribute="top" secondItem="fZZ-sl-bR1" secondAttribute="bottom" constant="15" id="g9N-NM-RWJ"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="leading" secondItem="fZZ-sl-bR1" secondAttribute="leading" id="icF-fW-iS4"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="trailing" secondItem="wH7-Y1-k8e" secondAttribute="trailing" id="mzU-Ud-bmI"/>
-                            <constraint firstItem="F0V-oW-Fmx" firstAttribute="trailing" secondItem="PRV-fk-m3A" secondAttribute="trailing" constant="20" id="n89-sc-ObQ"/>
                             <constraint firstItem="WeG-f7-vTD" firstAttribute="trailing" secondItem="70K-4n-Vmp" secondAttribute="trailingMargin" id="psi-Ac-41n"/>
-                            <constraint firstItem="WeG-f7-vTD" firstAttribute="top" secondItem="PRV-fk-m3A" secondAttribute="bottom" constant="33" id="ufs-4D-Fro"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="leading" secondItem="wH7-Y1-k8e" secondAttribute="leading" id="v1Y-SX-u0k"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="top" secondItem="wH7-Y1-k8e" secondAttribute="bottom" constant="15" id="wEn-XE-EOz"/>
-                            <constraint firstItem="PRV-fk-m3A" firstAttribute="trailing" secondItem="fZZ-sl-bR1" secondAttribute="trailing" id="we1-3D-k6a"/>
                             <constraint firstItem="b08-fY-Iut" firstAttribute="leading" secondItem="F0V-oW-Fmx" secondAttribute="leading" constant="103" id="x6U-GX-iXd"/>
-                            <constraint firstItem="fZZ-sl-bR1" firstAttribute="top" secondItem="xYB-2F-GcM" secondAttribute="bottom" constant="15" id="xcX-If-dex"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gearBuyDate" destination="3Ww-11-jLv" id="kes-m1-XZs"/>
                         <outlet property="gearCapacity" destination="wH7-Y1-k8e" id="Z7p-9j-7uC"/>
                         <outlet property="gearCollectionView" destination="WeG-f7-vTD" id="tOw-Xp-Dp8"/>
                         <outlet property="gearColor" destination="xYB-2F-GcM" id="qGq-Hw-x0d"/>
@@ -607,7 +599,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eHr-eo-Pah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="151"/>
+            <point key="canvasLocation" x="2377" y="671"/>
         </scene>
         <!--Gear Detail View Controller-->
         <scene sceneID="SFk-cM-F5z">
@@ -618,37 +610,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6d-EN-rUm">
-                                <rect key="frame" x="123" y="326" width="56" height="30"/>
+                                <rect key="frame" x="272" y="726" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="장비 삭제"/>
                                 <connections>
                                     <action selector="showDeleteAlert:" destination="yZo-S3-NzY" eventType="touchUpInside" id="IXa-Nv-3zZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIz-UY-NRH">
-                                <rect key="frame" x="64" y="28" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="closeBtn:" destination="yZo-S3-NzY" eventType="touchUpInside" id="Yka-BH-Sts"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZM-rB-tX6">
-                                <rect key="frame" x="44" y="98" width="74" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="장비 가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7b-Fk-5DZ">
-                                <rect key="frame" x="44" y="221" width="74" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PIy-om-oFh">
-                                <rect key="frame" x="0.0" y="509" width="390" height="203"/>
+                                <rect key="frame" x="0.0" y="517" width="390" height="201"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5E1-1l-ryp">
@@ -659,7 +629,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="8OO-3a-RwP" customClass="GearDetailViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="5.666666666666667" width="389" height="192"/>
+                                        <rect key="frame" x="0.0" y="4.666666666666667" width="389" height="192"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="YXh-w9-Ibi">
                                             <rect key="frame" x="0.0" y="0.0" width="389" height="192"/>
@@ -687,19 +657,181 @@
                                     <outlet property="delegate" destination="yZo-S3-NzY" id="0UH-Sb-dex"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIz-UY-NRH">
+                                <rect key="frame" x="16" y="20" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="뒤로 가기"/>
+                                <connections>
+                                    <action selector="closeBtn:" destination="yZo-S3-NzY" eventType="touchUpInside" id="Yka-BH-Sts"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제조사" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jK2-OV-4AT" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="16" y="259" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용 가능 인원" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mgt-Da-KWZ" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="16" y="318" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 종류" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FKu-xd-nhw" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="16" y="82" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 가격" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HtZ-ed-Slf" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="16" y="446" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="색상" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jG1-eY-XGm" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="16" y="200" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VxK-Lf-B78" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="16" y="379" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uTK-ae-RZ9" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="16" y="141" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbL-3n-Hmd">
+                                <rect key="frame" x="59" y="726" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="장비 수정"/>
+                                <connections>
+                                    <action selector="gearEdit:" destination="yZo-S3-NzY" eventType="touchUpInside" id="eiU-xx-Ul9"/>
+                                    <segue destination="hWv-Lq-Ccj" kind="presentation" id="vEa-HH-N4r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kRs-u7-vVR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="gearName" destination="SZM-rB-tX6" id="7AF-K9-1PW"/>
-                        <outlet property="gearPrice" destination="Q7b-Fk-5DZ" id="AWt-Wx-hTC"/>
+                        <outlet property="gearBuyDate" destination="VxK-Lf-B78" id="RPe-mE-d3z"/>
+                        <outlet property="gearCapacity" destination="mgt-Da-KWZ" id="eiC-1p-cbo"/>
+                        <outlet property="gearColor" destination="jG1-eY-XGm" id="qyr-be-RSs"/>
+                        <outlet property="gearCompany" destination="jK2-OV-4AT" id="GJd-F5-FwB"/>
+                        <outlet property="gearName" destination="uTK-ae-RZ9" id="HPI-NT-2be"/>
+                        <outlet property="gearPrice" destination="HtZ-ed-Slf" id="9cT-Yr-frB"/>
+                        <outlet property="gearType" destination="FKu-xd-nhw" id="5lf-oc-muF"/>
                         <outlet property="imageCollectionView" destination="PIy-om-oFh" id="l0C-Hi-dNk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KgY-pt-FYF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-285" y="880"/>
+            <point key="canvasLocation" x="1162" y="1062"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="25e-BD-S0r">
@@ -881,16 +1013,40 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="3Ww-11-jLv">
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
+        </designable>
+        <designable name="FKu-xd-nhw">
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
+        </designable>
+        <designable name="HtZ-ed-Slf">
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
+        </designable>
         <designable name="PRV-fk-m3A">
             <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="TCa-Ij-R7o">
             <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
+        <designable name="VxK-Lf-B78">
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
+        </designable>
         <designable name="fZZ-sl-bR1">
             <size key="intrinsicContentSize" width="44.333333333333336" height="22"/>
         </designable>
+        <designable name="jG1-eY-XGm">
+            <size key="intrinsicContentSize" width="29.666666666666668" height="22"/>
+        </designable>
+        <designable name="jK2-OV-4AT">
+            <size key="intrinsicContentSize" width="44.333333333333336" height="22"/>
+        </designable>
         <designable name="lXO-GD-25q">
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
+        </designable>
+        <designable name="mgt-Da-KWZ">
+            <size key="intrinsicContentSize" width="97" height="22"/>
+        </designable>
+        <designable name="uTK-ae-RZ9">
             <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="wH7-Y1-k8e">
@@ -900,6 +1056,9 @@
             <size key="intrinsicContentSize" width="29.666666666666668" height="22"/>
         </designable>
     </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="vEa-HH-N4r"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>

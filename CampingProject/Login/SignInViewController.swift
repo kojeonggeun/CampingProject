@@ -14,7 +14,7 @@ class SignInViewController: UIViewController{
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    let userManager: UserManager = UserManager.shared
+    let userManager: UserViewModel = UserViewModel()
 
     @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
     

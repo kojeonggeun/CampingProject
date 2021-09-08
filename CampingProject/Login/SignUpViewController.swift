@@ -20,7 +20,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    let userManager: UserManager = UserManager.shared
+    let userManager: UserViewModel = UserViewModel()
 
     @IBAction func signUpBtn(_ sender: Any) {
         guard let email = emailTextField.text  else{ return }

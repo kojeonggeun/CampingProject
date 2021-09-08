@@ -18,24 +18,18 @@ struct TableViewCellData {
         self.gearId.append(id)
         self.name.append(name)
     }
-    
 }
-
-
 
 struct CellData: Codable {
     var id: Int
-    var name: String
+    var name: String?
     var gearTypeId: Int?
     var gearTypeName: String?
-    var color: String
-    var company: String
-    var capacity: String
+    var color: String?
+    var company: String?
+    var capacity: String?
     var price: Int?
     var buyDt: String?
-    
-    
-
 }
 
 struct ImageData: Codable {
@@ -44,6 +38,5 @@ struct ImageData: Codable {
     var url: String
 }
 
-// 이미지 저장하는 구조체 있어야 함
 
 
