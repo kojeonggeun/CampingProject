@@ -13,13 +13,14 @@ class MyGearViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emailText: UILabel!
     
-    
-    var gearManager: GearManager = GearManager.shared
-    
-    var tableViewData = [TableViewCellData]()
-    
     var segueText: String = ""
     var tableIndexPath = IndexPath()
+    
+    var apiService: APIService = APIService.shared
+    
+    let gearTypeVM = GearTypeViewModel()
+    let userGearVM = UserGearViewModel()
+    let tableDataVM = TableViewDataViewModel()
     
     @IBAction func unwind(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "token")
@@ -33,8 +34,6 @@ class MyGearViewController: UIViewController{
         
         emailText.text = segueText
         tableView.showsVerticalScrollIndicator = false
-        
-      
             
         self.loadData()
         
@@ -43,7 +42,10 @@ class MyGearViewController: UIViewController{
         
     } // end viewDidLoad
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GearDetailViewController"{
             let vc = segue.destination as! GearDetailViewController
@@ -52,15 +54,14 @@ class MyGearViewController: UIViewController{
     }
     
     func loadData(){
-        gearManager.loadUserData( completion: { userData in
+        apiService.loadUserData( completion: { userData in
             DispatchQueue.global().async {
-                self.gearManager.loadGearType(completion: { data in
-                    for i in 0..<data.count{
-                        self.tableViewData.append(TableViewCellData(isOpened: false, gearTypeName: data[i].gearName))
-
-                        for j in self.gearManager.userGear{
-                            if data[i].gearName == j.gearTypeName{
-                                self.tableViewData[i].update(id: j.id, name: j.name ?? "")
+                self.apiService.loadGearType(completion: { data in
+                    for i in 0..<self.gearTypeVM.gearTypes.count{
+                        self.apiService.loadTableViewData(tableData: TableViewCellData(isOpened: false, gearTypeName: self.gearTypeVM.gearTypes[i].gearName)) 
+                        for j in self.userGearVM.userGears{
+                            if self.gearTypeVM.gearTypes[i].gearName == j.gearTypeName{
+                                self.tableDataVM.tableData[i].update(id: j.id, name: j.name ?? "")
                             }// end if
                         }
                     }// end first for
@@ -70,16 +71,17 @@ class MyGearViewController: UIViewController{
                 })
             } // end global.async
         })
+        
     }
     
     @objc func reloadTableView(_ noti: Notification) {
         if let gearId = noti.userInfo?["gearAddId"] as? Int {
-            guard let first = gearManager.gearTypes.firstIndex(where: { $0.gearID == gearId}) else { return }
+            guard let first = self.gearTypeVM.gearTypes.firstIndex(where: { $0.gearID == gearId}) else { return }
                 DispatchQueue.global().async {
-                    self.gearManager.loadUserData(completion: { data in
+                    self.apiService.loadUserData(completion: { data in
                         if data {
-                            let gearEndIndex = self.gearManager.userGear.endIndex - 1
-                            self.tableViewData[first].update(id: self.gearManager.userGear[gearEndIndex].id, name: self.gearManager.userGear[gearEndIndex].name ?? "")
+                            let gearEndIndex = self.apiService.userGears.endIndex - 1
+                            self.tableDataVM.tableData[first].update(id: self.userGearVM.userGears[gearEndIndex].id, name: self.userGearVM.userGears[gearEndIndex].name ?? "")
 
                             DispatchQueue.main.async {
                                 self.tableView.reloadSections(IndexSet([first]), with: .automatic)
@@ -91,11 +93,13 @@ class MyGearViewController: UIViewController{
         
         if noti.userInfo?["delete"] as? Bool ?? false {
             self.tableView.performBatchUpdates({
-                 //do stuff then delete the row
-                self.tableViewData[self.tableIndexPath.section].name.remove(at: self.tableIndexPath.row)
+                 
+                
+                self.tableDataVM.tableData[self.tableIndexPath.section].name.remove(at: self.tableIndexPath.row)
                 self.tableView.deleteRows(at: [self.tableIndexPath], with: .fade)
             }, completion: { (done) in
                  //perform table refresh
+                
                 self.tableView.reloadSections([self.tableIndexPath.section], with: .automatic)
             })
         }
@@ -109,13 +113,13 @@ class MyGearViewController: UIViewController{
 extension MyGearViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return gearManager.GearTypeNumberOfSections()
+        return self.gearTypeVM.GearTypeNumberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableViewData[section].isOpened == true {
-            return tableViewData[section].name.count
+        if self.tableDataVM.isOpened(value: section) == true {
+            return self.tableDataVM.numberOfRowsInSection(section: section)
         }
         else {
             return 0
@@ -126,8 +130,8 @@ extension MyGearViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let button = UIButton(type: .system)
-        let item = tableViewData[section].gearTypeName
-        let itemCount = tableViewData[section].name.count
+        let item = tableDataVM.tableData[section].gearTypeName
+        let itemCount = tableDataVM.tableData[section].name.count
         
         button.setTitle("\(item) (\(itemCount)) 보유 중", for: .normal)
         button.addTarget(self, action: #selector(clicked), for: .touchUpInside)
@@ -163,7 +167,7 @@ extension MyGearViewController: UITableViewDataSource{
     
     @objc func clicked(_ sender: UIButton){
         let row = sender.tag
-        tableViewData[row].isOpened = !tableViewData[row].isOpened
+        tableDataVM.tableData[row].isOpened = !tableDataVM.isOpened(value: row)
         tableView.reloadSections([row], with: .automatic)
         
     }
@@ -172,22 +176,24 @@ extension MyGearViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell()}
         
-        cell.tableViewCellText.text = tableViewData[indexPath.section].name[indexPath.row]
-        
+        cell.tableViewCellText.text = tableDataVM.tableData[indexPath.section].name[indexPath.row]
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
-                self.tableViewData[indexPath.section].name.remove(at: indexPath.row)
-                   tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.tableDataVM.tableData[indexPath.section].name.remove(at: indexPath.row)
+                    
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+//                    self.gearManager.deleteGear(gearId:self.gearManager.userGear[0].id)
                     completion(true)
                 }
                 
-                action.backgroundColor = .blue
+                action.backgroundColor = .red
+                action.title = "삭제"
                 
-
+                
                 let configuration = UISwipeActionsConfiguration(actions: [action])
                 configuration.performsFirstActionWithFullSwipe = false
                 return configuration
@@ -199,7 +205,7 @@ extension MyGearViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         
-        if let first = gearManager.userGear.firstIndex(where: { $0.id == tableViewData[indexPath.section].gearId[indexPath.row]})
+        if let first = self.userGearVM.userGears.firstIndex(where: { $0.id == tableDataVM.tableData[indexPath.section].gearId[indexPath.row]})
         {
             tableIndexPath = indexPath
             self.performSegue(withIdentifier: "GearDetailViewController", sender: first)

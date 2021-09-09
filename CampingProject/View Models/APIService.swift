@@ -1,31 +1,30 @@
 //
-//  GearModel.swift
+//  APIService.swift
 //  CampingProject
 //
-//  Created by 고정근 on 2021/08/12.
+//  Created by 고정근 on 2021/09/09.
 //
 
 import Foundation
 import Alamofire
 
-class GearManager{
+class APIService{
     
     let userDefaults = UserDefaults.standard
-    static let shared = GearManager()
+    static let shared = APIService()
     
     var gearTypes: [GearType] = []
-    var userGear: [CellData] = []
-    var tableViewData = [TableViewCellData]()
+    var userGears: [CellData] = []
+    var tableViewData:[TableViewCellData] = []
+    
     let url = API.BASE_URL_MYSELF
     let urlUser = API.BASE_URL
     
     
 //    장비 저장
-    func gearSave(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
-        // 먼저 image를 Data형식으로 바꿔줘야 한다.
-        // jpegData or pngData를 통해서 바꿔주고
-        // multipartFormData에 바꾼 Data타입의 이미지를 append해준다.
-      
+    func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
+        
+        
         guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
@@ -37,6 +36,7 @@ class GearManager{
                                           "capacity": capacity, "price": price,
                                           "buyDt": date
         ]
+        
         
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in parameters {
@@ -55,7 +55,7 @@ class GearManager{
         }).responseJSON { response in
             switch response.result {
             case .success(let data):
-                print(data)
+                print(data,"wwww")
             case .failure(let error):
                 print(error)
             }
@@ -75,7 +75,7 @@ class GearManager{
     }
     
 //    장비타입 로드
-    func loadGearType(completion: @escaping ([GearType]) -> Void ) {
+    func loadGearType(completion: @escaping (Bool) -> Void ) {
         
         AF.request(urlUser + "common/config",
                    method: .get,
@@ -94,10 +94,11 @@ class GearManager{
                         self.gearTypes.append(i)
                     }
                 
-                    completion(self.gearTypes)
+                    completion(true)
                     
                 case .failure(let error):
                     print(error)
+                    completion(false)
                 }
             }
     }
@@ -127,7 +128,7 @@ class GearManager{
 
                 let data = self.parseUserGear(result)
                 for i in data {
-                    self.userGear.append(i)
+                    self.userGears.append(i)
                 }
 
                 completion(true)
@@ -135,12 +136,13 @@ class GearManager{
             case .failure(let error):
                 print("🚫loadUserData  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                 completion(false)
+                
             }
         }
     }
     func parseUserGear(_ data: Data) -> [CellData] {
         let decoder = JSONDecoder()
-        self.userGear = []
+        self.userGears = []
 
         do {
             let response = try decoder.decode([CellData].self, from: data)
@@ -195,9 +197,8 @@ class GearManager{
         }
     }
     
-    func GearTypeNumberOfSections() -> Int{
-        return self.gearTypes.count
+    func loadTableViewData(tableData: TableViewCellData){
+        
+        tableViewData.append(tableData)
     }
-    
-    
 }

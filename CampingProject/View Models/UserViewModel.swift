@@ -16,7 +16,6 @@ class UserViewModel {
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
     
-    
 //    회원가입
     func Register(email: String, password: String){
         // POST 로 보낼 정보

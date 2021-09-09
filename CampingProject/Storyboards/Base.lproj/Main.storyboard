@@ -604,9 +604,9 @@
         <!--Gear Detail View Controller-->
         <scene sceneID="SFk-cM-F5z">
             <objects>
-                <viewController id="yZo-S3-NzY" customClass="GearDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="yZo-S3-NzY" customClass="GearDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iBE-cG-K76">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6d-EN-rUm">
@@ -657,14 +657,6 @@
                                     <outlet property="delegate" destination="yZo-S3-NzY" id="0UH-Sb-dex"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIz-UY-NRH">
-                                <rect key="frame" x="16" y="20" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="뒤로 가기"/>
-                                <connections>
-                                    <action selector="closeBtn:" destination="yZo-S3-NzY" eventType="touchUpInside" id="Yka-BH-Sts"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제조사" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jK2-OV-4AT" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="16" y="259" width="350" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -812,6 +804,14 @@
                                 <connections>
                                     <action selector="gearEdit:" destination="yZo-S3-NzY" eventType="touchUpInside" id="eiU-xx-Ul9"/>
                                     <segue destination="hWv-Lq-Ccj" kind="presentation" id="vEa-HH-N4r"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIz-UY-NRH">
+                                <rect key="frame" x="310" y="44" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="뒤로 가기"/>
+                                <connections>
+                                    <action selector="closeBtn:" destination="yZo-S3-NzY" eventType="touchUpInside" id="Yka-BH-Sts"/>
                                 </connections>
                             </button>
                         </subviews>

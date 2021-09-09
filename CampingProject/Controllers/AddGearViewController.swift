@@ -26,10 +26,9 @@ class AddGearViewController: UIViewController {
     @IBOutlet weak var gearPrice: UITextField!
     
     @IBOutlet weak var imageCount: UILabel!
-    
-    var gearManager: GearManager = GearManager.shared
-    
     let btn: UIButton = UIButton()
+    
+    var apiService: APIService = APIService.shared
     var selectedAssets = [PHAsset]()
     var photoArray = [UIImage]()
     var imageFileName = [String]()
@@ -41,6 +40,7 @@ class AddGearViewController: UIViewController {
     let pickerView = UIPickerView()
     let datePickerView = UIDatePicker()
     
+    let userGearViewModel = UserGearViewModel()
     @IBAction func gearSave(_ sender: Any) {
         
         guard let name = gearName.text else { return }
@@ -50,8 +50,9 @@ class AddGearViewController: UIViewController {
         guard let date = gearBuyDate.text else { return }
         guard let price = gearPrice.text else { return }
         
-        gearManager.gearSave(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: photoArray, imageName: imageFileName)
-         
+       
+        self.userGearViewModel.addUserGear(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: photoArray, imageName: imageFileName)
+        
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
             self.dismiss(animated: true, completion: nil)
@@ -159,8 +160,8 @@ class AddGearViewController: UIViewController {
         gearTypeTextField.inputView = pickerView
         
 //      초기 pickerView값 초기화
-        gearTypeTextField.text = gearManager.gearTypes[0].gearName
-        gearTypeId = gearManager.gearTypes[0].gearID
+        gearTypeTextField.text = apiService.gearTypes[0].gearName
+        gearTypeId = apiService.gearTypes[0].gearID
     }
     
 }
@@ -198,21 +199,21 @@ extension AddGearViewController: UIPickerViewDataSource{
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return gearManager.gearTypes.count
+        return apiService.gearTypes.count
 
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        return gearManager.gearTypes[row].gearName
+        return apiService.gearTypes[row].gearName
 
     }
 }
 
 extension AddGearViewController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        gearTypeTextField.text = gearManager.gearTypes[row].gearName
-        gearTypeId = gearManager.gearTypes[row].gearID
+        gearTypeTextField.text = apiService.gearTypes[row].gearName
+        gearTypeId = apiService.gearTypes[row].gearID
 
     }
 
