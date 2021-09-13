@@ -23,7 +23,7 @@ class GearDetailViewController: UIViewController {
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
 
-    var gearIndex = Int()
+   
     var gearSection = Int()
     var gearRow = Int()
     var imageArray = [ImageData]()
@@ -40,12 +40,12 @@ class GearDetailViewController: UIViewController {
     
     @IBAction func showDeleteAlert(_ sender: Any) {
 
-        let id: Int = userGearVM.userGears[gearIndex].id
+        let id: Int = userGearVM.userGears[gearRow].id
         
         
         let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
-            self.userGearVM.deleteUserGear(gearId: id, section: self.gearSection, row: self.gearRow )
+            self.userGearVM.deleteUserGear(gearId: self.gearRow, row: self.gearRow )
             NotificationCenter.default.post(name: self.DidDeleteGearPost, object: nil, userInfo: ["delete": true])
             self.dismiss(animated: true, completion: nil)
         })
@@ -64,13 +64,13 @@ class GearDetailViewController: UIViewController {
         super.viewDidLoad()
 
         
-        guard let type = userGearVM.userGears[gearIndex].gearTypeName else { return }
-        guard let name = userGearVM.userGears[gearIndex].name else { return }
-        guard let color = userGearVM.userGears[gearIndex].color else { return }
-        guard let company = userGearVM.userGears[gearIndex].company else { return }
-        guard let capacity = userGearVM.userGears[gearIndex].capacity else { return }
-        guard let buyDt = userGearVM.userGears[gearIndex].buyDt else { return  }
-        guard let price = userGearVM.userGears[gearIndex].price else { return }
+        guard let type = userGearVM.userGears[gearRow].gearTypeName else { return }
+        guard let name = userGearVM.userGears[gearRow].name else { return }
+        guard let color = userGearVM.userGears[gearRow].color else { return }
+        guard let company = userGearVM.userGears[gearRow].company else { return }
+        guard let capacity = userGearVM.userGears[gearRow].capacity else { return }
+        guard let buyDt = userGearVM.userGears[gearRow].buyDt else { return  }
+        guard let price = userGearVM.userGears[gearRow].price else { return }
             
         gearType.text = type
         gearName.text = name
@@ -82,7 +82,7 @@ class GearDetailViewController: UIViewController {
     
         self.textFieldEdit(value: false)
 
-        apiService.loadGearImages(gearId: apiService.userGears[gearIndex].id, completion: { data in
+        apiService.loadGearImages(gearId: apiService.userGears[gearRow].id, completion: { data in
             for i in data {
                 print(i)
                 self.imageArray.append(i)

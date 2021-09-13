@@ -22,9 +22,9 @@ class UserGearViewModel {
         manager.addGear(name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName)
     }
     
-    func deleteUserGear(gearId: Int, section: Int, row: Int){
-        print(gearId)
-        manager.deleteGear(gearId: gearId, section: section, row: row)
+    func deleteUserGear(gearId: Int, row: Int){
+
+        manager.deleteGear(gearId: gearId,row: row)
     }
     
     func editUserGear(){

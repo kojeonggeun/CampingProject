@@ -19,8 +19,8 @@ class MyGearViewCell: UITableViewCell {
         super.awakeFromNib()
         
         tableViewCellText.textColor = UIColor.black
-        tableViewCellImage.layer.cornerRadius = 10
-        tableViewCellImage.layer.borderWidth = 0.5
+        tableViewCellImage.layer.cornerRadius = 7
+
         
     }
     
