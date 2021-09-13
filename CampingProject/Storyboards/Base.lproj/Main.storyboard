@@ -236,27 +236,47 @@
                                 <rect key="frame" x="10" y="174" width="370" height="587"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstViewCell" id="Dic-Bd-iK6" customClass="MyGearViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.333333969116211" width="370" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstViewCell" rowHeight="100" id="Dic-Bd-iK6" customClass="MyGearViewCell" customModule="CampingProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="370" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dic-Bd-iK6" id="iWi-UY-rLo">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GB7-fS-y1u">
-                                                    <rect key="frame" x="20" y="4" width="45" height="31"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qse-gb-9fb">
+                                                    <rect key="frame" x="14" y="0.0" width="96" height="100"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="96" id="IWy-D1-YFL"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비타입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEP-2c-sEd">
+                                                    <rect key="frame" x="120" y="36.666666666666664" width="45" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GB7-fS-y1u">
+                                                    <rect key="frame" x="119.99999999999999" y="10.000000000000002" width="62.333333333333329" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="GB7-fS-y1u" firstAttribute="leading" secondItem="iWi-UY-rLo" secondAttribute="leading" constant="20" id="AwD-86-adD"/>
-                                                <constraint firstAttribute="bottom" secondItem="GB7-fS-y1u" secondAttribute="bottom" constant="9" id="B1T-RA-iBe"/>
-                                                <constraint firstItem="GB7-fS-y1u" firstAttribute="top" secondItem="iWi-UY-rLo" secondAttribute="top" constant="4" id="pHv-Pz-ap8"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GB7-fS-y1u" secondAttribute="trailing" constant="50" id="9Ab-3Q-GLe"/>
+                                                <constraint firstItem="hEP-2c-sEd" firstAttribute="top" secondItem="GB7-fS-y1u" secondAttribute="bottom" constant="5" id="DPH-bS-r2X"/>
+                                                <constraint firstItem="hEP-2c-sEd" firstAttribute="leading" secondItem="Qse-gb-9fb" secondAttribute="trailing" constant="10" id="G5T-aH-pD4"/>
+                                                <constraint firstAttribute="bottom" secondItem="Qse-gb-9fb" secondAttribute="bottom" id="M1V-re-tbd"/>
+                                                <constraint firstItem="Qse-gb-9fb" firstAttribute="leading" secondItem="iWi-UY-rLo" secondAttribute="leading" constant="14" id="cl8-7g-BWh"/>
+                                                <constraint firstItem="GB7-fS-y1u" firstAttribute="leading" secondItem="Qse-gb-9fb" secondAttribute="trailing" constant="10" id="fd9-jw-u68"/>
+                                                <constraint firstItem="GB7-fS-y1u" firstAttribute="top" secondItem="iWi-UY-rLo" secondAttribute="top" constant="10" id="gzQ-74-uVo"/>
+                                                <constraint firstItem="Qse-gb-9fb" firstAttribute="top" secondItem="iWi-UY-rLo" secondAttribute="top" id="mC5-BR-tXh"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="tableViewCellGearType" destination="hEP-2c-sEd" id="A7t-V4-I3j"/>
+                                            <outlet property="tableViewCellImage" destination="Qse-gb-9fb" id="Kam-sh-uOP"/>
                                             <outlet property="tableViewCellText" destination="GB7-fS-y1u" id="6Ke-m3-E16"/>
                                         </connections>
                                     </tableViewCell>
@@ -325,7 +345,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kv9-Wn-kWl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Pke-rv-TyW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="846" y="146"/>
+            <point key="canvasLocation" x="844.61538461538464" y="145.73459715639811"/>
         </scene>
         <!--Add Gear View Controller-->
         <scene sceneID="PX8-u3-Jwu">
@@ -1057,7 +1077,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="vEa-HH-N4r"/>
+        <segue reference="NVx-5t-8Qh"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>

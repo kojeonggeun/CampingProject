@@ -28,7 +28,7 @@ class AddGearViewController: UIViewController {
     @IBOutlet weak var imageCount: UILabel!
     let btn: UIButton = UIButton()
     
-    var apiService: APIService = APIService.shared
+    var apiService: APIManager = APIManager.shared
     var selectedAssets = [PHAsset]()
     var photoArray = [UIImage]()
     var imageFileName = [String]()

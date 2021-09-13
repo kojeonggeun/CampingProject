@@ -8,14 +8,15 @@
 import Foundation
 import Alamofire
 
-class APIService{
+class APIManager{
     
     let userDefaults = UserDefaults.standard
-    static let shared = APIService()
+    static let shared = APIManager()
     
     var gearTypes: [GearType] = []
     var userGears: [CellData] = []
-    var tableViewData:[TableViewCellData] = []
+    var tableViewData: [TableViewCellData] = []
+    
     
     let url = API.BASE_URL_MYSELF
     let urlUser = API.BASE_URL
@@ -63,7 +64,9 @@ class APIService{
     }
     
 //    장비 삭제
-    func deleteGear(gearId: Int) {
+    func deleteGear(gearId: Int, section: Int, row: Int) {
+        tableViewData[section].gearId.remove(at: row)
+        tableViewData[section].name.remove(at: row)
         
         AF.request(url + "gear"+"/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
             print(response)
@@ -105,6 +108,7 @@ class APIService{
     func parseGears(_ data: Data) -> [GearType]  {
         let decoder = JSONDecoder()
         self.gearTypes = []
+        self.tableViewData = []
 
         do {
             let response = try decoder.decode(Response.self, from: data)
@@ -143,7 +147,6 @@ class APIService{
     func parseUserGear(_ data: Data) -> [CellData] {
         let decoder = JSONDecoder()
         self.userGears = []
-
         do {
             let response = try decoder.decode([CellData].self, from: data)
             
@@ -200,5 +203,8 @@ class APIService{
     func loadTableViewData(tableData: TableViewCellData){
         
         tableViewData.append(tableData)
+        
     }
+    
+    
 }

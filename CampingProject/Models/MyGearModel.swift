@@ -38,5 +38,3 @@ struct ImageData: Codable {
     var url: String
 }
 
-
-

@@ -11,7 +11,7 @@ import UIKit
 
 class UserGearViewModel {
     
-    private let manager = APIService.shared
+    private let manager = APIManager.shared
     
     var userGears: [CellData] {
         return manager.userGears
@@ -22,8 +22,9 @@ class UserGearViewModel {
         manager.addGear(name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName)
     }
     
-    func deleteUserGear(gearId: Int){
-        manager.deleteGear(gearId: gearId)
+    func deleteUserGear(gearId: Int, section: Int, row: Int){
+        print(gearId)
+        manager.deleteGear(gearId: gearId, section: section, row: row)
     }
     
     func editUserGear(){

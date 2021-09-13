@@ -10,7 +10,7 @@ import Alamofire
 
 
 class GearTypeViewModel {
-    private let manager = APIService.shared
+    private let manager = APIManager.shared
     
     var gearTypes: [GearType] {
         return manager.gearTypes

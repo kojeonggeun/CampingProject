@@ -27,9 +27,9 @@
 		CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103526C552460058F440 /* GearTypeViewModel.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
 		CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */; };
-		CBD5F5D426E9DD2F00E09B0D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D326E9DD2F00E09B0D /* APIService.swift */; };
+		CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */; };
 		CBD5F5D626E9E0B500E09B0D /* UserGearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */; };
-		CBD5F5D826E9FB2900E09B0D /* TableViewDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D726E9FB2900E09B0D /* TableViewDataViewModel.swift */; };
+		CBD5F5D826E9FB2900E09B0D /* TableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D726E9FB2900E09B0D /* TableViewViewModel.swift */; };
 		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,9 +57,9 @@
 		CBAB103526C552460058F440 /* GearTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeViewModel.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
 		CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		CBD5F5D326E9DD2F00E09B0D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGearViewModel.swift; sourceTree = "<group>"; };
-		CBD5F5D726E9FB2900E09B0D /* TableViewDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataViewModel.swift; sourceTree = "<group>"; };
+		CBD5F5D726E9FB2900E09B0D /* TableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModel.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
 		DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampingProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -164,9 +164,9 @@
 			children = (
 				CB6037D226B28A530023042F /* UserViewModel.swift */,
 				CBAB103526C552460058F440 /* GearTypeViewModel.swift */,
-				CBD5F5D326E9DD2F00E09B0D /* APIService.swift */,
+				CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */,
 				CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */,
-				CBD5F5D726E9FB2900E09B0D /* TableViewDataViewModel.swift */,
+				CBD5F5D726E9FB2900E09B0D /* TableViewViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -320,9 +320,9 @@
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,
 				CBD5F5D626E9E0B500E09B0D /* UserGearViewModel.swift in Sources */,
 				CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */,
-				CBD5F5D826E9FB2900E09B0D /* TableViewDataViewModel.swift in Sources */,
+				CBD5F5D826E9FB2900E09B0D /* TableViewViewModel.swift in Sources */,
 				CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */,
-				CBD5F5D426E9DD2F00E09B0D /* APIService.swift in Sources */,
+				CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */,
 				CBA2327326BE763200946DA0 /* MyGearViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

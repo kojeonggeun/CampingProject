@@ -24,8 +24,10 @@ class GearDetailViewController: UIViewController {
     @IBOutlet weak var imageCollectionView: UICollectionView!
 
     var gearIndex = Int()
+    var gearSection = Int()
+    var gearRow = Int()
     var imageArray = [ImageData]()
-    let apiService = APIService.shared
+    let apiService = APIManager.shared
     
     let userGearVM = UserGearViewModel()
     
@@ -40,9 +42,10 @@ class GearDetailViewController: UIViewController {
 
         let id: Int = userGearVM.userGears[gearIndex].id
         
+        
         let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
-            self.userGearVM.deleteUserGear(gearId: id)
+            self.userGearVM.deleteUserGear(gearId: id, section: self.gearSection, row: self.gearRow )
             NotificationCenter.default.post(name: self.DidDeleteGearPost, object: nil, userInfo: ["delete": true])
             self.dismiss(animated: true, completion: nil)
         })
@@ -60,6 +63,7 @@ class GearDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         guard let type = userGearVM.userGears[gearIndex].gearTypeName else { return }
         guard let name = userGearVM.userGears[gearIndex].name else { return }
         guard let color = userGearVM.userGears[gearIndex].color else { return }
@@ -80,6 +84,7 @@ class GearDetailViewController: UIViewController {
 
         apiService.loadGearImages(gearId: apiService.userGears[gearIndex].id, completion: { data in
             for i in data {
+                print(i)
                 self.imageArray.append(i)
             }
             self.imageCollectionView.reloadData()
