@@ -44,6 +44,7 @@
                             <constraint firstItem="zy0-Y1-iA8" firstAttribute="top" secondItem="M0m-qE-R0P" secondAttribute="bottom" constant="50" id="ga6-3D-Uo1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="M0m-qE-R0P" secondAttribute="trailing" constant="87" id="rcR-B3-5b4"/>
                             <constraint firstItem="M0m-qE-R0P" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="u0d-fi-HMJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zy0-Y1-iA8" secondAttribute="bottom" constant="183.5" id="vxP-Wz-ab6"/>
                         </constraints>
                     </view>
                 </viewController>

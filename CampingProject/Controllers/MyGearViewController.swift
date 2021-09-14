@@ -12,6 +12,7 @@ class MyGearViewController: UIViewController{
   
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emailText: UILabel!
+    @IBOutlet weak var categoryCollectionView: UICollectionView!
     
     var segueText: String = ""
     var tableIndexPath = IndexPath()
@@ -32,7 +33,7 @@ class MyGearViewController: UIViewController{
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
     
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,12 +62,13 @@ class MyGearViewController: UIViewController{
         apiManager.loadUserData( completion: { userData in
             DispatchQueue.global().async {
                 self.apiManager.loadGearType(completion: { data in
-                    
                     for i in 0..<self.gearTypeVM.gearTypes.count{
                         self.apiManager.loadTableViewData(tableData: TableViewCellData(isOpened: false, gearTypeName: self.gearTypeVM.gearTypes[i].gearName))
                         
                         for j in self.userGearVM.userGears{
+                            
                             if self.gearTypeVM.gearTypes[i].gearName == j.gearTypeName{
+                                
                                 self.apiManager.tableViewData[i].update(id: j.id, name: j.name ?? "")        
                             }// end if
                         }
@@ -74,10 +76,13 @@ class MyGearViewController: UIViewController{
                     
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.categoryCollectionView.reloadData()
+                        
                     }
                 })
             } // end global.async
         })
+        
     }
     
     @objc func reloadTableView(_ noti: Notification) {
@@ -122,17 +127,13 @@ extension MyGearViewController: UITableViewDataSource{
         return self.userGearVM.userGears.count
     }
     
-    
-
-    
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell() }
         
         apiManager.loadGearImages(gearId: self.userGearVM.userGears[indexPath.row].id, completion: { data in
             DispatchQueue.global().async {
                 if !data.isEmpty {
-                    let url = URL(string: data[0].url)
+                    let url = URL(string: data[0].url) ?? URL(string: "awd")
                     let data = try? Data(contentsOf: url!)
                     DispatchQueue.main.async {
                         let image = UIImage(data: data!)
@@ -153,6 +154,7 @@ extension MyGearViewController: UITableViewDataSource{
         
         return cell
     }
+
     
 //    밀어서 삭제하기
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -185,16 +187,47 @@ extension MyGearViewController: UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})
-        print(first)
-        
+//        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})
         
         tableIndexPath = indexPath
         let data = [indexPath.section,indexPath.row]
         self.performSegue(withIdentifier: "GearDetailViewController", sender: data)
             
-        
     }
 }
    
 
+extension MyGearViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+        return gearTypeVM.GearTypeNumberOfSections()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.updateUI(title: gearTypeVM.gearTypes[indexPath.row].gearName)
+        
+        return cell
+    }
+    
+    
+}
+
+extension MyGearViewController: UICollectionViewDelegate {
+    
+}
+
+extension MyGearViewController: UICollectionViewDelegateFlowLayout {
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//
+//    }
+ 
+}

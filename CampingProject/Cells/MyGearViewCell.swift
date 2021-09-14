@@ -18,10 +18,12 @@ class MyGearViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        tableViewCellText.textColor = UIColor.black
         tableViewCellImage.layer.cornerRadius = 7
-
-        
+    }
+    override func layoutSubviews() {
+         super.layoutSubviews()
+         let bottomSpace: CGFloat = 15
+         self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: bottomSpace, right: 0))
     }
     
     
