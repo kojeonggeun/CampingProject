@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 class APIManager{
     
@@ -17,7 +18,7 @@ class APIManager{
     var userGears: [CellData] = []
     var tableViewData: [TableViewCellData] = []
     
-    
+    let imageCache = AutoPurgingImageCache( memoryCapacity: 111_111_111, preferredMemoryUsageAfterPurge: 90_000_000)
     let url = API.BASE_URL_MYSELF
     let urlUser = API.BASE_URL
     
@@ -161,20 +162,34 @@ class APIManager{
     
 //    유저 장비 이미지 로드
     func loadGearImages(gearId: Int, completion: @escaping ([ImageData]) -> Void){
-
+        
         AF.request(url + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(_):
                 guard let result = response.data else { return }
-                completion(self.parseGearImages(result))
+                let images = self.parseGearImages(result)
+                if !images.isEmpty{
+                    AF.request(images[0].url).responseImage { response in
+                        if response.value != nil{
+                            let image = UIImage(data: response.data!)!
+                            self.imageCache.add(image, withIdentifier: "\(gearId)")
+                        }
+                    }
+                } else {
+                    let image = UIImage(systemName:"camera.circle")!
+                    self.imageCache.add(image, withIdentifier: "\(gearId)")
+                }
                 
+                completion(self.parseGearImages(result))
+        
             case .failure(let error):
                 print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-            }
+            } // end switch
         }
         
     }
     func parseGearImages(_ data: Data) -> [ImageData] {
+   
         let decoder = JSONDecoder()
  
         do {

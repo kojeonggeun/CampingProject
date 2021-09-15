@@ -7,9 +7,7 @@ target 'CampingProject' do
 
   # Pods for CampingProject
  pod 'Alamofire', '~> 5.2'
- pod 'SwiftKeychainWrapper', '~>3.0.1'
- pod 'CryptoSwift', '~> 1.4.1'
- pod 'Firebase/Auth'
+ pod 'AlamofireImage', '~> 4.1'
  pod "BSImagePicker", "~> 3.1"
  pod 'TextFieldEffects'
 end

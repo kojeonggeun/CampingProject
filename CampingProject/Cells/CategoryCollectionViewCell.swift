@@ -20,15 +20,16 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         
         categoryButton.tintColor = .white
         categoryButton.titleLabel?.font = UIFont.systemFont(ofSize:15, weight: .bold)
-        categoryButton.backgroundColor = UIColor.lightGray
         categoryButton.layer.cornerRadius = 5
+        
 
     }
        
     func updateUI(title: String){
-        print(title)
+        
         categoryButton.setTitle("\(title)", for: .normal)
-
+//        컬러는 따로 받아서 여러가지 색 사용
+//        categoryButton.backgroundColor = UIColor.lightGray
     }
 }
 

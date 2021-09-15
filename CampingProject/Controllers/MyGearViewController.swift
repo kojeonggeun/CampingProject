@@ -7,10 +7,11 @@
 
 import UIKit
 
+
 class MyGearViewController: UIViewController{
     
   
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var gearTableView: UITableView!
     @IBOutlet weak var emailText: UILabel!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     
@@ -38,7 +39,7 @@ class MyGearViewController: UIViewController{
         super.viewDidLoad()
         
         emailText.text = segueText
-        tableView.showsVerticalScrollIndicator = false
+        gearTableView.showsVerticalScrollIndicator = false
             
         self.loadData()
 
@@ -49,8 +50,9 @@ class MyGearViewController: UIViewController{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GearDetailViewController"{
-            let vc = segue.destination as! GearDetailViewController
-            
+            let nav = segue.destination as! UINavigationController
+            let vc = nav.topViewController as! GearDetailViewController
+                        
             guard let data = sender as? NSArray else { return }
             vc.gearSection = data[0] as! Int
             vc.gearRow = data[1] as! Int
@@ -75,7 +77,7 @@ class MyGearViewController: UIViewController{
                     }// end first for
                     
                     DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                        self.gearTableView.reloadData()
                         self.categoryCollectionView.reloadData()
                         
                     }
@@ -95,7 +97,7 @@ class MyGearViewController: UIViewController{
                             self.apiManager.tableViewData[first].update(id: self.userGearVM.userGears[gearEndIndex].id, name: self.userGearVM.userGears[gearEndIndex].name ?? "")
 
                             DispatchQueue.main.async {
-                                self.tableView.reloadData()
+                                self.gearTableView.reloadData()
                             }
                         }
                     })// end closure
@@ -103,12 +105,12 @@ class MyGearViewController: UIViewController{
         }
         
         if noti.userInfo?["delete"] as? Bool ?? false {
-            self.tableView.performBatchUpdates({
+            self.gearTableView.performBatchUpdates({
                 
-                self.tableView.deleteRows(at: [self.tableIndexPath], with: .fade)
+                self.gearTableView.deleteRows(at: [self.tableIndexPath], with: .fade)
             }, completion: { (done) in
                  //perform table refresh
-                self.tableView.reloadSections([self.tableIndexPath.section], with: .automatic)
+                self.gearTableView.reloadSections([self.tableIndexPath.section], with: .automatic)
             })
         }
     }
@@ -117,7 +119,7 @@ class MyGearViewController: UIViewController{
 }// end FirstViewController
 
 
-
+// TableView
 extension MyGearViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -130,27 +132,37 @@ extension MyGearViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FirstViewCell", for: indexPath) as? MyGearViewCell else { return UITableViewCell() }
         
-        apiManager.loadGearImages(gearId: self.userGearVM.userGears[indexPath.row].id, completion: { data in
-            DispatchQueue.global().async {
-                if !data.isEmpty {
-                    let url = URL(string: data[0].url) ?? URL(string: "awd")
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async {
+        let userGearId = self.userGearVM.userGears[indexPath.row].id
+        
+        if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
+            DispatchQueue.main.async {
+                cell.tableViewCellImage.image = cacheImage
+            }
+            
+        } else {
+            apiManager.loadGearImages(gearId: userGearId, completion: { data in
+                DispatchQueue.global().async {
+                    if !data.isEmpty {
+                        let url = URL(string: data[0].url)
+                        let data = try? Data(contentsOf: url!)
                         let image = UIImage(data: data!)
-                        cell.tableViewCellImage.image = image
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        let image = UIImage(systemName: "camera.circle")
-                        image?.withTintColor(UIColor.lightGray)
-                        cell.tableViewCellImage.image = image
+                        DispatchQueue.main.async {
+                            cell.tableViewCellImage.image = image
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            cell.tableViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)")!
+                        }
                     }
                 }
-            }
-        })
-
-        cell.tableViewCellText.text = self.userGearVM.userGears[indexPath.row].name
-        cell.tableViewCellGearType.text = self.userGearVM.userGears[indexPath.row].gearTypeName
+            })
+        }
+        
+    
+        if let gearName = self.userGearVM.userGears[indexPath.row].name,
+           let gearType = self.userGearVM.userGears[indexPath.row].gearTypeName {
+            cell.updateUI(name: gearName, type: gearType)
+        }
         
         return cell
     }
@@ -158,14 +170,16 @@ extension MyGearViewController: UITableViewDataSource{
     
 //    밀어서 삭제하기
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
         
         let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
             
             self.userGearVM.deleteUserGear(gearId: self.userGearVM.userGears[indexPath.row].id,row: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.apiManager.userGears.remove(at: first)
+            self.gearTableView.deleteRows(at: [indexPath], with: .automatic)
             
             DispatchQueue.main.async {
-                self.tableView.reloadSections([indexPath.section], with: .automatic)
+                self.gearTableView.reloadData()
             }
             completion(true)
         }
@@ -186,7 +200,7 @@ extension MyGearViewController: UITableViewDataSource{
 extension MyGearViewController: UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+//      카테고리 적용 시 필요
 //        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})
         
         tableIndexPath = indexPath
@@ -196,15 +210,15 @@ extension MyGearViewController: UITableViewDelegate{
     }
 }
    
-
+// CollectionView
 extension MyGearViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
         return gearTypeVM.GearTypeNumberOfSections()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
         
         cell.updateUI(title: gearTypeVM.gearTypes[indexPath.row].gearName)
@@ -217,17 +231,4 @@ extension MyGearViewController: UICollectionViewDataSource {
 
 extension MyGearViewController: UICollectionViewDelegate {
     
-}
-
-extension MyGearViewController: UICollectionViewDelegateFlowLayout {
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//
-//    }
- 
 }
