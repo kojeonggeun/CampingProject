@@ -18,15 +18,16 @@ class MyGearViewController: UIViewController{
     var segueText: String = ""
     var tableIndexPath = IndexPath()
     
-    
-    var tableData = [TableViewCellData]()
-    
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel()
     let tableViewVM = TableViewViewModel()
     let apiManager: APIManager = APIManager.shared
     
     
+    @IBAction func CategoryMove(_ sender: Any) {
+        print("awd")
+        performSegue(withIdentifier: "categoryTableView", sender: self)
+    }
     
     @IBAction func unwind(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "token")
@@ -56,6 +57,12 @@ class MyGearViewController: UIViewController{
             guard let data = sender as? NSArray else { return }
             vc.gearSection = data[0] as! Int
             vc.gearRow = data[1] as! Int
+            
+        }
+        if segue.identifier == "categoryTableView"{
+            let nav = segue.destination as! UINavigationController
+            let vc = nav.topViewController as! CategoryTableViewController
+            
             
         }
     }
@@ -230,5 +237,5 @@ extension MyGearViewController: UICollectionViewDataSource {
 }
 
 extension MyGearViewController: UICollectionViewDelegate {
-    
+  
 }
