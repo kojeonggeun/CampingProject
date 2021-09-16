@@ -24,13 +24,6 @@ class MyGearViewController: UIViewController{
     let apiManager: APIManager = APIManager.shared
     
     
-    @IBAction func CategoryMove(_ sender: Any) {
-        
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryTableView")
-        self.navigationController?.pushViewController(pushVC!, animated: true)
-         
-    }
-    
     @IBAction func addGearMove(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView")
         self.navigationController?.pushViewController(pushVC!, animated: true)
@@ -216,14 +209,13 @@ extension MyGearViewController: UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //      카테고리 적용 시 필요
-//        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})
+        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
         
         tableIndexPath = indexPath
         let data = [indexPath.section,indexPath.row]
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
-        pushVC.gearSection = indexPath.section
-        pushVC.gearRow = indexPath.row
         
+        pushVC.gearRow = first
         self.navigationController?.pushViewController(pushVC, animated: true)
 
             
@@ -250,14 +242,12 @@ extension MyGearViewController: UICollectionViewDataSource {
     }
     
     @objc func categoryClicked(_ sender: UIButton){
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryTableView")
-        self.navigationController?.pushViewController(pushVC!, animated: true)
-        print(sender.tag)
-        print(self.gearTypeVM.gearTypes[sender.tag])
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryTableView") as! CategoryTableViewController
+        pushVC.gearType = sender.tag
+        
+        self.navigationController?.pushViewController(pushVC, animated: true)
         
     }
-    
-    
 }
 
 extension MyGearViewController: UICollectionViewDelegate {

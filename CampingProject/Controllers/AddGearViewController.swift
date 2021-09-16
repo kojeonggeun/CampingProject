@@ -41,28 +41,7 @@ class AddGearViewController: UIViewController {
     let datePickerView = UIDatePicker()
     
     let userGearViewModel = UserGearViewModel()
-    @IBAction func gearSave(_ sender: Any) {
-        
-        guard let name = gearName.text else { return }
-        guard let color = gearColor.text else { return }
-        guard let company = gearCompany.text else { return }
-        guard let capacity = gearCapacity.text else { return }
-        guard let date = gearBuyDate.text else { return }
-        guard let price = gearPrice.text else { return }
-        
-       
-        self.userGearViewModel.addUserGear(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: photoArray, imageName: imageFileName)
-        
-        let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
-            self.dismiss(animated: true, completion: nil)
-            
-            NotificationCenter.default.post(name: self.DidReloadPostMyGearViewController, object: nil, userInfo: ["gearAddId": self.gearTypeId])
-            
-        })
-        self.present(alert, animated: true)
-        
-    }
+    
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -121,13 +100,38 @@ class AddGearViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "장비 등록"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"장비 등록")
+        self.navigationItem.rightBarButtonItem?.action = #selector(gearSave)
+        
         createPickerView()
         createDatePickerView()
         gearTypeTextField.tintColor = .clear
         imageCount.text = "(\(self.photoArray.count) / 5"
         
     }
-
+    
+    @objc func gearSave(_ sender: Any) {
+        
+        guard let name = gearName.text else { return }
+        guard let color = gearColor.text else { return }
+        guard let company = gearCompany.text else { return }
+        guard let capacity = gearCapacity.text else { return }
+        guard let date = gearBuyDate.text else { return }
+        guard let price = gearPrice.text else { return }
+        
+       
+        self.userGearViewModel.addUserGear(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: photoArray, imageName: imageFileName)
+        
+        let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
+            self.navigationController?.popViewController(animated: true)
+            NotificationCenter.default.post(name: self.DidReloadPostMyGearViewController, object: nil, userInfo: ["gearAddId": self.gearTypeId])
+            
+        })
+        self.present(alert, animated: true)
+        
+    }
+    
     func createDatePickerView(){
         
         datePickerView.datePickerMode = .date

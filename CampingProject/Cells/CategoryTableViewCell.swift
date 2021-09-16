@@ -20,11 +20,12 @@ class CategoryTableViewCell: UITableViewCell{
        
     }
     override func layoutSubviews() {
-         super.layoutSubviews()
-         let bottomSpace: CGFloat = 15
-         self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: bottomSpace, right: 0))
-    }
-    
+        super.layoutSubviews()
+        let bottomSpace: CGFloat = 15
+        let topSpace: CGFloat = 15
+        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: topSpace, left: 0, bottom: bottomSpace, right: 0))
+        }
+
     func updateUI(name:String, type: String){
         
         categoryName.text = name

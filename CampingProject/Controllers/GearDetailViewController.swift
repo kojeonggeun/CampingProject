@@ -23,8 +23,7 @@ class GearDetailViewController: UIViewController {
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
 
-   
-    var gearSection = Int()
+
     var gearRow = Int()
     var imageArray = [ImageData]()
     let apiService = APIManager.shared

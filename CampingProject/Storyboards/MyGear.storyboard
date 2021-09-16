@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,17 +14,17 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="El5-Fr-sjZ" customClass="MyGearViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X7p-n4-9pK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7or-cV-1Po">
-                                <rect key="frame" x="10" y="257" width="394" height="605"/>
+                                <rect key="frame" x="10" y="257" width="370" height="553"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstViewCell" rowHeight="100" id="tHy-5x-ybp" customClass="MyGearViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="394" height="100"/>
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="370" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tHy-5x-ybp" id="0qm-E3-49W">
-                                            <rect key="frame" x="0.0" y="0.0" width="394" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XF1-kB-cYZ">
@@ -32,14 +32,14 @@
                                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비타입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcA-oi-MBp">
-                                                    <rect key="frame" x="100" y="36.5" width="45" height="16"/>
+                                                    <rect key="frame" x="100" y="36.666666666666664" width="45" height="16"/>
                                                     <color key="tintColor" systemColor="systemBackgroundColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCV-Km-1Ib">
-                                                    <rect key="frame" x="100" y="10" width="62.5" height="21.5"/>
+                                                    <rect key="frame" x="100.00000000000001" y="10.000000000000002" width="62.666666666666671" height="21.666666666666671"/>
                                                     <color key="tintColor" systemColor="systemBackgroundColor"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <nil key="textColor"/>
@@ -71,7 +71,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRk-vz-Xwp">
-                                <rect key="frame" x="348" y="122" width="35" height="31"/>
+                                <rect key="frame" x="324" y="122" width="35" height="31"/>
                                 <state key="normal" image="plus.app" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                 </state>
@@ -80,7 +80,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RkH-L8-FJz">
-                                <rect key="frame" x="0.0" y="168" width="414" height="80"/>
+                                <rect key="frame" x="0.0" y="168" width="390" height="80"/>
                                 <color key="backgroundColor" systemColor="quaternarySystemFillColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="DcK-G6-xWW"/>
@@ -129,7 +129,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="이메일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMS-MB-hb5">
-                                <rect key="frame" x="20" y="131" width="36.5" height="17"/>
+                                <rect key="frame" x="19.999999999999996" y="131" width="36.666666666666657" height="17"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -157,7 +157,7 @@
                     <navigationItem key="navigationItem" title="내 장비 리스트" id="Dor-Lo-0Za">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="spe-Km-6i2">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="qJR-GT-Sgh">
-                                <rect key="frame" x="20" y="7" width="52" height="30"/>
+                                <rect key="frame" x="16" y="7" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="로그아웃"/>
                                 <connections>
@@ -184,7 +184,7 @@
                 <navigationController storyboardIdentifier="MyGearViewController" id="93K-v3-MxX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="내 장비" id="ULz-fM-fn0"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Lm-OK-tRa">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -200,41 +200,56 @@
             <objects>
                 <tableViewController storyboardIdentifier="CategoryTableView" modalPresentationStyle="fullScreen" id="Ytn-F5-XHL" customClass="CategoryTableViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cU9-Ud-fT1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryTableViewCell" rowHeight="100" id="yn0-NK-aao" customClass="CategoryTableViewCell" customModule="CampingProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="100"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryTableView" rowHeight="100" id="Y0b-PL-tww" customClass="CategoryTableViewCell" customModule="CampingProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yn0-NK-aao" id="yTk-ZE-a7W">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y0b-PL-tww" id="DKM-la-fuA">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tTo-CA-ccY">
-                                            <rect key="frame" x="20" y="6" width="80" height="89"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-Fl-tyu">
+                                            <rect key="frame" x="10" y="11" width="80" height="78"/>
+                                            <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="78" id="0Vp-9X-pP2"/>
+                                                <constraint firstAttribute="width" constant="80" id="Q0u-dz-EW2"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsk-fL-UqA">
-                                            <rect key="frame" x="120" y="11" width="42" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비타입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5je-Oz-mNP">
+                                            <rect key="frame" x="100" y="36.666666666666664" width="45" height="16"/>
+                                            <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ch-vP-pNF">
-                                            <rect key="frame" x="120" y="32" width="35.5" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQA-9b-aWp">
+                                            <rect key="frame" x="100.00000000000001" y="10.000000000000002" width="62.666666666666671" height="21.666666666666671"/>
+                                            <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="eQA-9b-aWp" firstAttribute="leading" secondItem="DKM-la-fuA" secondAttribute="leading" constant="100.00000000000001" id="2FW-PJ-DkG"/>
+                                        <constraint firstItem="5je-Oz-mNP" firstAttribute="top" secondItem="eQA-9b-aWp" secondAttribute="bottom" constant="5" id="4kk-WC-Nen"/>
+                                        <constraint firstItem="XVN-Fl-tyu" firstAttribute="top" secondItem="DKM-la-fuA" secondAttribute="top" constant="11" id="Ava-4J-SA1"/>
+                                        <constraint firstItem="XVN-Fl-tyu" firstAttribute="leading" secondItem="DKM-la-fuA" secondAttribute="leading" constant="10" id="CsM-J8-nea"/>
+                                        <constraint firstItem="5je-Oz-mNP" firstAttribute="leading" secondItem="XVN-Fl-tyu" secondAttribute="trailing" constant="10" id="DUt-Ys-gZu"/>
+                                        <constraint firstAttribute="bottom" secondItem="XVN-Fl-tyu" secondAttribute="bottom" constant="11" id="ILT-G4-gBb"/>
+                                        <constraint firstItem="eQA-9b-aWp" firstAttribute="top" secondItem="DKM-la-fuA" secondAttribute="top" constant="10" id="cU1-ng-Ix6"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eQA-9b-aWp" secondAttribute="trailing" constant="50" id="eL6-7C-RRE"/>
+                                        <constraint firstItem="eQA-9b-aWp" firstAttribute="leading" secondItem="XVN-Fl-tyu" secondAttribute="trailing" constant="10.000000000000014" id="qSv-Gw-GOn"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="categoryImage" destination="tTo-CA-ccY" id="2md-hg-rhc"/>
-                                    <outlet property="categoryName" destination="Lsk-fL-UqA" id="SMq-8P-eAX"/>
-                                    <outlet property="categoryType" destination="6Ch-vP-pNF" id="DAD-hr-e78"/>
+                                    <outlet property="categoryImage" destination="XVN-Fl-tyu" id="e6f-Pq-QFw"/>
+                                    <outlet property="categoryName" destination="eQA-9b-aWp" id="ENJ-eh-SNq"/>
+                                    <outlet property="categoryType" destination="5je-Oz-mNP" id="rKg-65-tMz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -254,11 +269,11 @@
             <objects>
                 <viewController storyboardIdentifier="AddGearView" modalPresentationStyle="fullScreen" id="9HA-7s-erx" customClass="AddGearViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rOz-1L-TXR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Y6m-C9-rTc">
-                                <rect key="frame" x="142" y="621" width="252" height="168"/>
+                                <rect key="frame" x="122" y="569" width="252" height="168"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="168" id="3cL-Ur-nmP"/>
@@ -451,10 +466,10 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uyU-gf-37o">
-                                <rect key="frame" x="41.5" y="665.5" width="75.5" height="79"/>
+                                <rect key="frame" x="21" y="614" width="76" height="78.333333333333371"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-df-3Dy">
-                                        <rect key="frame" x="0.0" y="0.0" width="75.5" height="58.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="76" height="58"/>
                                         <state key="normal" image="camera.on.rectangle" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50"/>
                                         </state>
@@ -463,7 +478,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWr-1N-ilF">
-                                        <rect key="frame" x="0.0" y="58.5" width="75.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="58.000000000000007" width="76" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -502,7 +517,7 @@
             <objects>
                 <viewController storyboardIdentifier="GearDetailView" modalPresentationStyle="fullScreen" id="kDf-Cw-jsc" customClass="GearDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HZh-Wm-3R0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y38-BH-8XM">
@@ -525,7 +540,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="Kgb-F9-gqD" customClass="GearDetailViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="4.5" width="389" height="192"/>
+                                        <rect key="frame" x="0.0" y="4.666666666666667" width="389" height="192"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BsB-g3-8uX">
                                             <rect key="frame" x="0.0" y="0.0" width="389" height="192"/>
@@ -721,16 +736,16 @@
     </scenes>
     <designables>
         <designable name="4qm-p6-FgP">
-            <size key="intrinsicContentSize" width="63.5" height="22"/>
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="8Uf-vS-0HP">
-            <size key="intrinsicContentSize" width="63.5" height="22"/>
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="BAr-A5-hsv">
-            <size key="intrinsicContentSize" width="29.5" height="22"/>
+            <size key="intrinsicContentSize" width="29.666666666666668" height="22"/>
         </designable>
         <designable name="Lby-Qz-Rxz">
-            <size key="intrinsicContentSize" width="63.5" height="22"/>
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="Na9-ti-O6q">
             <size key="intrinsicContentSize" width="97" height="22"/>
@@ -739,28 +754,28 @@
             <size key="intrinsicContentSize" width="97" height="22"/>
         </designable>
         <designable name="UyR-YO-U0J">
-            <size key="intrinsicContentSize" width="63.5" height="22"/>
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="bjj-nX-WxD">
-            <size key="intrinsicContentSize" width="63.5" height="22"/>
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="l0d-xq-ByR">
-            <size key="intrinsicContentSize" width="63.5" height="22"/>
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="nN8-XG-Ria">
-            <size key="intrinsicContentSize" width="29.5" height="22"/>
+            <size key="intrinsicContentSize" width="29.666666666666668" height="22"/>
         </designable>
         <designable name="o87-NS-uPw">
-            <size key="intrinsicContentSize" width="44.5" height="22"/>
+            <size key="intrinsicContentSize" width="44.333333333333336" height="22"/>
         </designable>
         <designable name="vGW-mK-9Qc">
-            <size key="intrinsicContentSize" width="44.5" height="22"/>
+            <size key="intrinsicContentSize" width="44.333333333333336" height="22"/>
         </designable>
         <designable name="wfm-2V-SfY">
-            <size key="intrinsicContentSize" width="63.5" height="22"/>
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
         <designable name="zcc-HW-Xck">
-            <size key="intrinsicContentSize" width="63.5" height="22"/>
+            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
         </designable>
     </designables>
     <resources>
