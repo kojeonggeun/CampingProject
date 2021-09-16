@@ -40,7 +40,8 @@ class SignInViewController: UIViewController{
   
         if let barVC = segue.destination as? MainTabBarController {
                 barVC.viewControllers?.forEach {
-                    if let vc = $0 as? MyGearViewController{
+                    if let nav = $0 as? UINavigationController{
+                        let vc = nav.topViewController as! MyGearViewController
                         vc.segueText = email
                     }
                 }

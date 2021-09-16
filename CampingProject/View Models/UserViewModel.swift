@@ -65,7 +65,7 @@ class UserViewModel {
     func loginCheck(user: NSDictionary ,completion: @escaping (Bool)-> Void ) {
         
         let headers: HTTPHeaders = ["Authorization" : user["token"] as! String]
-        print(user["token"])
+        print(user["token"]!)
         AF.request(urlUser,
                    method: .get,
                    encoding: URLEncoding.default,

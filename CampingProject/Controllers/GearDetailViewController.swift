@@ -41,13 +41,13 @@ class GearDetailViewController: UIViewController {
     @IBAction func showDeleteAlert(_ sender: Any) {
 
         let id: Int = userGearVM.userGears[gearRow].id
-        
-        
+
         let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
-            self.userGearVM.deleteUserGear(gearId: self.gearRow, row: self.gearRow )
+            self.userGearVM.deleteUserGear(gearId: id, row: self.gearRow )
+            self.navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: self.DidDeleteGearPost, object: nil, userInfo: ["delete": true])
-            self.dismiss(animated: true, completion: nil)
+            
         })
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in
             return
@@ -62,7 +62,8 @@ class GearDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.title = "장비 상세"
         
         guard let type = userGearVM.userGears[gearRow].gearTypeName else { return }
         guard let name = userGearVM.userGears[gearRow].name else { return }

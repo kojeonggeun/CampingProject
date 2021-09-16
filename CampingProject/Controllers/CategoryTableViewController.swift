@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 
-//class CategoryTableViewController: UIViewController{
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-//}
 
 
 class CategoryTableViewController: UITableViewController{
@@ -22,6 +16,11 @@ class CategoryTableViewController: UITableViewController{
     let userGearVM = UserGearViewModel()
     let tableViewVM = TableViewViewModel()
     let apiManager: APIManager = APIManager.shared
+    
+    @IBAction func closeButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +63,6 @@ class CategoryTableViewController: UITableViewController{
             })
         }
         
-    
         if let gearName = self.userGearVM.userGears[indexPath.row].name,
            let gearType = self.userGearVM.userGears[indexPath.row].gearTypeName {
             cell.updateUI(name: gearName, type: gearType)
@@ -72,8 +70,6 @@ class CategoryTableViewController: UITableViewController{
         
         return cell
     }
-    
-    
 }
 
 

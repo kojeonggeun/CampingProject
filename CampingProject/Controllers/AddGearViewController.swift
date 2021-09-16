@@ -119,6 +119,8 @@ class AddGearViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "장비 등록"
         createPickerView()
         createDatePickerView()
         gearTypeTextField.tintColor = .clear

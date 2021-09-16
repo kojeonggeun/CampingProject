@@ -25,10 +25,17 @@ class MyGearViewController: UIViewController{
     
     
     @IBAction func CategoryMove(_ sender: Any) {
-        print("awd")
-        performSegue(withIdentifier: "categoryTableView", sender: self)
+        
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryTableView")
+        self.navigationController?.pushViewController(pushVC!, animated: true)
+         
     }
     
+    @IBAction func addGearMove(_ sender: Any) {
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView")
+        self.navigationController?.pushViewController(pushVC!, animated: true)
+        
+    }
     @IBAction func unwind(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "token")
         
@@ -41,7 +48,8 @@ class MyGearViewController: UIViewController{
         
         emailText.text = segueText
         gearTableView.showsVerticalScrollIndicator = false
-            
+        
+        
         self.loadData()
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostMyGearViewController"), object: nil)
@@ -50,21 +58,21 @@ class MyGearViewController: UIViewController{
     } // end viewDidLoad
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GearDetailViewController"{
-            let nav = segue.destination as! UINavigationController
-            let vc = nav.topViewController as! GearDetailViewController
-                        
-            guard let data = sender as? NSArray else { return }
-            vc.gearSection = data[0] as! Int
-            vc.gearRow = data[1] as! Int
-            
-        }
-        if segue.identifier == "categoryTableView"{
-            let nav = segue.destination as! UINavigationController
-            let vc = nav.topViewController as! CategoryTableViewController
-            
-            
-        }
+//        if segue.identifier == "GearDetailView"{
+//            let nav = segue.destination as! UINavigationController
+//            let vc = nav.topViewController as! GearDetailViewController
+//
+//            guard let data = sender as? NSArray else { return }
+//            vc.gearSection = data[0] as! Int
+//            vc.gearRow = data[1] as! Int
+//
+//        }
+//        if segue.identifier == "categoryTableView"{
+//            let nav = segue.destination as! UINavigationController
+//            let vc = nav.topViewController as! CategoryTableViewController
+//
+//
+//        }
     }
     
     func loadData(){
@@ -105,6 +113,7 @@ class MyGearViewController: UIViewController{
 
                             DispatchQueue.main.async {
                                 self.gearTableView.reloadData()
+                                
                             }
                         }
                     })// end closure
@@ -182,7 +191,6 @@ extension MyGearViewController: UITableViewDataSource{
         let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
             
             self.userGearVM.deleteUserGear(gearId: self.userGearVM.userGears[indexPath.row].id,row: indexPath.row)
-            self.apiManager.userGears.remove(at: first)
             self.gearTableView.deleteRows(at: [indexPath], with: .automatic)
             
             DispatchQueue.main.async {
@@ -212,7 +220,12 @@ extension MyGearViewController: UITableViewDelegate{
         
         tableIndexPath = indexPath
         let data = [indexPath.section,indexPath.row]
-        self.performSegue(withIdentifier: "GearDetailViewController", sender: data)
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
+        pushVC.gearSection = indexPath.section
+        pushVC.gearRow = indexPath.row
+        
+        self.navigationController?.pushViewController(pushVC, animated: true)
+
             
     }
 }
@@ -228,9 +241,20 @@ extension MyGearViewController: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
         
+        
+        cell.categoryButton.tag = indexPath.row
+        cell.categoryButton.addTarget(self, action: #selector(categoryClicked), for: .touchUpInside)
         cell.updateUI(title: gearTypeVM.gearTypes[indexPath.row].gearName)
         
         return cell
+    }
+    
+    @objc func categoryClicked(_ sender: UIButton){
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryTableView")
+        self.navigationController?.pushViewController(pushVC!, animated: true)
+        print(sender.tag)
+        print(self.gearTypeVM.gearTypes[sender.tag])
+        
     }
     
     
