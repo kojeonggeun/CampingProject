@@ -24,6 +24,7 @@ class MyGearViewController: UIViewController{
     let apiManager: APIManager = APIManager.shared
     
     
+    
     @IBAction func addGearMove(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView")
         self.navigationController?.pushViewController(pushVC!, animated: true)
@@ -31,6 +32,7 @@ class MyGearViewController: UIViewController{
     }
     @IBAction func unwind(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "token")
+        UserDefaults.standard.set(false, forKey: "Auto")
         
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }

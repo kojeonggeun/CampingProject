@@ -36,7 +36,6 @@ class CategoryTableViewController: UITableViewController{
                 categoryData.append(i)
             }
         }
-     
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
