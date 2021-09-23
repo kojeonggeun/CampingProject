@@ -12,6 +12,7 @@ import UIKit
 
 class CategoryTableViewController: UITableViewController{
     
+    
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel()
     let tableViewVM = TableViewViewModel()
@@ -24,7 +25,7 @@ class CategoryTableViewController: UITableViewController{
         dismiss(animated: true, completion: nil)
     }
     
-    
+    // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +37,7 @@ class CategoryTableViewController: UITableViewController{
                 categoryData.append(i)
             }
         }
+       
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,6 +49,7 @@ class CategoryTableViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableView", for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
         
         let userGearId = categoryData[indexPath.row].id
@@ -54,6 +57,7 @@ class CategoryTableViewController: UITableViewController{
         if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
             DispatchQueue.main.async {
                 cell.categoryImage.image = cacheImage
+                
             }
             
         } else {
@@ -65,6 +69,7 @@ class CategoryTableViewController: UITableViewController{
                         let image = UIImage(data: data!)
                         DispatchQueue.main.async {
                             cell.categoryImage.image = image
+                            
                         }
                     } else {
                         DispatchQueue.main.async {
@@ -83,9 +88,14 @@ class CategoryTableViewController: UITableViewController{
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.categoryData[indexPath.row].id
         })!
+      
         
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
         pushVC.gearRow = first
@@ -94,5 +104,8 @@ class CategoryTableViewController: UITableViewController{
         
     }
     
+
+ 
 }
+
 

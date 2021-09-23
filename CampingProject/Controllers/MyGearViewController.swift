@@ -15,6 +15,7 @@ class MyGearViewController: UIViewController{
     @IBOutlet weak var emailText: UILabel!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     
+    
     var segueText: String = ""
     var tableIndexPath = IndexPath()
     
@@ -31,13 +32,13 @@ class MyGearViewController: UIViewController{
         
     }
     @IBAction func unwind(_ sender: Any) {
-        UserDefaults.standard.removeObject(forKey: "token")
-        UserDefaults.standard.set(false, forKey: "Auto")
+        DB.userDefaults.removeObject(forKey: "token")
+        DB.userDefaults.set(false, forKey: "Auto")
         
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
     
-  
+  // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,11 +77,8 @@ class MyGearViewController: UIViewController{
                 self.apiManager.loadGearType(completion: { data in
                     for i in 0..<self.gearTypeVM.gearTypes.count{
                         self.apiManager.loadTableViewData(tableData: TableViewCellData(isOpened: false, gearTypeName: self.gearTypeVM.gearTypes[i].gearName))
-                        
                         for j in self.userGearVM.userGears{
-                            
                             if self.gearTypeVM.gearTypes[i].gearName == j.gearTypeName{
-                                
                                 self.apiManager.tableViewData[i].update(id: j.id, name: j.name ?? "")        
                             }// end if
                         }
@@ -98,13 +96,13 @@ class MyGearViewController: UIViewController{
     }
     
     @objc func reloadTableView(_ noti: Notification) {
-        if let gearId = noti.userInfo?["gearAddId"] as? Int {
-            guard let first = self.gearTypeVM.gearTypes.firstIndex(where: { $0.gearID == gearId}) else { return }
+        if (noti.userInfo?["gearAddId"] as? Int) != nil {
+//            guard let first = self.gearTypeVM.gearTypes.firstIndex(where: { $0.gearID == gearId}) else { return }
                 DispatchQueue.global().async {
                     self.apiManager.loadUserData(completion: { data in
                         if data {
-                            let gearEndIndex = self.apiManager.userGears.endIndex - 1
-                            self.apiManager.tableViewData[first].update(id: self.userGearVM.userGears[gearEndIndex].id, name: self.userGearVM.userGears[gearEndIndex].name ?? "")
+//                            let gearEndIndex = self.apiManager.userGears.endIndex - 1
+//                            self.apiManager.tableViewData[first].update(id: self.userGearVM.userGears[gearEndIndex].id, name: self.userGearVM.userGears[gearEndIndex].name ?? "")
 
                             DispatchQueue.main.async {
                                 self.gearTableView.reloadData()
@@ -168,11 +166,10 @@ extension MyGearViewController: UITableViewDataSource{
                 }
             })
         }
-        
-    
         if let gearName = self.userGearVM.userGears[indexPath.row].name,
-           let gearType = self.userGearVM.userGears[indexPath.row].gearTypeName {
-            cell.updateUI(name: gearName, type: gearType)
+           let gearType = self.userGearVM.userGears[indexPath.row].gearTypeName,
+           let gearDate = self.userGearVM.userGears[indexPath.row].buyDt {
+            cell.updateUI(name: gearName, type: gearType, date: gearDate)
         }
         
         return cell
@@ -181,7 +178,7 @@ extension MyGearViewController: UITableViewDataSource{
     
 //    밀어서 삭제하기
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
+//        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
         
         let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
             
@@ -212,9 +209,9 @@ extension MyGearViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //      카테고리 적용 시 필요
         let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
-        
+
         tableIndexPath = indexPath
-        let data = [indexPath.section,indexPath.row]
+//        let data = [indexPath.section,indexPath.row]
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
         
         pushVC.gearRow = first
@@ -243,6 +240,7 @@ extension MyGearViewController: UICollectionViewDataSource {
         return cell
     }
     
+//    카테고리를 누르면 해당하는 User데이터를 가지고 tableView를 reload??
     @objc func categoryClicked(_ sender: UIButton){
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryTableView") as! CategoryTableViewController
         pushVC.gearType = sender.tag

@@ -17,13 +17,8 @@ class AddGearViewController: UIViewController {
     
     @IBOutlet weak var gearCollectionView: UICollectionView!
     
-    @IBOutlet weak var gearTypeTextField: UITextField!
-    @IBOutlet weak var gearName: UITextField!
-    @IBOutlet weak var gearColor: UITextField!
-    @IBOutlet weak var gearCompany: UITextField!
-    @IBOutlet weak var gearCapacity: UITextField!
-    @IBOutlet weak var gearBuyDate: UITextField!
-    @IBOutlet weak var gearPrice: UITextField!
+    @IBOutlet weak var customView: GearTextListCustomView!
+
     
     @IBOutlet weak var imageCount: UILabel!
     let btn: UIButton = UIButton()
@@ -32,7 +27,7 @@ class AddGearViewController: UIViewController {
     var selectedAssets = [PHAsset]()
     var photoArray = [UIImage]()
     var imageFileName = [String]()
-    var gearTypeId: Int = 0
+
     
     var total: Int = 0
     
@@ -95,80 +90,42 @@ class AddGearViewController: UIViewController {
         vc.present(alert, animated: true)
         
     }
-
+    
+    // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "장비 등록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"장비 등록")
-        self.navigationItem.rightBarButtonItem?.action = #selector(gearSave)
         
-        createPickerView()
-        createDatePickerView()
-        gearTypeTextField.tintColor = .clear
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(gearSave(_:)))
+    
+
         imageCount.text = "(\(self.photoArray.count) / 5"
         
     }
     
-    @objc func gearSave(_ sender: Any) {
+    @objc func gearSave(_ sender: UIButton) {
         
-        guard let name = gearName.text else { return }
-        guard let color = gearColor.text else { return }
-        guard let company = gearCompany.text else { return }
-        guard let capacity = gearCapacity.text else { return }
-        guard let date = gearBuyDate.text else { return }
-        guard let price = gearPrice.text else { return }
+        guard let name = customView.gearName.text else { return }
+        guard let color = customView.gearColor.text else { return }
+        guard let company = customView.gearCompany.text else { return }
+        guard let capacity = customView.gearCapacity.text else { return }
+        guard let date = customView.gearBuyDate.text else { return }
+        guard let price = customView.gearPrice.text else { return }
         
        
-        self.userGearViewModel.addUserGear(name: name, type: gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: photoArray, imageName: imageFileName)
+        self.userGearViewModel.addUserGear(name: name, type: customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: photoArray, imageName: imageFileName)
         
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
             self.navigationController?.popViewController(animated: true)
-            NotificationCenter.default.post(name: self.DidReloadPostMyGearViewController, object: nil, userInfo: ["gearAddId": self.gearTypeId])
+            NotificationCenter.default.post(name: self.DidReloadPostMyGearViewController, object: nil, userInfo: ["gearAddId": self.customView.gearTypeId])
             
         })
         self.present(alert, animated: true)
         
     }
-    
-    func createDatePickerView(){
-        
-        datePickerView.datePickerMode = .date
-        datePickerView.timeZone = NSTimeZone.local
-        datePickerView.locale = Locale(identifier: "ko_KR")
-        datePickerView.preferredDatePickerStyle = .wheels
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target : nil, action: #selector(donePressed))
-                
-        toolbar.setItems([doneButton], animated: true)
-        
-        gearBuyDate.inputAccessoryView = toolbar
-        gearBuyDate.inputView = datePickerView
-        
-    }
-    
-    @objc func donePressed(){
-        let formatter = DateFormatter()
 
-        formatter.timeStyle = .none
-        formatter.dateFormat = "yyyy년 MM월 dd일"
-        
-        gearBuyDate.text = formatter.string(from: datePickerView.date)
-        self.view.endEditing(true)
-        
-    }
-    func createPickerView(){
-        
-        pickerView.delegate = self
-        gearTypeTextField.inputView = pickerView
-        
-//      초기 pickerView값 초기화
-        gearTypeTextField.text = apiService.gearTypes[0].gearName
-        gearTypeId = apiService.gearTypes[0].gearID
-    }
     
 }
 
@@ -196,34 +153,6 @@ extension AddGearViewController {
     }
 }
 
-
-
-extension AddGearViewController: UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-        
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return apiService.gearTypes.count
-
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        return apiService.gearTypes[row].gearName
-
-    }
-}
-
-extension AddGearViewController: UIPickerViewDelegate{
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        gearTypeTextField.text = apiService.gearTypes[row].gearName
-        gearTypeId = apiService.gearTypes[row].gearID
-
-    }
-
-}
 
 
 extension AddGearViewController: UICollectionViewDataSource {
@@ -277,5 +206,5 @@ extension AddGearViewController: UICollectionViewDelegate{
 //        return CGSize(width: width, height: height)
 //    }
 //}
-//
-//
+
+

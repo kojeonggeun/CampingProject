@@ -39,11 +39,11 @@ class SignInViewController: UIViewController{
         if sender.isSelected{
             sender.isSelected = false
             loginStateButton.tintColor = .lightGray
-            userManager.userDefaults.set(sender.isSelected, forKey: "Auto")
+            DB.userDefaults.set(sender.isSelected, forKey: "Auto")
         } else {
             sender.isSelected = true
             loginStateButton.tintColor = .green
-            userManager.userDefaults.set(sender.isSelected, forKey: "Auto")
+            DB.userDefaults.set(sender.isSelected, forKey: "Auto")
 
         }
         
@@ -63,7 +63,7 @@ class SignInViewController: UIViewController{
                 }
             }
     }
-        
+    // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,9 +83,9 @@ class SignInViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if userManager.userDefaults.bool(forKey: "Auto") {
-            if userManager.userDefaults.object(forKey: "token") != nil {
-                guard let user = UserDefaults.standard.value(forKey: "token") as? NSDictionary else { return }
+        if DB.userDefaults.bool(forKey: "Auto") {
+            if DB.userDefaults.object(forKey: "token") != nil {
+                guard let user = DB.userDefaults.value(forKey: "token") as? NSDictionary else { return }
                 userManager.loginCheck(user: user){ (completion) in
                     if completion {
                         self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])

@@ -100,7 +100,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
             })
         })
     }
-    
+    // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         

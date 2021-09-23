@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <accessibilityOverrides dynamicTypePreference="3"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -20,45 +22,59 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7or-cV-1Po">
                                 <rect key="frame" x="10" y="257" width="370" height="553"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstViewCell" rowHeight="100" id="tHy-5x-ybp" customClass="MyGearViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.333333969116211" width="370" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstViewCell" rowHeight="110" id="tHy-5x-ybp" customClass="MyGearViewCell" customModule="CampingProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="370" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tHy-5x-ybp" id="0qm-E3-49W">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XF1-kB-cYZ">
-                                                    <rect key="frame" x="10" y="11" width="80" height="78"/>
+                                                    <rect key="frame" x="10" y="18" width="80" height="81"/>
                                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="1vW-fR-pKI"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비타입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcA-oi-MBp">
-                                                    <rect key="frame" x="100" y="36.666666666666664" width="45" height="16"/>
+                                                    <rect key="frame" x="98" y="61" width="45" height="16"/>
                                                     <color key="tintColor" systemColor="systemBackgroundColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCV-Km-1Ib">
-                                                    <rect key="frame" x="100.00000000000001" y="10.000000000000002" width="62.666666666666671" height="21.666666666666671"/>
+                                                    <rect key="frame" x="97" y="36" width="63" height="22"/>
                                                     <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록 날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ei9-fP-wn6">
+                                                    <rect key="frame" x="98" y="12" width="49" height="16"/>
+                                                    <color key="tintColor" red="0.82745098039999998" green="0.81960784310000001" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iCV-Km-1Ib" secondAttribute="trailing" constant="50" id="TGO-Z0-XHj"/>
-                                                <constraint firstItem="NcA-oi-MBp" firstAttribute="leading" secondItem="XF1-kB-cYZ" secondAttribute="trailing" constant="10" id="c1A-eU-NFY"/>
-                                                <constraint firstItem="iCV-Km-1Ib" firstAttribute="leading" secondItem="XF1-kB-cYZ" secondAttribute="trailing" constant="10.000000000000014" id="eVZ-y4-67Q"/>
-                                                <constraint firstAttribute="bottom" secondItem="XF1-kB-cYZ" secondAttribute="bottom" constant="11" id="eqf-Db-fdU"/>
-                                                <constraint firstItem="XF1-kB-cYZ" firstAttribute="leading" secondItem="0qm-E3-49W" secondAttribute="leading" constant="10" id="guT-ZZ-CJ3"/>
-                                                <constraint firstItem="XF1-kB-cYZ" firstAttribute="top" secondItem="0qm-E3-49W" secondAttribute="top" constant="11" id="hTV-C1-MUH"/>
-                                                <constraint firstItem="iCV-Km-1Ib" firstAttribute="top" secondItem="0qm-E3-49W" secondAttribute="top" constant="10" id="mfI-Wd-aco"/>
-                                                <constraint firstItem="iCV-Km-1Ib" firstAttribute="leading" secondItem="0qm-E3-49W" secondAttribute="leading" constant="100.00000000000001" id="pXC-vq-RfE"/>
-                                                <constraint firstItem="NcA-oi-MBp" firstAttribute="top" secondItem="iCV-Km-1Ib" secondAttribute="bottom" constant="5" id="zfc-ZT-CNk"/>
+                                                <constraint firstItem="Ei9-fP-wn6" firstAttribute="leading" secondItem="NcA-oi-MBp" secondAttribute="leading" id="5qh-Hf-aZu"/>
+                                                <constraint firstItem="Ei9-fP-wn6" firstAttribute="leading" secondItem="XF1-kB-cYZ" secondAttribute="trailing" constant="8" symbolic="YES" id="8rI-rn-YVn"/>
+                                                <constraint firstAttribute="bottom" secondItem="XF1-kB-cYZ" secondAttribute="bottom" constant="11" id="AL3-JJ-31P"/>
+                                                <constraint firstItem="Ei9-fP-wn6" firstAttribute="leading" secondItem="iCV-Km-1Ib" secondAttribute="leading" constant="1" id="BPk-ae-2ND"/>
+                                                <constraint firstItem="XF1-kB-cYZ" firstAttribute="top" secondItem="0qm-E3-49W" secondAttribute="top" constant="18" id="HRL-JG-i4Z"/>
+                                                <constraint firstItem="NcA-oi-MBp" firstAttribute="top" secondItem="iCV-Km-1Ib" secondAttribute="bottom" constant="3" id="T8d-2j-yUL"/>
+                                                <constraint firstItem="Ei9-fP-wn6" firstAttribute="top" secondItem="0qm-E3-49W" secondAttribute="topMargin" constant="1" id="Vnk-1b-uhM"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iCV-Km-1Ib" secondAttribute="trailing" constant="30" id="bgQ-oC-fpy"/>
+                                                <constraint firstItem="XF1-kB-cYZ" firstAttribute="leading" secondItem="0qm-E3-49W" secondAttribute="leading" constant="10" id="eGQ-t0-ip2"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NcA-oi-MBp" secondAttribute="trailing" constant="30" id="eR6-DP-NCd"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ei9-fP-wn6" secondAttribute="trailing" constant="30" id="o0x-j1-JRO"/>
+                                                <constraint firstItem="iCV-Km-1Ib" firstAttribute="top" secondItem="Ei9-fP-wn6" secondAttribute="bottom" constant="8" symbolic="YES" id="y1y-dI-L0H"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="tableViewCellDate" destination="Ei9-fP-wn6" id="o2V-H1-VAN"/>
                                             <outlet property="tableViewCellGearType" destination="NcA-oi-MBp" id="MhY-YK-1rW"/>
                                             <outlet property="tableViewCellImage" destination="XF1-kB-cYZ" id="qUq-Fj-SOv"/>
                                             <outlet property="tableViewCellText" destination="iCV-Km-1Ib" id="zda-B8-nwD"/>
@@ -71,7 +87,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRk-vz-Xwp">
-                                <rect key="frame" x="324" y="122" width="35" height="31"/>
+                                <rect key="frame" x="324.33333333333331" y="113" width="34.666666666666686" height="31"/>
                                 <state key="normal" image="plus.app" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                 </state>
@@ -129,7 +145,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="이메일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMS-MB-hb5">
-                                <rect key="frame" x="19.999999999999996" y="131" width="36.666666666666657" height="17"/>
+                                <rect key="frame" x="19.999999999999996" y="118" width="36.666666666666657" height="17"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -141,9 +157,9 @@
                         <constraints>
                             <constraint firstItem="mHD-ZT-atf" firstAttribute="trailing" secondItem="7or-cV-1Po" secondAttribute="trailing" constant="10" id="7xw-K1-RxU"/>
                             <constraint firstItem="RkH-L8-FJz" firstAttribute="centerX" secondItem="7or-cV-1Po" secondAttribute="centerX" id="9VF-Rk-A7c"/>
-                            <constraint firstItem="lMS-MB-hb5" firstAttribute="top" secondItem="mHD-ZT-atf" secondAttribute="top" constant="43" id="CBi-kL-hwT"/>
+                            <constraint firstItem="lMS-MB-hb5" firstAttribute="top" secondItem="mHD-ZT-atf" secondAttribute="top" constant="30" id="CBi-kL-hwT"/>
                             <constraint firstItem="RkH-L8-FJz" firstAttribute="top" secondItem="mHD-ZT-atf" secondAttribute="top" constant="80" id="Gz0-Oz-fxB"/>
-                            <constraint firstItem="WRk-vz-Xwp" firstAttribute="top" secondItem="mHD-ZT-atf" secondAttribute="top" constant="34" id="I0d-oW-wiE"/>
+                            <constraint firstItem="WRk-vz-Xwp" firstAttribute="top" secondItem="mHD-ZT-atf" secondAttribute="top" constant="25" id="I0d-oW-wiE"/>
                             <constraint firstItem="RkH-L8-FJz" firstAttribute="leading" secondItem="mHD-ZT-atf" secondAttribute="leading" id="T3Q-x5-fVD"/>
                             <constraint firstItem="WRk-vz-Xwp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lMS-MB-hb5" secondAttribute="trailing" constant="20" id="TGv-Oc-QVM"/>
                             <constraint firstItem="mHD-ZT-atf" firstAttribute="bottom" secondItem="7or-cV-1Po" secondAttribute="bottom" id="UD0-da-Qz3"/>
@@ -155,7 +171,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="내 장비" id="pxl-6y-lHI"/>
                     <navigationItem key="navigationItem" title="내 장비 리스트" id="Dor-Lo-0Za">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="spe-Km-6i2">
+                        <barButtonItem key="leftBarButtonItem" title="로그아웃" style="done" id="spe-Km-6i2">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="qJR-GT-Sgh">
                                 <rect key="frame" x="16" y="7" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -176,7 +192,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDz-l4-hog" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="U9T-1Q-D6Z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1255" y="786"/>
+            <point key="canvasLocation" x="1744.6153846153845" y="-297.15639810426541"/>
         </scene>
         <!--내 장비-->
         <scene sceneID="p1p-Vy-DJq">
@@ -193,7 +209,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8fd-z1-LuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="315" y="786"/>
+            <point key="canvasLocation" x="805" y="-298"/>
         </scene>
         <!--Title-->
         <scene sceneID="cSp-LJ-jVz">
@@ -205,7 +221,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryTableView" rowHeight="100" id="Y0b-PL-tww" customClass="CategoryTableViewCell" customModule="CampingProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="100"/>
+                                <rect key="frame" x="0.0" y="50" width="390" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y0b-PL-tww" id="DKM-la-fuA">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="100"/>
@@ -215,35 +231,36 @@
                                             <rect key="frame" x="10" y="11" width="80" height="78"/>
                                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="78" id="0Vp-9X-pP2"/>
-                                                <constraint firstAttribute="width" constant="80" id="Q0u-dz-EW2"/>
+                                                <constraint firstAttribute="width" constant="80" id="yQp-PA-vwl"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비타입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5je-Oz-mNP">
-                                            <rect key="frame" x="100" y="36.666666666666664" width="45" height="16"/>
-                                            <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQA-9b-aWp">
-                                            <rect key="frame" x="100.00000000000001" y="10.000000000000002" width="62.666666666666671" height="21.666666666666671"/>
-                                            <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hxD-Xd-3tr">
+                                            <rect key="frame" x="99.999999999999986" y="11" width="62.333333333333329" height="41.333333333333336"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQA-9b-aWp">
+                                                    <rect key="frame" x="0.0" y="0.0" width="62.333333333333336" height="21.666666666666668"/>
+                                                    <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장비타입" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5je-Oz-mNP">
+                                                    <rect key="frame" x="0.0" y="25.666666666666668" width="45" height="15.666666666666668"/>
+                                                    <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="eQA-9b-aWp" firstAttribute="leading" secondItem="DKM-la-fuA" secondAttribute="leading" constant="100.00000000000001" id="2FW-PJ-DkG"/>
-                                        <constraint firstItem="5je-Oz-mNP" firstAttribute="top" secondItem="eQA-9b-aWp" secondAttribute="bottom" constant="5" id="4kk-WC-Nen"/>
-                                        <constraint firstItem="XVN-Fl-tyu" firstAttribute="top" secondItem="DKM-la-fuA" secondAttribute="top" constant="11" id="Ava-4J-SA1"/>
-                                        <constraint firstItem="XVN-Fl-tyu" firstAttribute="leading" secondItem="DKM-la-fuA" secondAttribute="leading" constant="10" id="CsM-J8-nea"/>
-                                        <constraint firstItem="5je-Oz-mNP" firstAttribute="leading" secondItem="XVN-Fl-tyu" secondAttribute="trailing" constant="10" id="DUt-Ys-gZu"/>
-                                        <constraint firstAttribute="bottom" secondItem="XVN-Fl-tyu" secondAttribute="bottom" constant="11" id="ILT-G4-gBb"/>
-                                        <constraint firstItem="eQA-9b-aWp" firstAttribute="top" secondItem="DKM-la-fuA" secondAttribute="top" constant="10" id="cU1-ng-Ix6"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eQA-9b-aWp" secondAttribute="trailing" constant="50" id="eL6-7C-RRE"/>
-                                        <constraint firstItem="eQA-9b-aWp" firstAttribute="leading" secondItem="XVN-Fl-tyu" secondAttribute="trailing" constant="10.000000000000014" id="qSv-Gw-GOn"/>
+                                        <constraint firstAttribute="bottom" secondItem="XVN-Fl-tyu" secondAttribute="bottom" constant="11" id="Bdv-Q8-7SO"/>
+                                        <constraint firstItem="XVN-Fl-tyu" firstAttribute="leading" secondItem="DKM-la-fuA" secondAttribute="leading" constant="10" id="KQ5-nH-d9x"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hxD-Xd-3tr" secondAttribute="trailing" constant="30" id="P0F-o3-hBj"/>
+                                        <constraint firstItem="hxD-Xd-3tr" firstAttribute="top" secondItem="XVN-Fl-tyu" secondAttribute="top" id="QFT-yQ-pDi"/>
+                                        <constraint firstItem="hxD-Xd-3tr" firstAttribute="leading" secondItem="XVN-Fl-tyu" secondAttribute="trailing" constant="10.000000000000014" id="SMa-Lt-3Xr"/>
+                                        <constraint firstItem="XVN-Fl-tyu" firstAttribute="top" secondItem="DKM-la-fuA" secondAttribute="top" constant="11" id="aKj-0R-cIs"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -262,7 +279,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2r-xr-u6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3611.594202898551" y="-272.54464285714283"/>
+            <point key="canvasLocation" x="2563" y="380"/>
         </scene>
         <!--Title-->
         <scene sceneID="dFh-Pk-i71">
@@ -325,146 +342,6 @@
                                     <outlet property="delegate" destination="9HA-7s-erx" id="FUc-u8-yua"/>
                                 </connections>
                             </collectionView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제조사" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o87-NS-uPw" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="271" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용 가능 인원" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NyD-pv-hry" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="330" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 종류" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UyR-YO-U0J" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="94" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 가격" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wfm-2V-SfY" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="458" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="색상" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BAr-A5-hsv" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="212" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bjj-nX-WxD" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="391" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lby-Qz-Rxz" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="153" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uyU-gf-37o">
                                 <rect key="frame" x="21" y="614" width="76" height="78.333333333333371"/>
                                 <subviews>
@@ -485,6 +362,11 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egp-Oa-xYW" customClass="GearTextListCustomView" customModule="CampingProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="66" width="374" height="481"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="inR-3G-q0U"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -497,20 +379,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="A0v-SZ-ke0"/>
                     <connections>
-                        <outlet property="gearBuyDate" destination="bjj-nX-WxD" id="eot-gr-Kiv"/>
-                        <outlet property="gearCapacity" destination="NyD-pv-hry" id="XcM-kj-qE9"/>
+                        <outlet property="customView" destination="egp-Oa-xYW" id="BBX-SK-ZGj"/>
                         <outlet property="gearCollectionView" destination="Y6m-C9-rTc" id="SVe-5c-n7g"/>
-                        <outlet property="gearColor" destination="BAr-A5-hsv" id="MoK-gl-kBw"/>
-                        <outlet property="gearCompany" destination="o87-NS-uPw" id="3ud-oe-FSQ"/>
-                        <outlet property="gearName" destination="Lby-Qz-Rxz" id="3e3-r3-hht"/>
-                        <outlet property="gearPrice" destination="wfm-2V-SfY" id="gzS-4q-T8B"/>
-                        <outlet property="gearTypeTextField" destination="UyR-YO-U0J" id="5Ff-G8-72v"/>
                         <outlet property="imageCount" destination="jWr-1N-ilF" id="Hyo-2E-4WD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kem-W1-S0b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1385" y="-272"/>
+            <point key="canvasLocation" x="804.61538461538464" y="390.99526066350711"/>
         </scene>
         <!--Title-->
         <scene sceneID="Eqz-fY-DFy">
@@ -521,7 +397,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y38-BH-8XM">
-                                <rect key="frame" x="272" y="726" width="56" height="30"/>
+                                <rect key="frame" x="272" y="732" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="장비 삭제"/>
                                 <connections>
@@ -529,7 +405,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IGb-I2-qFR">
-                                <rect key="frame" x="0.0" y="517" width="390" height="201"/>
+                                <rect key="frame" x="0.0" y="535" width="390" height="189"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xv6-7t-eas">
@@ -540,21 +416,21 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="Kgb-F9-gqD" customClass="GearDetailViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="4.666666666666667" width="389" height="192"/>
+                                        <rect key="frame" x="0.0" y="-1.6666666666666667" width="389" height="192"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BsB-g3-8uX">
                                             <rect key="frame" x="0.0" y="0.0" width="389" height="192"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BEH-f0-2uz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="389" height="192"/>
+                                                    <rect key="frame" x="10" y="22" width="369" height="160"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="BEH-f0-2uz" firstAttribute="leading" secondItem="BsB-g3-8uX" secondAttribute="leading" id="Heb-3x-F8Q"/>
-                                                <constraint firstItem="BEH-f0-2uz" firstAttribute="top" secondItem="BsB-g3-8uX" secondAttribute="top" id="TJL-IU-RHM"/>
-                                                <constraint firstAttribute="trailing" secondItem="BEH-f0-2uz" secondAttribute="trailing" id="UsG-rA-eEg"/>
-                                                <constraint firstAttribute="bottom" secondItem="BEH-f0-2uz" secondAttribute="bottom" id="hqv-1n-uOi"/>
+                                                <constraint firstAttribute="trailing" secondItem="BEH-f0-2uz" secondAttribute="trailing" constant="10" id="EGW-TK-FRD"/>
+                                                <constraint firstAttribute="bottom" secondItem="BEH-f0-2uz" secondAttribute="bottom" constant="10" id="Frt-7h-MsK"/>
+                                                <constraint firstItem="BEH-f0-2uz" firstAttribute="leading" secondItem="BsB-g3-8uX" secondAttribute="leading" constant="10" id="Sei-GA-J5z"/>
+                                                <constraint firstItem="BEH-f0-2uz" firstAttribute="top" secondItem="BsB-g3-8uX" secondAttribute="top" constant="22" id="jd1-cK-wbV"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="389" height="192"/>
@@ -568,216 +444,31 @@
                                     <outlet property="delegate" destination="kDf-Cw-jsc" id="oqu-m1-ujZ"/>
                                 </connections>
                             </collectionView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제조사" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vGW-mK-9Qc" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="259" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용 가능 인원" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Na9-ti-O6q" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="318" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 종류" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Uf-vS-0HP" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="82" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 가격" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4qm-p6-FgP" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="446" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="색상" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nN8-XG-Ria" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="200" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="구입 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zcc-HW-Xck" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="379" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="장비 이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l0d-xq-ByR" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="141" width="350" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4H8-fU-wGU">
-                                <rect key="frame" x="59" y="726" width="56" height="30"/>
+                                <rect key="frame" x="59" y="732" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="장비 수정"/>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qhS-6w-XXH" customClass="GearTextListCustomView" customModule="CampingProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="70" width="374" height="467"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ubR-9E-c8h"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="aIu-rX-KoG"/>
                     <connections>
-                        <outlet property="gearBuyDate" destination="zcc-HW-Xck" id="5TI-oG-k4r"/>
-                        <outlet property="gearCapacity" destination="Na9-ti-O6q" id="sVj-o7-7qZ"/>
-                        <outlet property="gearColor" destination="nN8-XG-Ria" id="j3C-iy-cqv"/>
-                        <outlet property="gearCompany" destination="vGW-mK-9Qc" id="Qzr-ng-8Ru"/>
-                        <outlet property="gearName" destination="l0d-xq-ByR" id="KUU-tv-HuZ"/>
-                        <outlet property="gearPrice" destination="4qm-p6-FgP" id="SJb-uz-9W7"/>
-                        <outlet property="gearType" destination="8Uf-vS-0HP" id="VVQ-g0-HAE"/>
+                        <outlet property="customView" destination="qhS-6w-XXH" id="erO-jg-bS3"/>
                         <outlet property="imageCollectionView" destination="IGb-I2-qFR" id="Tiv-jN-HUP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uf1-GI-fPx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2485" y="-272"/>
+            <point key="canvasLocation" x="1904.6153846153845" y="390.99526066350711"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="4qm-p6-FgP">
-            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
-        </designable>
-        <designable name="8Uf-vS-0HP">
-            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
-        </designable>
-        <designable name="BAr-A5-hsv">
-            <size key="intrinsicContentSize" width="29.666666666666668" height="22"/>
-        </designable>
-        <designable name="Lby-Qz-Rxz">
-            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
-        </designable>
-        <designable name="Na9-ti-O6q">
-            <size key="intrinsicContentSize" width="97" height="22"/>
-        </designable>
-        <designable name="NyD-pv-hry">
-            <size key="intrinsicContentSize" width="97" height="22"/>
-        </designable>
-        <designable name="UyR-YO-U0J">
-            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
-        </designable>
-        <designable name="bjj-nX-WxD">
-            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
-        </designable>
-        <designable name="l0d-xq-ByR">
-            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
-        </designable>
-        <designable name="nN8-XG-Ria">
-            <size key="intrinsicContentSize" width="29.666666666666668" height="22"/>
-        </designable>
-        <designable name="o87-NS-uPw">
-            <size key="intrinsicContentSize" width="44.333333333333336" height="22"/>
-        </designable>
-        <designable name="vGW-mK-9Qc">
-            <size key="intrinsicContentSize" width="44.333333333333336" height="22"/>
-        </designable>
-        <designable name="wfm-2V-SfY">
-            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
-        </designable>
-        <designable name="zcc-HW-Xck">
-            <size key="intrinsicContentSize" width="63.333333333333336" height="22"/>
-        </designable>
-    </designables>
     <resources>
         <image name="camera.on.rectangle" catalog="system" width="128" height="96"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>

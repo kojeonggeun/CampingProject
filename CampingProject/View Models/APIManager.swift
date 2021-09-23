@@ -11,7 +11,7 @@ import AlamofireImage
 
 class APIManager{
     
-    let userDefaults = UserDefaults.standard
+    
     static let shared = APIManager()
     
     var gearTypes: [GearType] = []
@@ -27,7 +27,7 @@ class APIManager{
     func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
         
         
-        guard let token = userDefaults.value(forKey: "token") as? NSDictionary else { return }
+        guard let token = DB.userDefaults.value(forKey: "token") as? NSDictionary else { return }
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
                     "Authorization" : token["token"] as! String
@@ -178,7 +178,6 @@ class APIManager{
                     let image = UIImage(systemName:"camera.circle")!
                     self.imageCache.add(image, withIdentifier: "\(gearId)")
                 }
-                
                 completion(self.parseGearImages(result))
         
             case .failure(let error):
@@ -202,7 +201,7 @@ class APIManager{
     
 //    API herder
     func headerInfo() -> HTTPHeaders {
-        if let token = userDefaults.value(forKey: "token") as? NSDictionary  {
+        if let token = DB.userDefaults.value(forKey: "token") as? NSDictionary  {
             
             let headers: HTTPHeaders = [
                         "Authorization" : token["token"] as! String
@@ -215,10 +214,6 @@ class APIManager{
     }
     
     func loadTableViewData(tableData: TableViewCellData){
-        
         tableViewData.append(tableData)
-        
     }
-    
-    
 }

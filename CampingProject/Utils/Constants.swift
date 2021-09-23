@@ -13,4 +13,8 @@ enum API {
     static let BASE_URL_MYSELF = "https://camtorage.bamdule.com/camtorage/api/myself/"
 }
 
+enum DB{
+    static let userDefaults = UserDefaults.standard
+}
+
 

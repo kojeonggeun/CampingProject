@@ -11,9 +11,10 @@ import UIKit
 class MyGearViewCell: UITableViewCell {
     
     @IBOutlet weak var tableViewCellText: UILabel!
-    @IBOutlet weak var expandButton: UIButton!
+    
     @IBOutlet weak var tableViewCellImage: UIImageView!
     @IBOutlet weak var tableViewCellGearType: UILabel!
+    @IBOutlet weak var tableViewCellDate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,10 +28,11 @@ class MyGearViewCell: UITableViewCell {
         self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: topSpace, left: 0, bottom: bottomSpace, right: 0))
         }
 
-    func updateUI(name:String, type: String){
+    func updateUI(name:String, type: String, date: String){
         
         tableViewCellText.text = name
         tableViewCellGearType.text = type
+        tableViewCellDate.text = date
     }
     
     

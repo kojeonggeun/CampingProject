@@ -30,6 +30,7 @@ struct CellData: Codable {
     var capacity: String?
     var price: Int?
     var buyDt: String?
+
 }
 
 struct ImageData: Codable {

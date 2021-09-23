@@ -10,20 +10,12 @@ import UIKit
 import TextFieldEffects
 
 class GearDetailViewController: UIViewController {
-    
-    
-    @IBOutlet weak var gearType: UITextField!
-    @IBOutlet weak var gearName: UITextField!
-    @IBOutlet weak var gearColor: UITextField!
-    @IBOutlet weak var gearCompany: UITextField!
-    @IBOutlet weak var gearCapacity: UITextField!
-    @IBOutlet weak var gearBuyDate: UITextField!
-    @IBOutlet weak var gearPrice: UITextField!
-    
-    
+
+    @IBOutlet weak var customView: GearTextListCustomView!
     @IBOutlet weak var imageCollectionView: UICollectionView!
 
-
+    
+    
     var gearRow = Int()
     var imageArray = [ImageData]()
     let apiService = APIManager.shared
@@ -59,9 +51,9 @@ class GearDetailViewController: UIViewController {
         
     }
     
+    // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "장비 상세"
         
         guard let type = userGearVM.userGears[gearRow].gearTypeName else { return }
@@ -71,15 +63,9 @@ class GearDetailViewController: UIViewController {
         guard let capacity = userGearVM.userGears[gearRow].capacity else { return }
         guard let buyDt = userGearVM.userGears[gearRow].buyDt else { return  }
         guard let price = userGearVM.userGears[gearRow].price else { return }
-            
-        gearType.text = type
-        gearName.text = name
-        gearColor.text = color
-        gearCompany.text = company
-        gearCapacity.text = capacity
-        gearBuyDate.text = buyDt
-        gearPrice.text = "\(price)"
-    
+        
+        customView.UpdateDate(type: type, name: name, color: color, company: company, capacity: capacity, buyDate: buyDt, price: price)
+        
         self.textFieldEdit(value: false)
 
         apiService.loadGearImages(gearId: apiService.userGears[gearRow].id, completion: { data in
@@ -88,11 +74,12 @@ class GearDetailViewController: UIViewController {
                 self.imageArray.append(i)
             }
             self.imageCollectionView.reloadData()
+            
         })
     }
     
     func textFieldEdit(value: Bool) {
-        let textFieldArr = [gearType,gearName,gearColor,gearCompany,gearCapacity,gearBuyDate,gearPrice]
+        let textFieldArr = [customView.gearType,customView.gearName,customView.gearColor,customView.gearCompany,customView.gearCapacity,customView.gearBuyDate,customView.gearPrice]
         for i in textFieldArr {
             i!.isUserInteractionEnabled = value
         }
@@ -131,4 +118,11 @@ extension GearDetailViewController: UICollectionViewDataSource {
 
 extension GearDetailViewController: UICollectionViewDelegate{
     
+}
+
+extension GearDetailViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    }
 }

@@ -11,8 +11,6 @@ import Alamofire
 
 
 class UserViewModel {
-    
-    let userDefaults = UserDefaults.standard
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
     
@@ -47,8 +45,7 @@ class UserViewModel {
                 case .success(let value):
                     
                     let json = value as! NSDictionary
-                    self.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
-                    guard let token = self.userDefaults.value(forKey: "token") as? NSDictionary else { return }
+                    DB.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
                     
                     completion(true)
 
