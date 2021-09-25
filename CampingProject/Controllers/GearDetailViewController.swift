@@ -14,8 +14,8 @@ class GearDetailViewController: UIViewController {
     @IBOutlet weak var customView: GearTextListCustomView!
     @IBOutlet weak var imageCollectionView: UICollectionView!
 
-    
-    
+ 
+    @IBOutlet weak var pageControl: UIPageControl!
     var gearRow = Int()
     var imageArray = [ImageData]()
     let apiService = APIManager.shared
@@ -25,6 +25,11 @@ class GearDetailViewController: UIViewController {
     
     let DidDeleteGearPost: Notification.Name = Notification.Name("DidDeleteGearPost")
     
+    @IBAction func pageChanged(_ sender: UIPageControl) {
+        let indexPath = IndexPath(item: sender.currentPage, section: 0)
+        imageCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        
+    }
     @IBAction func closeBtn(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -51,9 +56,13 @@ class GearDetailViewController: UIViewController {
         
     }
     
+    
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    
+   
         self.title = "장비 상세"
         
         guard let type = userGearVM.userGears[gearRow].gearTypeName else { return }
@@ -64,18 +73,25 @@ class GearDetailViewController: UIViewController {
         guard let buyDt = userGearVM.userGears[gearRow].buyDt else { return  }
         guard let price = userGearVM.userGears[gearRow].price else { return }
         
-        customView.UpdateDate(type: type, name: name, color: color, company: company, capacity: capacity, buyDate: buyDt, price: price)
+//        customView.UpdateDate(type: type, name: name, color: color, company: company, capacity: capacity, buyDate: buyDt, price: price)
         
-        self.textFieldEdit(value: false)
+//        self.textFieldEdit(value: false)
 
         apiService.loadGearImages(gearId: apiService.userGears[gearRow].id, completion: { data in
             for i in data {
-                print(i)
                 self.imageArray.append(i)
             }
+            self.pageControl.numberOfPages = self.imageArray.count
             self.imageCollectionView.reloadData()
             
         })
+        
+        
+        
+        pageControl.currentPage = 0
+        pageControl.pageIndicatorTintColor = UIColor.gray
+        pageControl.currentPageIndicatorTintColor = UIColor.red
+        
     }
     
     func textFieldEdit(value: Bool) {
@@ -117,7 +133,15 @@ extension GearDetailViewController: UICollectionViewDataSource {
 }
 
 extension GearDetailViewController: UICollectionViewDelegate{
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = scrollView.bounds.size.width // 너비 저장
+              let x = scrollView.contentOffset.x + (width / 2.0) // 현재 스크롤한 x좌표 저장
+              
+              let newPage = Int(x / width)
+              if pageControl.currentPage != newPage {
+                  pageControl.currentPage = newPage
+              }
+    }
 }
 
 extension GearDetailViewController: UICollectionViewDelegateFlowLayout{

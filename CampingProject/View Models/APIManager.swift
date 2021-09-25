@@ -11,7 +11,6 @@ import AlamofireImage
 
 class APIManager{
     
-    
     static let shared = APIManager()
     
     var gearTypes: [GearType] = []

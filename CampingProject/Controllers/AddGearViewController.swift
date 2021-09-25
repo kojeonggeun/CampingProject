@@ -16,25 +16,22 @@ import TextFieldEffects
 class AddGearViewController: UIViewController {
     
     @IBOutlet weak var gearCollectionView: UICollectionView!
-    
     @IBOutlet weak var customView: GearTextListCustomView!
-
     
     @IBOutlet weak var imageCount: UILabel!
-    let btn: UIButton = UIButton()
+    
     
     var apiService: APIManager = APIManager.shared
     var selectedAssets = [PHAsset]()
     var photoArray = [UIImage]()
     var imageFileName = [String]()
-
     
     var total: Int = 0
     
     let DidReloadPostMyGearViewController: Notification.Name = Notification.Name("DidReloadPostMyGearViewController")
     let pickerView = UIPickerView()
     let datePickerView = UIDatePicker()
-    
+    let imagePicker = ImagePickerManager()
     let userGearViewModel = UserGearViewModel()
     
     
@@ -44,63 +41,60 @@ class AddGearViewController: UIViewController {
     
     
     @IBAction func imageSelectButton(_ sender: Any) {
-        if self.photoArray.count >= 5{
-            imageErrorAlert(vc: self)
-            return
-        }
-        
-        let imagePicker = ImagePickerController()
-        imagePicker.settings.selection.max = 5
-        
-        var tempAssets = [PHAsset]()
-        
-        self.presentImagePicker(imagePicker, select: { (asset) in
-            
-            tempAssets.append(asset)
-            
-            if self.selectedAssets.count + tempAssets.count > 5 {
-                self.imageErrorAlert(vc: imagePicker)
-                imagePicker.deselect(asset: asset)
-                tempAssets.remove(at: tempAssets.endIndex - 1)
-            }
-            
-        }, deselect: { (asset) in
-            if let firstIndex = tempAssets.firstIndex(where: { $0 == asset }) {
-                tempAssets.remove(at: firstIndex)
-            }
-            else {
-                return
-                
-            }
-        }, cancel: { (assets) in
-            // User canceled selection.
-        }, finish: { (assets) in
-            for asset in assets {
-                self.selectedAssets.append(asset)
-            }
-            self.convertAssetToImages()
-            self.imageCount.text = "(\(self.photoArray.count) / 5"
-        })
+        imagePicker.imagePicker(vc: self, collection: gearCollectionView, countLabel: imageCount)
+//        if self.photoArray.count >= 5{
+//            imageErrorAlert(vc: self)
+//            return
+//        }
+//
+//        let imagePicker = ImagePickerController()
+//        imagePicker.settings.selection.max = 5
+//
+//        var tempAssets = [PHAsset]()
+//
+//        self.presentImagePicker(imagePicker, select: { (asset) in
+//
+//            tempAssets.append(asset)
+//
+//            if self.selectedAssets.count + tempAssets.count > 5 {
+//                self.imageErrorAlert(vc: imagePicker)
+//                imagePicker.deselect(asset: asset)
+//                tempAssets.remove(at: tempAssets.endIndex - 1)
+//            }
+//
+//        }, deselect: { (asset) in
+//            if let firstIndex = tempAssets.firstIndex(where: { $0 == asset }) {
+//                tempAssets.remove(at: firstIndex)
+//            }
+//            else {
+//                return
+//
+//            }
+//        }, cancel: { (assets) in
+//            // User canceled selection.
+//        }, finish: { (assets) in
+//            for asset in assets {
+//                self.selectedAssets.append(asset)
+//            }
+//            self.convertAssetToImages()
+//            self.imageCount.text = "(\(self.photoArray.count) / 5"
+//        })
     }
     
-    func imageErrorAlert(vc: UIViewController){
-        
-        let alert = UIAlertController(title: nil, message: "이미지는 5장까지 등록 가능합니다.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-        vc.present(alert, animated: true)
-        
-    }
+//    func imageErrorAlert(vc: UIViewController){
+//
+//        let alert = UIAlertController(title: nil, message: "이미지는 5장까지 등록 가능합니다.", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+//        vc.present(alert, animated: true)
+//
+//    }
     
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "장비 등록"
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(gearSave(_:)))
-    
-
-        imageCount.text = "(\(self.photoArray.count) / 5"
+        imageCount.text = "(\(imagePicker.photoArray.count) / 5"
         
     }
     
@@ -113,8 +107,8 @@ class AddGearViewController: UIViewController {
         guard let date = customView.gearBuyDate.text else { return }
         guard let price = customView.gearPrice.text else { return }
         
-       
-        self.userGearViewModel.addUserGear(name: name, type: customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: photoArray, imageName: imageFileName)
+        
+        self.userGearViewModel.addUserGear(name: name, type: customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: imagePicker.photoArray, imageName: imagePicker.imageFileName)
         
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
@@ -125,41 +119,14 @@ class AddGearViewController: UIViewController {
         self.present(alert, animated: true)
         
     }
-
-    
 }
-
-extension AddGearViewController {
-    func convertAssetToImages(){
-    
-            for i in total..<selectedAssets.count{
-                let manager = PHImageManager.default()
-                let option = PHImageRequestOptions()
-                let asset = PHAssetResource.assetResources(for: selectedAssets[i])
-                
-                var thumbnail = UIImage()
-
-                option.isSynchronous = true
-                manager.requestImage(for: selectedAssets[i], targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: option, resultHandler: {(result,info) -> Void in
-                    thumbnail = result!
-                })
-                    
-                self.photoArray.append(thumbnail)
-                self.imageFileName.append(asset.first!.originalFilename)
-                
-                self.gearCollectionView.reloadData()
-            }
-            self.total = selectedAssets.count
-    }
-}
-
 
 
 extension AddGearViewController: UICollectionViewDataSource {
    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.photoArray.count
+        return imagePicker.photoArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -169,7 +136,7 @@ extension AddGearViewController: UICollectionViewDataSource {
         cell.imageRemoveButton.tag = indexPath.row
         cell.imageRemoveButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
-        cell.updateUI(item: self.photoArray[indexPath.row])
+        cell.updateUI(item: imagePicker.photoArray[indexPath.row])
         
         
         return cell
@@ -177,15 +144,16 @@ extension AddGearViewController: UICollectionViewDataSource {
     
     @objc func buttonAction(_ sender: UIButton){
         
-        self.total -= 1
+        imagePicker.total -= 1
         
         let cell: UICollectionViewCell? = (sender.superview?.superview as? UICollectionViewCell)
         if let indexpath: IndexPath = self.gearCollectionView?.indexPath(for: cell!) {
-            self.selectedAssets.remove(at: indexpath.row)
-            self.photoArray.remove(at: indexpath.row)
+            imagePicker.userSelectedAssets.remove(at: indexpath.row)
+            imagePicker.photoArray.remove(at: indexpath.row)
             self.gearCollectionView.deleteItems(at: [indexpath])
         }
-        self.imageCount.text = "(\(self.photoArray.count) / 5"
+        print(imagePicker.photoArray.count)
+        self.imageCount.text = "(\(imagePicker.photoArray.count) / 5"
     }
 
 }

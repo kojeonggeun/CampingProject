@@ -21,6 +21,7 @@ class CategoryTableViewController: UITableViewController{
     var gearType = Int()
     var categoryData = [CellData]()
     
+   
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

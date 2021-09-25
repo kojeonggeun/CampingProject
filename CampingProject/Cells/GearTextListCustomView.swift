@@ -46,16 +46,21 @@ class GearTextListCustomView: UIView{
 
       private func commonInit(){
           let className = String(describing: type(of: self))
-
-          let bundle = Bundle.init(for: self.classForCoder)
-          let view = bundle.loadNibNamed(className,
-                                         owner: self,
-                                         options: nil)?.first as! UIView
+          guard let view = loadViewFromNib(nib: className) else { return }
+          
+          view.translatesAutoresizingMaskIntoConstraints = false
+          
           view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
           self.addSubview(view)
           
       }
+    
+    func loadViewFromNib(nib: String) -> UIView? {
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: nib, bundle: bundle)
+        return nib.instantiate(withOwner: self, options: nil).first as? UIView
+                        
+    }
     
     func UpdateDate(type:String, name:String, color:String, company:String, capacity:String,buyDate:String, price:Int ){
         gearType.text = type
@@ -74,13 +79,12 @@ class GearTextListCustomView: UIView{
         datePickerView.timeZone = NSTimeZone.local
         datePickerView.locale = Locale(identifier: "ko_KR")
         datePickerView.preferredDatePickerStyle = .wheels
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
+        
         
         let doneButton = UIBarButtonItem(title: "선택", style: .plain, target : self, action: #selector(dismissDatePickerView))
-        toolbar.setItems([doneButton], animated: true)
+        let toolBar = createToolbar(item: doneButton)
         
-        gearBuyDate.inputAccessoryView = toolbar
+        gearBuyDate.inputAccessoryView = toolBar
         gearBuyDate.inputView = datePickerView
     }
     
@@ -103,11 +107,9 @@ class GearTextListCustomView: UIView{
         gearType.text = apiService.gearTypes[0].gearName
         gearTypeId = apiService.gearTypes[0].gearID
         
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
         let button = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissPickerView))
-        toolBar.setItems([button], animated: true)
-        toolBar.isUserInteractionEnabled = true
+        let toolBar = createToolbar(item: button)
+        
         gearType.inputAccessoryView = toolBar
         
         
@@ -118,6 +120,15 @@ class GearTextListCustomView: UIView{
         selectType = ""
 
         endEditing(true)
+    }
+    
+    func createToolbar(item: UIBarButtonItem) -> UIToolbar{
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.setItems([item], animated: true)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
     }
     
 }

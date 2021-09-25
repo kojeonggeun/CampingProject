@@ -13,12 +13,15 @@ class GearDetailViewCell: UICollectionViewCell {
     
     @IBOutlet weak var gearDetailImage: UIImageView!
     
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+
+    }
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//
-//
-//    }
+    
+    
     func updateUI(item: UIImage?) {
         
         guard let image = item else { return }

@@ -30,6 +30,7 @@
 		CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103526C552460058F440 /* GearTypeViewModel.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
 		CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */; };
+		CBAF990226FF68C7000E6A4E /* BSImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF990126FF68C7000E6A4E /* BSImagePicker.swift */; };
 		CBBB2A9B26F238A8006B2E3C /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9A26F238A8006B2E3C /* CategoryTableViewCell.swift */; };
 		CBBB2A9D26F238BF006B2E3C /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */; };
 		CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */; };
@@ -66,6 +67,7 @@
 		CBAB103526C552460058F440 /* GearTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeViewModel.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
 		CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		CBAF990126FF68C7000E6A4E /* BSImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BSImagePicker.swift; path = ../../../../../Documents/BSImagePicker.swift; sourceTree = "<group>"; };
 		CBBB2A9A26F238A8006B2E3C /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				CBBB2A9A26F238A8006B2E3C /* CategoryTableViewCell.swift */,
 				CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */,
 				CB491B9826FC3A8100D2481F /* GearTextListCustomView.xib */,
+				CBAF990126FF68C7000E6A4E /* BSImagePicker.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
+				CBAF990226FF68C7000E6A4E /* BSImagePicker.swift in Sources */,
 				CBAB103326C5510A0058F440 /* AddGearViewController.swift in Sources */,
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
 				CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */,
