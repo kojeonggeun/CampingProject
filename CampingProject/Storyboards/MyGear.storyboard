@@ -192,7 +192,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDz-l4-hog" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="U9T-1Q-D6Z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1744.6153846153845" y="-297.15639810426541"/>
+            <point key="canvasLocation" x="1660" y="-413"/>
         </scene>
         <!--내 장비-->
         <scene sceneID="p1p-Vy-DJq">
@@ -203,13 +203,16 @@
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="Lbt-mH-xcJ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="El5-Fr-sjZ" kind="relationship" relationship="rootViewController" id="QwW-oN-Nzx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8fd-z1-LuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="805" y="-298"/>
+            <point key="canvasLocation" x="942" y="-413"/>
         </scene>
         <!--Title-->
         <scene sceneID="cSp-LJ-jVz">
@@ -279,7 +282,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2r-xr-u6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2563" y="380"/>
+            <point key="canvasLocation" x="2662" y="380"/>
         </scene>
         <!--Title-->
         <scene sceneID="dFh-Pk-i71">
@@ -302,43 +305,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearImageCollectionViewCell" id="sEH-3B-UPx" customClass="GearImageCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="123" height="148"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="p5x-kF-deT">
-                                            <rect key="frame" x="0.0" y="0.0" width="123" height="148"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cuT-kB-vu0">
-                                                    <rect key="frame" x="0.0" y="13" width="114" height="135"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kax-ou-s4H">
-                                                    <rect key="frame" x="91.333333333333329" y="1.9999999999999982" width="29.666666666666671" height="28.333333333333329"/>
-                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" image="xmark.circle.fill" catalog="system">
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="cuT-kB-vu0" secondAttribute="bottom" id="6DD-TH-94p"/>
-                                                <constraint firstAttribute="trailing" secondItem="cuT-kB-vu0" secondAttribute="trailing" constant="9" id="DrK-n8-f9Q"/>
-                                                <constraint firstItem="cuT-kB-vu0" firstAttribute="height" secondItem="p5x-kF-deT" secondAttribute="height" multiplier="0.912162" id="K3h-eK-aLm"/>
-                                                <constraint firstItem="cuT-kB-vu0" firstAttribute="width" secondItem="p5x-kF-deT" secondAttribute="width" multiplier="0.926829" id="Ub1-ix-ee9"/>
-                                                <constraint firstAttribute="trailing" secondItem="Kax-ou-s4H" secondAttribute="trailing" constant="2" id="YLp-0x-dFK"/>
-                                                <constraint firstItem="cuT-kB-vu0" firstAttribute="top" secondItem="p5x-kF-deT" secondAttribute="top" constant="13" id="c4I-48-ldH"/>
-                                                <constraint firstItem="cuT-kB-vu0" firstAttribute="leading" secondItem="p5x-kF-deT" secondAttribute="leading" id="uzD-pl-rXc"/>
-                                                <constraint firstItem="Kax-ou-s4H" firstAttribute="top" secondItem="p5x-kF-deT" secondAttribute="top" constant="2" id="zko-cz-EdN"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="123" height="148"/>
-                                        <connections>
-                                            <outlet property="gearImage" destination="cuT-kB-vu0" id="pvq-Xh-gpg"/>
-                                            <outlet property="imageRemoveButton" destination="Kax-ou-s4H" id="Jlk-mc-d3e"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="9HA-7s-erx" id="jqF-AW-IXl"/>
                                     <outlet property="delegate" destination="9HA-7s-erx" id="FUc-u8-yua"/>
@@ -388,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kem-W1-S0b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="804.61538461538464" y="390.99526066350711"/>
+            <point key="canvasLocation" x="1129" y="380"/>
         </scene>
         <!--Title-->
         <scene sceneID="Eqz-fY-DFy">
@@ -444,6 +411,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4H8-fU-wGU">
                                         <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
                                         <state key="normal" title="장비 수정"/>
+                                        <connections>
+                                            <action selector="gearEdit:" destination="kDf-Cw-jsc" eventType="touchUpInside" id="oYJ-7c-nJk"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y38-BH-8XM">
                                         <rect key="frame" x="213" y="0.0" width="56" height="30"/>
@@ -542,13 +512,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uf1-GI-fPx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1904.6153846153845" y="390.99526066350711"/>
+            <point key="canvasLocation" x="1843" y="380"/>
+        </scene>
+        <!--Gear Edit View Controller-->
+        <scene sceneID="UIj-lD-6pa">
+            <objects>
+                <viewController storyboardIdentifier="GearEditView" modalPresentationStyle="fullScreen" id="maP-VG-uWb" customClass="GearEditViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qL4-bp-m7N">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WoB-Fi-7pm">
+                                <rect key="frame" x="120" y="599" width="252" height="168"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="252" id="l2G-Ud-f1V"/>
+                                    <constraint firstAttribute="height" constant="168" id="x59-eX-D5d"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="K5x-5Y-avu">
+                                    <size key="itemSize" width="123" height="148"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="maP-VG-uWb" id="wsI-QN-CXX"/>
+                                    <outlet property="delegate" destination="maP-VG-uWb" id="zSn-Q2-uOu"/>
+                                </connections>
+                            </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ilN-4V-gCi">
+                                <rect key="frame" x="24" y="644" width="76" height="78.333333333333371"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kk9-g8-sGV">
+                                        <rect key="frame" x="0.0" y="0.0" width="76" height="58"/>
+                                        <state key="normal" image="camera.on.rectangle" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showImagePicker:" destination="maP-VG-uWb" eventType="touchUpInside" id="6YN-4b-S9e"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sia-cV-b4Z">
+                                        <rect key="frame" x="0.0" y="58.000000000000007" width="76" height="20.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DXW-sO-dYR" customClass="GearTextListCustomView" customModule="CampingProject" customModuleProvider="target">
+                                <rect key="frame" x="9" y="44" width="372" height="535"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sqB-RT-d3S"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sqB-RT-d3S" firstAttribute="trailing" secondItem="WoB-Fi-7pm" secondAttribute="trailing" constant="18" id="GgE-GR-fVk"/>
+                            <constraint firstItem="sqB-RT-d3S" firstAttribute="bottom" secondItem="WoB-Fi-7pm" secondAttribute="bottom" constant="43" id="WAN-HX-HFZ"/>
+                            <constraint firstItem="ilN-4V-gCi" firstAttribute="centerY" secondItem="WoB-Fi-7pm" secondAttribute="centerY" id="uaa-Gv-KY1"/>
+                            <constraint firstItem="WoB-Fi-7pm" firstAttribute="leading" secondItem="ilN-4V-gCi" secondAttribute="trailing" constant="20" id="zwC-3J-gpK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="customView" destination="DXW-sO-dYR" id="um4-x7-Ab0"/>
+                        <outlet property="imageCollectionView" destination="WoB-Fi-7pm" id="RYq-4d-e28"/>
+                        <outlet property="imageCount" destination="sia-cV-b4Z" id="cem-xN-SZe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mnl-xV-3AC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1841.5384615384614" y="1090.5213270142181"/>
         </scene>
     </scenes>
     <resources>
         <image name="camera.on.rectangle" catalog="system" width="128" height="96"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
-        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="quaternarySystemFillColor">
             <color red="0.45490196078431372" green="0.45490196078431372" blue="0.50196078431372548" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

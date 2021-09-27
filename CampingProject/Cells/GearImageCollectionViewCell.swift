@@ -10,14 +10,17 @@ import UIKit
 
 class GearImageCollectionViewCell: UICollectionViewCell {
     
+   
     @IBOutlet weak var gearImage: UIImageView!
     @IBOutlet weak var imageRemoveButton: UIButton!
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//
-//
-//    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        
+    }
+    
+    
     func updateUI(item: UIImage?) {
         guard let image = item else { return }
         gearImage.image = image

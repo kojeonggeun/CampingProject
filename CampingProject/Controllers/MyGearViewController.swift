@@ -41,10 +41,21 @@ class MyGearViewController: UIViewController{
   // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+//        navigationController?.navigationBar.prefersLargeTitles = true
+//
+//        let appearance = UINavigationBarAppearance()
+//        appearance.backgroundColor = .lightGray
+//        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+//
+//        navigationController?.navigationBar.tintColor = .white
+//        navigationController?.navigationBar.standardAppearance = appearance
+//        navigationController?.navigationBar.compactAppearance = appearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
         
         emailText.text = segueText
         gearTableView.showsVerticalScrollIndicator = false
-        
         
         self.loadData()
 
@@ -54,21 +65,7 @@ class MyGearViewController: UIViewController{
     } // end viewDidLoad
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "GearDetailView"{
-//            let nav = segue.destination as! UINavigationController
-//            let vc = nav.topViewController as! GearDetailViewController
-//
-//            guard let data = sender as? NSArray else { return }
-//            vc.gearSection = data[0] as! Int
-//            vc.gearRow = data[1] as! Int
-//
-//        }
-//        if segue.identifier == "categoryTableView"{
-//            let nav = segue.destination as! UINavigationController
-//            let vc = nav.topViewController as! CategoryTableViewController
-//
-//
-//        }
+
     }
     
     func loadData(){
@@ -152,7 +149,9 @@ extension MyGearViewController: UITableViewDataSource{
             apiManager.loadGearImages(gearId: userGearId, completion: { data in
                 DispatchQueue.global().async {
                     if !data.isEmpty {
-                        let url = URL(string: data[0].url)
+//                        let url = URL(string: data[0].url)
+                        let url = URL(string: "https://doodleipsum.com/600?shape=circle&bg=ceebff")
+                    
                         let data = try? Data(contentsOf: url!)
                         let image = UIImage(data: data!)
                         DispatchQueue.main.async {

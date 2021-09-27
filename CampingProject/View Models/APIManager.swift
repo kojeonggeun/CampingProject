@@ -56,7 +56,7 @@ class APIManager{
         }).responseJSON { response in
             switch response.result {
             case .success(let data):
-                print(data,"wwww")
+                print("")
             case .failure(let error):
                 print(error)
             }
@@ -72,7 +72,23 @@ class APIManager{
         }
     }
     
-    func editGear(){
+    func editGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
+        
+        guard let token = DB.userDefaults.value(forKey: "token") as? NSDictionary else { return }
+        
+        let headers: HTTPHeaders = [
+                    "Content-type": "multipart/form-data",
+                    "Authorization" : token["token"] as! String
+                ]
+        
+        let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
+                                          "color": color, "company": company,
+                                          "capacity": capacity, "price": price,
+                                          "buyDt": date
+        ]
+//        AF.request(url + "gear"+"/\(gearId)", method: .put, parameters: Parameters, headers: headers)
+
+        
         
     }
     

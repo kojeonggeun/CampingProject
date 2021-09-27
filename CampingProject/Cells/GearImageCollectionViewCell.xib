@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="M1t-Rs-DUl" customClass="GearImageCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="123" height="138"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="t3h-FN-uLF">
+                <rect key="frame" x="0.0" y="0.0" width="123" height="138"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FdE-JF-dhu">
+                        <rect key="frame" x="0.0" y="15" width="107" height="123"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="107" id="Gtg-o1-nxD"/>
+                            <constraint firstAttribute="height" constant="123" id="LBD-iY-bIz"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVV-Nb-zkx">
+                        <rect key="frame" x="89" y="2" width="29.666666666666671" height="28.333333333333329"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" image="xmark.circle.fill" catalog="system">
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="FdE-JF-dhu" secondAttribute="bottom" id="eBe-Qg-MSr"/>
+                    <constraint firstAttribute="trailing" secondItem="FdE-JF-dhu" secondAttribute="trailing" constant="16" id="m1d-U0-tF3"/>
+                    <constraint firstItem="FdE-JF-dhu" firstAttribute="top" secondItem="t3h-FN-uLF" secondAttribute="top" constant="15" id="mnm-xY-ao0"/>
+                    <constraint firstItem="FdE-JF-dhu" firstAttribute="leading" secondItem="t3h-FN-uLF" secondAttribute="leading" id="zgK-sx-oM9"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="123" height="138"/>
+            <connections>
+                <outlet property="gearImage" destination="FdE-JF-dhu" id="tsd-yS-ESg"/>
+                <outlet property="imageRemoveButton" destination="GVV-Nb-zkx" id="1TO-Q0-WxA"/>
+            </connections>
+            <point key="canvasLocation" x="-1404" y="17"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
+    </resources>
+</document>

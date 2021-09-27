@@ -13,23 +13,22 @@ class GearDetailViewController: UIViewController {
 
     @IBOutlet weak var customView: GearTextListCustomView!
     @IBOutlet weak var imageCollectionView: UICollectionView!
-
  
     @IBOutlet weak var pageControl: UIPageControl!
+    
     var gearRow = Int()
     var imageArray = [ImageData]()
     let apiService = APIManager.shared
     
     let userGearVM = UserGearViewModel()
     
-    
     let DidDeleteGearPost: Notification.Name = Notification.Name("DidDeleteGearPost")
     
     @IBAction func pageChanged(_ sender: UIPageControl) {
         let indexPath = IndexPath(item: sender.currentPage, section: 0)
         imageCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
-        
     }
+    
     @IBAction func closeBtn(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -52,7 +51,10 @@ class GearDetailViewController: UIViewController {
 
     }
     @IBAction func gearEdit(_ sender: Any) {
-     
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearEditView") as! GearEditViewController
+        pushVC.gearRow = gearRow
+        
+        self.navigationController?.pushViewController(pushVC, animated: true)
         
     }
     
@@ -61,23 +63,23 @@ class GearDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
+        let userData = userGearVM.userGears[gearRow]
    
         self.title = "장비 상세"
         
-        guard let type = userGearVM.userGears[gearRow].gearTypeName else { return }
-        guard let name = userGearVM.userGears[gearRow].name else { return }
-        guard let color = userGearVM.userGears[gearRow].color else { return }
-        guard let company = userGearVM.userGears[gearRow].company else { return }
-        guard let capacity = userGearVM.userGears[gearRow].capacity else { return }
-        guard let buyDt = userGearVM.userGears[gearRow].buyDt else { return  }
-        guard let price = userGearVM.userGears[gearRow].price else { return }
+//        guard let type = userData.gearTypeName else { return }
+//        guard let name = userData.name else { return }
+//        guard let color = userData.color else { return }
+//        guard let company = userData.company else { return }
+//        guard let capacity = userData.capacity else { return }
+//        guard let buyDt = userData.buyDt else { return  }
+//        guard let price = userData.price else { return }
         
 //        customView.UpdateDate(type: type, name: name, color: color, company: company, capacity: capacity, buyDate: buyDt, price: price)
         
 //        self.textFieldEdit(value: false)
 
-        apiService.loadGearImages(gearId: apiService.userGears[gearRow].id, completion: { data in
+        apiService.loadGearImages(gearId: userData.id, completion: { data in
             for i in data {
                 self.imageArray.append(i)
             }
@@ -85,8 +87,6 @@ class GearDetailViewController: UIViewController {
             self.imageCollectionView.reloadData()
             
         })
-        
-        
         
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = UIColor.gray

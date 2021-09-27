@@ -27,7 +27,10 @@ class UserGearViewModel {
         manager.deleteGear(gearId: gearId,row: row)
     }
     
-    func editUserGear(){
+    
+    func editUserGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, image: [UIImage], imageName: [String]){
         
+        manager.editGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName)
+            
     }
 }

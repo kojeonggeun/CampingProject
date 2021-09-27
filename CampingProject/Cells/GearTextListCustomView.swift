@@ -62,7 +62,8 @@ class GearTextListCustomView: UIView{
                         
     }
     
-    func UpdateDate(type:String, name:String, color:String, company:String, capacity:String,buyDate:String, price:Int ){
+    func UpdateData(type:String, name:String, color:String, company:String, capacity:String,buyDate:String, price:Int ){
+        
         gearType.text = type
         gearName.text = name
         gearColor.text = color
