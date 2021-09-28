@@ -17,6 +17,7 @@ class GearEditViewController: UIViewController {
     
     var gearRow: Int = 0
     var allPhotos: PHFetchResult<PHAsset>?
+    var imageItem = [ImageData]()
     
     let userGearVM = UserGearViewModel()
     let apiService = APIManager.shared
@@ -34,12 +35,13 @@ class GearEditViewController: UIViewController {
         self.allPhotos = PHAsset.fetchAssets(with: nil)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
 //       장비 상세에서 받아 온 정보 입력
-        customView.UpdateData(type: userData.gearTypeName!, name: userData.name!, color: userData.color!, company: userData.company!, capacity: userData.capacity!, buyDate: userData.buyDt!, price: userData.price!)
+        customView.editData(type: userData.gearTypeName!, name: userData.name!, color: userData.color!, company: userData.company!, capacity: userData.capacity!, buyDate: userData.buyDt!, price: userData.price!)
+        
      
         apiService.loadGearImages(gearId: userData.id, completion: { data in
             for (index, item) in data.enumerated() {
                 let asset = self.allPhotos?.object(at: index)
-
+                self.imageItem.append(item)
                 let url = URL(string: item.url)
                 let data = try? Data(contentsOf: url!)
                 
@@ -68,7 +70,8 @@ class GearEditViewController: UIViewController {
         let gearId = userGearVM.userGears[gearRow].id
         let type = customView.gearTypeId
     
-        userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
+        userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: imageItem)
+        
         
     }
 }

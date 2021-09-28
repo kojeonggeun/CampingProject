@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import AuthenticationServices
+
 
 class SignInViewController: UIViewController{
     
@@ -79,16 +79,16 @@ class SignInViewController: UIViewController{
         passwordTextField.text = ""
     }
     
-    
+//    TODO: 자동로그인 손봐야함 이상하다. 유저 데이터가 없는 경우가 생김
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if DB.userDefaults.bool(forKey: "Auto") {
             if DB.userDefaults.object(forKey: "token") != nil {
-                guard let user = DB.userDefaults.value(forKey: "token") as? NSDictionary else { return }
-                userManager.loginCheck(user: user){ (completion) in
+                
+                userManager.loginCheck(){ (completion) in
                     if completion {
-                        self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])
+                        self.performSegue(withIdentifier: "MainTabBarController", sender: API.token["email"])
                     }
                 }
             }

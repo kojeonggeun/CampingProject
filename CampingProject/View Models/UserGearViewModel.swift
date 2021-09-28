@@ -28,9 +28,9 @@ class UserGearViewModel {
     }
     
     
-    func editUserGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, image: [UIImage], imageName: [String]){
+    func editUserGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, image: [UIImage], imageName: [String], item: [ImageData]){
         
-        manager.editGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName)
+        manager.editGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName, item: item)
             
     }
 }

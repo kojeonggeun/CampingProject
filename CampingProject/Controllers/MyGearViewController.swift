@@ -149,9 +149,8 @@ extension MyGearViewController: UITableViewDataSource{
             apiManager.loadGearImages(gearId: userGearId, completion: { data in
                 DispatchQueue.global().async {
                     if !data.isEmpty {
-//                        let url = URL(string: data[0].url)
-                        let url = URL(string: "https://doodleipsum.com/600?shape=circle&bg=ceebff")
-                    
+                        let url = URL(string: data[0].url)
+//                        let url = URL(string: "https://doodleipsum.com/600?shape=circle&bg=ceebff")
                         let data = try? Data(contentsOf: url!)
                         let image = UIImage(data: data!)
                         DispatchQueue.main.async {

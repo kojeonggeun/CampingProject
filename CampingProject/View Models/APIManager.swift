@@ -26,10 +26,10 @@ class APIManager{
     func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
         
         
-        guard let token = DB.userDefaults.value(forKey: "token") as? NSDictionary else { return }
+        
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
-                    "Authorization" : token["token"] as! String
+                    "Authorization" : API.tokenString
                 ]
         
         let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
@@ -67,27 +67,55 @@ class APIManager{
     func deleteGear(gearId: Int,  row: Int) {
         userGears.remove(at: row)
         
-        AF.request(url + "gear"+"/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
+        AF.request(url + "gear/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
             print(response)
         }
     }
     
-    func editGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
-        
-        guard let token = DB.userDefaults.value(forKey: "token") as? NSDictionary else { return }
+//    장비 수정
+    func editGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String], item: [ImageData]){
         
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
-                    "Authorization" : token["token"] as! String
-                ]
+                    "Authorization" : API.tokenString]
         
         let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
-                                          "color": color, "company": company,
-                                          "capacity": capacity, "price": price,
-                                          "buyDt": date
-        ]
-//        AF.request(url + "gear"+"/\(gearId)", method: .put, parameters: Parameters, headers: headers)
+                                  "color": color, "company": company,
+                                  "capacity": capacity, "price": price,
+                                  "buyDt": date]
+    
+//        TODO: PUT 메서드로 수정하려는데 안됨 고쳐야한다~
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            for (key, value) in parameters {
+                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key as String)
+            }
+            for (index,value) in item.enumerated() {
+                multipartFormData.append("\(value.imageId)".data(using: .utf8)!, withName: "gearImages[\(index)].imageId")
+            }
+            
+            // withName에 디비와 매칭되는 값을 넣어야함
+            for i in 0..<image.count{
+                multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages[\(i)].image", fileName: imageName[i],mimeType: "image/jpg")
+                
+            }
+        }, to: url + "gear/\(gearId)" ,method: .put, headers: headers).uploadProgress(queue: .main, closure: { progress in
 
+            print("Upload Progress: \(progress.fractionCompleted)")
+
+        }).responseString { response in
+            switch response.result {
+            case .success(let data):
+
+                print(data)
+
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        
+        
         
         
     }
@@ -216,16 +244,13 @@ class APIManager{
     
 //    API herder
     func headerInfo() -> HTTPHeaders {
-        if let token = DB.userDefaults.value(forKey: "token") as? NSDictionary  {
+        
             
-            let headers: HTTPHeaders = [
-                        "Authorization" : token["token"] as! String
-                    ]
-            return headers
-        } else {
-            
-            return HTTPHeaders()
-        }
+        let headers: HTTPHeaders = [
+                    "Authorization" : API.tokenString
+                ]
+        return headers
+        
     }
     
     func loadTableViewData(tableData: TableViewCellData){

@@ -33,6 +33,7 @@
 		CBB519FA26FF7187005F8B00 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB519F926FF7187005F8B00 /* ImagePickerManager.swift */; };
 		CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */; };
 		CBB51A022700C74A005F8B00 /* GearImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */; };
+		CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB51A032702F61E005F8B00 /* ProfileViewController.swift */; };
 		CBBB2A9B26F238A8006B2E3C /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9A26F238A8006B2E3C /* CategoryTableViewCell.swift */; };
 		CBBB2A9D26F238BF006B2E3C /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */; };
 		CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */; };
@@ -72,6 +73,7 @@
 		CBB519F926FF7187005F8B00 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearEditViewController.swift; sourceTree = "<group>"; };
 		CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GearImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		CBB51A032702F61E005F8B00 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CBBB2A9A26F238A8006B2E3C /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				CBAB103226C5510A0058F440 /* AddGearViewController.swift */,
 				CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */,
 				CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */,
+				CBB51A032702F61E005F8B00 /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				CB3347A826DD16C200DE0126 /* GearDetailViewCell.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */,
+				CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
 				CBAB103326C5510A0058F440 /* AddGearViewController.swift in Sources */,
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,

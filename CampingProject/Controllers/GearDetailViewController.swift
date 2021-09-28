@@ -91,7 +91,7 @@ class GearDetailViewController: UIViewController {
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = UIColor.gray
         pageControl.currentPageIndicatorTintColor = UIColor.red
-        
+        print(userData)
     }
     
     func textFieldEdit(value: Bool) {

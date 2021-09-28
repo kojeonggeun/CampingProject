@@ -59,10 +59,10 @@ class UserViewModel {
     }
     
 //    토큰 유무 확인하여 로그인
-    func loginCheck(user: NSDictionary ,completion: @escaping (Bool)-> Void ) {
+    func loginCheck(completion: @escaping (Bool)-> Void ) {
         
-        let headers: HTTPHeaders = ["Authorization" : user["token"] as! String]
-        print(user["token"]!)
+        let headers: HTTPHeaders = ["Authorization" : API.tokenString]
+        print(API.tokenString)
         AF.request(urlUser,
                    method: .get,
                    encoding: URLEncoding.default,
