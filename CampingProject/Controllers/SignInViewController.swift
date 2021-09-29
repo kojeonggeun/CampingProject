@@ -16,7 +16,7 @@ class SignInViewController: UIViewController{
     @IBOutlet weak var loginStateButton: UIButton!
     
     let userManager: UserViewModel = UserViewModel()
-
+    let apiManager: APIManager = APIManager.shared
     @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
     
     @IBAction func loginBtn(_ sender: Any) {
@@ -26,8 +26,11 @@ class SignInViewController: UIViewController{
         
         userManager.login(email: email, password: password) { completion in
             if completion {
+                self.apiManager.loadUserData(){ data in
+                    print(data)
+                }
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
-        
+                
             } else {
                 print("로그인 실패 시 코드 작성 해야 함")
             }

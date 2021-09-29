@@ -242,6 +242,19 @@ class APIManager{
         }
     }
     
+    func loadUserData(){
+        
+        AF.request(url , method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+            switch response.result {
+            case .success(let data):
+               print(data)
+               
+            case .failure(let error):
+                print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            } // end switch
+        }
+    }
+    
 //    API herder
     func headerInfo() -> HTTPHeaders {
         

@@ -59,6 +59,7 @@ class UserViewModel {
             }
     }
     
+    
 //    토큰 유무 확인하여 로그인
     func loginCheck(completion: @escaping (Bool)-> Void ) {
         
