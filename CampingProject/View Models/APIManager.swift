@@ -29,7 +29,7 @@ class APIManager{
         
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
-                    "Authorization" : API.tokenString
+                    "Authorization" : returnToken()
                 ]
         
         let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
@@ -77,7 +77,7 @@ class APIManager{
         
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
-                    "Authorization" : API.tokenString]
+                    "Authorization" : returnToken()]
         
         let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
                                   "color": color, "company": company,
@@ -247,7 +247,7 @@ class APIManager{
         
             
         let headers: HTTPHeaders = [
-                    "Authorization" : API.tokenString
+                    "Authorization" : returnToken()
                 ]
         return headers
         
@@ -255,5 +255,13 @@ class APIManager{
     
     func loadTableViewData(tableData: TableViewCellData){
         tableViewData.append(tableData)
+    }
+    
+    func returnToken() -> String{
+        let tokenDict =  DB.userDefaults.value(forKey: "token") as! NSDictionary
+        let token = tokenDict["token"] as! String
+        
+        
+        return token
     }
 }

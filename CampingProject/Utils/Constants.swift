@@ -11,8 +11,7 @@ import UIKit
 enum API {
     static let BASE_URL = "https://camtorage.bamdule.com/camtorage/api/"
     static let BASE_URL_MYSELF = "https://camtorage.bamdule.com/camtorage/api/myself/"
-    static let token = DB.userDefaults.value(forKey: "token") as! NSDictionary
-    static let tokenString = token["token"] as! String
+    
 }
 
 enum DB{

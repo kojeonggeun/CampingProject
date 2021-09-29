@@ -47,6 +47,7 @@ class UserViewModel {
                     let json = value as! NSDictionary
                     DB.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
                     
+                    print(json["token"])
                     completion(true)
 
 
@@ -61,8 +62,8 @@ class UserViewModel {
 //    토큰 유무 확인하여 로그인
     func loginCheck(completion: @escaping (Bool)-> Void ) {
         
-        let headers: HTTPHeaders = ["Authorization" : API.tokenString]
-        print(API.tokenString)
+        let headers: HTTPHeaders = ["Authorization" : returnToken()]
+        
         AF.request(urlUser,
                    method: .get,
                    encoding: URLEncoding.default,
@@ -94,6 +95,14 @@ class UserViewModel {
 
         let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         return predicate.evaluate(with: password)
+    }
+    
+    func returnToken() -> String{
+        let tokenDict =  DB.userDefaults.value(forKey: "token") as! NSDictionary
+        let token = tokenDict["token"] as! String
+        
+        
+        return token
     }
 
 }

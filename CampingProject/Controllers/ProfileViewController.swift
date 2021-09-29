@@ -11,17 +11,31 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var gearQuantity: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+    
+    var userGearVM = UserGearViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url = URL(string: "https://doodleipsum.com/600?shape=circle&bg=ceebff")
-                      
-        let data = try? Data(contentsOf: url!)
-        let image = UIImage(data: data!)
-        profileImage.image = image
+        DispatchQueue.global().async {
+            let url = URL(string: "https://doodleipsum.com/600?shape=circle&bg=D4E2D4")
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                let image = UIImage(data: data!)
+                self.profileImage.image = image
+            }
+        }
+
+        profileImage.layer.cornerRadius = profileImage.bounds.height / 2
+        profileImage.layer.borderWidth = 4
+        profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        profileImage.layer.cornerRadius = 50
-        
+        gearQuantity.text = "\(userGearVM.userGears.count)"
     }
 }
