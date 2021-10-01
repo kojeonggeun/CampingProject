@@ -79,20 +79,35 @@ class GearDetailViewController: UIViewController {
         
 //        self.textFieldEdit(value: false)
 
-        apiService.loadGearImages(gearId: userData.id, completion: { data in
-            for i in data {
-                self.imageArray.append(i)
-            }
-            self.pageControl.numberOfPages = self.imageArray.count
-            self.imageCollectionView.reloadData()
-            
-        })
+        self.loadImage()
         
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = UIColor.gray
         pageControl.currentPageIndicatorTintColor = UIColor.red
-        print(userData)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadImage), name: NSNotification.Name("DidReloadPostDetailViewController"), object: nil)
+        
     }
+    
+    @objc func reloadImage(){
+        self.imageArray.removeAll()
+        
+        self.loadImage()
+    }
+    
+    func loadImage() {
+        self.apiService.loadGearImages(gearId: self.userGearVM.userGears[self.gearRow].id, completion: { data in
+            
+            for i in data {
+                self.imageArray.append(i)
+            }
+            self.pageControl.numberOfPages = self.imageArray.count
+            
+            self.imageCollectionView.reloadData()
+            self.pageControl.reloadInputViews()
+        })
+    }
+    
     
     func textFieldEdit(value: Bool) {
         let textFieldArr = [customView.gearType,customView.gearName,customView.gearColor,customView.gearCompany,customView.gearCapacity,customView.gearBuyDate,customView.gearPrice]
@@ -116,12 +131,10 @@ extension GearDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GearDetailViewCell", for: indexPath) as? GearDetailViewCell else { return UICollectionViewCell() }
-        
-       
+     
         DispatchQueue.global().async {
             let url = URL(string: self.imageArray[indexPath.row].url)
             let data = try? Data(contentsOf: url!)
-
             DispatchQueue.main.async {
                 let image = UIImage(data: data!)
                 cell.updateUI(item: image)

@@ -23,16 +23,20 @@ class GearEditViewController: UIViewController {
     let apiService = APIManager.shared
     let imagePicker = ImagePickerManager()
     
+    let DidReloadPostDetailViewController: Notification.Name = Notification.Name("DidReloadPostDetailViewController")
+    
     @IBAction func showImagePicker(_ sender: Any) {
         imagePicker.showImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
     }
     
+    // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let userData = userGearVM.userGears[gearRow]
-
+    
         self.allPhotos = PHAsset.fetchAssets(with: nil)
+//        TODO: 수정 완료 후 Alert랑 테이블 뷰 리로드 필요~
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
 //       장비 상세에서 받아 온 정보 입력
         customView.editData(type: userData.gearTypeName!, name: userData.name!, color: userData.color!, company: userData.company!, capacity: userData.capacity!, buyDate: userData.buyDt!, price: userData.price!)
@@ -69,8 +73,19 @@ class GearEditViewController: UIViewController {
         guard let price = customView.gearPrice.text else { return }
         let gearId = userGearVM.userGears[gearRow].id
         let type = customView.gearTypeId
-    
-        userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: imageItem)
+        
+        self.userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
+        
+        let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
+            self.navigationController?.popViewController(animated: true)
+            NotificationCenter.default.post(name: self.DidReloadPostDetailViewController, object: nil)
+            
+        })
+        
+        present(alert, animated: true, completion: nil)
+        
+        
         
         
     }

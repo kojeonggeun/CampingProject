@@ -206,6 +206,7 @@ class APIManager{
     func loadGearImages(gearId: Int, completion: @escaping ([ImageData]) -> Void){
         
         AF.request(url + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+    
             switch response.result {
             case .success(_):
                 guard let result = response.data else { return }
@@ -221,6 +222,7 @@ class APIManager{
                     let image = UIImage(systemName:"camera.circle")!
                     self.imageCache.add(image, withIdentifier: "\(gearId)")
                 }
+          
                 completion(self.parseGearImages(result))
         
             case .failure(let error):

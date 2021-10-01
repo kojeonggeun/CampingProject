@@ -24,6 +24,7 @@ class AddGearViewController: UIViewController {
     var apiService: APIManager = APIManager.shared
     
     let DidReloadPostMyGearViewController: Notification.Name = Notification.Name("DidReloadPostMyGearViewController")
+    
     let pickerView = UIPickerView()
     let datePickerView = UIDatePicker()
     let imagePicker = ImagePickerManager()
@@ -59,7 +60,6 @@ class AddGearViewController: UIViewController {
         guard let capacity = customView.gearCapacity.text else { return }
         guard let date = customView.gearBuyDate.text else { return }
         guard let price = customView.gearPrice.text else { return }
-        
         
         self.userGearViewModel.addUserGear(name: name, type: customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: imagePicker.photoArray, imageName: imagePicker.imageFileName)
         
