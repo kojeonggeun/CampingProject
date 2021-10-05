@@ -5,6 +5,9 @@
 //  Created by 고정근 on 2021/08/13.
 //
 
+struct Response: Codable {
+    var gearTypes: [GearType] = []
+}
 
 struct GearType: Codable {
     var gearID: Int
@@ -16,7 +19,5 @@ struct GearType: Codable {
     }
 }
 
-struct Response: Codable {
-    var gearTypes: [GearType] = []
-}
+
 

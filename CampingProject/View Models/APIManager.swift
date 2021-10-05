@@ -167,7 +167,7 @@ class APIManager{
     
     
 //  유저 장비 로드
-    func loadUserData(completion: @escaping (Bool) -> Void){
+    func loadUserGear(completion: @escaping (Bool) -> Void){
         AF.request(url + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(_):

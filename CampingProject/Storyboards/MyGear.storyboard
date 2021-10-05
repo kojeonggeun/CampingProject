@@ -481,7 +481,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2021.9.25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyO-nv-PNh">
-                                <rect key="frame" x="214" y="539" width="75" height="21"/>
+                                <rect key="frame" x="214" y="540" width="75" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -506,6 +506,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="aIu-rX-KoG"/>
                     <connections>
+                        <outlet property="gearBuyDt" destination="DyO-nv-PNh" id="1lu-bw-xAy"/>
+                        <outlet property="gearColor" destination="tHF-Nf-7zY" id="oYF-93-IFc"/>
+                        <outlet property="gearCompany" destination="UwE-2H-4N1" id="o5U-XU-9AQ"/>
+                        <outlet property="gearName" destination="DOB-I4-jdg" id="QSV-g3-Nur"/>
+                        <outlet property="gearPrice" destination="JK1-en-fOB" id="uJn-S9-TEt"/>
+                        <outlet property="gearType" destination="emz-Qy-DP5" id="Wbg-ZK-kCi"/>
                         <outlet property="imageCollectionView" destination="IGb-I2-qFR" id="Tiv-jN-HUP"/>
                         <outlet property="pageControl" destination="AMy-qA-ofe" id="7o6-GF-FUi"/>
                     </connections>

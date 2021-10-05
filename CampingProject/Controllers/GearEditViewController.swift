@@ -36,10 +36,11 @@ class GearEditViewController: UIViewController {
         let userData = userGearVM.userGears[gearRow]
     
         self.allPhotos = PHAsset.fetchAssets(with: nil)
-//        TODO: 수정 완료 후 Alert랑 테이블 뷰 리로드 필요~
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
-//       장비 상세에서 받아 온 정보 입력
-        customView.editData(type: userData.gearTypeName!, name: userData.name!, color: userData.color!, company: userData.company!, capacity: userData.capacity!, buyDate: userData.buyDt!, price: userData.price!)
+
+        
+        customView.UpdateData(type: userData.gearTypeName!, name: userData.name!, color: userData.color!, company: userData.company!, capacity: userData.capacity!, buyDate: userData.buyDt!, price: userData.price!)
         
      
         apiService.loadGearImages(gearId: userData.id, completion: { data in
@@ -65,6 +66,7 @@ class GearEditViewController: UIViewController {
     }
     
     @objc func gearEdit(){
+//        TODO: 텍스트 리로드 해줘야 함 , 이미지랑 다르네 흐음,,
         guard let name = customView.gearName.text else { return }
         guard let color = customView.gearColor.text else { return }
         guard let company = customView.gearCompany.text else { return }
@@ -75,7 +77,7 @@ class GearEditViewController: UIViewController {
         let type = customView.gearTypeId
         
         self.userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
-        
+   
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
             self.navigationController?.popViewController(animated: true)

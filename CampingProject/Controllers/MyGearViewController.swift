@@ -69,7 +69,7 @@ class MyGearViewController: UIViewController{
     }
     
     func loadData(){
-        apiManager.loadUserData( completion: { userData in
+        apiManager.loadUserGear( completion: { userData in
             DispatchQueue.global().async {
                 self.apiManager.loadGearType(completion: { data in
                     for i in 0..<self.gearTypeVM.gearTypes.count{
@@ -96,7 +96,7 @@ class MyGearViewController: UIViewController{
         if (noti.userInfo?["gearAddId"] as? Int) != nil {
 //            guard let first = self.gearTypeVM.gearTypes.firstIndex(where: { $0.gearID == gearId}) else { return }
                 DispatchQueue.global().async {
-                    self.apiManager.loadUserData(completion: { data in
+                    self.apiManager.loadUserGear(completion: { data in
                         if data {
 //                            let gearEndIndex = self.apiManager.userGears.endIndex - 1
 //                            self.apiManager.tableViewData[first].update(id: self.userGearVM.userGears[gearEndIndex].id, name: self.userGearVM.userGears[gearEndIndex].name ?? "")

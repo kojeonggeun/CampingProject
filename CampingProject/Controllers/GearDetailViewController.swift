@@ -13,8 +13,15 @@ class GearDetailViewController: UIViewController {
 
     @IBOutlet weak var customView: GearTextListCustomView!
     @IBOutlet weak var imageCollectionView: UICollectionView!
- 
     @IBOutlet weak var pageControl: UIPageControl!
+    
+    @IBOutlet weak var gearName: UILabel!
+    @IBOutlet weak var gearType: UILabel!
+    @IBOutlet weak var gearCompany: UILabel!
+    @IBOutlet weak var gearColor: UILabel!
+    @IBOutlet weak var gearPrice: UILabel!
+    @IBOutlet weak var gearBuyDt: UILabel!
+    
     
     var gearRow = Int()
     var imageArray = [ImageData]()
@@ -62,20 +69,14 @@ class GearDetailViewController: UIViewController {
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadText()
         
-        let userData = userGearVM.userGears[gearRow]
    
         self.title = "장비 상세"
         
-//        guard let type = userData.gearTypeName else { return }
-//        guard let name = userData.name else { return }
-//        guard let color = userData.color else { return }
-//        guard let company = userData.company else { return }
-//        guard let capacity = userData.capacity else { return }
-//        guard let buyDt = userData.buyDt else { return  }
-//        guard let price = userData.price else { return }
+     
         
-//        customView.UpdateDate(type: type, name: name, color: color, company: company, capacity: capacity, buyDate: buyDt, price: price)
+//        customView.UpdateData(type: type, name: name, color: color, company: company, capacity: capacity, buyDate: buyDt, price: price)
         
 //        self.textFieldEdit(value: false)
 
@@ -91,8 +92,28 @@ class GearDetailViewController: UIViewController {
     
     @objc func reloadImage(){
         self.imageArray.removeAll()
-        
+        self.loadText()
         self.loadImage()
+    }
+    
+    func loadText(){
+        let userData = userGearVM.userGears[gearRow]
+        
+        guard let type = userData.gearTypeName else { return }
+        guard let name = userData.name else { return }
+        guard let color = userData.color else { return }
+        guard let company = userData.company else { return }
+        guard let capacity = userData.capacity else { return }
+        guard let buyDt = userData.buyDt else { return  }
+        guard let price = userData.price else { return }
+        
+        print(userData)
+        gearName.text = name
+        gearType.text = type
+        gearCompany.text = company
+        gearColor.text = color
+        gearPrice.text = "\(price)"
+        gearBuyDt.text = buyDt
     }
     
     func loadImage() {
@@ -103,10 +124,14 @@ class GearDetailViewController: UIViewController {
             }
             self.pageControl.numberOfPages = self.imageArray.count
             
-            self.imageCollectionView.reloadData()
-            self.pageControl.reloadInputViews()
+            DispatchQueue.main.async {
+                self.imageCollectionView.reloadData()
+                self.pageControl.reloadInputViews()
+            }
+            
         })
     }
+    
     
     
     func textFieldEdit(value: Bool) {

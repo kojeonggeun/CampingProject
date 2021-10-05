@@ -26,8 +26,8 @@ class SignInViewController: UIViewController{
         
         userManager.login(email: email, password: password) { completion in
             if completion {
-                self.apiManager.loadUserData(){ data in
-                    print(data)
+                self.apiManager.loadUserGear(){ data in
+                   
                 }
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
                 
@@ -80,16 +80,16 @@ class SignInViewController: UIViewController{
         super.viewWillAppear(animated)
         emailTextField.text = ""
         passwordTextField.text = ""
-    }
-    
-//    TODO: 자동로그인 손봐야함 이상하다. 유저 데이터가 없는 경우가 생김
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
+        
         
         if DB.userDefaults.bool(forKey: "Auto") {
             if DB.userDefaults.object(forKey: "token") != nil {
                 let user = DB.userDefaults.value(forKey: "token") as! NSDictionary
                 print(user["token"])
+                userManager.loadUserInfo(completion:{ data in
+                    print(data.user.userImageUrl)
+                })
                 userManager.loginCheck(){ (completion) in
                     if completion {
                         self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])
@@ -97,6 +97,12 @@ class SignInViewController: UIViewController{
                 }
             }
         }
+    }// end func
+    
+//    TODO: 자동로그인 손봐야함 이상하다. 유저 데이터가 없는 경우가 생김
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }// end func
     
 }

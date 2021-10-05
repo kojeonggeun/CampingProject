@@ -81,6 +81,41 @@ class UserViewModel {
                 }
             }
     }
+    
+    func loadUserInfo(completion: @escaping (UserInfo)-> Void) {
+        let headers: HTTPHeaders = ["Authorization" : returnToken()]
+        
+        AF.request(urlUser,
+                   method: .get,
+                   encoding: URLEncoding.default,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(_):
+                    guard let user = response.data else { return }
+                    completion(self.parseUser(user))
+                    
+                case .failure(let error):
+                    print("🚫 loginCheck Error:\(error._code), Message: \(error.errorDescription!),\(error)")
+                }
+            }
+    }
+    
+    func parseUser(_ data: Data) -> UserInfo {
+        let decoder = JSONDecoder()
+        do {
+            let response = try decoder.decode(UserInfo.self, from: data)
+            return response
+        } catch let error {
+            print(AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error)))
+            print("--> UserInfo parsing error: \(error.localizedDescription)")
+            return UserInfo.init(code: "", user: User.init(), followerCnt: 0, followingCnt: 0, gearCnt: 0, boardCnt: 0)
+//            return
+            
+        }
+    }
+    
   
     
     func isValidEmail(email: String) -> Bool{
