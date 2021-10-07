@@ -34,7 +34,7 @@ class MyGearViewController: UIViewController{
     @IBAction func unwind(_ sender: Any) {
         DB.userDefaults.removeObject(forKey: "token")
         DB.userDefaults.set(false, forKey: "Auto")
-        
+        print(DB.userDefaults.bool(forKey: "Auto"))
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
     
@@ -167,6 +167,7 @@ extension MyGearViewController: UITableViewDataSource{
         if let gearName = self.userGearVM.userGears[indexPath.row].name,
            let gearType = self.userGearVM.userGears[indexPath.row].gearTypeName,
            let gearDate = self.userGearVM.userGears[indexPath.row].buyDt {
+            
             cell.updateUI(name: gearName, type: gearType, date: gearDate)
         }
         
@@ -241,10 +242,11 @@ extension MyGearViewController: UICollectionViewDataSource {
 //    카테고리를 누르면 해당하는 User데이터를 가지고 tableView를 reload??
     @objc func categoryClicked(_ sender: UIButton){
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryTableView") as! CategoryTableViewController
+ 
         pushVC.gearType = sender.tag
-        
         self.navigationController?.pushViewController(pushVC, animated: true)
-        
+   
+
     }
 }
 

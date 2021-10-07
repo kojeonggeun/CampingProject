@@ -65,6 +65,8 @@ class APIManager{
     
 //    장비 삭제
     func deleteGear(gearId: Int,  row: Int) {
+        print(userGears)
+        print(row)
         userGears.remove(at: row)
         
         AF.request(url + "gear/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in

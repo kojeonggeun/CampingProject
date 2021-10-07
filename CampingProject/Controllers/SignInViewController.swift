@@ -15,7 +15,7 @@ class SignInViewController: UIViewController{
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginStateButton: UIButton!
     
-    let userManager: UserViewModel = UserViewModel()
+    let userManager: UserViewModel = UserViewModel.shared
     let apiManager: APIManager = APIManager.shared
     @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
     
@@ -27,7 +27,7 @@ class SignInViewController: UIViewController{
         userManager.login(email: email, password: password) { completion in
             if completion {
                 self.apiManager.loadUserGear(){ data in
-                   
+                    self.userManager.loadUserInfo()
                 }
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
                 
@@ -38,7 +38,7 @@ class SignInViewController: UIViewController{
     }
     
     @IBAction func autoLogin(_ sender: UIButton) {
-    
+        
         if sender.isSelected{
             sender.isSelected = false
             loginStateButton.tintColor = .lightGray
@@ -81,15 +81,11 @@ class SignInViewController: UIViewController{
         emailTextField.text = ""
         passwordTextField.text = ""
         
-        
-        
         if DB.userDefaults.bool(forKey: "Auto") {
             if DB.userDefaults.object(forKey: "token") != nil {
                 let user = DB.userDefaults.value(forKey: "token") as! NSDictionary
                 print(user["token"])
-                userManager.loadUserInfo(completion:{ data in
-                    print(data.user.userImageUrl)
-                })
+                self.userManager.loadUserInfo()
                 userManager.loginCheck(){ (completion) in
                     if completion {
                         self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])

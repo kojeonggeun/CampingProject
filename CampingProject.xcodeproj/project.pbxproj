@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB0355BE270DD4F800564675 /* MyGear.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB0355BD270DD4F800564675 /* MyGear.storyboard */; };
 		CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */; };
-		CB2E7F9926F35ED2007B9460 /* MyGear.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB2E7F9826F35ED2007B9460 /* MyGear.storyboard */; };
 		CB3347A826DD16C200DE0126 /* GearDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3347A726DD16C200DE0126 /* GearDetailViewCell.swift */; };
 		CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */; };
 		CB491B9726FC31ED00D2481F /* GearTextListCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */; };
@@ -46,9 +46,9 @@
 
 /* Begin PBXFileReference section */
 		41765E29EA73FAA1FE98B10C /* Pods-CampingProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.debug.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.debug.xcconfig"; sourceTree = "<group>"; };
+		CB0355BD270DD4F800564675 /* MyGear.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyGear.storyboard; sourceTree = "<group>"; };
 		CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		CB2E7F9826F35ED2007B9460 /* MyGear.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyGear.storyboard; sourceTree = "<group>"; };
 		CB3347A726DD16C200DE0126 /* GearDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearDetailViewCell.swift; sourceTree = "<group>"; };
 		CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearModel.swift; sourceTree = "<group>"; };
 		CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTextListCustomView.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				CB6037C026B2728E0023042F /* Main.storyboard */,
-				CB2E7F9826F35ED2007B9460 /* MyGear.storyboard */,
+				CB0355BD270DD4F800564675 /* MyGear.storyboard */,
 				CB6037C526B2728F0023042F /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -282,9 +282,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB0355BE270DD4F800564675 /* MyGear.storyboard in Resources */,
 				CBB51A022700C74A005F8B00 /* GearImageCollectionViewCell.xib in Resources */,
 				CB6037C726B2728F0023042F /* LaunchScreen.storyboard in Resources */,
-				CB2E7F9926F35ED2007B9460 /* MyGear.storyboard in Resources */,
 				CB491B9926FC3A8100D2481F /* GearTextListCustomView.xib in Resources */,
 				CB6037C426B2728F0023042F /* Assets.xcassets in Resources */,
 				CB6037C226B2728F0023042F /* Main.storyboard in Resources */,

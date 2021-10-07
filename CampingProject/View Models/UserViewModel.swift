@@ -11,8 +11,13 @@ import Alamofire
 
 
 class UserViewModel {
+    
+    static let shared = UserViewModel()
+    
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
+    var userImage: [UserInfo] = []
+    
     
 //    회원가입
     func Register(email: String, password: String){
@@ -82,7 +87,7 @@ class UserViewModel {
             }
     }
     
-    func loadUserInfo(completion: @escaping (UserInfo)-> Void) {
+    func loadUserInfo() {
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
         
         AF.request(urlUser,
@@ -94,7 +99,7 @@ class UserViewModel {
                 switch response.result {
                 case .success(_):
                     guard let user = response.data else { return }
-                    completion(self.parseUser(user))
+                    self.userImage.append(self.parseUser(user))
                     
                 case .failure(let error):
                     print("🚫 loginCheck Error:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -111,8 +116,6 @@ class UserViewModel {
             print(AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error)))
             print("--> UserInfo parsing error: \(error.localizedDescription)")
             return UserInfo.init(code: "", user: User.init(), followerCnt: 0, followingCnt: 0, gearCnt: 0, boardCnt: 0)
-//            return
-            
         }
     }
     

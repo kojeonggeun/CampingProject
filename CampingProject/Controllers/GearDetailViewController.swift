@@ -46,7 +46,7 @@ class GearDetailViewController: UIViewController {
 
         let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
-            self.userGearVM.deleteUserGear(gearId: id, row: self.gearRow )
+            self.userGearVM.deleteUserGear(gearId: id, row: self.gearRow)
             self.navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: self.DidDeleteGearPost, object: nil, userInfo: ["delete": true])
             
@@ -71,13 +71,8 @@ class GearDetailViewController: UIViewController {
         super.viewDidLoad()
         self.loadText()
         
-   
         self.title = "장비 상세"
-        
-     
-        
 //        customView.UpdateData(type: type, name: name, color: color, company: company, capacity: capacity, buyDate: buyDt, price: price)
-        
 //        self.textFieldEdit(value: false)
 
         self.loadImage()
@@ -107,9 +102,8 @@ class GearDetailViewController: UIViewController {
         guard let buyDt = userData.buyDt else { return  }
         guard let price = userData.price else { return }
         
-        print(userData)
         gearName.text = name
-        gearType.text = type
+        gearType.text = "[\(type)]"
         gearCompany.text = company
         gearColor.text = color
         gearPrice.text = "\(price)"

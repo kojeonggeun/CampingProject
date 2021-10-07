@@ -11,25 +11,25 @@ import UIKit
 
 
 class CategoryTableViewController: UITableViewController{
+      
     
+    
+    @IBOutlet var categoryTableView: UITableView!
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel()
     let tableViewVM = TableViewViewModel()
     let apiManager: APIManager = APIManager.shared
     
-    var gearType = Int()
-    var categoryData = [CellData]()
-    
+    var gearType: Int = 0
+    var categoryData: [CellData] = []
+    var tableIndex: IndexPath = []
    
-    @IBAction func closeButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
+  
     
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let type = gearTypeVM.gearTypes[gearType].gearName
         self.title = type
     
@@ -38,7 +38,22 @@ class CategoryTableViewController: UITableViewController{
                 categoryData.append(i)
             }
         }
-       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+ 
+        
+//        self.categoryTableView.performBatchUpdates({
+//            
+//            self.categoryTableView.deleteRows(at: [tableIndex], with: .fade)
+//        }, completion: { (done) in
+//             //perform table refresh
+//            self.categoryTableView.reloadData()
+//        })
+        
+        
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -58,7 +73,6 @@ class CategoryTableViewController: UITableViewController{
         if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
             DispatchQueue.main.async {
                 cell.categoryImage.image = cacheImage
-                
             }
             
         } else {
@@ -94,11 +108,13 @@ class CategoryTableViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        TODO: 카테고리에서 삭제 후 문제 생김!!!
         let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.categoryData[indexPath.row].id
         })!
       
-        
+        tableIndex = indexPath
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
+        
         pushVC.gearRow = first
         
         self.navigationController?.pushViewController(pushVC, animated: true)
