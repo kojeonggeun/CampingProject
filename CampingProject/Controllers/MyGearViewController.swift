@@ -20,7 +20,7 @@ class MyGearViewController: UIViewController{
     var tableIndexPath = IndexPath()
     
     let gearTypeVM = GearTypeViewModel()
-    let userGearVM = UserGearViewModel()
+    let userGearVM = UserGearViewModel.shared
     let tableViewVM = TableViewViewModel()
     let apiManager: APIManager = APIManager.shared
     
@@ -93,13 +93,13 @@ class MyGearViewController: UIViewController{
     }
     
     @objc func reloadTableView(_ noti: Notification) {
+        
+        
         if (noti.userInfo?["gearAddId"] as? Int) != nil {
-//            guard let first = self.gearTypeVM.gearTypes.firstIndex(where: { $0.gearID == gearId}) else { return }
+
                 DispatchQueue.global().async {
                     self.apiManager.loadUserGear(completion: { data in
                         if data {
-//                            let gearEndIndex = self.apiManager.userGears.endIndex - 1
-//                            self.apiManager.tableViewData[first].update(id: self.userGearVM.userGears[gearEndIndex].id, name: self.userGearVM.userGears[gearEndIndex].name ?? "")
 
                             DispatchQueue.main.async {
                                 self.gearTableView.reloadData()
@@ -109,14 +109,20 @@ class MyGearViewController: UIViewController{
                     })// end closure
                 }
         }
-        
+        guard let row =  noti.userInfo?["gearRow"] as? Int else { return }
+        var CategoryIndexPath: IndexPath = []
+     
+        if row != -1 {
+            CategoryIndexPath = [0, row]
+        } else {
+            CategoryIndexPath = self.tableIndexPath
+        }
+
         if noti.userInfo?["delete"] as? Bool ?? false {
             self.gearTableView.performBatchUpdates({
-                
-                self.gearTableView.deleteRows(at: [self.tableIndexPath], with: .fade)
+                self.gearTableView.deleteRows(at: [CategoryIndexPath], with: .fade)
             }, completion: { (done) in
                  //perform table refresh
-                self.gearTableView.reloadSections([self.tableIndexPath.section], with: .automatic)
             })
         }
     }
@@ -213,6 +219,7 @@ extension MyGearViewController: UITableViewDelegate{
 //        let data = [indexPath.section,indexPath.row]
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
         
+        pushVC.tableIndex = indexPath
         pushVC.gearRow = first
         self.navigationController?.pushViewController(pushVC, animated: true)
 

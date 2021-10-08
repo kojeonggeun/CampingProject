@@ -23,13 +23,16 @@ class GearDetailViewController: UIViewController {
     @IBOutlet weak var gearBuyDt: UILabel!
     
     
-    var gearRow = Int()
-    var imageArray = [ImageData]()
+    
+    var imageArray: [ImageData] = []
+    var tableIndex: IndexPath = []
+    var gearRow: Int = -1
     let apiService = APIManager.shared
     
-    let userGearVM = UserGearViewModel()
+    let userGearVM = UserGearViewModel.shared
     
     let DidDeleteGearPost: Notification.Name = Notification.Name("DidDeleteGearPost")
+    let DidDeleteCatogoryGearPost: Notification.Name = Notification.Name("DidDeleteCatogoryGearPost")
     
     @IBAction func pageChanged(_ sender: UIPageControl) {
         let indexPath = IndexPath(item: sender.currentPage, section: 0)
@@ -48,7 +51,10 @@ class GearDetailViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
             self.userGearVM.deleteUserGear(gearId: id, row: self.gearRow)
             self.navigationController?.popViewController(animated: true)
-            NotificationCenter.default.post(name: self.DidDeleteGearPost, object: nil, userInfo: ["delete": true])
+            NotificationCenter.default.post(name: self.DidDeleteGearPost, object: nil, userInfo: ["delete": true,"gearRow": self.gearRow])
+            NotificationCenter.default.post(name: self.DidDeleteCatogoryGearPost, object: nil)
+
+            
             
         })
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in
@@ -59,7 +65,7 @@ class GearDetailViewController: UIViewController {
     }
     @IBAction func gearEdit(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearEditView") as! GearEditViewController
-        pushVC.gearRow = gearRow
+        pushVC.gearRow = self.gearRow
         
         self.navigationController?.pushViewController(pushVC, animated: true)
         

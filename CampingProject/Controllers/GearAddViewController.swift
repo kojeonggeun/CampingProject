@@ -28,7 +28,7 @@ class AddGearViewController: UIViewController {
     let pickerView = UIPickerView()
     let datePickerView = UIDatePicker()
     let imagePicker = ImagePickerManager()
-    let userGearViewModel = UserGearViewModel()
+    let userGearViewModel = UserGearViewModel.shared
     
     
     @IBAction func closeButton(_ sender: Any) {

@@ -12,6 +12,9 @@ import UIKit
 class UserGearViewModel {
     
     private let manager = APIManager.shared
+    static let shared = UserGearViewModel()
+    
+    var categoryData: [CellData] = []
     
     var userGears: [CellData] {
         return manager.userGears
@@ -23,7 +26,7 @@ class UserGearViewModel {
     }
     
     func deleteUserGear(gearId: Int, row: Int){
-
+        
         manager.deleteGear(gearId: gearId,row: row)
     }
     
@@ -32,5 +35,20 @@ class UserGearViewModel {
         
         manager.editGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName, item: item)
             
+    }
+    func categoryUserData(type: String){
+        categoryData.removeAll()
+        for i in userGears{
+            if i.gearTypeName == type {
+                categoryData.append(i)
+            }
+        }
+    }
+    func deleteCategoryData(row: Int){
+        categoryData.remove(at: row)
+    }
+    func numberOfRowsInSection() -> Int{
+   
+        return categoryData.count
     }
 }

@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var gearQuantity: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
-    var userGearVM = UserGearViewModel()
+    var userGearVM = UserGearViewModel.shared
     var url: String = ""
     
     let userManager: UserViewModel = UserViewModel.shared

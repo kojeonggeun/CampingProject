@@ -17,12 +17,11 @@ class CategoryTableViewController: UITableViewController{
     @IBOutlet var categoryTableView: UITableView!
     
     let gearTypeVM = GearTypeViewModel()
-    let userGearVM = UserGearViewModel()
+    let userGearVM = UserGearViewModel.shared
     let tableViewVM = TableViewViewModel()
     let apiManager: APIManager = APIManager.shared
     
     var gearType: Int = 0
-    var categoryData: [CellData] = []
     var tableIndex: IndexPath = []
    
   
@@ -32,43 +31,39 @@ class CategoryTableViewController: UITableViewController{
         super.viewDidLoad()
         let type = gearTypeVM.gearTypes[gearType].gearName
         self.title = type
-    
-        for i in userGearVM.userGears{
-            if i.gearTypeName == type {
-                categoryData.append(i)
-            }
-        }
+        userGearVM.categoryUserData(type: type)
+     
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidDeleteCatogoryGearPost"), object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
- 
-        
-//        self.categoryTableView.performBatchUpdates({
-//            
-//            self.categoryTableView.deleteRows(at: [tableIndex], with: .fade)
-//        }, completion: { (done) in
-//             //perform table refresh
-//            self.categoryTableView.reloadData()
-//        })
+    @objc func reloadTableView(_ noti: Notification) {
         
         
-        
+        self.categoryTableView.performBatchUpdates({
+            self.userGearVM.deleteCategoryData(row: tableIndex.row)
+            
+            self.categoryTableView.deleteRows(at: [self.tableIndex], with: .fade)
+        }, completion: { (done) in
+             //perform table refresh
+        })
     }
+    
+  
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryData.count
+        
+        return userGearVM.numberOfRowsInSection()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableView", for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
         
-        let userGearId = categoryData[indexPath.row].id
+        let userGearId = userGearVM.categoryData[indexPath.row].id
         
         if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
             DispatchQueue.main.async {
@@ -95,8 +90,8 @@ class CategoryTableViewController: UITableViewController{
             })
         }
         
-        if let gearName = categoryData[indexPath.row].name,
-           let gearType = categoryData[indexPath.row].gearTypeName {
+        if let gearName = userGearVM.categoryData[indexPath.row].name,
+           let gearType = userGearVM.categoryData[indexPath.row].gearTypeName {
             cell.updateUI(name: gearName, type: gearType)
         }
         
@@ -109,13 +104,15 @@ class CategoryTableViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        TODO: 카테고리에서 삭제 후 문제 생김!!!
-        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.categoryData[indexPath.row].id
+        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.categoryData[indexPath.row].id
         })!
       
         tableIndex = indexPath
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
-        
+        print(first)
+        pushVC.tableIndex = indexPath
         pushVC.gearRow = first
+        
         
         self.navigationController?.pushViewController(pushVC, animated: true)
         

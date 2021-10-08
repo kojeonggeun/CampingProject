@@ -19,7 +19,7 @@ class GearEditViewController: UIViewController {
     var allPhotos: PHFetchResult<PHAsset>?
     var imageItem = [ImageData]()
     
-    let userGearVM = UserGearViewModel()
+    let userGearVM = UserGearViewModel.shared
     let apiService = APIManager.shared
     let imagePicker = ImagePickerManager()
     
