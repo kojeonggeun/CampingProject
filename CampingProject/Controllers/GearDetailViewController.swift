@@ -53,9 +53,6 @@ class GearDetailViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: self.DidDeleteGearPost, object: nil, userInfo: ["delete": true,"gearRow": self.gearRow])
             NotificationCenter.default.post(name: self.DidDeleteCatogoryGearPost, object: nil)
-
-            
-            
         })
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in
             return

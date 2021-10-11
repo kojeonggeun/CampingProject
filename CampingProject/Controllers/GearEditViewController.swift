@@ -24,6 +24,7 @@ class GearEditViewController: UIViewController {
     let imagePicker = ImagePickerManager()
     
     let DidReloadPostDetailViewController: Notification.Name = Notification.Name("DidReloadPostDetailViewController")
+    let DidReloadPostEdit: Notification.Name = Notification.Name("DidReloadPostEdit")
     
     @IBAction func showImagePicker(_ sender: Any) {
         imagePicker.showImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
@@ -82,14 +83,11 @@ class GearEditViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
             self.navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: self.DidReloadPostDetailViewController, object: nil)
+            NotificationCenter.default.post(name: self.DidReloadPostEdit, object: nil, userInfo: ["edit" : true])
             
         })
         
         present(alert, animated: true, completion: nil)
-        
-        
-        
-        
     }
 }
 

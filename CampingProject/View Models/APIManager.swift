@@ -84,8 +84,6 @@ class APIManager{
                                   "capacity": capacity, "price": price,
                                   "buyDt": date]
     
-//        TODO: PUT 메서드로 수정하려는데 안됨 고쳐야한다~
-        
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in parameters {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key as String)
@@ -106,9 +104,8 @@ class APIManager{
         }).responseString { response in
             switch response.result {
             case .success(let data):
-
-                print(data)
-
+                self.loadUserGear(completion: { data in
+                })
             case .failure(let error):
                 print(error)
             }

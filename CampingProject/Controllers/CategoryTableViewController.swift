@@ -12,8 +12,6 @@ import UIKit
 
 class CategoryTableViewController: UITableViewController{
       
-    
-    
     @IBOutlet var categoryTableView: UITableView!
     
     let gearTypeVM = GearTypeViewModel()
@@ -37,11 +35,8 @@ class CategoryTableViewController: UITableViewController{
     }
     
     @objc func reloadTableView(_ noti: Notification) {
-        
-        
         self.categoryTableView.performBatchUpdates({
             self.userGearVM.deleteCategoryData(row: tableIndex.row)
-            
             self.categoryTableView.deleteRows(at: [self.tableIndex], with: .fade)
         }, completion: { (done) in
              //perform table refresh

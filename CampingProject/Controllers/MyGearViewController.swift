@@ -61,6 +61,9 @@ class MyGearViewController: UIViewController{
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostMyGearViewController"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidDeleteGearPost"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
+        
+        
         
     } // end viewDidLoad
     
@@ -91,31 +94,35 @@ class MyGearViewController: UIViewController{
         })
         
     }
-    
-    @objc func reloadTableView(_ noti: Notification) {
-        
-        
-        if (noti.userInfo?["gearAddId"] as? Int) != nil {
 
+    @objc func reloadTableView(_ noti: Notification) {
+        if (noti.userInfo?["gearAddId"] as? Int) != nil {
                 DispatchQueue.global().async {
                     self.apiManager.loadUserGear(completion: { data in
                         if data {
-
                             DispatchQueue.main.async {
                                 self.gearTableView.reloadData()
-                                
                             }
                         }
                     })// end closure
                 }
         }
-        guard let row =  noti.userInfo?["gearRow"] as? Int else { return }
-        var CategoryIndexPath: IndexPath = []
+        
+//      카테고리에서 삭제할 때 인덱스값과 메인에서 삭제할 때 인덱스 값이 상이함
+//      카테고리에서 삭제할 때 메인의 인덱스값을 가져오게 함, 메인과 카테고리에서 동시에 리스트에서 삭제되게
+//      코드가 너무 지저분해서 리팩토링 필수
      
-        if row != -1 {
-            CategoryIndexPath = [0, row]
-        } else {
-            CategoryIndexPath = self.tableIndexPath
+        print(noti.userInfo)
+        print(noti.userInfo!.first?.key)
+        
+        
+        var CategoryIndexPath: IndexPath = []
+        if let row =  noti.userInfo?["gearRow"] as? Int {
+            if row != -1 {
+                CategoryIndexPath = [0, row]
+            } else {
+                CategoryIndexPath = self.tableIndexPath
+            }
         }
 
         if noti.userInfo?["delete"] as? Bool ?? false {
@@ -125,6 +132,12 @@ class MyGearViewController: UIViewController{
                  //perform table refresh
             })
         }
+        
+        if noti.userInfo?["edit"] as? Bool ?? false {
+            self.gearTableView.reloadData()
+        }
+        
+   
     }
   
     
@@ -170,6 +183,7 @@ extension MyGearViewController: UITableViewDataSource{
                 }
             })
         }
+        
         if let gearName = self.userGearVM.userGears[indexPath.row].name,
            let gearType = self.userGearVM.userGears[indexPath.row].gearTypeName,
            let gearDate = self.userGearVM.userGears[indexPath.row].buyDt {
