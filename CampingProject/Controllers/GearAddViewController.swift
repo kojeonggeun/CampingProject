@@ -37,7 +37,7 @@ class AddGearViewController: UIViewController {
     
     
     @IBAction func imageSelectButton(_ sender: Any) {
-        imagePicker.showImagePicker(vc: self, collection: gearCollectionView, countLabel: imageCount)
+        imagePicker.showMultipleImagePicker(vc: self, collection: gearCollectionView, countLabel: imageCount)
 
     }
     

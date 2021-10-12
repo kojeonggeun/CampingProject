@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 
 
@@ -16,7 +17,7 @@ class UserViewModel {
     
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
-    var userImage: [UserInfo] = []
+    var userInfo: [UserInfo] = []
     
     
 //    회원가입
@@ -99,8 +100,10 @@ class UserViewModel {
                 switch response.result {
                 case .success(_):
                     guard let user = response.data else { return }
-                    self.userImage.append(self.parseUser(user))
-                    
+                    let userData = self.parseUser(user)
+                    print(self.userInfo)
+                    self.userInfo.append(userData)
+                    print(self.userInfo)
                 case .failure(let error):
                     print("🚫 loginCheck Error:\(error._code), Message: \(error.errorDescription!),\(error)")
                 }
@@ -109,6 +112,7 @@ class UserViewModel {
     
     func parseUser(_ data: Data) -> UserInfo {
         let decoder = JSONDecoder()
+        self.userInfo.removeAll()
         do {
             let response = try decoder.decode(UserInfo.self, from: data)
             return response
@@ -119,6 +123,51 @@ class UserViewModel {
         }
     }
     
+    func saveUserProfileImage(image: UIImage, imageName: String){
+        let headers: HTTPHeaders = [
+                    "Content-type": "multipart/form-data",
+                    "Authorization" : returnToken()
+                ]
+        
+        print(image)
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(image.jpegData(compressionQuality: 1)!, withName: "userImage", fileName: imageName, mimeType: "image/jpg")
+            
+        }, to: urlUser + "image",method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
+            
+            print("Upload Progress: \(progress.fractionCompleted)")
+            
+        }).response { response in
+            switch response.result {
+            case .success(_):
+                print(response.result)
+               
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func saveUserProfile(name: String, phone: String ,intro: String, public: Bool){
+        
+        let parameters :Parameters = ["name": name, "phone": intro]
+        
+        let headers: HTTPHeaders = [
+                    "Content-type": "application/x-www-form-urlencoded",
+                    "Authorization" : returnToken()
+                ]
+        
+        AF.request(urlUser ,method: .put,parameters: parameters,encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
+        ).responseJSON { response in
+            switch response.result {
+            case .success(_):
+                print("POST 성공")
+                
+            case .failure(let error):
+                print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
+    }
   
     
     func isValidEmail(email: String) -> Bool{

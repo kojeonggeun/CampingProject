@@ -27,7 +27,7 @@ class GearEditViewController: UIViewController {
     let DidReloadPostEdit: Notification.Name = Notification.Name("DidReloadPostEdit")
     
     @IBAction func showImagePicker(_ sender: Any) {
-        imagePicker.showImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
+        imagePicker.showMultipleImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
     }
     
     // MARK: LifeCycles

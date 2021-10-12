@@ -24,7 +24,6 @@ struct User: Codable {
     let phone: String?
     let userImageId: Int
     let userImageUrl: String
-    let userImagePath: String
     let isPublic: Bool
     
     init(){
@@ -33,8 +32,7 @@ struct User: Codable {
         self.email = ""
         self.phone = ""
         self.userImageId = 0
-        self.userImageUrl = ""
-        self.userImagePath = ""
+        self.userImageUrl = "https://doodleipsum.com/700/avatar-2?i"
         self.isPublic = false
         
     }

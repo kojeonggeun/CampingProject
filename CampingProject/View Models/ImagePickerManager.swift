@@ -17,7 +17,7 @@ class ImagePickerManager: ImagePickerController {
     var imageFileName = [String]()
     var total: Int = 0
     
-    func showImagePicker(vc: UIViewController, collection: UICollectionView, countLabel: UILabel){
+    func showMultipleImagePicker(vc: UIViewController, collection: UICollectionView, countLabel: UILabel){
         if self.photoArray.count >= 5{ 
             imageErrorAlert(vc: vc)
             return

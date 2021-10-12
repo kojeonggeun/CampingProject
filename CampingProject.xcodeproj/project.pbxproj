@@ -41,6 +41,7 @@
 		CBD5F5D826E9FB2900E09B0D /* TableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D726E9FB2900E09B0D /* TableViewViewModel.swift */; };
 		CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */; };
 		CBF37200270C6FCF0028533C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF371FF270C6FCF0028533C /* UserModel.swift */; };
+		CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */; };
 		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		CBD5F5D726E9FB2900E09B0D /* TableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModel.swift; sourceTree = "<group>"; };
 		CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		CBF371FF270C6FCF0028533C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
 		DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampingProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -181,6 +183,7 @@
 				CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */,
 				CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */,
 				CBB51A032702F61E005F8B00 /* ProfileViewController.swift */,
+				CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */,
 				CBF37200270C6FCF0028533C /* UserModel.swift in Sources */,
 				CBBB2A9B26F238A8006B2E3C /* CategoryTableViewCell.swift in Sources */,
+				CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */,
 				CBD5F5D826E9FB2900E09B0D /* TableViewViewModel.swift in Sources */,
 				CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */,
 				CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */,

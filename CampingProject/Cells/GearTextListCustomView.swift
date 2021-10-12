@@ -27,11 +27,13 @@ class GearTextListCustomView: UIView{
     let datePickerView = UIDatePicker()
     
     override func awakeFromNib() {
-       super.awakeFromNib(
-       )
+       super.awakeFromNib()
+        
+        gearPrice.keyboardType = .numberPad
         createPickerView()
         createDatePickerView()
         gearType.tintColor = .clear
+        
     }
     
     override init(frame: CGRect) {
@@ -133,6 +135,7 @@ class GearTextListCustomView: UIView{
     }
     
 }
+
 extension GearTextListCustomView: UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

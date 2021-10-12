@@ -104,7 +104,6 @@ class CategoryTableViewController: UITableViewController{
       
         tableIndex = indexPath
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
-        print(first)
         pushVC.tableIndex = indexPath
         pushVC.gearRow = first
         

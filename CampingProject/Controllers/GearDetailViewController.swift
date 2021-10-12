@@ -96,7 +96,7 @@ class GearDetailViewController: UIViewController {
     
     func loadText(){
         let userData = userGearVM.userGears[gearRow]
-        
+        print(userData)
         guard let type = userData.gearTypeName else { return }
         guard let name = userData.name else { return }
         guard let color = userData.color else { return }
