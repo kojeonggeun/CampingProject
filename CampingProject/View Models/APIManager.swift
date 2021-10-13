@@ -24,6 +24,8 @@ class APIManager{
     
 //    장비 저장
     func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
+        
+
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
                     "Authorization" : returnToken()

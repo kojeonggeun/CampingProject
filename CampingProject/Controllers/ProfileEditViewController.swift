@@ -10,15 +10,22 @@ import TextFieldEffects
 import Photos
 
 class ProfileEditViewController: UIViewController {
-    
-    let imagePicker = UIImagePickerController()
-    var image: String = ""
-    let userVM = UserViewModel.shared
+  
     
     @IBOutlet weak var profileImageView:UIImageView!
     
     @IBOutlet weak var profileIntro: HoshiTextField!
     @IBOutlet weak var profileName: HoshiTextField!
+    
+    
+    var image: String = ""
+    var delegate: ReloadData?
+    
+    let imagePicker = UIImagePickerController()
+    let userVM = UserViewModel.shared
+    
+    
+    
     
     @IBAction func imageSelectButton(_ sender: Any) {
         self.present(self.imagePicker, animated: true)
@@ -29,8 +36,20 @@ class ProfileEditViewController: UIViewController {
         self.dismiss(animated: true, completion: nil )
     }
     @IBAction func saveProfile(_ sender: Any) {
-        userVM.saveUserProfileImage(image: profileImageView.image!, imageName: "asd")
-        userVM.saveUserProfile(name: profileName.text!, phone: "", intro: profileIntro.text!, public: true)
+//        userVM.saveUserProfileImage(image: profileImageView.image!, imageName: "asd")
+        
+        userVM.saveUserProfile(name: profileName.text!, phone: "", intro: profileIntro.text!, public: true, completion: { check in
+            if check {
+                let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다!!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
+                    self.delegate?.reloadData()
+                    self.dismiss(animated: true, completion: nil)
+                })
+                self.present(alert, animated: true)
+            }
+          
+            
+        })
         
      
     }
@@ -50,7 +69,7 @@ class ProfileEditViewController: UIViewController {
         
         profileName.text = name
         profileIntro.text = intro
-        
+            
         DispatchQueue.global().async {
             let url = URL(string: self.image)
 
@@ -88,4 +107,8 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
         picker.dismiss(animated: true, completion: nil)
         
     }
+}
+
+protocol ReloadData {
+    func reloadData()
 }

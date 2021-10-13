@@ -88,7 +88,8 @@ class UserViewModel {
             }
     }
     
-    func loadUserInfo() {
+    func loadUserInfo(completion: @escaping (Bool)-> Void) {
+        
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
         
         AF.request(urlUser,
@@ -101,11 +102,10 @@ class UserViewModel {
                 case .success(_):
                     guard let user = response.data else { return }
                     let userData = self.parseUser(user)
-                    print(self.userInfo)
                     self.userInfo.append(userData)
-                    print(self.userInfo)
+                    completion(true)
                 case .failure(let error):
-                    print("🚫 loginCheck Error:\(error._code), Message: \(error.errorDescription!),\(error)")
+                    print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
                 }
             }
     }
@@ -148,7 +148,7 @@ class UserViewModel {
         }
     }
     
-    func saveUserProfile(name: String, phone: String ,intro: String, public: Bool){
+    func saveUserProfile(name: String, phone: String ,intro: String, public: Bool, completion: @escaping (Bool) -> Void) {
         
         let parameters :Parameters = ["name": name, "phone": intro]
         
@@ -161,7 +161,7 @@ class UserViewModel {
         ).responseJSON { response in
             switch response.result {
             case .success(_):
-                print("POST 성공")
+                completion(true)
                 
             case .failure(let error):
                 print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")

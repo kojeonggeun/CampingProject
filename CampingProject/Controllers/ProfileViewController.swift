@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 
-class ProfileViewController: UIViewController {
+
+class ProfileViewController: UIViewController, ReloadData {
+  
     
     @IBOutlet weak var gearQuantity: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
@@ -20,13 +22,14 @@ class ProfileViewController: UIViewController {
     var userGearVM = UserGearViewModel.shared
     var imageUrl: String = ""
     
-    let userManager: UserViewModel = UserViewModel.shared
+    let userVM: UserViewModel = UserViewModel.shared
     
     @IBAction func showProfileEdit(_ sender: Any) {
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as? ProfileEditViewController else {
                 return
             }
         vc.image = imageUrl
+        vc.delegate = self
         present(vc, animated: true)
         
     }
@@ -40,42 +43,45 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-        
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderWidth = 5
         profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
-
+        
+        reloadData()
+        
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func reloadData() {
         
-     
-        gearQuantity.text = "\(userGearVM.userGears.count)"
-        
-        if self.userManager.userInfo[0].user.userImageUrl != "" {
-            imageUrl = self.userManager.userInfo[0].user.userImageUrl
+        if self.userVM.userInfo[0].user.userImageUrl != "" {
+            imageUrl = self.userVM.userInfo[0].user.userImageUrl
         } else {
             imageUrl = "https://doodleipsum.com/700/avatar-2?i"
         }
         
         DispatchQueue.global().async {
-            self.userManager.loadUserInfo()
-            
-            let url = URL(string: self.userManager.userInfo[0].user.userImageUrl)
-            let data = try? Data(contentsOf: url!)
-            
-//            TODO: 프로필 이미지 수정 좀 이상함
-            DispatchQueue.main.async {
-                let image = UIImage(data: data!)
-                self.profileImage.image = image
+            self.userVM.loadUserInfo(completion: { check in
+                let url = URL(string: self.userVM.userInfo[0].user.userImageUrl)
+                let data = try? Data(contentsOf: url!)
                 
-                self.profileName.text = self.userManager.userInfo[0].user.name
-                self.profileIntro.text = self.userManager.userInfo[0].user.phone
-            }
+    //            TODO: 프로필 이미지 수정 좀 이상함
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data!)
+                    self.profileImage.image = image
+                    
+                    self.profileName.text = self.userVM.userInfo[0].user.name
+                    self.profileIntro.text = self.userVM.userInfo[0].user.phone
+                }
+            })
         }
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        gearQuantity.text = "\(userGearVM.userGears.count)"
+        
+    }
+
 }
