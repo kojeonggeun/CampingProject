@@ -47,11 +47,7 @@ class ProfileEditViewController: UIViewController {
                 })
                 self.present(alert, animated: true)
             }
-          
-            
         })
-        
-     
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,10 +76,7 @@ class ProfileEditViewController: UIViewController {
             }
         }
     }
-    
-
 }
-
 
 extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

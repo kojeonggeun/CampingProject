@@ -109,13 +109,8 @@ class APIManager{
                 print(error)
             }
         }
-        
-        
-        
-        
-        
-    }
     
+    }
 //    장비타입 로드
     func loadGearType(completion: @escaping (Bool) -> Void ) {
         
@@ -249,9 +244,40 @@ class APIManager{
                
             case .failure(let error):
                 print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-            } // end switch
+            }
         }
     }
+    
+    func searchUser(searchText: String){
+        let parameters: [String: Any] = ["searchText": searchText]
+        
+        AF.request(urlUser+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+            switch response.result {
+            case .success(let data):
+                guard let result = response.data else { return }
+                print(self.parseSearchUser(result))
+               
+            case .failure(let error):
+                print("🚫searchUser  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
+    }
+    
+    func parseSearchUser(_ data: Data) -> [SearchUser] {
+   
+        let decoder = JSONDecoder()
+ 
+        do {
+            let response = try decoder.decode(SearchResult.self, from: data)
+            return response.users
+        } catch let error {
+            print("--> CellData parsing error: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    
+    
     
 //    API herder
     func headerInfo() -> HTTPHeaders {
