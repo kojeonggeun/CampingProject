@@ -32,9 +32,10 @@ extension SearchUserViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchUserView", for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableView", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
         
-        cell.backgroundColor = .blue
+        cell.updateUI(email: "testEmail", name: "testName")
+        
         return cell
     }
     
