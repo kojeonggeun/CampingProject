@@ -248,14 +248,14 @@ class APIManager{
         }
     }
     
-    func searchUser(searchText: String){
-        let parameters: [String: Any] = ["searchText": searchText]
+    func searchUser(searchText: String, page: Int = 0, completion: @escaping ([SearchUser]) -> Void){
+        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 3]
         
         AF.request(urlUser+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(let data):
                 guard let result = response.data else { return }
-                print(self.parseSearchUser(result))
+                completion(self.parseSearchUser(result))
                
             case .failure(let error):
                 print("🚫searchUser  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
