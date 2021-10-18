@@ -277,15 +277,45 @@ class APIManager{
     }
     
     
+/*
+    친구를 요청하게 되면 계정 공개일 경우
+    팔로잉 추가, 상대방은 팔로워 추가
+    비공개 일 경우 요청 & 승인 과정을 거쳐야 함
+*/
+    func followRequst(id: Int, isPublic: Bool, completion: @escaping (Bool) -> Void){
+//        if isPublic {
+//        }
+        
+  
+        
+        AF.request(url + "friend/\(id)",
+                   method: .post,
+                   encoding:URLEncoding.default,
+                   headers: self.headerInfo())
+            .validate(statusCode: 200..<300)
+            .response { (response) in
+                switch response.result {
+                case .success(_):
+          
+                    completion(true)
+                case .failure(let error):
+                    print(AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error)))
+                    print("🚫 followRequst Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                    completion(false)
+                }
+            }
+    }
+    
     
     
 //    API herder
     func headerInfo() -> HTTPHeaders {
         
-            
         let headers: HTTPHeaders = [
-                    "Authorization" : returnToken()
+                    "Authorization" : returnToken(),
+                    "Content-Type" : "application/x-www-form-urlencoded"
                 ]
+            
         return headers
         
     }

@@ -22,6 +22,12 @@ class SearchUserViewController: UIViewController {
     var fetchingMore: Bool = false
     var page: Int = 0
     
+    
+    @IBAction func sendFollowRequest(_ sender: Any) {
+        
+    }
+    
+//    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,14 +44,28 @@ extension SearchUserViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableView", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+        cell.sendFollowButton.tag = indexPath.row
         
+        cell.sendFollowButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
         
         cell.updateUI(email: self.searchData[indexPath.row].email, name: self.searchData[indexPath.row].name)
         
         return cell
     }
-    
+    @objc func sendFollowRequest(sender: UIButton){
+        
+        let id = self.searchData[sender.tag].id
+        let isPublic = self.searchData[sender.tag].isPublic
+        
+        manager.followRequst(id: id, isPublic: isPublic, completion: { data in
+            sender.backgroundColor = .white
+            
+            sender.setTitle("팔로워", for: .normal)
+        })
+        
+    }
 }
+
 
 extension SearchUserViewController: UITableViewDelegate{
     
