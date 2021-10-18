@@ -249,7 +249,7 @@ class APIManager{
     }
     
     func searchUser(searchText: String, page: Int = 0, completion: @escaping ([SearchUser]) -> Void){
-        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 3]
+        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 20]
         
         AF.request(urlUser+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {

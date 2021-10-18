@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserInfo: Codable {
-    let code: String
+//    let code: String
     var user: User
     let followerCnt: Int
     let followingCnt: Int
@@ -22,7 +22,7 @@ struct User: Codable {
     let name: String?
     let email: String
     let phone: String?
-    let userImageId: Int
+    let userImageId: Int?
     let userImageUrl: String
     let isPublic: Bool
     

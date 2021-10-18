@@ -9,14 +9,16 @@ import Foundation
 import UIKit
 
 
+//TODO: 스크롤을 끝까지 내려서 데이터 불러 올떄 데이터가 있으면 로딩 화면 띄우게 해야함 , 검색 결과가 없을 때 화면도 추가 해야 함
 class SearchUserViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchTableView: UITableView!
     
-    var manager = APIManager.shared
+    let manager = APIManager.shared
     var searchInputText: String = ""
     var searchData: [SearchUser] = []
+    
     var fetchingMore: Bool = false
     var page: Int = 0
     
@@ -37,22 +39,17 @@ extension SearchUserViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableView", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
         
-        for i in self.searchData{
-            cell.updateUI(email: i.email, name: i.name)
-        }
         
-        
+        cell.updateUI(email: self.searchData[indexPath.row].email, name: self.searchData[indexPath.row].name)
         
         return cell
     }
-    
     
 }
 
 extension SearchUserViewController: UITableViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         if searchTableView.contentOffset.y > (searchTableView.contentSize.height - searchTableView.bounds.size.height){
             if !fetchingMore{
                 beginBatchFetch()
@@ -60,40 +57,37 @@ extension SearchUserViewController: UITableViewDelegate{
             
         }
     }
-        
+    
     private func beginBatchFetch() {
         fetchingMore = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
             self.page += 1
-            
             self.manager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
-//                self.searchData = data
-                
+
                 self.searchData.append(contentsOf: data)
-                print(self.searchData)
-                self.searchTableView.reloadData()
+                DispatchQueue.main.async {
+                    self.fetchingMore = false
+                    self.searchTableView.reloadData()
+                }
             })
-            self.fetchingMore = false
         })
     }
- 
 }
-
-
 
 extension SearchUserViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchInputText = searchText
-       
+        
+        self.searchData.removeAll()
+        self.page = 0
+    
         manager.searchUser(searchText: searchText, completion: { data in
-            self.searchData = data
-//            self.searchData.append(contentsOf: data)
-            print(self.searchData)
-            self.searchTableView.reloadData()
+            for i in data{
+                self.searchData.append(i)
+            }
+            DispatchQueue.main.async {
+                self.searchTableView.reloadData()
+            }
         })
     }
-    
-    
-    
-    
 }
