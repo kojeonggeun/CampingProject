@@ -103,6 +103,7 @@ class UserViewModel {
                     guard let user = response.data else { return }
                     let userData = self.parseUser(user)
                     self.userInfo.append(userData)
+                    
                     completion(true)
                 case .failure(let error):
                     print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -123,13 +124,12 @@ class UserViewModel {
         }
     }
     
-    func saveUserProfileImage(image: UIImage, imageName: String){
+    func saveUserProfileImage(image: UIImage, imageName: String, completion: @escaping (Bool) -> Void){
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
                     "Authorization" : returnToken()
                 ]
         
-        print(image)
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(image.jpegData(compressionQuality: 1)!, withName: "userImage", fileName: imageName, mimeType: "image/jpg")
             
@@ -140,18 +140,20 @@ class UserViewModel {
         }).response { response in
             switch response.result {
             case .success(_):
-                print(response.result)
+                completion(true)
                
             case .failure(let error):
                 print(error)
+                completion(false)
             }
         }
     }
     
     func saveUserProfile(name: String, phone: String ,intro: String, public: Bool, completion: @escaping (Bool) -> Void) {
+//        TODO: 자기소개 속성 필요함
         
         let parameters :Parameters = ["name": name, "phone": intro]
-        
+     
         let headers: HTTPHeaders = [
                     "Content-type": "application/x-www-form-urlencoded",
                     "Authorization" : returnToken()

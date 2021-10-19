@@ -8,11 +8,11 @@
 import Foundation
 
 
-struct SearchResult: Codable {
+struct SearchResult: Decodable {
     var users: [SearchUser] = []
 }
 
-struct SearchUser: Codable {
+struct SearchUser: Decodable {
     var id: Int
     var name: String
     var email:String

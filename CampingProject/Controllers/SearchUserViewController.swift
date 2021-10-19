@@ -58,9 +58,14 @@ extension SearchUserViewController: UITableViewDataSource{
         let isPublic = self.searchData[sender.tag].isPublic
         
         manager.followRequst(id: id, isPublic: isPublic, completion: { data in
-            sender.backgroundColor = .white
+            if data {
+                sender.backgroundColor = .white
+                sender.setTitle("팔로워", for: .normal)
+            } else {
+                
+            }
             
-            sender.setTitle("팔로워", for: .normal)
+            
         })
         
     }

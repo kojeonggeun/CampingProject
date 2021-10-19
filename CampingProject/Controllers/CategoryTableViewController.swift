@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-
+// TODO: 카테고리에서 사진 수정 후 리로드 안된다
 class CategoryTableViewController: UITableViewController{
       
     @IBOutlet var categoryTableView: UITableView!
@@ -116,4 +116,9 @@ class CategoryTableViewController: UITableViewController{
  
 }
 
+extension String{
+    func toDate(){
+        print("Awdawda")
+    }
+}
 

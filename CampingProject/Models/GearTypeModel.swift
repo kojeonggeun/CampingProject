@@ -5,11 +5,11 @@
 //  Created by 고정근 on 2021/08/13.
 //
 
-struct Response: Codable {
+struct Response: Decodable {
     var gearTypes: [GearType] = []
 }
 
-struct GearType: Codable {
+struct GearType: Decodable {
     var gearID: Int
     var gearName: String
     

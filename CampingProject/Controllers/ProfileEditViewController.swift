@@ -24,30 +24,32 @@ class ProfileEditViewController: UIViewController {
     let imagePicker = UIImagePickerController()
     let userVM = UserViewModel.shared
     
-    
-    
-    
+
     @IBAction func imageSelectButton(_ sender: Any) {
         self.present(self.imagePicker, animated: true)
-
     }
     
     @IBAction func dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil )
     }
+    
     @IBAction func saveProfile(_ sender: Any) {
-//        userVM.saveUserProfileImage(image: profileImageView.image!, imageName: "asd")
-        
-        userVM.saveUserProfile(name: profileName.text!, phone: "", intro: profileIntro.text!, public: true, completion: { check in
-            if check {
-                let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다!!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
-                    self.delegate?.reloadData()
-                    self.dismiss(animated: true, completion: nil)
+        userVM.saveUserProfileImage(image: profileImageView.image!, imageName: "asd", completion: { imageCheck in
+            if imageCheck{
+                self.userVM.saveUserProfile(name: self.profileName.text!, phone: "", intro: self.profileIntro.text!, public: true, completion: { saveCheck in
+                    if saveCheck {
+                        self.delegate?.reloadData()
+                        
+                        let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다!!", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
+                            self.dismiss(animated: true, completion: nil)
+                        })
+                        self.present(alert, animated: true)
+                    }
                 })
-                self.present(alert, animated: true)
             }
         })
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +70,6 @@ class ProfileEditViewController: UIViewController {
             
         DispatchQueue.global().async {
             let url = URL(string: self.image)
-
             let data = try? Data(contentsOf: url!)
             DispatchQueue.main.async {
                 let image = UIImage(data: data!)

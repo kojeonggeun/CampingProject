@@ -20,7 +20,7 @@ struct TableViewCellData {
     }
 }
 
-struct CellData: Codable {
+struct CellData: Decodable {
     var id: Int
     var name: String?
     var gearTypeId: Int?
@@ -32,7 +32,7 @@ struct CellData: Codable {
     var buyDt: String?
 }
 
-struct ImageData: Codable {
+struct ImageData: Decodable {
     var imageId: Int
     var orgFilename: String
     var url: String

@@ -18,8 +18,8 @@ class APIManager{
     var tableViewData: [TableViewCellData] = []
     
     let imageCache = AutoPurgingImageCache( memoryCapacity: 111_111_111, preferredMemoryUsageAfterPurge: 90_000_000)
-    let url = API.BASE_URL_MYSELF
-    let urlUser = API.BASE_URL
+    let url = API.BASE_URL
+    let urlUser = API.BASE_URL_MYSELF
     
     
 //    장비 저장
@@ -48,7 +48,7 @@ class APIManager{
                 multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: imageName[i],mimeType: "image/jpg")
             }
             
-        }, to: url + "gear",method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
+        }, to: urlUser + "gear",method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
             
             print("Upload Progress: \(progress.fractionCompleted)")
             
@@ -66,7 +66,7 @@ class APIManager{
     func deleteGear(gearId: Int,  row: Int) {
         userGears.remove(at: row)
         
-        AF.request(url + "gear/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
+        AF.request(urlUser + "gear/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
             print(response)
         }
     }
@@ -96,7 +96,7 @@ class APIManager{
                 multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages[\(i)].image", fileName: imageName[i],mimeType: "image/jpg")
                 
             }
-        }, to: url + "gear/\(gearId)" ,method: .put, headers: headers).uploadProgress(queue: .main, closure: { progress in
+        }, to: urlUser + "gear/\(gearId)" ,method: .put, headers: headers).uploadProgress(queue: .main, closure: { progress in
 
             print("Upload Progress: \(progress.fractionCompleted)")
 
@@ -114,7 +114,7 @@ class APIManager{
 //    장비타입 로드
     func loadGearType(completion: @escaping (Bool) -> Void ) {
         
-        AF.request(urlUser + "common/config",
+        AF.request(url + "common/config",
                    method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,
@@ -159,7 +159,7 @@ class APIManager{
     
 //  유저 장비 로드
     func loadUserGear(completion: @escaping (Bool) -> Void){
-        AF.request(url + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(urlUser + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(_):
                 guard let result = response.data else { return }
@@ -168,7 +168,6 @@ class APIManager{
                 for i in data {
                     self.userGears.append(i)
                 }
-
                 completion(true)
                 
             case .failure(let error):
@@ -196,7 +195,7 @@ class APIManager{
 //    유저 장비 이미지 로드
     func loadGearImages(gearId: Int, completion: @escaping ([ImageData]) -> Void){
         
-        AF.request(url + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(urlUser + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
     
             switch response.result {
             case .success(_):
@@ -237,7 +236,7 @@ class APIManager{
     
     func loadUserData(){
         
-        AF.request(url , method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(urlUser , method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(let data):
                print(data)
@@ -249,9 +248,9 @@ class APIManager{
     }
     
     func searchUser(searchText: String, page: Int = 0, completion: @escaping ([SearchUser]) -> Void){
-        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 20]
+        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 5]
         
-        AF.request(urlUser+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(url+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
             switch response.result {
             case .success(let data):
                 guard let result = response.data else { return }
@@ -285,21 +284,19 @@ class APIManager{
     func followRequst(id: Int, isPublic: Bool, completion: @escaping (Bool) -> Void){
 //        if isPublic {
 //        }
-        
-  
-        
-        AF.request(url + "friend/\(id)",
+
+        AF.request(urlUser + "friend/\(id)",
                    method: .post,
-                   encoding:URLEncoding.default,
+                   encoding:JSONEncoding.default,
                    headers: self.headerInfo())
             .validate(statusCode: 200..<300)
-            .response { (response) in
+            .responseJSON { (response) in
                 switch response.result {
                 case .success(_):
           
                     completion(true)
                 case .failure(let error):
-                    print(AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error)))
+                    print(AFError.parameterEncodingFailed(reason: .customEncodingFailed(error: error)))
                     print("🚫 followRequst Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                     completion(false)
                 }
@@ -312,8 +309,8 @@ class APIManager{
     func headerInfo() -> HTTPHeaders {
         
         let headers: HTTPHeaders = [
-                    "Authorization" : returnToken(),
-                    "Content-Type" : "application/x-www-form-urlencoded"
+                "Content-Type" : "application/x-www-form-urlencoded",
+                "Authorization" : returnToken(),
                 ]
             
         return headers

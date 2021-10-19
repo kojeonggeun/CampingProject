@@ -27,7 +27,7 @@ class SignInViewController: UIViewController{
         userManager.login(email: email, password: password) { completion in
             if completion {
                 self.apiManager.loadUserGear(){ data in
-                    self.userManager.loadUserInfo(completion: {check in })
+                    self.userManager.loadUserInfo(completion: {_ in })
                 }
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
                 
@@ -85,7 +85,7 @@ class SignInViewController: UIViewController{
             if DB.userDefaults.object(forKey: "token") != nil {
                 let user = DB.userDefaults.value(forKey: "token") as! NSDictionary
                 print(user["token"])
-                self.userManager.loadUserInfo(completion: {check in })
+                self.userManager.loadUserInfo(completion: {_ in })
                 userManager.loginCheck(){ (completion) in
                     if completion {
                         self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])

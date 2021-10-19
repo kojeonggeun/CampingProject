@@ -50,34 +50,33 @@ class ProfileViewController: UIViewController, ReloadData {
         profileImage.layer.borderWidth = 5
         profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
+  
         
         reloadData()
         
     }
     
     func reloadData() {
-        
-        
-        
-        if self.userVM.userInfo[0].user.userImageUrl != "" {
-            imageUrl = self.userVM.userInfo[0].user.userImageUrl
-        } else {
-            
-            imageUrl = "https://doodleipsum.com/700/avatar-2?i"
-        }
-        
         DispatchQueue.global().async {
             self.userVM.loadUserInfo(completion: { check in
-                let url = URL(string: self.imageUrl)
-                let data = try? Data(contentsOf: url!)
-                
-    //            TODO: 프로필 이미지 수정 좀 이상함
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data!)
-                    self.profileImage.image = image
+                if check {
                     
-                    self.profileName.text = self.userVM.userInfo[0].user.name
-                    self.profileIntro.text = self.userVM.userInfo[0].user.phone
+                    if self.userVM.userInfo[0].user.userImageUrl != "" {
+                        self.imageUrl = self.userVM.userInfo[0].user.userImageUrl
+                    } else {
+                        self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
+                    }
+                    
+                    let url = URL(string: self.imageUrl)
+                    let data = try? Data(contentsOf: url!)
+        //            TODO: 프로필 이미지 수정 좀 이상함
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: data!)
+                        self.profileImage.image = image
+                        
+                        self.profileName.text = self.userVM.userInfo[0].user.name
+                        self.profileIntro.text = self.userVM.userInfo[0].user.phone
+                    }
                 }
             })
         }
@@ -87,6 +86,7 @@ class ProfileViewController: UIViewController, ReloadData {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gearQuantity.text = "\(userGearVM.userGears.count)"
+        
         follower.text = String(self.userVM.userInfo[0].followerCnt)
         following.text = String(self.userVM.userInfo[0].followingCnt)
     }
