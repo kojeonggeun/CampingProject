@@ -67,7 +67,7 @@ class GearEditViewController: UIViewController {
     }
     
     @objc func gearEdit(){
-//        TODO: 텍스트 리로드 해줘야 함 , 이미지랑 다르네 흐음,,
+
         guard let name = customView.gearName.text else { return }
         guard let color = customView.gearColor.text else { return }
         guard let company = customView.gearCompany.text else { return }
@@ -82,7 +82,7 @@ class GearEditViewController: UIViewController {
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
             self.navigationController?.popViewController(animated: true)
-            NotificationCenter.default.post(name: self.DidReloadPostDetailViewController, object: nil)
+            NotificationCenter.default.post(name: self.DidReloadPostDetailViewController, object: nil,userInfo: ["categoryDelete" : true])
             NotificationCenter.default.post(name: self.DidReloadPostEdit, object: nil, userInfo: ["edit" : true])
             
         })

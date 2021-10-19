@@ -31,16 +31,24 @@ class CategoryTableViewController: UITableViewController{
         self.title = type
         userGearVM.categoryUserData(type: type)
      
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidDeleteCatogoryGearPost"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.deleteTableCell(_:)), name: NSNotification.Name("DidDeleteCatogoryGearPost"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
     }
     
-    @objc func reloadTableView(_ noti: Notification) {
+    @objc func deleteTableCell(_ noti: Notification) {
         self.categoryTableView.performBatchUpdates({
             self.userGearVM.deleteCategoryData(row: tableIndex.row)
             self.categoryTableView.deleteRows(at: [self.tableIndex], with: .fade)
         }, completion: { (done) in
              //perform table refresh
         })
+    
+    }
+    
+    @objc func reloadTableView(_ noti: Notification){
+        if noti.userInfo?["edit"] as! Bool{
+            self.categoryTableView.reloadData()
+        }
     }
     
   
@@ -59,7 +67,6 @@ class CategoryTableViewController: UITableViewController{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableView", for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
         
         let userGearId = userGearVM.categoryData[indexPath.row].id
-        
         if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
             DispatchQueue.main.async {
                 cell.categoryImage.image = cacheImage
@@ -98,7 +105,6 @@ class CategoryTableViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        TODO: 카테고리에서 삭제 후 문제 생김!!!
         let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.categoryData[indexPath.row].id
         })!
       
@@ -111,14 +117,4 @@ class CategoryTableViewController: UITableViewController{
         self.navigationController?.pushViewController(pushVC, animated: true)
         
     }
-    
-
- 
 }
-
-extension String{
-    func toDate(){
-        print("Awdawda")
-    }
-}
-
