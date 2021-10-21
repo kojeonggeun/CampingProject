@@ -19,8 +19,8 @@ struct SearchUser: Decodable {
     var phone: String
     
 //    이미지 추가 전
-//    var userImageId: Int
-//    var userImageUrl: String
+    var userImageId: Int?
+    var userImageUrl: String
     
     var isPublic: Bool
     

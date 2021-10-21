@@ -24,6 +24,10 @@ class SearchTableViewCell: UITableViewCell{
     func updateUI(email: String, name: String){
         searchEmail.text = email
         searchName.text = name
-        
+    }
+    func updateImage(image: UIImage?){
+        if let searchImage = image {
+            searchProfileImage.image = searchImage
+        }
     }
 }

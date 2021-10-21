@@ -65,6 +65,10 @@ class UserViewModel {
             }
     }
     
+//    서버 작업 후 구현 예정
+    func emailDuplicateCheck(email: String, completion: @escaping (Bool) -> Void) {
+    }
+    
     
 //    토큰 유무 확인하여 로그인
     func loginCheck(completion: @escaping (Bool)-> Void ) {

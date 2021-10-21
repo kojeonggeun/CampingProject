@@ -24,9 +24,6 @@ class AddGearViewController: UIViewController {
     var apiService: APIManager = APIManager.shared
     
     let DidReloadPostMyGearViewController: Notification.Name = Notification.Name("DidReloadPostMyGearViewController")
-    
-    let pickerView = UIPickerView()
-    let datePickerView = UIDatePicker()
     let imagePicker = ImagePickerManager()
     let userGearViewModel = UserGearViewModel.shared
     
@@ -63,7 +60,7 @@ class AddGearViewController: UIViewController {
         
         self.userGearViewModel.addUserGear(name: name, type: customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: imagePicker.photoArray, imageName: imagePicker.imageFileName)
         
-        let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.!!", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
             self.navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: self.DidReloadPostMyGearViewController, object: nil, userInfo: ["gearAddId": self.customView.gearTypeId])

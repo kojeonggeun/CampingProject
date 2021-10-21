@@ -29,7 +29,7 @@ class MyGearViewCell: UITableViewCell {
         }
 
     func updateUI(name:String, type: String, date: String){
-        print(name, type, date)
+        
         tableViewCellText.text = name
         tableViewCellGearType.text = type
         tableViewCellDate.text = date

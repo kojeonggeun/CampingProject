@@ -22,6 +22,8 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     
     let userManager: UserViewModel = UserViewModel()
 
+    
+//    서버 작업 후 이메일 중복검사 구현 예정 
     @IBAction func signUpBtn(_ sender: Any) {
         guard let email = emailTextField.text  else{ return }
         guard let password = passwordTextField.text else{ return }

@@ -35,9 +35,11 @@ class SearchUserViewController: UIViewController {
 }
 
 extension SearchUserViewController: UITableViewDataSource{
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.searchData.count
     }
@@ -45,11 +47,28 @@ extension SearchUserViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableView", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
         cell.sendFollowButton.tag = indexPath.row
-        
         cell.sendFollowButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
+        print(self.searchData[indexPath.row].userImageUrl)
         
-        cell.updateUI(email: self.searchData[indexPath.row].email, name: self.searchData[indexPath.row].name)
+        let email = self.searchData[indexPath.row].email
+        let name = self.searchData[indexPath.row].name
+        var imageUrl = self.searchData[indexPath.row].userImageUrl
         
+        if imageUrl == "" {
+            imageUrl = "https://doodleipsum.com/500/avatar-3"
+        }
+        
+        DispatchQueue.global().async {
+            let url = URL(string: imageUrl)
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                let image = UIImage(data: data!)
+                cell.updateImage(image: image)
+                }
+            }
+        
+        cell.updateUI(email: email, name: name)
+
         return cell
     }
     @objc func sendFollowRequest(sender: UIButton){
@@ -64,10 +83,7 @@ extension SearchUserViewController: UITableViewDataSource{
             } else {
                 
             }
-            
-            
         })
-        
     }
 }
 

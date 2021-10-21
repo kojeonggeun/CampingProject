@@ -106,8 +106,9 @@ class GearTextListCustomView: UIView{
     func createPickerView(){
         
         pickerView.delegate = self
-        gearType.inputView = pickerView
+        
         gearType.text = apiService.gearTypes[0].gearName
+        gearType.inputView = pickerView
         gearTypeId = apiService.gearTypes[0].gearID
         
         let button = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissPickerView))

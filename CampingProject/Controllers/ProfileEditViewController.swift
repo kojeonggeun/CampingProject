@@ -40,7 +40,7 @@ class ProfileEditViewController: UIViewController {
                     if saveCheck {
                         self.delegate?.reloadData()
                         
-                        let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다!!", preferredStyle: .alert)
+                        let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
                             self.dismiss(animated: true, completion: nil)
                         })
