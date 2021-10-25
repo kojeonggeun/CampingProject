@@ -66,7 +66,19 @@ class UserViewModel {
     }
     
 //    서버 작업 후 구현 예정
-    func emailDuplicateCheck(email: String, completion: @escaping (Bool) -> Void) {
+    func emailDuplicateCheck(email: String, completion: @escaping (Int) -> Void) {
+        let parameters: [String: Any] = ["email": email]
+        
+        AF.request(url+"user/existEmail/" , method: .get, parameters: parameters).validate(statusCode: 200..<300).responseJSON { (response) in
+            switch response.result {
+            case .success(let data):
+                guard let result = data as? Int else { return }
+                completion(result)
+               
+            case .failure(let error):
+                print("🚫searchUser  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
     }
     
     
@@ -190,7 +202,7 @@ class UserViewModel {
         let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         return predicate.evaluate(with: password)
     }
-    
+
     func returnToken() -> String{
         let tokenDict =  DB.userDefaults.value(forKey: "token") as! NSDictionary
         let token = tokenDict["token"] as! String

@@ -22,6 +22,16 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     
     let userManager: UserViewModel = UserViewModel()
 
+    // MARK: LifeCycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        passwordTextField.isSecureTextEntry = true
+        passwordConformTextField.isSecureTextEntry = true
+        checkTextField.isHidden = true
+
+        
+    }
     
 //    서버 작업 후 이메일 중복검사 구현 예정 
     @IBAction func signUpBtn(_ sender: Any) {
@@ -34,6 +44,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     }
     
     func signUpAction(email: String, password: String, passwordConform: String){
+    
         
         if !userManager.isValidEmail(email: email){
             checkTextField.isHidden = false
@@ -74,16 +85,16 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     
     func passwordAnimation(){
             UIView.animate(withDuration: 0.2, animations: {
-            self.passwordTextField.frame.origin.x -= 10
-            self.passwordConformTextField.frame.origin.x -= 10
+            self.passwordTextField.frame.origin.x -= 20
+            self.passwordConformTextField.frame.origin.x -= 20
             }, completion: { _ in
                 UIView.animate(withDuration: 0.2, animations: {
                     self.passwordTextField.frame.origin.x += 20
                     self.passwordConformTextField.frame.origin.x += 20
                 }, completion: { _ in
                     UIView.animate(withDuration: 0.2, animations: {
-                        self.passwordTextField.frame.origin.x -= 10
-                        self.passwordConformTextField.frame.origin.x -= 10
+                        self.passwordTextField.frame.origin.x -= 20
+                        self.passwordConformTextField.frame.origin.x -= 20
                     })
                 })
             })
@@ -91,31 +102,36 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     
     func emailAnimation(){
         UIView.animate(withDuration: 0.2, animations: {
-        self.emailTextField.frame.origin.x -= 10
+        self.emailTextField.frame.origin.x -= 20
         }, completion: { _ in
             UIView.animate(withDuration: 0.2, animations: {
                 self.emailTextField.frame.origin.x += 20
             }, completion: { _ in
                 UIView.animate(withDuration: 0.2, animations: {
-                    self.emailTextField.frame.origin.x -= 10
+                    self.emailTextField.frame.origin.x -= 20
                 })
             })
         })
     }
-    // MARK: LifeCycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        passwordTextField.isSecureTextEntry = true
-        passwordConformTextField.isSecureTextEntry = true
-        checkTextField.isHidden = true
-
-        
-    }
+ 
     
     // 키보드 리턴키 눌렀을때 키보드 사라지게
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        guard let email = textField.text else { return }
+        
+        userManager.emailDuplicateCheck(email: email, completion: { data in
+            if data != 0 {
+                self.checkTextField.isHidden = false
+                self.checkTextField.text = "중복 되는 이메일입니다."
+                self.emailAnimation()
+            } else {
+                self.checkTextField.isHidden = true
+            }
+        })
     }
 }
