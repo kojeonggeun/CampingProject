@@ -47,9 +47,7 @@ class SignInViewController: UIViewController{
             sender.isSelected = true
             loginStateButton.tintColor = .green
             DB.userDefaults.set(sender.isSelected, forKey: "Auto")
-
         }
-        
     }
     
     @IBAction func appleLogin(_ sender: Any) {
@@ -69,17 +67,15 @@ class SignInViewController: UIViewController{
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-         
-        
-        
+
         passwordTextField.isSecureTextEntry = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailTextField.text = ""
-        passwordTextField.text = ""
+        
+        initFieldData()
         
         if DB.userDefaults.bool(forKey: "Auto") {
             if DB.userDefaults.object(forKey: "token") != nil {
@@ -95,10 +91,11 @@ class SignInViewController: UIViewController{
         }
     }// end func
     
-//    TODO: 자동로그인 손봐야함 이상하다. 유저 데이터가 없는 경우가 생김
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }// end func
+    func initFieldData(){
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        loginStateButton.tintColor = .lightGray
+        loginStateButton.isSelected = false
+    }
     
 }

@@ -52,7 +52,6 @@ class UserViewModel {
                     
                     let json = value as! NSDictionary
                     DB.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
-                    
                     print(json["token"])
                     completion(true)
 

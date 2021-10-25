@@ -24,8 +24,7 @@ class MyGearViewController: UIViewController{
     let tableViewVM = TableViewViewModel()
     let apiManager: APIManager = APIManager.shared
     
-    
-    
+
     @IBAction func addGearMove(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView")
         self.navigationController?.pushViewController(pushVC!, animated: true)
@@ -34,7 +33,6 @@ class MyGearViewController: UIViewController{
     @IBAction func unwind(_ sender: Any) {
         DB.userDefaults.removeObject(forKey: "token")
         DB.userDefaults.set(false, forKey: "Auto")
-        
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
     

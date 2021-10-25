@@ -50,7 +50,6 @@ class ProfileViewController: UIViewController, ReloadData {
         profileImage.layer.borderWidth = 5
         profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
-  
         
         reloadData()
         
@@ -81,7 +80,6 @@ class ProfileViewController: UIViewController, ReloadData {
             })
         }
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
