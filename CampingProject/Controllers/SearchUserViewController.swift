@@ -21,7 +21,6 @@ class SearchUserViewController: UIViewController {
     var searchData: [SearchUser] = []
     
     var fetchingMore: Bool = false
-    var hasNextPage: Bool = false
     var page: Int = 0
     
     
@@ -43,10 +42,12 @@ extension SearchUserViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if self.searchData.isEmpty || section == 1 && fetchingMore{
+        if self.searchData.isEmpty && section != 1{
             return 1
         } else if section == 0 {
             return self.searchData.count
+        } else if section == 1 && fetchingMore{
+            return 1
         }
         
         return 0
