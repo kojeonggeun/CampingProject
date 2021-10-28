@@ -31,3 +31,11 @@ class SearchTableViewCell: UITableViewCell{
         }
     }
 }
+
+class LoadingCell: UITableViewCell {
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
+    func start() {
+        activityIndicatorView.startAnimating()
+    }
+}

@@ -43,6 +43,8 @@
 		CBD5F5D626E9E0B500E09B0D /* UserGearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */; };
 		CBD5F5D826E9FB2900E09B0D /* TableViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D726E9FB2900E09B0D /* TableViewViewModel.swift */; };
 		CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */; };
+		CBDC478D272823B100537E5A /* EmptySearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC478C272823B100537E5A /* EmptySearchResultCell.swift */; };
+		CBDC478F2729467900537E5A /* FollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC478E2729467900537E5A /* FollowerViewController.swift */; };
 		CBF37200270C6FCF0028533C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF371FF270C6FCF0028533C /* UserModel.swift */; };
 		CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */; };
 		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
@@ -88,6 +90,8 @@
 		CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGearViewModel.swift; sourceTree = "<group>"; };
 		CBD5F5D726E9FB2900E09B0D /* TableViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewViewModel.swift; sourceTree = "<group>"; };
 		CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		CBDC478C272823B100537E5A /* EmptySearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchResultCell.swift; sourceTree = "<group>"; };
+		CBDC478E2729467900537E5A /* FollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerViewController.swift; sourceTree = "<group>"; };
 		CBF371FF270C6FCF0028533C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 				CBB51A032702F61E005F8B00 /* ProfileViewController.swift */,
 				CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */,
 				CB90E3FC27185A3F00CD2B1C /* SearchUserViewController.swift */,
+				CBDC478E2729467900537E5A /* FollowerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 				CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */,
 				CB491B9826FC3A8100D2481F /* GearTextListCustomView.xib */,
 				CB90E4002719A47500CD2B1C /* SearchTableViewCell.swift */,
+				CBDC478C272823B100537E5A /* EmptySearchResultCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -352,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDC478D272823B100537E5A /* EmptySearchResultCell.swift in Sources */,
 				CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */,
 				CB534DF726C2664A0022EA20 /* MyGearViewCell.swift in Sources */,
 				CB491B9726FC31ED00D2481F /* GearTextListCustomView.swift in Sources */,
@@ -362,6 +369,7 @@
 				CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
 				CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */,
+				CBDC478F2729467900537E5A /* FollowerViewController.swift in Sources */,
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
 				CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */,
 				CBB519FA26FF7187005F8B00 /* ImagePickerManager.swift in Sources */,

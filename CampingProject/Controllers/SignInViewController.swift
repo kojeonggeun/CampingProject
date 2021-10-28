@@ -15,6 +15,8 @@ class SignInViewController: UIViewController{
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginStateButton: UIButton!
     
+    @IBOutlet weak var loginCheckLabel: UILabel!
+    
     let userManager: UserViewModel = UserViewModel.shared
     let apiManager: APIManager = APIManager.shared
     @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
@@ -32,7 +34,9 @@ class SignInViewController: UIViewController{
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
                 
             } else {
-                print("로그인 실패 시 코드 작성 해야 함")
+//                loginCheckLabel.isHidden = false
+                self.loginCheckLabel.text = "이메일 또는 비밀번호가 틀립니다."
+                
             }
         }
     }
@@ -57,9 +61,9 @@ class SignInViewController: UIViewController{
   
         if let barVC = segue.destination as? MainTabBarController {
                 barVC.viewControllers?.forEach {
-                    if let nav = $0 as? UINavigationController{
-                        let vc = nav.topViewController as! MyGearViewController
-                        vc.segueText = email
+                    if let nav = $0 as? UINavigationController {
+                        let vc = nav.topViewController as? MyGearViewController
+                        vc?.segueText = email
                     }
                 }
             }
@@ -75,7 +79,7 @@ class SignInViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        initFieldData()
+        fieldDataInit()
         
         if DB.userDefaults.bool(forKey: "Auto") {
             if DB.userDefaults.object(forKey: "token") != nil {
@@ -91,9 +95,10 @@ class SignInViewController: UIViewController{
         }
     }// end func
     
-    func initFieldData(){
+    func fieldDataInit(){
         emailTextField.text = ""
         passwordTextField.text = ""
+        loginCheckLabel.text = ""
         loginStateButton.tintColor = .lightGray
         loginStateButton.isSelected = false
     }

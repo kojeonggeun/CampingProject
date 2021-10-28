@@ -27,13 +27,26 @@ class ProfileViewController: UIViewController, ReloadData {
     
     let userVM: UserViewModel = UserViewModel.shared
     
+    @IBAction func moveFollower(_ sender: Any) {
+        
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followerView")
+        self.navigationController?.pushViewController(pushVC!, animated: true)
+    }
+    @IBAction func moveFollowing(_ sender: Any) {
+        print("moveFollowing")
+    }
     @IBAction func showProfileEdit(_ sender: Any) {
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as? ProfileEditViewController else {
-                return
-            }
-        vc.image = imageUrl
-        vc.delegate = self
-        present(vc, animated: true)
+        let pushEditVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as! ProfileEditViewController
+        pushEditVC.image = imageUrl
+        pushEditVC.delegate = self
+        self.navigationController?.pushViewController(pushEditVC, animated: true)
+//        self.navigationController?.pushViewController(pushVC!, animated: true)
+//        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as? ProfileEditViewController else {
+//                return
+//            }
+//        vc.image = imageUrl
+//        vc.delegate = self
+//        present(vc, animated: true)
         
     }
     //      09/29
@@ -51,6 +64,7 @@ class ProfileViewController: UIViewController, ReloadData {
         profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
         
+        profileIntro.isEditable = false
         reloadData()
         
     }

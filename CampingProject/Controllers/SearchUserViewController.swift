@@ -14,12 +14,14 @@ class SearchUserViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchTableView: UITableView!
+
     
     let manager = APIManager.shared
     var searchInputText: String = ""
     var searchData: [SearchUser] = []
     
     var fetchingMore: Bool = false
+    var hasNextPage: Bool = false
     var page: Int = 0
     
     
@@ -35,42 +37,70 @@ class SearchUserViewController: UIViewController {
 }
 
 extension SearchUserViewController: UITableViewDataSource{
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.searchData.count
+        
+        if self.searchData.isEmpty || section == 1 && fetchingMore{
+            return 1
+        } else if section == 0 {
+            return self.searchData.count
+        }
+        
+        return 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableView", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
-        cell.sendFollowButton.tag = indexPath.row
-        cell.sendFollowButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
-        print(self.searchData[indexPath.row].userImageUrl)
         
-        let email = self.searchData[indexPath.row].email
-        let name = self.searchData[indexPath.row].name
-        var imageUrl = self.searchData[indexPath.row].userImageUrl
-        
-        if imageUrl == "" {
-            imageUrl = "https://doodleipsum.com/500/avatar-3"
+        if self.searchData.isEmpty && indexPath.section == 0{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "noResult", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
+            
+            cell.updateLabel(text: searchInputText)
+            return cell
         }
         
-        DispatchQueue.global().async {
-            let url = URL(string: imageUrl)
-            let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
-                let image = UIImage(data: data!)
-                cell.updateImage(image: image)
-                }
-            }
-        
-        cell.updateUI(email: email, name: name)
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableView", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+            cell.sendFollowButton.tag = indexPath.row
+            cell.sendFollowButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
+            
+            
+            let email = self.searchData[indexPath.row].email
+            
+            let name = self.searchData[indexPath.row].name
+            var imageUrl = self.searchData[indexPath.row].userImageUrl
 
-        return cell
+            if imageUrl == "" {
+                imageUrl = "https://doodleipsum.com/500/avatar-3"
+            }
+
+            DispatchQueue.global().async {
+                let url = URL(string: imageUrl)
+                let data = try? Data(contentsOf: url!)
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data!)
+                    cell.updateImage(image: image)
+                    }
+                }
+            
+            cell.updateUI(email: email, name: name)
+            
+            return cell
+        } else  {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as? LoadingCell else { return UITableViewCell() }
+            
+            cell.start()
+            
+            return cell
+        }
+        
+        
+    
     }
+    
     @objc func sendFollowRequest(sender: UIButton){
         
         let id = self.searchData[sender.tag].id
@@ -91,7 +121,13 @@ extension SearchUserViewController: UITableViewDataSource{
 extension SearchUserViewController: UITableViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if searchTableView.contentOffset.y > (searchTableView.contentSize.height - searchTableView.bounds.size.height){
+        
+        let offsetY = searchTableView.contentOffset.y
+        let contentSize = searchTableView.contentSize.height
+        let boundsSizeHeight = searchTableView.bounds.size.height
+        
+        
+        if offsetY > (contentSize - boundsSizeHeight){
             if !fetchingMore{
                 beginBatchFetch()
             }
@@ -101,7 +137,12 @@ extension SearchUserViewController: UITableViewDelegate{
     
     private func beginBatchFetch() {
         fetchingMore = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
+        
+        DispatchQueue.main.async {
+                self.searchTableView.reloadSections(IndexSet(integer: 1), with: .none)
+            }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.page += 1
             self.manager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
 
@@ -110,7 +151,9 @@ extension SearchUserViewController: UITableViewDelegate{
                     self.fetchingMore = false
                     self.searchTableView.reloadData()
                 }
+               
             })
+            
         })
     }
 }
@@ -126,6 +169,7 @@ extension SearchUserViewController: UISearchBarDelegate{
             for i in data{
                 self.searchData.append(i)
             }
+
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }

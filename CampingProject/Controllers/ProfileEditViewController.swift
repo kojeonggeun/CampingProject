@@ -29,9 +29,9 @@ class ProfileEditViewController: UIViewController {
         self.present(self.imagePicker, animated: true)
     }
     
-    @IBAction func dismiss(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil )
-    }
+//    @IBAction func dismiss(_ sender: Any) {
+//        self.dismiss(animated: true, completion: nil )
+//    }
     
     @IBAction func saveProfile(_ sender: Any) {
         userVM.saveUserProfileImage(image: profileImageView.image!, imageName: "asd", completion: { imageCheck in
@@ -42,7 +42,7 @@ class ProfileEditViewController: UIViewController {
                         
                         let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
-                            self.dismiss(animated: true, completion: nil)
+                            self.navigationController?.popViewController(animated: true)
                         })
                         self.present(alert, animated: true)
                     }
