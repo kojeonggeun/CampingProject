@@ -31,7 +31,9 @@ class SearchUserViewController: UIViewController {
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        searchTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
+        searchTableView.register(UINib(nibName:String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
+        searchTableView.register(UINib(nibName:String(describing: LoadingCell.self), bundle: nil), forCellReuseIdentifier: "LoadingCell")
     }
 }
 
@@ -57,14 +59,16 @@ extension SearchUserViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if self.searchData.isEmpty && indexPath.section == 0{
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "noResult", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySearchResultCell", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
             
             cell.updateLabel(text: searchInputText)
             return cell
         }
         
         if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableView", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+            
             cell.sendFollowButton.tag = indexPath.row
             cell.sendFollowButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
             
@@ -78,9 +82,11 @@ extension SearchUserViewController: UITableViewDataSource{
                 imageUrl = "https://doodleipsum.com/500/avatar-3"
             }
 
+            print(imageUrl)
             DispatchQueue.global().async {
                 let url = URL(string: imageUrl)
                 let data = try? Data(contentsOf: url!)
+                print(url, data)
                 DispatchQueue.main.async {
                     let image = UIImage(data: data!)
                     cell.updateImage(image: image)

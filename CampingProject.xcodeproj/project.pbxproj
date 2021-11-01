@@ -45,6 +45,10 @@
 		CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */; };
 		CBDC478D272823B100537E5A /* EmptySearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC478C272823B100537E5A /* EmptySearchResultCell.swift */; };
 		CBDC478F2729467900537E5A /* FollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC478E2729467900537E5A /* FollowerViewController.swift */; };
+		CBDC479527301A7000537E5A /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDC479427301A7000537E5A /* SearchTableViewCell.xib */; };
+		CBDC479727302B8000537E5A /* EmptySearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDC479627302B8000537E5A /* EmptySearchResultCell.xib */; };
+		CBDC479927302B9100537E5A /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC479827302B9100537E5A /* LoadingCell.swift */; };
+		CBDC479B27302B9C00537E5A /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDC479A27302B9C00537E5A /* LoadingCell.xib */; };
 		CBF37200270C6FCF0028533C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF371FF270C6FCF0028533C /* UserModel.swift */; };
 		CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */; };
 		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
@@ -92,6 +96,10 @@
 		CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		CBDC478C272823B100537E5A /* EmptySearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchResultCell.swift; sourceTree = "<group>"; };
 		CBDC478E2729467900537E5A /* FollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerViewController.swift; sourceTree = "<group>"; };
+		CBDC479427301A7000537E5A /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		CBDC479627302B8000537E5A /* EmptySearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptySearchResultCell.xib; sourceTree = "<group>"; };
+		CBDC479827302B9100537E5A /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		CBDC479A27302B9C00537E5A /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		CBF371FF270C6FCF0028533C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -236,7 +244,11 @@
 				CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */,
 				CB491B9826FC3A8100D2481F /* GearTextListCustomView.xib */,
 				CB90E4002719A47500CD2B1C /* SearchTableViewCell.swift */,
+				CBDC479427301A7000537E5A /* SearchTableViewCell.xib */,
 				CBDC478C272823B100537E5A /* EmptySearchResultCell.swift */,
+				CBDC479627302B8000537E5A /* EmptySearchResultCell.xib */,
+				CBDC479827302B9100537E5A /* LoadingCell.swift */,
+				CBDC479A27302B9C00537E5A /* LoadingCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -300,11 +312,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDC479527301A7000537E5A /* SearchTableViewCell.xib in Resources */,
 				CB0355BE270DD4F800564675 /* MyGear.storyboard in Resources */,
+				CBDC479B27302B9C00537E5A /* LoadingCell.xib in Resources */,
 				CBB51A022700C74A005F8B00 /* GearImageCollectionViewCell.xib in Resources */,
 				CB6037C726B2728F0023042F /* LaunchScreen.storyboard in Resources */,
 				CB491B9926FC3A8100D2481F /* GearTextListCustomView.xib in Resources */,
 				CB6037C426B2728F0023042F /* Assets.xcassets in Resources */,
+				CBDC479727302B8000537E5A /* EmptySearchResultCell.xib in Resources */,
 				CB6037C226B2728F0023042F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +392,7 @@
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
 				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,
 				CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */,
+				CBDC479927302B9100537E5A /* LoadingCell.swift in Sources */,
 				CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */,
 				CB90E3FF271860E900CD2B1C /* SearchUserModel.swift in Sources */,
 				CB6037D326B28A530023042F /* UserViewModel.swift in Sources */,

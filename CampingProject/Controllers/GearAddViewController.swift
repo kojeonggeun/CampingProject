@@ -38,7 +38,6 @@ class AddGearViewController: UIViewController {
 
     }
     
-    
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()

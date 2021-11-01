@@ -15,7 +15,6 @@ class SearchTableViewCell: UITableViewCell{
     @IBOutlet weak var searchName: UILabel!
     @IBOutlet weak var sendFollowButton: UIButton!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
      
@@ -32,10 +31,3 @@ class SearchTableViewCell: UITableViewCell{
     }
 }
 
-class LoadingCell: UITableViewCell {
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    
-    func start() {
-        activityIndicatorView.startAnimating()
-    }
-}
