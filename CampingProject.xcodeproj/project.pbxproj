@@ -49,6 +49,8 @@
 		CBDC479727302B8000537E5A /* EmptySearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDC479627302B8000537E5A /* EmptySearchResultCell.xib */; };
 		CBDC479927302B9100537E5A /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC479827302B9100537E5A /* LoadingCell.swift */; };
 		CBDC479B27302B9C00537E5A /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDC479A27302B9C00537E5A /* LoadingCell.xib */; };
+		CBDC479D2732C97700537E5A /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC479C2732C97700537E5A /* SearchResultViewModel.swift */; };
+		CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC479E2732C9C900537E5A /* CellProtocol.swift */; };
 		CBF37200270C6FCF0028533C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF371FF270C6FCF0028533C /* UserModel.swift */; };
 		CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */; };
 		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
@@ -100,6 +102,8 @@
 		CBDC479627302B8000537E5A /* EmptySearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptySearchResultCell.xib; sourceTree = "<group>"; };
 		CBDC479827302B9100537E5A /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		CBDC479A27302B9C00537E5A /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		CBDC479C2732C97700537E5A /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
+		CBDC479E2732C9C900537E5A /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		CBF371FF270C6FCF0028533C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				CB93BE1726D3BEAF0018AB0D /* Constants.swift */,
+				CBDC479E2732C9C900537E5A /* CellProtocol.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */,
 				CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */,
 				CBD5F5D726E9FB2900E09B0D /* TableViewViewModel.swift */,
+				CBDC479C2732C97700537E5A /* SearchResultViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 				CB3347A826DD16C200DE0126 /* GearDetailViewCell.swift in Sources */,
 				CB90E3FD27185A3F00CD2B1C /* SearchUserViewController.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
+				CBDC479D2732C97700537E5A /* SearchResultViewModel.swift in Sources */,
 				CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */,
 				CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
@@ -390,6 +397,7 @@
 				CBB519FA26FF7187005F8B00 /* ImagePickerManager.swift in Sources */,
 				CB90E4012719A47500CD2B1C /* SearchTableViewCell.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
+				CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */,
 				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,
 				CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */,
 				CBDC479927302B9100537E5A /* LoadingCell.swift in Sources */,

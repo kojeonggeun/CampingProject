@@ -18,7 +18,6 @@ struct SearchUser: Decodable {
     var email:String
     var phone: String
     
-//    이미지 추가 전
     var userImageId: Int?
     var userImageUrl: String
     

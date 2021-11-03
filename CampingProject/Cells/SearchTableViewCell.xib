@@ -21,14 +21,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emw-qw-0Br">
-                        <rect key="frame" x="93" y="12" width="42" height="21"/>
+                        <rect key="frame" x="93" y="12" width="163" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8Y-Fz-WxV">
-                        <rect key="frame" x="93" y="30" width="36" height="17"/>
+                        <rect key="frame" x="93" y="30" width="163" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
@@ -48,7 +48,7 @@
                 <outlet property="searchProfileImage" destination="fUy-rr-UrO" id="GNx-qH-0Ie"/>
                 <outlet property="sendFollowButton" destination="U4F-bN-FWt" id="kXn-AQ-C1c"/>
             </connections>
-            <point key="canvasLocation" x="84" y="-37"/>
+            <point key="canvasLocation" x="82.608695652173921" y="-37.5"/>
         </tableViewCell>
     </objects>
 </document>

@@ -12,6 +12,15 @@ class FollowerViewController: UIViewController {
     
     @IBOutlet weak var followerTableView: UITableView!
     
+    let manager = APIManager.shared
+    var searchInputText: String = ""
+    
+    
+    var fetchingMore: Bool = false
+    var page: Int = 0
+    
+    var searchData: [CellRepresentable] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
