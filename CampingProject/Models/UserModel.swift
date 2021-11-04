@@ -10,21 +10,21 @@ import Foundation
 struct UserInfo: Decodable {
 //    let code: String
     var user: User
-    let followerCnt: Int
-    let followingCnt: Int
-    let gearCnt: Int
-    let boardCnt: Int
+    var followerCnt: Int
+    var followingCnt: Int
+    var gearCnt: Int
+    var boardCnt: Int
     
 }
 
 struct User: Decodable {
-    let id: Int
-    let name: String?
-    let email: String
-    let phone: String?
-    let userImageId: Int?
-    let userImageUrl: String
-    let isPublic: Bool
+    var id: Int
+    var name: String?
+    var email: String
+    var phone: String?
+    var userImageId: Int?
+    var userImageUrl: String
+    var isPublic: Bool
     
     init(){
         self.id = 0

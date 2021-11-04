@@ -21,7 +21,7 @@ class MyGearViewController: UIViewController{
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
-    let tableViewVM = TableViewViewModel()
+    
     let apiManager: APIManager = APIManager.shared
     
 

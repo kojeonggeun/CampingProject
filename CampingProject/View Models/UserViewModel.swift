@@ -18,7 +18,7 @@ class UserViewModel {
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
     var userInfo: [UserInfo] = []
-    
+    var friendData: [Friend] = []
     
 //    회원가입
     func Register(email: String, password: String){
@@ -117,6 +117,7 @@ class UserViewModel {
                 case .success(_):
                     guard let user = response.data else { return }
                     let userData = self.parseUser(user)
+                    print(userData,"Awd")
                     self.userInfo.append(userData)
                     
                     completion(true)
@@ -186,9 +187,40 @@ class UserViewModel {
         }
     }
   
+    func loadFriends(desc: String){
+        let headers: HTTPHeaders = [
+                    "Content-type": "application/x-www-form-urlencoded",
+                    "Authorization" : returnToken()
+                ]
+        AF.request(urlUser + "friend/\(desc)" ,method: .get , encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
+        ).responseJSON { response in
+            switch response.result {
+            case .success(_):
+                guard let data = response.data else { return }
+                let friends = self.parseFriend(data)
+                for i in friends{
+                    self.friendData.append(i)
+                }
+            case .failure(let error):
+                print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
+    }
+    func parseFriend(_ data: Data) -> [Friend] {
+        let decoder = JSONDecoder()
+        self.friendData.removeAll()
+        do {
+            let response = try decoder.decode(Friends.self, from: data)
+            return response.friends
+        } catch let error {
+            print(AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error)))
+            print("--> Friend parsing error: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
     
     func isValidEmail(email: String) -> Bool{
-        // print(userDefaults.string(forKey: "ww") as! String)
         let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return predicate.evaluate(with: email)

@@ -44,9 +44,11 @@ class UserGearViewModel {
             }
         }
     }
+    
     func deleteCategoryData(row: Int){
         categoryData.remove(at: row)
     }
+    
     func numberOfRowsInSection() -> Int{
    
         return categoryData.count

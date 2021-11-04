@@ -9,9 +9,13 @@ import Foundation
 import UIKit
 
 class MainTabBarController: UITabBarController {
+    
+    let userVM = UserViewModel.shared
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userVM.loadFriends(desc: "following")
+//        print(userVM.userInfo,"Awddddd")
     }
 }
 

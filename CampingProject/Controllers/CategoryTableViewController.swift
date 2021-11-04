@@ -16,7 +16,7 @@ class CategoryTableViewController: UITableViewController{
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
-    let tableViewVM = TableViewViewModel()
+    
     let apiManager: APIManager = APIManager.shared
     
     var gearType: Int = 0

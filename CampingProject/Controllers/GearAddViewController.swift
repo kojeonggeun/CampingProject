@@ -42,7 +42,9 @@ class AddGearViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "장비 등록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(gearSave(_:)))
+        let rightBarButtonItem = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(gearSave(_:)))
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
         imageCount.text = "(\(imagePicker.photoArray.count) / 5"
         gearCollectionView.register(UINib(nibName:String(describing: GearImageCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "imageCell")
 //        imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
