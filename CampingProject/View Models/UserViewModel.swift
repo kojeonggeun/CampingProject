@@ -117,7 +117,7 @@ class UserViewModel {
                 case .success(_):
                     guard let user = response.data else { return }
                     let userData = self.parseUser(user)
-                    print(userData,"Awd")
+                    
                     self.userInfo.append(userData)
                     
                     completion(true)

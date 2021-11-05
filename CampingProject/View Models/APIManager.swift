@@ -55,7 +55,7 @@ class APIManager{
         }).responseJSON { response in
             switch response.result {
             case .success(let data):
-                print("")
+                print(data)
             case .failure(let error):
                 print(error)
             }
@@ -102,7 +102,7 @@ class APIManager{
 
         }).responseString { response in
             switch response.result {
-            case .success(let data):
+            case .success(_):
                 self.loadUserGear(completion: { data in
                 })
             case .failure(let error):

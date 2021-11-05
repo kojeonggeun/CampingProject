@@ -98,7 +98,6 @@ class ProfileViewController: UIViewController, ReloadData {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gearQuantity.text = "\(userGearVM.userGears.count)"
-        print(self.userVM.userInfo)
         
         follower.text = String(self.userVM.userInfo[0].followerCnt)
         following.text = String(self.userVM.userInfo[0].followingCnt)

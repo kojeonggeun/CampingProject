@@ -15,7 +15,7 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         userVM.loadFriends(desc: "following")
-//        print(userVM.userInfo,"Awddddd")
+
     }
 }
 

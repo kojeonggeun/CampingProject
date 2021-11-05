@@ -20,16 +20,17 @@ class SearchUserViewController: UIViewController {
     
     var searchInputText: String = ""
     var fetchingMore: Bool = false
+    var hasNext: Bool = false
     var page: Int = 0
     var searchData: [CellRepresentable] = []
-    
-    @IBAction func sendFollowRequest(_ sender: Any) {
-        
-    }
+    var cellHeightsDictionary: NSMutableDictionary = [:]
+ 
     
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchTableView.keyboardDismissMode = .onDrag
         
         searchTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
         searchTableView.register(UINib(nibName:String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
@@ -43,7 +44,6 @@ extension SearchUserViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if self.searchData.isEmpty && section != 1{
             return 1
         } else if section == 0 {
@@ -69,7 +69,6 @@ extension SearchUserViewController: UITableViewDataSource{
     }
 }
 
-
 extension SearchUserViewController: UITableViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -78,12 +77,10 @@ extension SearchUserViewController: UITableViewDelegate{
         let contentSize = searchTableView.contentSize.height
         let boundsSizeHeight = searchTableView.bounds.size.height
         
-        
         if offsetY > (contentSize - boundsSizeHeight){
             if !fetchingMore{
                 beginBatchFetch()
             }
-            
         }
     }
     
@@ -92,8 +89,7 @@ extension SearchUserViewController: UITableViewDelegate{
         
         DispatchQueue.main.async {
                 self.searchTableView.reloadSections(IndexSet(integer: 1), with: .none)
-            }
-        
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.page += 1
             self.manager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
@@ -103,9 +99,24 @@ extension SearchUserViewController: UITableViewDelegate{
                     self.fetchingMore = false
                     self.searchTableView.reloadData()
                 }
-               
             })
         })
+    }
+    
+/*  TableView reloadData() 했을 때 스크롤이 밑에 고정 되어 있어 스크롤의 위치를 수정해야 함
+    기존 셀의 높이를 저장하여 스크롤 시
+ */
+//    셀의 높이를 저장
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellHeightsDictionary.setObject(cell.frame.size.height, forKey: indexPath as NSCopying)
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let height = cellHeightsDictionary.object(forKey: indexPath) as? Double {
+            
+            return CGFloat(height)
+        }
+        return UITableView.automaticDimension
     }
     
 }
@@ -118,6 +129,7 @@ extension SearchUserViewController: UISearchBarDelegate{
    
         manager.searchUser(searchText: searchText, completion: { data in
             self.appendSearchData(data: data)
+             
             
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()

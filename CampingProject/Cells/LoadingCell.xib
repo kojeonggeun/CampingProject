@@ -16,11 +16,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="358" height="66"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="NBo-q6-86F">
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="NBo-q6-86F">
                         <rect key="frame" x="169" y="23" width="20" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </activityIndicatorView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="NBo-q6-86F" firstAttribute="top" secondItem="stI-FS-duV" secondAttribute="top" constant="23" id="VEF-WJ-hT0"/>
+                    <constraint firstItem="NBo-q6-86F" firstAttribute="leading" secondItem="stI-FS-duV" secondAttribute="leading" constant="169" id="dGU-nV-pzM"/>
+                    <constraint firstAttribute="bottom" secondItem="NBo-q6-86F" secondAttribute="bottom" constant="23" id="hVL-Jt-EEW"/>
+                    <constraint firstAttribute="trailing" secondItem="NBo-q6-86F" secondAttribute="trailing" constant="169" id="m0K-u9-ci5"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="activityIndicatorView" destination="NBo-q6-86F" id="tyc-8z-0FA"/>
