@@ -52,6 +52,8 @@
 		CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC479E2732C9C900537E5A /* CellProtocol.swift */; };
 		CBDC47A12734187700537E5A /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC47A02734187700537E5A /* FriendModel.swift */; };
 		CBF37200270C6FCF0028533C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF371FF270C6FCF0028533C /* UserModel.swift */; };
+		CBF791F427366EDC0089EE48 /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF791F327366EDC0089EE48 /* FriendViewModel.swift */; };
+		CBF791F62737B0300089EE48 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF791F52737B0300089EE48 /* FollowingViewController.swift */; };
 		CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */; };
 		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
 /* End PBXBuildFile section */
@@ -105,6 +107,8 @@
 		CBDC479E2732C9C900537E5A /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		CBDC47A02734187700537E5A /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
 		CBF371FF270C6FCF0028533C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		CBF791F327366EDC0089EE48 /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
+		CBF791F52737B0300089EE48 /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
 		DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampingProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +215,7 @@
 				CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */,
 				CB90E3FC27185A3F00CD2B1C /* SearchUserViewController.swift */,
 				CBDC478E2729467900537E5A /* FollowerViewController.swift */,
+				CBF791F52737B0300089EE48 /* FollowingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 				CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */,
 				CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */,
 				CBDC479C2732C97700537E5A /* SearchResultViewModel.swift */,
+				CBF791F327366EDC0089EE48 /* FriendViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 				CBB519FA26FF7187005F8B00 /* ImagePickerManager.swift in Sources */,
 				CB90E4012719A47500CD2B1C /* SearchTableViewCell.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
+				CBF791F62737B0300089EE48 /* FollowingViewController.swift in Sources */,
 				CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */,
 				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,
 				CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */,
@@ -407,6 +414,7 @@
 				CB6037D326B28A530023042F /* UserViewModel.swift in Sources */,
 				CB58A79826E5F136006C80EA /* GearDetailViewController.swift in Sources */,
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,
+				CBF791F427366EDC0089EE48 /* FriendViewModel.swift in Sources */,
 				CBBB2A9D26F238BF006B2E3C /* CategoryTableViewController.swift in Sources */,
 				CBD5F5D626E9E0B500E09B0D /* UserGearViewModel.swift in Sources */,
 				CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */,

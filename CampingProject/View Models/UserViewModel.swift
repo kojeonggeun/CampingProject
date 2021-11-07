@@ -18,7 +18,8 @@ class UserViewModel {
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
     var userInfo: [UserInfo] = []
-    var friendData: [Friend] = []
+    var followers: [Friend] = []
+    var followings: [Friend] = []
     
 //    회원가입
     func Register(email: String, password: String){
@@ -164,7 +165,7 @@ class UserViewModel {
             }
         }
     }
-    
+
     func saveUserProfile(name: String, phone: String ,intro: String, public: Bool, completion: @escaping (Bool) -> Void) {
 //        TODO: 자기소개 속성 필요함
         
@@ -187,28 +188,33 @@ class UserViewModel {
         }
     }
   
-    func loadFriends(desc: String){
+    func loadFollower(){
         let headers: HTTPHeaders = [
                     "Content-type": "application/x-www-form-urlencoded",
                     "Authorization" : returnToken()
                 ]
-        AF.request(urlUser + "friend/\(desc)" ,method: .get , encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
+        
+        AF.request(urlUser + "friend/follower" ,method: .get , encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
         ).responseJSON { response in
             switch response.result {
             case .success(_):
                 guard let data = response.data else { return }
-                let friends = self.parseFriend(data)
-                for i in friends{
-                    self.friendData.append(i)
+                let follower = self.parseFollower(data)
+               
+                for i in follower {
+                    self.followers.append(i)
                 }
+                
             case .failure(let error):
                 print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
-    func parseFriend(_ data: Data) -> [Friend] {
+    
+    func parseFollower(_ data: Data) -> [Friend] {
         let decoder = JSONDecoder()
-        self.friendData.removeAll()
+        self.followers.removeAll()
+
         do {
             let response = try decoder.decode(Friends.self, from: data)
             return response.friends
@@ -219,6 +225,42 @@ class UserViewModel {
         }
     }
     
+    func loadFollowing(){
+        let headers: HTTPHeaders = [
+                    "Content-type": "application/x-www-form-urlencoded",
+                    "Authorization" : returnToken()
+                ]
+        
+        AF.request(urlUser + "friend/following" ,method: .get , encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
+        ).responseJSON { response in
+            switch response.result {
+            case .success(_):
+                guard let data = response.data else { return }
+                let follower = self.parseFollowing(data)
+               
+                for i in follower {
+                    self.followings.append(i)
+                }
+                
+            case .failure(let error):
+                print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
+    }
+    
+    func parseFollowing(_ data: Data) -> [Friend] {
+        let decoder = JSONDecoder()
+        self.followings.removeAll()
+
+        do {
+            let response = try decoder.decode(Friends.self, from: data)
+            return response.friends
+        } catch let error {
+            print(AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error)))
+            print("--> Friend parsing error: \(error.localizedDescription)")
+            return []
+        }
+    }
     
     func isValidEmail(email: String) -> Bool{
         let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"

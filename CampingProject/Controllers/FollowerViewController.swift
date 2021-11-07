@@ -13,6 +13,9 @@ import UIKit
 class FollowerViewController: UIViewController {
     
     @IBOutlet weak var followerTableView: UITableView!
+    @IBOutlet weak var follwerSearchBar: UISearchBar!
+    
+    
     
     let manager = APIManager.shared
     let userVM = UserViewModel.shared
@@ -20,36 +23,44 @@ class FollowerViewController: UIViewController {
     var searchInputText: String = ""
     var fetchingMore: Bool = false
     var page: Int = 0
-    var searchData: [CellRepresentable] = []
+    
+    var searchData = [CellRepresentable]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         followerTableView.keyboardDismissMode = .onDrag
         
         followerTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
         followerTableView.register(UINib(nibName:String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
         followerTableView.register(UINib(nibName:String(describing: LoadingCell.self), bundle: nil), forCellReuseIdentifier: "LoadingCell")
-     
+        
     }
 }
+
+
 
 extension FollowerViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userVM.friendData.count
+        if userVM.followers.isEmpty && section != 1{
+            return 1
+        } else if section == 0 {
+            return userVM.followers.count
+        } else if section == 1 && fetchingMore {
+            return 1
+        }
+        return 0
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
-        let email = userVM.friendData[indexPath.row].email
-        let name = userVM.friendData[indexPath.row].name
-        
-        cell.updateUI(email: email, name: name)
-        return cell
+
+        return searchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
     }
 }
 extension FollowerViewController: UITableViewDelegate{

@@ -18,12 +18,14 @@ class SearchUserViewController: UIViewController {
 
     let manager = APIManager.shared
     
+    var searchData: [CellRepresentable] = []
+    var cellHeightsDictionary: NSMutableDictionary = [:]
+    
     var searchInputText: String = ""
     var fetchingMore: Bool = false
     var hasNext: Bool = false
     var page: Int = 0
-    var searchData: [CellRepresentable] = []
-    var cellHeightsDictionary: NSMutableDictionary = [:]
+
  
     
 //    MARK: LifeCycles
@@ -103,9 +105,7 @@ extension SearchUserViewController: UITableViewDelegate{
         })
     }
     
-/*  TableView reloadData() 했을 때 스크롤이 밑에 고정 되어 있어 스크롤의 위치를 수정해야 함
-    기존 셀의 높이를 저장하여 스크롤 시
- */
+//    TableView reloadData() 했을 때 스크롤이 밑에 고정 되어 있어 스크롤의 위치를 수정해야 함
 //    셀의 높이를 저장
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cellHeightsDictionary.setObject(cell.frame.size.height, forKey: indexPath as NSCopying)
@@ -129,8 +129,7 @@ extension SearchUserViewController: UISearchBarDelegate{
    
         manager.searchUser(searchText: searchText, completion: { data in
             self.appendSearchData(data: data)
-             
-            
+
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }

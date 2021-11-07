@@ -29,24 +29,27 @@ class ProfileViewController: UIViewController, ReloadData {
     
     @IBAction func moveFollower(_ sender: Any) {
         
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followerView")
-        self.navigationController?.pushViewController(pushVC!, animated: true)
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followerView") as! FollowerViewController
+
+        for i in userVM.followers{
+            pushVC.searchData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
+        }
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
     @IBAction func moveFollowing(_ sender: Any) {
-        print("moveFollowing")
+        
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followingView") as! FollowingViewController
+        for i in userVM.followings{
+            pushVC.searchData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
+        }
+        self.navigationController?.pushViewController(pushVC, animated: true)
+        
     }
     @IBAction func showProfileEdit(_ sender: Any) {
         let pushEditVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as! ProfileEditViewController
         pushEditVC.image = imageUrl
         pushEditVC.delegate = self
         self.navigationController?.pushViewController(pushEditVC, animated: true)
-//        self.navigationController?.pushViewController(pushVC!, animated: true)
-//        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as? ProfileEditViewController else {
-//                return
-//            }
-//        vc.image = imageUrl
-//        vc.delegate = self
-//        present(vc, animated: true)
         
     }
     //      09/29
@@ -58,6 +61,8 @@ class ProfileViewController: UIViewController, ReloadData {
     //  MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderWidth = 5
@@ -99,8 +104,14 @@ class ProfileViewController: UIViewController, ReloadData {
         super.viewWillAppear(animated)
         gearQuantity.text = "\(userGearVM.userGears.count)"
         
+        userVM.loadFollower()
+        userVM.loadFollowing()
+        
+
         follower.text = String(self.userVM.userInfo[0].followerCnt)
         following.text = String(self.userVM.userInfo[0].followingCnt)
+        
+        
+        
     }
-
 }
