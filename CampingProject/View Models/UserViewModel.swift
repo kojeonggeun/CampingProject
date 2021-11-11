@@ -262,6 +262,24 @@ class UserViewModel {
         }
     }
     
+    func deleteFollower(id: Int){
+        let headers: HTTPHeaders = [
+                    "Content-type": "application/x-www-form-urlencoded",
+                    "Authorization" : returnToken()
+                ]
+        
+        AF.request(urlUser + "friend/\(id)" ,method: .delete , encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
+        ).responseJSON { response in
+            switch response.result {
+            case .success(_):
+                print("삭제 성공~")
+                
+            case .failure(let error):
+                print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
+    }
+    
     func isValidEmail(email: String) -> Bool{
         let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)

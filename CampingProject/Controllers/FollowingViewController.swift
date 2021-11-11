@@ -15,13 +15,13 @@ class FollowingViewController: UIViewController {
     let manager = APIManager.shared
     let userVM = UserViewModel.shared
     
-    var searchData: [CellRepresentable] = []
+    var followingData: [FollowerRepresentable] = []
     var fetchingMore: Bool = false
     var page: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(searchData)
+        print(followingData)
         
         followingTableView.keyboardDismissMode = .onDrag
         followingTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
@@ -48,12 +48,49 @@ extension FollowingViewController: UITableViewDataSource {
         return 0
     }
 
-    
+//    친구가 없을 때 예외처리 해야함
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        return searchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+        return followingData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
     }
 }
 extension FollowingViewController: UITableViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let offsetY = followingTableView.contentOffset.y
+        let contentSize = followingTableView.contentSize.height
+        let boundsSizeHeight = followingTableView.bounds.size.height
+        
+        if offsetY > (contentSize - boundsSizeHeight){
+            if !fetchingMore{
+                beginBatchFetch()
+            }
+        }
+    }
+    
+    private func beginBatchFetch() {
+        fetchingMore = true
+        
+        DispatchQueue.main.async {
+                self.followingTableView.reloadSections(IndexSet(integer: 1), with: .none)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.page += 1
+//            self.manager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
+//                self.appendSearchData(data: data)
+                
+                DispatchQueue.main.async {
+                    self.fetchingMore = false
+                    self.followingTableView.reloadData()
+                }
+            })
+//        })
+    }
 }
 
+
+extension FollowingViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   
+    }
+}

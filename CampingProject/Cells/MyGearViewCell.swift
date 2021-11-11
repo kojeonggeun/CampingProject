@@ -8,31 +8,31 @@
 import Foundation
 import UIKit
 
-class MyGearViewCell: UITableViewCell {
+class MyGearViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var tableViewCellText: UILabel!
+    @IBOutlet weak var collectionViewCellText: UILabel!
     
-    @IBOutlet weak var tableViewCellImage: UIImageView!
-    @IBOutlet weak var tableViewCellGearType: UILabel!
-    @IBOutlet weak var tableViewCellDate: UILabel!
+    @IBOutlet weak var collectionViewCellImage: UIImageView!
+    @IBOutlet weak var collectionViewCellGearType: UILabel!
+    @IBOutlet weak var collectionViewCellDate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        tableViewCellImage.layer.cornerRadius = 7
+        collectionViewCellImage.layer.cornerRadius = 7
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let bottomSpace: CGFloat = 15
-        let topSpace: CGFloat = 15
-        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: topSpace, left: 0, bottom: bottomSpace, right: 0))
-        }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        let bottomSpace: CGFloat = 15
+//        let topSpace: CGFloat = 15
+//        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: topSpace, left: 0, bottom: bottomSpace, right: 0))
+//        }
 
     func updateUI(name:String, type: String, date: String){
-        
-        tableViewCellText.text = name
-        tableViewCellGearType.text = type
-        tableViewCellDate.text = date
+        print(name, type, date)
+        collectionViewCellText.text = name
+        collectionViewCellGearType.text = type
+        collectionViewCellDate.text = date
     }
     
     

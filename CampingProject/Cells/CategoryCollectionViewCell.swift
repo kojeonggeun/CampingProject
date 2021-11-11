@@ -12,9 +12,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     
     @IBOutlet weak var categoryButton: UIButton!
-    
-
-    
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         

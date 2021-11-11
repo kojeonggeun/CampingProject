@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 
-class FriendViewModel: CellRepresentable {
+class FriendViewModel: FollowerRepresentable {
   
     var searchFriend: Friend
     var friendType: String
     
     let manager = APIManager.shared
+    let userVM = UserViewModel.shared
     
     init(searchFriend: Friend, friendType: String) {
         self.searchFriend = searchFriend
@@ -22,12 +23,13 @@ class FriendViewModel: CellRepresentable {
     }
     
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        print(friendType)
         if indexPath.section == 0 {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
             
-            cell.sendFollowButton.tag = indexPath.row
-            cell.sendFollowButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
+            cell.sendEventButton.tag = indexPath.row
+            cell.sendEventButton.addTarget(self, action: #selector(deleteRequest), for: .touchUpInside)
        
             let email = self.searchFriend.email
             
@@ -60,9 +62,11 @@ class FriendViewModel: CellRepresentable {
         }
     }
     
-    @objc func sendFollowRequest(sender: UIButton){
-        let id = self.searchFriend.id
+    @objc func deleteRequest(sender: UIButton){
+        let id = self.searchFriend.friendId
+        
+        userVM.deleteFollower(id: id)
         
     }
-    
+
 }

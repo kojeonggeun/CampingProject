@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SearchResultViewModel: CellRepresentable {
-  
+    
     var searchData: SearchUser
     var searchInputText: String
     
@@ -28,8 +28,8 @@ class SearchResultViewModel: CellRepresentable {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
             
-            cell.sendFollowButton.tag = indexPath.row
-            cell.sendFollowButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
+            cell.sendEventButton.tag = indexPath.row
+            cell.sendEventButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
        
             let email = self.searchData.email
             

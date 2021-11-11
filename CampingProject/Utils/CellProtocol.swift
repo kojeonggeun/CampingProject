@@ -9,5 +9,10 @@ import Foundation
 import UIKit
 
 protocol CellRepresentable {
+    
+    func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
+}
+protocol FollowerRepresentable {
+    var searchFriend: Friend { get }
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
 }

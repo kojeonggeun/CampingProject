@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-// 팔로워랑 팔로우 ViewModel 작성해야 함
+// 검색 기능 구현 해야 함
 
 class FollowerViewController: UIViewController {
     
@@ -24,12 +24,12 @@ class FollowerViewController: UIViewController {
     var fetchingMore: Bool = false
     var page: Int = 0
     
-    var searchData = [CellRepresentable]()
+    var followerData = [FollowerRepresentable]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("Awd")
         followerTableView.keyboardDismissMode = .onDrag
         
         followerTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
@@ -38,7 +38,6 @@ class FollowerViewController: UIViewController {
         
     }
 }
-
 
 
 extension FollowerViewController: UITableViewDataSource {
@@ -57,12 +56,51 @@ extension FollowerViewController: UITableViewDataSource {
         return 0
     }
 
-    
+    //    친구가 없을 때 예외처리 해야함
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        return searchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+        
+        return followerData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
     }
 }
+
 extension FollowerViewController: UITableViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let offsetY = followerTableView.contentOffset.y
+        let contentSize = followerTableView.contentSize.height
+        let boundsSizeHeight = followerTableView.bounds.size.height
+        
+        if offsetY > (contentSize - boundsSizeHeight){
+            if !fetchingMore{
+                beginBatchFetch()
+            }
+        }
+    }
     
+    private func beginBatchFetch() {
+        fetchingMore = true
+        
+        DispatchQueue.main.async {
+                self.followerTableView.reloadSections(IndexSet(integer: 1), with: .none)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.page += 1
+//            self.manager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
+//                self.appendSearchData(data: data)
+                
+                DispatchQueue.main.async {
+                    self.fetchingMore = false
+                    self.followerTableView.reloadData()
+                }
+            })
+//        })
+    }
 }
+
+extension FollowerViewController: UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchInputText = searchText
+        self.page = 0
+    }
+}
+

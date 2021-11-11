@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController, ReloadData {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followerView") as! FollowerViewController
 
         for i in userVM.followers{
-            pushVC.searchData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
+            pushVC.followerData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
         }
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
@@ -40,7 +40,7 @@ class ProfileViewController: UIViewController, ReloadData {
         
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followingView") as! FollowingViewController
         for i in userVM.followings{
-            pushVC.searchData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
+            pushVC.followingData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "following"))
         }
         self.navigationController?.pushViewController(pushVC, animated: true)
         

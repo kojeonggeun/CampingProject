@@ -83,6 +83,7 @@ class GearTextListCustomView: UIView{
         datePickerView.locale = Locale(identifier: "ko_KR")
         datePickerView.preferredDatePickerStyle = .wheels
         
+        datePickerView.backgroundColor = .white
         
         let doneButton = UIBarButtonItem(title: "선택", style: .plain, target : self, action: #selector(dismissDatePickerView))
         let toolBar = createToolbar(item: doneButton)
@@ -103,9 +104,12 @@ class GearTextListCustomView: UIView{
         
     }
     
+    
     func createPickerView(){
         
         pickerView.delegate = self
+        pickerView.backgroundColor = .white
+        
         
         gearType.text = apiService.gearTypes[0].gearName
         gearType.inputView = pickerView

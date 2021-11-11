@@ -8,9 +8,6 @@
 import Foundation
 import UIKit
 
-
-//TODO: 코드를 밖으로 분리해서 재사용 가능하게 만들어야 함, 팔로워 & 팔로잉 화면에도 사용 예정
-
 class SearchUserViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
