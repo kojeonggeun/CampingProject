@@ -55,7 +55,7 @@ class APIManager{
         }).responseJSON { response in
             switch response.result {
             case .success(let data):
-                print(data)
+                print("")
             case .failure(let error):
                 print(error)
             }

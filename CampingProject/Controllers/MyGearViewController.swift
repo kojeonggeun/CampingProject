@@ -13,12 +13,11 @@ class MyGearViewController: UIViewController{
   
     @IBOutlet weak var myGearCollectionVIew: UICollectionView!
     
-    @IBOutlet weak var emailText: UILabel!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     
     
     var segueText: String = ""
-    var tableIndexPath = IndexPath()
+    var collectionIndexPath = IndexPath()
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
@@ -53,11 +52,12 @@ class MyGearViewController: UIViewController{
 //        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         
-        emailText.text = segueText
-//        myGearCollectionVIew.showsVerticalScrollIndicator = false
+        
+        
+        myGearCollectionVIew.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
         
         self.loadData()
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostMyGearViewController"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidDeleteGearPost"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
@@ -117,7 +117,7 @@ class MyGearViewController: UIViewController{
             if row != -1 {
                 CategoryIndexPath = [0, row]
             } else {
-                CategoryIndexPath = self.tableIndexPath
+                CategoryIndexPath = self.collectionIndexPath
             }
         }
 
@@ -140,7 +140,6 @@ class MyGearViewController: UIViewController{
 }// end FirstViewController
 
 
-// TableView
 extension MyGearViewController: UICollectionViewDataSource{
    
   
@@ -166,7 +165,7 @@ extension MyGearViewController: UICollectionViewDataSource{
             return cell
         }
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
         
         let userGearId = self.userGearVM.userGears[indexPath.row].id
         
@@ -206,7 +205,7 @@ extension MyGearViewController: UICollectionViewDataSource{
     }
     
     @objc func categoryClicked(_ sender: UIButton){
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryTableView") as! CategoryTableViewController
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
 
         pushVC.gearType = sender.tag
         self.navigationController?.pushViewController(pushVC, animated: true)
@@ -248,7 +247,7 @@ extension MyGearViewController: UICollectionViewDelegate{
         //      카테고리 적용 시 필요
                 let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
 
-                tableIndexPath = indexPath
+                collectionIndexPath = indexPath
         //        let data = [indexPath.section,indexPath.row]
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
                 
@@ -262,12 +261,8 @@ extension MyGearViewController: UICollectionViewDelegate{
 extension MyGearViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == myGearCollectionVIew {
-            let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             let margin: CGFloat = 10
             let itemSpacing: CGFloat = 10
-            
-            print(collectionView.frame.width)
-            print(collectionView.bounds.width)
             
             let width = (collectionView.frame.width - margin * 2 - itemSpacing) / 2
             let height = width * 10/7.5
@@ -279,10 +274,5 @@ extension MyGearViewController: UICollectionViewDelegateFlowLayout{
         let height = collectionView.bounds.height / 1.7
         
         return CGSize(width: width, height: height)
-        
-        
-      
-   
-    
     }
 }

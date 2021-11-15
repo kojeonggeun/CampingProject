@@ -57,16 +57,7 @@ class SignInViewController: UIViewController{
     @IBAction func appleLogin(_ sender: Any) {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let email = sender as? String else { return }
-  
-        if let barVC = segue.destination as? MainTabBarController {
-                barVC.viewControllers?.forEach {
-                    if let nav = $0 as? UINavigationController {
-                        let vc = nav.topViewController as? MyGearViewController
-                        vc?.segueText = email
-                    }
-                }
-            }
+   
     }
     // MARK: LifeCycles
     override func viewDidLoad() {
@@ -88,7 +79,7 @@ class SignInViewController: UIViewController{
                 self.userManager.loadUserInfo(completion: {_ in })
                 userManager.loginCheck(){ (completion) in
                     if completion {
-                        self.performSegue(withIdentifier: "MainTabBarController", sender: user["email"])
+                        self.performSegue(withIdentifier: "MainTabBarController",sender: nil)
                     }
                 }
             }

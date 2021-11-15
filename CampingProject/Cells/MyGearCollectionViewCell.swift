@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-class MyGearViewCell: UICollectionViewCell {
+class MyGearCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var collectionViewCellText: UILabel!
     
     @IBOutlet weak var collectionViewCellImage: UIImageView!
     @IBOutlet weak var collectionViewCellGearType: UILabel!
+    @IBOutlet weak var collectionViewCellText: UILabel!
     @IBOutlet weak var collectionViewCellDate: UILabel!
     
     override func awakeFromNib() {
@@ -29,12 +29,10 @@ class MyGearViewCell: UICollectionViewCell {
 //        }
 
     func updateUI(name:String, type: String, date: String){
-        print(name, type, date)
         collectionViewCellText.text = name
         collectionViewCellGearType.text = type
         collectionViewCellDate.text = date
     }
-    
     
 }
 

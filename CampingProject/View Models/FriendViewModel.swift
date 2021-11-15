@@ -23,7 +23,6 @@ class FriendViewModel: FollowerRepresentable {
     }
     
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        print(friendType)
         if indexPath.section == 0 {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }

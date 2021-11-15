@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 
-// TODO: 카테고리에서 사진 수정 후 리로드 안된다
-class CategoryTableViewController: UITableViewController{
+
+class CategoryCollectionViewController: UICollectionViewController{
       
-    @IBOutlet var categoryTableView: UITableView!
+    @IBOutlet var categoryCollectionView: UICollectionView!
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
@@ -30,15 +30,16 @@ class CategoryTableViewController: UITableViewController{
         let type = gearTypeVM.gearTypes[gearType].gearName
         self.title = type
         userGearVM.categoryUserData(type: type)
-     
+        categoryCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.deleteTableCell(_:)), name: NSNotification.Name("DidDeleteCatogoryGearPost"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
     }
     
     @objc func deleteTableCell(_ noti: Notification) {
-        self.categoryTableView.performBatchUpdates({
+        self.categoryCollectionView.performBatchUpdates({
             self.userGearVM.deleteCategoryData(row: tableIndex.row)
-            self.categoryTableView.deleteRows(at: [self.tableIndex], with: .fade)
+            self.categoryCollectionView.deleteItems(at: [self.tableIndex])
         }, completion: { (done) in
              //perform table refresh
         })
@@ -47,29 +48,26 @@ class CategoryTableViewController: UITableViewController{
     
     @objc func reloadTableView(_ noti: Notification){
         if noti.userInfo?["edit"] as! Bool{
-            self.categoryTableView.reloadData()
+            self.categoryCollectionView.reloadData()
         }
     }
     
   
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return userGearVM.numberOfRowsInSection()
     }
+
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
      
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableView", for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
         
         let userGearId = userGearVM.categoryData[indexPath.row].id
         if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
             DispatchQueue.main.async {
-                cell.categoryImage.image = cacheImage
+                cell.collectionViewCellImage.image = cacheImage
             }
             
         } else {
@@ -80,12 +78,12 @@ class CategoryTableViewController: UITableViewController{
                         let data = try? Data(contentsOf: url!)
                         let image = UIImage(data: data!)
                         DispatchQueue.main.async {
-                            cell.categoryImage.image = image
+                            cell.collectionViewCellImage.image = image
                             
                         }
                     } else {
                         DispatchQueue.main.async {
-                            cell.categoryImage.image = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)")!
+                            cell.collectionViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)")!
                         }
                     }
                 }
@@ -93,18 +91,15 @@ class CategoryTableViewController: UITableViewController{
         }
         
         if let gearName = userGearVM.categoryData[indexPath.row].name,
-           let gearType = userGearVM.categoryData[indexPath.row].gearTypeName {
-            cell.updateUI(name: gearName, type: gearType)
+           let gearType = userGearVM.categoryData[indexPath.row].gearTypeName,
+            let gearDate = userGearVM.categoryData[indexPath.row].buyDt {
+            cell.updateUI(name: gearName, type: gearType, date: gearDate)
         }
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.categoryData[indexPath.row].id
         })!
       
@@ -115,6 +110,16 @@ class CategoryTableViewController: UITableViewController{
         
         
         self.navigationController?.pushViewController(pushVC, animated: true)
-        
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let margin: CGFloat = 10
+//        let itemSpacing: CGFloat = 10
+//
+//        let width = (collectionView.frame.width - margin * 2 - itemSpacing) / 2
+//        let height = width * 10/7.5
+//
+//        return CGSize(width: width, height: height)
+//    }
+    
 }

@@ -13,7 +13,7 @@
 		CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */; };
 		CB491B9726FC31ED00D2481F /* GearTextListCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */; };
 		CB491B9926FC3A8100D2481F /* GearTextListCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB491B9826FC3A8100D2481F /* GearTextListCustomView.xib */; };
-		CB534DF726C2664A0022EA20 /* MyGearViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB534DF626C2664A0022EA20 /* MyGearViewCell.swift */; };
+		CB534DF726C2664A0022EA20 /* MyGearCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB534DF626C2664A0022EA20 /* MyGearCollectionViewCell.swift */; };
 		CB58A79826E5F136006C80EA /* GearDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58A79726E5F136006C80EA /* GearDetailViewController.swift */; };
 		CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037BA26B2728E0023042F /* AppDelegate.swift */; };
 		CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037BC26B2728E0023042F /* SceneDelegate.swift */; };
@@ -22,6 +22,7 @@
 		CB6037C726B2728F0023042F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6037C526B2728F0023042F /* LaunchScreen.storyboard */; };
 		CB6037D126B289980023042F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037D026B289980023042F /* SignUpViewController.swift */; };
 		CB6037D326B28A530023042F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037D226B28A530023042F /* UserViewModel.swift */; };
+		CB906520274276AD00DA84F3 /* MyGearCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB90651F274276AC00DA84F3 /* MyGearCollectionViewCell.xib */; };
 		CB90E3FD27185A3F00CD2B1C /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90E3FC27185A3F00CD2B1C /* SearchUserViewController.swift */; };
 		CB90E3FF271860E900CD2B1C /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90E3FE271860E900CD2B1C /* SearchUserModel.swift */; };
 		CB90E4012719A47500CD2B1C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90E4002719A47500CD2B1C /* SearchTableViewCell.swift */; };
@@ -38,7 +39,7 @@
 		CBB51A022700C74A005F8B00 /* GearImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */; };
 		CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB51A032702F61E005F8B00 /* ProfileViewController.swift */; };
 		CBBB2A9B26F238A8006B2E3C /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9A26F238A8006B2E3C /* CategoryTableViewCell.swift */; };
-		CBBB2A9D26F238BF006B2E3C /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */; };
+		CBBB2A9D26F238BF006B2E3C /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */; };
 		CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */; };
 		CBD5F5D626E9E0B500E09B0D /* UserGearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */; };
 		CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */; };
@@ -67,7 +68,7 @@
 		CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearModel.swift; sourceTree = "<group>"; };
 		CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTextListCustomView.swift; sourceTree = "<group>"; };
 		CB491B9826FC3A8100D2481F /* GearTextListCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GearTextListCustomView.xib; sourceTree = "<group>"; };
-		CB534DF626C2664A0022EA20 /* MyGearViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewCell.swift; sourceTree = "<group>"; };
+		CB534DF626C2664A0022EA20 /* MyGearCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearCollectionViewCell.swift; sourceTree = "<group>"; };
 		CB58A79726E5F136006C80EA /* GearDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearDetailViewController.swift; sourceTree = "<group>"; };
 		CB6037B726B2728E0023042F /* CampingProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampingProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6037BA26B2728E0023042F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 		CB6037C826B2728F0023042F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB6037D026B289980023042F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		CB6037D226B28A530023042F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		CB90651F274276AC00DA84F3 /* MyGearCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyGearCollectionViewCell.xib; sourceTree = "<group>"; };
 		CB90E3FC27185A3F00CD2B1C /* SearchUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
 		CB90E3FE271860E900CD2B1C /* SearchUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
 		CB90E4002719A47500CD2B1C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GearImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		CBB51A032702F61E005F8B00 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CBBB2A9A26F238A8006B2E3C /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
-		CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
 		CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGearViewModel.swift; sourceTree = "<group>"; };
 		CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -209,7 +211,7 @@
 				CBA2327426BE803600946DA0 /* SecondViewController.swift */,
 				CB58A79726E5F136006C80EA /* GearDetailViewController.swift */,
 				CBAB103226C5510A0058F440 /* GearAddViewController.swift */,
-				CBBB2A9C26F238BF006B2E3C /* CategoryTableViewController.swift */,
+				CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */,
 				CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */,
 				CBB51A032702F61E005F8B00 /* ProfileViewController.swift */,
 				CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */,
@@ -250,7 +252,7 @@
 				CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */,
 				CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */,
 				CB3347A726DD16C200DE0126 /* GearDetailViewCell.swift */,
-				CB534DF626C2664A0022EA20 /* MyGearViewCell.swift */,
+				CB534DF626C2664A0022EA20 /* MyGearCollectionViewCell.swift */,
 				CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */,
 				CBBB2A9A26F238A8006B2E3C /* CategoryTableViewCell.swift */,
 				CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */,
@@ -261,6 +263,7 @@
 				CBDC479627302B8000537E5A /* EmptySearchResultCell.xib */,
 				CBDC479827302B9100537E5A /* LoadingCell.swift */,
 				CBDC479A27302B9C00537E5A /* LoadingCell.xib */,
+				CB90651F274276AC00DA84F3 /* MyGearCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				CBDC479527301A7000537E5A /* SearchTableViewCell.xib in Resources */,
 				CB0355BE270DD4F800564675 /* MyGear.storyboard in Resources */,
 				CBDC479B27302B9C00537E5A /* LoadingCell.xib in Resources */,
+				CB906520274276AD00DA84F3 /* MyGearCollectionViewCell.xib in Resources */,
 				CBB51A022700C74A005F8B00 /* GearImageCollectionViewCell.xib in Resources */,
 				CB6037C726B2728F0023042F /* LaunchScreen.storyboard in Resources */,
 				CB491B9926FC3A8100D2481F /* GearTextListCustomView.xib in Resources */,
@@ -387,7 +391,7 @@
 			files = (
 				CBDC478D272823B100537E5A /* EmptySearchResultCell.swift in Sources */,
 				CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */,
-				CB534DF726C2664A0022EA20 /* MyGearViewCell.swift in Sources */,
+				CB534DF726C2664A0022EA20 /* MyGearCollectionViewCell.swift in Sources */,
 				CB491B9726FC31ED00D2481F /* GearTextListCustomView.swift in Sources */,
 				CB3347A826DD16C200DE0126 /* GearDetailViewCell.swift in Sources */,
 				CB90E3FD27185A3F00CD2B1C /* SearchUserViewController.swift in Sources */,
@@ -415,7 +419,7 @@
 				CB58A79826E5F136006C80EA /* GearDetailViewController.swift in Sources */,
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,
 				CBF791F427366EDC0089EE48 /* FriendViewModel.swift in Sources */,
-				CBBB2A9D26F238BF006B2E3C /* CategoryTableViewController.swift in Sources */,
+				CBBB2A9D26F238BF006B2E3C /* CategoryCollectionViewController.swift in Sources */,
 				CBD5F5D626E9E0B500E09B0D /* UserGearViewModel.swift in Sources */,
 				CBA2327526BE803600946DA0 /* SecondViewController.swift in Sources */,
 				CBF37200270C6FCF0028533C /* UserModel.swift in Sources */,
