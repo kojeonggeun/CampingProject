@@ -15,8 +15,6 @@ class FollowerViewController: UIViewController {
     @IBOutlet weak var followerTableView: UITableView!
     @IBOutlet weak var follwerSearchBar: UISearchBar!
     
-    
-    
     let manager = APIManager.shared
     let userVM = UserViewModel.shared
     
@@ -24,18 +22,18 @@ class FollowerViewController: UIViewController {
     var fetchingMore: Bool = false
     var page: Int = 0
     
-    var followerData = [FollowerRepresentable]()
-    
+    var followerData = [FollowRepresentable]()
+    var followerSearchData = [FollowRepresentable]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Awd")
+
         followerTableView.keyboardDismissMode = .onDrag
         
         followerTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
         followerTableView.register(UINib(nibName:String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
         followerTableView.register(UINib(nibName:String(describing: LoadingCell.self), bundle: nil), forCellReuseIdentifier: "LoadingCell")
-        
     }
 }
 
@@ -46,30 +44,49 @@ extension FollowerViewController: UITableViewDataSource {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if userVM.followers.isEmpty && section != 1{
+      
+        if self.followerData.isEmpty && section != 1{
             return 1
+            
         } else if section == 0 {
-            return userVM.followers.count
+            
+            if !self.followerSearchData.isEmpty{
+                return self.followerSearchData.count
+            }
+            if !searchInputText.isEmpty && followerSearchData.isEmpty{
+                return 1
+            }
+            return self.followerData.count
+            
         } else if section == 1 && fetchingMore {
             return 1
         }
+        
         return 0
     }
 
     //    친구가 없을 때 예외처리 해야함
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        return followerData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+        if !searchInputText.isEmpty && followerSearchData.isEmpty || followerData.isEmpty{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySearchResultCell", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
+            cell.updateLabel(text: searchInputText)
+            return cell
+        }
+        if !followerSearchData.isEmpty{
+            return followerSearchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+        }else {
+            return followerData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+        }
     }
 }
 
 extension FollowerViewController: UITableViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        let offsetY = followerTableView.contentOffset.y
-        let contentSize = followerTableView.contentSize.height
-        let boundsSizeHeight = followerTableView.bounds.size.height
-        
+
+        let offsetY = scrollView.contentOffset.y
+        let contentSize = scrollView.contentSize.height
+        let boundsSizeHeight = scrollView.bounds.size.height
+
         if offsetY > (contentSize - boundsSizeHeight){
             if !fetchingMore{
                 beginBatchFetch()
@@ -77,7 +94,7 @@ extension FollowerViewController: UITableViewDelegate{
         }
     }
     
-    private func beginBatchFetch() {
+    func beginBatchFetch() {
         fetchingMore = true
         
         DispatchQueue.main.async {
@@ -100,7 +117,18 @@ extension FollowerViewController: UITableViewDelegate{
 extension FollowerViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchInputText = searchText
+        self.followerSearchData.removeAll()
         self.page = 0
+
+        for i in userVM.followers{
+            let first = i.email.split(separator: "@")[0]
+            if first.lowercased().contains(searchText.lowercased()) {
+                self.followerSearchData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
+            }
+        }
+        DispatchQueue.main.async {
+            self.followerTableView.reloadData()
+        }
     }
 }
 

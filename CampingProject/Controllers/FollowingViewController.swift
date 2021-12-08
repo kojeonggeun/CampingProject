@@ -15,9 +15,12 @@ class FollowingViewController: UIViewController {
     let manager = APIManager.shared
     let userVM = UserViewModel.shared
     
-    var followingData: [FollowerRepresentable] = []
+    var searchInputText: String = ""
     var fetchingMore: Bool = false
     var page: Int = 0
+    
+    var followingData: [FollowRepresentable] = []
+    var followingSearchData = [FollowRepresentable]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +41,19 @@ extension FollowingViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if userVM.followings.isEmpty && section != 1{
+        if self.followingData.isEmpty && section != 1{
             return 1
+            
         } else if section == 0 {
-            return userVM.followings.count
+            
+            if !self.followingSearchData.isEmpty{
+                return self.followingSearchData.count
+            }
+            if !searchInputText.isEmpty && followingSearchData.isEmpty{
+                return 1
+            }
+            return self.followingData.count
+            
         } else if section == 1 && fetchingMore {
             return 1
         }
@@ -51,15 +63,24 @@ extension FollowingViewController: UITableViewDataSource {
 //    친구가 없을 때 예외처리 해야함
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        return followingData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+        if !searchInputText.isEmpty && followingSearchData.isEmpty || followingData.isEmpty{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySearchResultCell", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
+            cell.updateLabel(text: searchInputText)
+            return cell
+        }
+        if !followingSearchData.isEmpty{
+            return followingSearchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+        }else {
+            return followingData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+        }
     }
 }
 extension FollowingViewController: UITableViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offsetY = followingTableView.contentOffset.y
-        let contentSize = followingTableView.contentSize.height
-        let boundsSizeHeight = followingTableView.bounds.size.height
+        let offsetY = scrollView.contentOffset.y
+        let contentSize = scrollView.contentSize.height
+        let boundsSizeHeight = scrollView.bounds.size.height
         
         if offsetY > (contentSize - boundsSizeHeight){
             if !fetchingMore{
@@ -68,7 +89,7 @@ extension FollowingViewController: UITableViewDelegate{
         }
     }
     
-    private func beginBatchFetch() {
+    func beginBatchFetch() {
         fetchingMore = true
         
         DispatchQueue.main.async {
@@ -85,12 +106,25 @@ extension FollowingViewController: UITableViewDelegate{
                 }
             })
 //        })
+        
     }
 }
 
 
 extension FollowingViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-   
+        searchInputText = searchText
+        self.followingSearchData.removeAll()
+        self.page = 0
+
+        for i in userVM.followings{
+            let first = i.email.split(separator: "@")[0]
+            if first.lowercased().contains(searchText.lowercased()) {
+                self.followingSearchData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
+            }
+        }
+        DispatchQueue.main.async {
+            self.followingTableView.reloadData()
+        }
     }
 }

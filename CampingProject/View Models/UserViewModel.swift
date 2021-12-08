@@ -65,7 +65,7 @@ class UserViewModel {
             }
     }
     
-//    서버 작업 후 구현 예정
+
     func emailDuplicateCheck(email: String, completion: @escaping (Int) -> Void) {
         let parameters: [String: Any] = ["email": email]
         

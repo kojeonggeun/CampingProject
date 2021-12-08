@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-protocol CellRepresentable {
-    
+protocol CellRepresentable {    
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
 }
-protocol FollowerRepresentable {
+
+protocol FollowRepresentable {
     var searchFriend: Friend { get }
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
 }

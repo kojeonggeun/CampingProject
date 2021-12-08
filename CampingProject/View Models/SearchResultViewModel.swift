@@ -39,7 +39,7 @@ class SearchResultViewModel: CellRepresentable {
             if imageUrl == "" {
                 imageUrl = "https://doodleipsum.com/500/avatar-3"
             }
-
+            
             DispatchQueue.global().async {
                 let url = URL(string: imageUrl)
                 let data = try? Data(contentsOf: url!)

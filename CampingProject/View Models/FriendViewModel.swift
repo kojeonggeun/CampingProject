@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FriendViewModel: FollowerRepresentable {
+class FriendViewModel: FollowRepresentable {
   
     var searchFriend: Friend
     var friendType: String

@@ -151,7 +151,6 @@ extension MyGearViewController: UICollectionViewDataSource{
         return self.userGearVM.userGears.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == categoryCollectionView {
@@ -173,7 +172,7 @@ extension MyGearViewController: UICollectionViewDataSource{
             DispatchQueue.main.async {
                 cell.collectionViewCellImage.image = cacheImage
             }
-            
+
         } else {
             apiManager.loadGearImages(gearId: userGearId, completion: { data in
                 DispatchQueue.global().async {

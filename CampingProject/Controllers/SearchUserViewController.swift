@@ -57,12 +57,10 @@ extension SearchUserViewController: UITableViewDataSource{
    
         if self.searchData.isEmpty && indexPath.section == 0{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySearchResultCell", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
-
             cell.updateLabel(text: searchInputText)
             return cell
-            
         }
-            
+        
         return self.searchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
         
     }
@@ -72,9 +70,13 @@ extension SearchUserViewController: UITableViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offsetY = searchTableView.contentOffset.y
-        let contentSize = searchTableView.contentSize.height
-        let boundsSizeHeight = searchTableView.bounds.size.height
+        if self.searchData.isEmpty{
+            return
+        }
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentSize = scrollView.contentSize.height
+        let boundsSizeHeight = scrollView.bounds.size.height
         
         if offsetY > (contentSize - boundsSizeHeight){
             if !fetchingMore{
@@ -83,9 +85,9 @@ extension SearchUserViewController: UITableViewDelegate{
         }
     }
     
-    private func beginBatchFetch() {
+    func beginBatchFetch() {
         fetchingMore = true
-        
+       
         DispatchQueue.main.async {
                 self.searchTableView.reloadSections(IndexSet(integer: 1), with: .none)
         }
@@ -93,7 +95,7 @@ extension SearchUserViewController: UITableViewDelegate{
             self.page += 1
             self.manager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
                 self.appendSearchData(data: data)
-                
+
                 DispatchQueue.main.async {
                     self.fetchingMore = false
                     self.searchTableView.reloadData()
