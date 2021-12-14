@@ -104,7 +104,7 @@ extension SearchUserViewController: UITableViewDelegate{
         })
     }
     
-//    TableView reloadData() 했을 때 스크롤이 밑에 고정 되어 있어 스크롤의 위치를 수정해야 함
+
 //    셀의 높이를 저장
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cellHeightsDictionary.setObject(cell.frame.size.height, forKey: indexPath as NSCopying)

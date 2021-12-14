@@ -83,11 +83,10 @@ class MyGearViewController: UIViewController{
                             }// end if
                         }
                     }// end first for
-                    
+    
                     DispatchQueue.main.async {
                         self.myGearCollectionVIew.reloadData()
                         self.categoryCollectionView.reloadData()
-                        
                     }
                 })
             } // end global.async

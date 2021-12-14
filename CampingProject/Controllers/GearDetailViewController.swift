@@ -115,7 +115,6 @@ class GearDetailViewController: UIViewController {
     
     func loadImage() {
         self.apiService.loadGearImages(gearId: self.userGearVM.userGears[self.gearRow].id, completion: { data in
-            
             for i in data {
                 self.imageArray.append(i)
             }

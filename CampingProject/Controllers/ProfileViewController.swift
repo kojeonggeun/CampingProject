@@ -62,8 +62,6 @@ class ProfileViewController: UIViewController, ReloadData {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderWidth = 5
         profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
