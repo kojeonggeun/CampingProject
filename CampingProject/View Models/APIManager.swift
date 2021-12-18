@@ -233,19 +233,7 @@ class APIManager{
             return []
         }
     }
-    
-    func loadUserData(){
-        
-        AF.request(urlUser , method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
-            switch response.result {
-            case .success(let data):
-               print(data,"data")
-               
-            case .failure(let error):
-                print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-            }
-        }
-    }
+
     
     func searchUser(searchText: String, page: Int = 0, completion: @escaping ([SearchUser]) -> Void){
         let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 5]

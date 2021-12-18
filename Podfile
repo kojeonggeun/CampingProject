@@ -11,4 +11,5 @@ target 'CampingProject' do
  pod 'AlamofireImage', '~> 4.1'
  pod "BSImagePicker", "~> 3.1"
  pod 'TextFieldEffects'
+ pod 'GoogleSignIn'
 end

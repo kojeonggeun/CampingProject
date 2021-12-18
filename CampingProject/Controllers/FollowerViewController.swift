@@ -25,7 +25,7 @@ class FollowerViewController: UIViewController {
     var followerData = [FollowRepresentable]()
     var followerSearchData = [FollowRepresentable]()
 
-    
+//    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -120,6 +120,8 @@ extension FollowerViewController: UISearchBarDelegate{
         self.followerSearchData.removeAll()
         self.page = 0
 
+//        추후 팔로워 & 팔로잉 검색 기능 추가 예정
+//        그때 수정
         for i in userVM.followers{
             let first = i.email.split(separator: "@")[0]
             if first.lowercased().contains(searchText.lowercased()) {

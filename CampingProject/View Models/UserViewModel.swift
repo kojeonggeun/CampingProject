@@ -18,6 +18,7 @@ class UserViewModel {
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
     var userInfo: [UserInfo] = []
+    var friendInfo: [UserInfo] = []
     var followers: [Friend] = []
     var followings: [Friend] = []
     
@@ -117,6 +118,7 @@ class UserViewModel {
                 switch response.result {
                 case .success(_):
                     guard let user = response.data else { return }
+                    self.userInfo.removeAll()
                     let userData = self.parseUser(user)
                     
                     self.userInfo.append(userData)
@@ -128,9 +130,36 @@ class UserViewModel {
             }
     }
     
+    
+    func loadFriendInfo(friendId: Int ,completion: @escaping (Bool)-> Void) {
+        
+        let headers: HTTPHeaders = ["Authorization" : returnToken()]
+        
+        AF.request(url+"/user/\(friendId)",
+                   method: .get,
+                   encoding: URLEncoding.default,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(_):
+                    guard let user = response.data else { return }
+                    self.friendInfo.removeAll()
+                    let userData = self.parseUser(user)
+                    
+                    self.friendInfo.append(userData)
+                    
+                    completion(true)
+                case .failure(let error):
+                    print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
+                }
+            }
+    }
+    
+    
     func parseUser(_ data: Data) -> UserInfo {
         let decoder = JSONDecoder()
-        self.userInfo.removeAll()
+        
         do {
             let response = try decoder.decode(UserInfo.self, from: data)
             return response
@@ -199,7 +228,8 @@ class UserViewModel {
             switch response.result {
             case .success(_):
                 guard let data = response.data else { return }
-                let follower = self.parseFollower(data)
+                self.followers.removeAll()
+                let follower = self.parseFriends(data)
                
                 for i in follower {
                     self.followers.append(i)
@@ -208,20 +238,6 @@ class UserViewModel {
             case .failure(let error):
                 print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
-        }
-    }
-    
-    func parseFollower(_ data: Data) -> [Friend] {
-        let decoder = JSONDecoder()
-        self.followers.removeAll()
-
-        do {
-            let response = try decoder.decode(Friends.self, from: data)
-            return response.friends
-        } catch let error {
-            print(AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error)))
-            print("--> Friend parsing error: \(error.localizedDescription)")
-            return []
         }
     }
     
@@ -236,7 +252,8 @@ class UserViewModel {
             switch response.result {
             case .success(_):
                 guard let data = response.data else { return }
-                let follower = self.parseFollowing(data)
+                self.followings.removeAll()
+                let follower = self.parseFriends(data)
                
                 for i in follower {
                     self.followings.append(i)
@@ -248,9 +265,9 @@ class UserViewModel {
         }
     }
     
-    func parseFollowing(_ data: Data) -> [Friend] {
+    func parseFriends(_ data: Data) -> [Friend] {
         let decoder = JSONDecoder()
-        self.followings.removeAll()
+        
 
         do {
             let response = try decoder.decode(Friends.self, from: data)

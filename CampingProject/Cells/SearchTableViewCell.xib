@@ -39,24 +39,14 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4F-bN-FWt">
-                        <rect key="frame" x="269" y="17.5" width="80" height="31"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="80" id="Ymt-oV-oJu"/>
-                            <constraint firstAttribute="height" constant="31" id="a6w-Ok-dZy"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="filled" title="팔로우"/>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fUy-rr-UrO" firstAttribute="top" secondItem="IkH-3e-uUo" secondAttribute="top" constant="7" id="4bD-Se-XyF"/>
                     <constraint firstAttribute="bottom" secondItem="fUy-rr-UrO" secondAttribute="bottom" constant="3" id="8a9-aU-HGY"/>
                     <constraint firstItem="05N-i5-RoX" firstAttribute="top" secondItem="IkH-3e-uUo" secondAttribute="top" constant="12" id="Uyc-ji-BQF"/>
                     <constraint firstItem="fUy-rr-UrO" firstAttribute="leading" secondItem="IkH-3e-uUo" secondAttribute="leading" constant="6" id="e7P-SU-iTj"/>
-                    <constraint firstAttribute="bottom" secondItem="U4F-bN-FWt" secondAttribute="bottom" constant="17.5" id="fdX-bG-yzh"/>
-                    <constraint firstItem="U4F-bN-FWt" firstAttribute="top" secondItem="IkH-3e-uUo" secondAttribute="top" constant="17.5" id="jZe-xz-376"/>
-                    <constraint firstAttribute="trailing" secondItem="U4F-bN-FWt" secondAttribute="trailing" constant="9" id="rIz-cr-0e9"/>
+                    <constraint firstItem="fUy-rr-UrO" firstAttribute="width" secondItem="IkH-3e-uUo" secondAttribute="width" multiplier="0.170391" id="kqv-m6-6kd"/>
+                    <constraint firstItem="fUy-rr-UrO" firstAttribute="height" secondItem="IkH-3e-uUo" secondAttribute="height" multiplier="0.848485" id="qtu-yh-v8f"/>
                     <constraint firstAttribute="bottom" secondItem="05N-i5-RoX" secondAttribute="bottom" constant="13" id="tiJ-T0-Igi"/>
                     <constraint firstItem="05N-i5-RoX" firstAttribute="leading" secondItem="fUy-rr-UrO" secondAttribute="trailing" constant="16" id="xLZ-Bw-Mxt"/>
                 </constraints>
@@ -65,7 +55,6 @@
                 <outlet property="searchEmail" destination="emw-qw-0Br" id="Do0-RP-R57"/>
                 <outlet property="searchName" destination="H8Y-Fz-WxV" id="NRp-ac-ZaF"/>
                 <outlet property="searchProfileImage" destination="fUy-rr-UrO" id="GNx-qH-0Ie"/>
-                <outlet property="sendEventButton" destination="U4F-bN-FWt" id="z8Q-jK-fN6"/>
             </connections>
             <point key="canvasLocation" x="82.608695652173921" y="-37.5"/>
         </tableViewCell>

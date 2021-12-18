@@ -10,6 +10,7 @@ import UIKit
 
 protocol CellRepresentable {    
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
+    func moveFriendView()
 }
 
 protocol FollowRepresentable {

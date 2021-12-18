@@ -22,6 +22,7 @@ class FollowingViewController: UIViewController {
     var followingData: [FollowRepresentable] = []
     var followingSearchData = [FollowRepresentable]()
     
+//    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         print(followingData)
@@ -106,7 +107,6 @@ extension FollowingViewController: UITableViewDelegate{
                 }
             })
 //        })
-        
     }
 }
 
@@ -116,7 +116,9 @@ extension FollowingViewController: UISearchBarDelegate {
         searchInputText = searchText
         self.followingSearchData.removeAll()
         self.page = 0
-
+        
+        //        추후 팔로워 & 팔로잉 검색 기능 추가 예정
+        //        그때 수정
         for i in userVM.followings{
             let first = i.email.split(separator: "@")[0]
             if first.lowercased().contains(searchText.lowercased()) {

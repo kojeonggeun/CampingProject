@@ -14,6 +14,7 @@ class SearchResultViewModel: CellRepresentable {
     var searchInputText: String
     
     let manager = APIManager.shared
+    let userVM = UserViewModel.shared
     
     init(searchData: SearchUser, searchInputText: String) {
         self.searchData = searchData
@@ -28,9 +29,7 @@ class SearchResultViewModel: CellRepresentable {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
             
-            cell.sendEventButton.tag = indexPath.row
-            cell.sendEventButton.addTarget(self, action: #selector(sendFollowRequest), for: .touchUpInside)
-       
+
             let email = self.searchData.email
             
             let name = self.searchData.name
@@ -49,7 +48,7 @@ class SearchResultViewModel: CellRepresentable {
                     cell.updateImage(image: image)
                     }
                 }
-            
+
             cell.updateUI(email: email, name: name)
             
             return cell
@@ -62,17 +61,15 @@ class SearchResultViewModel: CellRepresentable {
         }
     }
     
-    @objc func sendFollowRequest(sender: UIButton){
-        let id = self.searchData.id
-        let isPublic = self.searchData.isPublic
-        
-        manager.followRequst(id: id, isPublic: isPublic, completion: { data in
-            if data {
-                sender.backgroundColor = .white
-                sender.setTitle("팔로워", for: .normal)
-            } else {
-                
-            }
+    func moveFriendView(){
+        print("클릭 한 사용자 ID \(searchData.id)")
+        print("클릭 한 사용자 Email \(searchData.email)")
+        print("클릭 한 사용자 Name \(searchData.name)")
+            
+        userVM.loadFriendInfo(friendId: searchData.id, completion: { data in
+            print("사용자 상세 정보 \(self.userVM.friendInfo[0].user)")
+            
         })
+        
     }
 }

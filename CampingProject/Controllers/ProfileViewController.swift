@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController, ReloadData {
 //      TODO: 친구 추가, 요청 & 승인 기능 구현 해야 함
 
 
-    //  MARK: LifeCycles
+//  MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,12 +104,9 @@ class ProfileViewController: UIViewController, ReloadData {
         
         userVM.loadFollower()
         userVM.loadFollowing()
-        
-
+    
         follower.text = String(self.userVM.userInfo[0].followerCnt)
         following.text = String(self.userVM.userInfo[0].followingCnt)
-        
-        
         
     }
 }

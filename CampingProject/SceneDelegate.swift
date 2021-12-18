@@ -16,6 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+
+//    TODO: Google login 추후 개발
+//        guard let scheme = URLContexts.first?.url.scheme else { return }
+//        if scheme.contains("com.googleusercontent.apps") {
+//            GIDSignIn.sharedInstance().handle(URLContexts.first?.url)
+//        }
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

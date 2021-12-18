@@ -68,6 +68,14 @@ extension SearchUserViewController: UITableViewDataSource{
 
 extension SearchUserViewController: UITableViewDelegate{
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.searchData[indexPath.row].moveFriendView()
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
+        print(pushVC)
+        self.navigationController?.pushViewController(pushVC, animated: true)
+        
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if self.searchData.isEmpty{

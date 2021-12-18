@@ -7,8 +7,10 @@
 
 import Foundation
 import UIKit
-import AuthenticationServices
+//import AuthenticationServices
 
+
+@available(iOS 13.0, *)
 class SignInViewController: UIViewController{
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -65,7 +67,7 @@ class SignInViewController: UIViewController{
         super.viewDidLoad()
 
         passwordTextField.isSecureTextEntry = true
-        setupAppleLogin()
+//        setupAppleLogin()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,24 +88,8 @@ class SignInViewController: UIViewController{
             }
         }
     }// end func
-        
-    func setupAppleLogin(){
-        let appleLoginButton = ASAuthorizationAppleIDButton(type:.signIn, style:.black)
-        appleLoginButton.addTarget(self, action: #selector(appleLoginButtonPress), for: .touchUpInside)
-        self.appleLoginView.addArrangedSubview(appleLoginButton)
-        
-    }
     
-    @objc func appleLoginButtonPress(){
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()
-        
-    }
+
     
     func fieldDataInit(){
         emailTextField.text = ""
@@ -115,17 +101,42 @@ class SignInViewController: UIViewController{
     
 }
 
+
+
+//    TODO: 추후 소셜 로그인 구현 예정(백엔드 친구와 의논 후)
+/*
+    func setupAppleLogin(){
+        let appleLoginButton = ASAuthorizationAppleIDButton(type:.signIn, style:.black)
+        appleLoginButton.addTarget(self, action: #selector(appleLoginButtonPress), for: .touchUpInside)
+        self.appleLoginView.addArrangedSubview(appleLoginButton)
+
+    }
+
+    @objc func appleLoginButtonPress(){
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.fullName, .email]
+
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+
+    }
+
 extension SignInViewController: ASAuthorizationControllerDelegate{
 //  Apple로그인 인증 성공 시 인증 정보 반환 함수
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        
+        print(authorization.credential)
         switch authorization.credential {
+            
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
             
-            print(appleIDCredential.identityToken)
+            
+            let tokeStr = String(data: appleIDCredential.identityToken!, encoding: .utf8)
+            print(tokeStr)
             print(userIdentifier, fullName, email)
             
         case let passwordCredential as ASPasswordCredential:
@@ -143,10 +154,12 @@ extension SignInViewController: ASAuthorizationControllerDelegate{
         print("Error: \(error)")
     }
 }
-
-extension SignInViewController: ASAuthorizationControllerPresentationContextProviding{
-    
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return self.view.window!
-    }
-}
+ 
+ 
+ extension SignInViewController: ASAuthorizationControllerPresentationContextProviding{
+     
+     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+         return self.view.window!
+     }
+ }
+*/
