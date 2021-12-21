@@ -15,6 +15,7 @@ class SearchUserViewController: UIViewController {
 
     let manager = APIManager.shared
     
+    
     var searchData: [CellRepresentable] = []
     var cellHeightsDictionary: NSMutableDictionary = [:]
     
@@ -69,10 +70,16 @@ extension SearchUserViewController: UITableViewDataSource{
 extension SearchUserViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.searchData[indexPath.row].moveFriendView()
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
-        print(pushVC)
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        
+        let Info: () = self.searchData[indexPath.row].moveFriendView(comple: { data  in
+            let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
+            pushVC.friendInfo = data
+            self.navigationController?.pushViewController(pushVC, animated: true)
+        })
+        
+        
+        
+   
         
     }
     

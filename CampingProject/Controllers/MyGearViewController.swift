@@ -105,12 +105,8 @@ class MyGearViewController: UIViewController{
                         }
                     })// end closure
                 }
+        
         }
-        
-//      카테고리에서 삭제할 때 인덱스값과 메인에서 삭제할 때 인덱스 값이 상이함
-//      카테고리에서 삭제할 때 메인의 인덱스값을 가져오게 함, 메인과 카테고리에서 동시에 리스트에서 삭제되게
-//      코드가 너무 지저분해서 리팩토링 필수
-        
         var CategoryIndexPath: IndexPath = []
         if let row =  noti.userInfo?["gearRow"] as? Int {
             if row != -1 {
@@ -131,8 +127,6 @@ class MyGearViewController: UIViewController{
         if noti.userInfo?["edit"] as? Bool ?? false {
             self.myGearCollectionVIew.reloadData()
         }
-        
-   
     }
   
     
@@ -140,8 +134,6 @@ class MyGearViewController: UIViewController{
 
 
 extension MyGearViewController: UICollectionViewDataSource{
-   
-  
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollectionView {
             return gearTypeVM.GearTypeNumberOfSections()

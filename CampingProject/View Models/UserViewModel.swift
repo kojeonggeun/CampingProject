@@ -132,9 +132,9 @@ class UserViewModel {
     
     
     func loadFriendInfo(friendId: Int ,completion: @escaping (Bool)-> Void) {
-        
+
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
-        
+
         AF.request(url+"/user/\(friendId)",
                    method: .get,
                    encoding: URLEncoding.default,
@@ -146,9 +146,9 @@ class UserViewModel {
                     guard let user = response.data else { return }
                     self.friendInfo.removeAll()
                     let userData = self.parseUser(user)
-                    
+
                     self.friendInfo.append(userData)
-                    
+
                     completion(true)
                 case .failure(let error):
                     print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")

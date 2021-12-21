@@ -18,24 +18,14 @@ struct UserInfo: Decodable {
 }
 
 struct User: Decodable {
-    var id: Int
-    var name: String?
-    var email: String
-    var phone: String?
-    var userImageId: Int?
-    var userImageUrl: String
-    var isPublic: Bool
-    
-    init(){
-        self.id = 0
-        self.name = ""
-        self.email = ""
-        self.phone = ""
-        self.userImageId = 0
-        self.userImageUrl = "https://doodleipsum.com/700/avatar-2?i"
-        self.isPublic = false
-        
-    }
+    var id: Int = 0
+    var name: String? = ""
+    var email: String = ""
+    var phone: String? = ""
+    var userImageId: Int? = 0
+    var userImageUrl: String = "https://doodleipsum.com/700/avatar-2?i"
+    var isPublic: Bool = false
+
 }
 
 

@@ -10,7 +10,7 @@ import UIKit
 
 protocol CellRepresentable {    
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
-    func moveFriendView()
+    func moveFriendView(comple: @escaping ((UserInfo) -> Void))
 }
 
 protocol FollowRepresentable {

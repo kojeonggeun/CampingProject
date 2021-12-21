@@ -10,11 +10,13 @@ import UIKit
 
 class SearchResultViewModel: CellRepresentable {
     
-    var searchData: SearchUser
-    var searchInputText: String
+    let searchData: SearchUser
+    let searchInputText: String
+    
     
     let manager = APIManager.shared
     let userVM = UserViewModel.shared
+    let userGearVM = UserGearViewModel.shared
     
     init(searchData: SearchUser, searchInputText: String) {
         self.searchData = searchData
@@ -61,14 +63,12 @@ class SearchResultViewModel: CellRepresentable {
         }
     }
     
-    func moveFriendView(){
-        print("클릭 한 사용자 ID \(searchData.id)")
-        print("클릭 한 사용자 Email \(searchData.email)")
-        print("클릭 한 사용자 Name \(searchData.name)")
-            
-        userVM.loadFriendInfo(friendId: searchData.id, completion: { data in
-            print("사용자 상세 정보 \(self.userVM.friendInfo[0].user)")
-            
+    func moveFriendView(comple: @escaping ((UserInfo) -> Void)){
+       
+        self.userVM.loadFriendInfo(friendId: self.searchData.id, completion: { data in
+            if data {
+                comple(self.userVM.friendInfo[0])
+            }
         })
         
     }
