@@ -29,7 +29,7 @@ class SearchUserViewController: UIViewController {
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.isNavigationBarHidden = true
         searchTableView.keyboardDismissMode = .onDrag
         
         searchTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
@@ -70,13 +70,14 @@ extension SearchUserViewController: UITableViewDataSource{
 extension SearchUserViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let Info: () = self.searchData[indexPath.row].moveFriendView(comple: { data  in
-            let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
-            pushVC.friendInfo = data
-            self.navigationController?.pushViewController(pushVC, animated: true)
-        })
-        
+        if !self.searchData.isEmpty{
+            self.searchData[indexPath.row].moveFriendView(comple: { data  in
+                print(data)
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
+                pushVC.friendInfo = data
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
+        }
         
         
    

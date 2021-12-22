@@ -7,17 +7,19 @@
 
 import Foundation
 
-struct UserInfo: Decodable {
+struct UserInfo: Codable {
 //    let code: String
     var user: User
-    var followerCnt: Int
-    var followingCnt: Int
-    var gearCnt: Int
-    var boardCnt: Int
+    var followerCnt: Int = 0
+    var followingCnt: Int = 0
+    var gearCnt: Int = 0
+    var boardCnt: Int = 0
+    var status: String?
     
+   
 }
 
-struct User: Decodable {
+struct User: Codable {
     var id: Int = 0
     var name: String? = ""
     var email: String = ""
@@ -25,9 +27,7 @@ struct User: Decodable {
     var userImageId: Int? = 0
     var userImageUrl: String = "https://doodleipsum.com/700/avatar-2?i"
     var isPublic: Bool = false
+    var aboutMe: String = ""
 
 }
-
-
-
 

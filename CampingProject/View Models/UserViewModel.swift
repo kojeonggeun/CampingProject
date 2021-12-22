@@ -156,7 +156,6 @@ class UserViewModel {
             }
     }
     
-    
     func parseUser(_ data: Data) -> UserInfo {
         let decoder = JSONDecoder()
         
@@ -166,7 +165,8 @@ class UserViewModel {
         } catch let error {
             print(AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error)))
             print("--> UserInfo parsing error: \(error.localizedDescription)")
-            return UserInfo.init( user: User.init(), followerCnt: 0, followingCnt: 0, gearCnt: 0, boardCnt: 0)
+            return UserInfo.init(user: User.init(), followerCnt: 0, followingCnt: 0, gearCnt: 0, boardCnt: 0, status: "NONE")
+            
         }
     }
     

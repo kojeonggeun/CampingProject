@@ -25,7 +25,7 @@ class FollowingViewController: UIViewController {
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(followingData)
+        
         
         followingTableView.keyboardDismissMode = .onDrag
         followingTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
@@ -110,15 +110,14 @@ extension FollowingViewController: UITableViewDelegate{
     }
 }
 
-
 extension FollowingViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchInputText = searchText
         self.followingSearchData.removeAll()
         self.page = 0
         
-        //        추후 팔로워 & 팔로잉 검색 기능 추가 예정
-        //        그때 수정
+    //        추후 팔로워 & 팔로잉 검색 기능 추가 예정
+    //        그때 수정
         for i in userVM.followings{
             let first = i.email.split(separator: "@")[0]
             if first.lowercased().contains(searchText.lowercased()) {

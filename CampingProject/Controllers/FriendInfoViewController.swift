@@ -16,6 +16,7 @@ class FriendInfoViewController: UIViewController {
     @IBOutlet weak var userFollowing: UILabel!
     @IBOutlet weak var userGear: UILabel!
     @IBOutlet weak var userDesc: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     
     var friendInfo: UserInfo? = nil
     
@@ -23,11 +24,21 @@ class FriendInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(friendInfo)
-        guard let info = friendInfo else { return }
+        
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
 
+        guard let info = friendInfo else { return }
+        guard let status = info.status else { return }
+        
+        if status == "FOLLOWING"{
+            followButton.setTitle("팔로잉☑️", for: .normal)
+            followButton.tintColor = .brown
+        }
+        self.title = info.user.email
         userName.text = info.user.name
         userFollower.text = "\(info.followerCnt)"
         userFollowing.text = "\(info.followingCnt)"
+        userDesc.text = info.user.phone
     }
 }
