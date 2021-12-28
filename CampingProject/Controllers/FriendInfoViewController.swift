@@ -35,10 +35,16 @@ class FriendInfoViewController: UIViewController {
             followButton.setTitle("팔로잉☑️", for: .normal)
             followButton.tintColor = .brown
         }
-        self.title = info.user.email
-        userName.text = info.user.name
+        self.title = info.user?.email
+        userName.text = info.user?.name
         userFollower.text = "\(info.followerCnt)"
         userFollowing.text = "\(info.followingCnt)"
-        userDesc.text = info.user.phone
+        userDesc.text = info.user?.phone
     }
+    
+
+    
 }
+
+
+

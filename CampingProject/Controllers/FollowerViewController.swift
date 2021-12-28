@@ -98,7 +98,7 @@ extension FollowerViewController: UITableViewDelegate{
         fetchingMore = true
         
         DispatchQueue.main.async {
-                self.followerTableView.reloadSections(IndexSet(integer: 1), with: .none)
+            self.followerTableView.reloadSections(IndexSet(integer: 1), with: .none)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.page += 1

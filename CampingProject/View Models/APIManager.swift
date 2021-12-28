@@ -24,8 +24,6 @@ class APIManager{
     
 //    장비 저장
     func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
-        
-
         let headers: HTTPHeaders = [
                     "Content-type": "multipart/form-data",
                     "Authorization" : returnToken()
@@ -54,7 +52,7 @@ class APIManager{
             
         }).responseJSON { response in
             switch response.result {
-            case .success(let data):
+            case .success(_):
                 print("")
             case .failure(let error):
                 print(error)
@@ -120,14 +118,15 @@ class APIManager{
                    encoding: URLEncoding.default,
                    headers: nil)
             .validate(statusCode: 200..<300)
-            .responseJSON { (response) in
+            .responseDecodable(of:Response.self) { (response) in
                 
                 switch response.result{
                 case .success:
-                    guard let result = response.data else {return}
-                    let data = self.parseGears(result)
+                    let gears = response.value!
+                    self.gearTypes.removeAll()
+                    self.tableViewData.removeAll()
                     
-                    for i in data {
+                    for i in gears.gearTypes {
                         self.gearTypes.append(i)
                     }
                 
@@ -139,35 +138,22 @@ class APIManager{
                 }
             }
     }
-    func parseGears(_ data: Data) -> [GearType]  {
-        let decoder = JSONDecoder()
-        self.gearTypes = []
-        self.tableViewData = []
 
-        do {
-            let response = try decoder.decode(Response.self, from: data)
-            let gears = response.gearTypes
-            return gears
-   
-        } catch let error {
-            print("--> GearType parsing error: \(error.localizedDescription)")
-          
-        }
-        return []
-    }
     
     
 //  유저 장비 로드
     func loadUserGear(completion: @escaping (Bool) -> Void){
-        AF.request(urlUser + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(urlUser + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
+            .responseDecodable(of:[CellData].self)  { (response) in
             switch response.result {
             case .success(_):
-                guard let result = response.data else { return }
-
-                let data = self.parseUserGear(result)
-                for i in data {
+                self.userGears.removeAll()
+                let userGears = response.value!
+                
+                for i in userGears {
                     self.userGears.append(i)
                 }
+                
                 completion(true)
                 
             case .failure(let error):
@@ -177,30 +163,17 @@ class APIManager{
             }
         }
     }
-    func parseUserGear(_ data: Data) -> [CellData] {
-        let decoder = JSONDecoder()
-        self.userGears = []
-        do {
-            let response = try decoder.decode([CellData].self, from: data)
-            
-            return response
-            
-        } catch let error {
-            print("--> CellData parsing error: \(error.localizedDescription)")
-            return []
-        }
-        
-    }
     
 //    유저 장비 이미지 로드
     func loadGearImages(gearId: Int, completion: @escaping ([ImageData]) -> Void){
         
-        AF.request(urlUser + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(urlUser + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
+            .responseDecodable(of:[ImageData].self)  { (response) in
     
             switch response.result {
             case .success(_):
-                guard let result = response.data else { return }
-                let images = self.parseGearImages(result)
+                
+                let images = response.value!
                 if !images.isEmpty{
                     AF.request(images[0].url).responseImage { response in
                         if response.value != nil{
@@ -213,7 +186,7 @@ class APIManager{
                     self.imageCache.add(image, withIdentifier: "\(gearId)")
                 }
           
-                completion(self.parseGearImages(result))
+                completion(images)
         
             case .failure(let error):
                 print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -221,28 +194,18 @@ class APIManager{
         }
         
     }
-    func parseGearImages(_ data: Data) -> [ImageData] {
-   
-        let decoder = JSONDecoder()
- 
-        do {
-            let response = try decoder.decode([ImageData].self, from: data)
-            return response
-        } catch let error {
-            print("--> CellData parsing error: \(error.localizedDescription)")
-            return []
-        }
-    }
 
     
     func searchUser(searchText: String, page: Int = 0, completion: @escaping ([SearchUser]) -> Void){
         let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 5]
         
-        AF.request(url+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(url+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300)
+            .responseDecodable(of: SearchResult.self) { (response) in
             switch response.result {
             case .success(let data):
-                guard let result = response.data else { return }
-                completion(self.parseSearchUser(result))
+                
+                let searchResult = response.value!
+                completion(searchResult.users)
                
             case .failure(let error):
                 print("🚫searchUser  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -250,18 +213,6 @@ class APIManager{
         }
     }
     
-    func parseSearchUser(_ data: Data) -> [SearchUser] {
-   
-        let decoder = JSONDecoder()
- 
-        do {
-            let response = try decoder.decode(SearchResult.self, from: data)
-            return response.users
-        } catch let error {
-            print("--> CellData parsing error: \(error.localizedDescription)")
-            return []
-        }
-    }
     
     
 /*

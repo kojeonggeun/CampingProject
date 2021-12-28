@@ -15,7 +15,7 @@ class GearTypeViewModel {
     var gearTypes: [GearType] {
         return manager.gearTypes
     }
-
+    
     func GearTypeNumberOfSections() -> Int{
         return gearTypes.count
     }

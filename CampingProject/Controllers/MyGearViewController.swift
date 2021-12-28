@@ -72,7 +72,6 @@ class MyGearViewController: UIViewController{
     
     func loadData(){
         apiManager.loadUserGear( completion: { userData in
-
             DispatchQueue.global().async {
                 self.apiManager.loadGearType(completion: { data in
                     for i in 0..<self.gearTypeVM.gearTypes.count{
@@ -202,33 +201,6 @@ extension MyGearViewController: UICollectionViewDataSource{
 
 
     }
-    
-////    밀어서 삭제하기
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-////        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
-//
-//        let action = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
-//
-//            self.userGearVM.deleteUserGear(gearId: self.userGearVM.userGears[indexPath.row].id,row: indexPath.row)
-//            self.gearTableView.deleteRows(at: [indexPath], with: .automatic)
-//
-//            DispatchQueue.main.async {
-//                self.gearTableView.reloadData()
-//            }
-//            completion(true)
-//        }
-//
-//                action.backgroundColor = .red
-//                action.title = "삭제"
-//                let configuration = UISwipeActionsConfiguration(actions: [action])
-//                configuration.performsFirstActionWithFullSwipe = false
-//                return configuration
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-//}
 }
 
 extension MyGearViewController: UICollectionViewDelegate{

@@ -63,9 +63,12 @@ class ProfileEditViewController: UIViewController {
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         profileImageView.layer.borderWidth = 5
         profileImageView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+
+        guard let user = self.userVM.userInfo[0].user else { return }
+        guard let name = user.name else { return }
+        guard let intro = user.phone else { return }
         
-        guard let name = self.userVM.userInfo[0].user.name else { return }
-        guard let intro = self.userVM.userInfo[0].user.phone else { return }
+        
         
         profileName.text = name
         profileIntro.text = intro

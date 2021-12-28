@@ -75,10 +75,11 @@ class ProfileViewController: UIViewController, ReloadData {
     func reloadData() {
         DispatchQueue.global().async {
             self.userVM.loadUserInfo(completion: { check in
+                guard let user = self.userVM.userInfo[0].user else { return }
+                
                 if check {
-                    
-                    if self.userVM.userInfo[0].user.userImageUrl != "" {
-                        self.imageUrl = self.userVM.userInfo[0].user.userImageUrl
+                    if user.userImageUrl != "" {
+                        self.imageUrl = user.userImageUrl
                     } else {
                         self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
                     }
@@ -90,8 +91,8 @@ class ProfileViewController: UIViewController, ReloadData {
                         let image = UIImage(data: data!)
                         self.profileImage.image = image
                         
-                        self.profileName.text = self.userVM.userInfo[0].user.name
-                        self.profileIntro.text = self.userVM.userInfo[0].user.phone
+                        self.profileName.text = user.name
+                        self.profileIntro.text = user.phone
                     }
                 }
             })
@@ -104,7 +105,7 @@ class ProfileViewController: UIViewController, ReloadData {
         
         userVM.loadFollower()
         userVM.loadFollowing()
-    
+        
         follower.text = String(self.userVM.userInfo[0].followerCnt)
         following.text = String(self.userVM.userInfo[0].followingCnt)
         

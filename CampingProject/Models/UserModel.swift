@@ -8,13 +8,30 @@
 import Foundation
 
 struct UserInfo: Codable {
-//    let code: String
-    var user: User
-    var followerCnt: Int = 0
-    var followingCnt: Int = 0
-    var gearCnt: Int = 0
-    var boardCnt: Int = 0
+    var user: User?
+    var followerCnt: Int
+    var followingCnt: Int
+    var gearCnt: Int
+    var boardCnt: Int
     var status: String?
+  
+    enum CodingKeys: CodingKey {
+        case user, followerCnt, followingCnt, gearCnt, boardCnt, status
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        user = (try? values.decode(User.self, forKey: .user)) ?? nil
+        followerCnt = (try? values.decode(Int.self, forKey: .followerCnt)) ?? 0
+        followingCnt = (try? values.decode(Int.self, forKey: .followingCnt)) ?? 0
+        gearCnt = (try? values.decode(Int.self, forKey: .gearCnt)) ?? 0
+        boardCnt = (try? values.decode(Int.self, forKey: .boardCnt)) ?? 0
+        status = (try? values.decode(String.self, forKey: .status)) ?? nil
+    }
+
+    
+
+    
     
    
 }
