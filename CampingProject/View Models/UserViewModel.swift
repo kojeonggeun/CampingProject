@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 import UIKit
-
+import RxSwift
 
 
 class UserViewModel {
@@ -17,17 +17,20 @@ class UserViewModel {
     
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
-    var userInfo: [UserInfo] = []
+    
     var friendInfo: [UserInfo] = []
     var followers: [Friend] = []
     var followings: [Friend] = []
+    
+    
+    
     
 //    회원가입
     func Register(email: String, password: String){
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
         
-        AF.request(url + "user",method: .post,parameters: params,encoding:URLEncoding.default,headers: ["Content-Type":"application/x-www-form-urlencoded"]).validate(statusCode: 200..<300).responseJSON { response in
+        AF.request(url + "user",method: .post,parameters: params,encoding:URLEncoding.default,headers: ["Content-Type":"application/x-www-form-urlencoded"]).responseJSON { response in
             
             switch response.result {
             case .success(_):
@@ -47,7 +50,7 @@ class UserViewModel {
                    parameters: ["email":email,"password":password],
                    encoding: URLEncoding.default,
                    headers: nil)
-            .validate(statusCode: 200..<300)
+            
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -70,7 +73,7 @@ class UserViewModel {
     func emailDuplicateCheck(email: String, completion: @escaping (Int) -> Void) {
         let parameters: [String: Any] = ["email": email]
         
-        AF.request(url+"user/existEmail/" , method: .get, parameters: parameters).validate(statusCode: 200..<300).responseJSON { (response) in
+        AF.request(url+"user/existEmail/" , method: .get, parameters: parameters).responseJSON { (response) in
             switch response.result {
             case .success(let data):
                 guard let result = data as? Int else { return }
@@ -92,7 +95,7 @@ class UserViewModel {
                    method: .get,
                    encoding: URLEncoding.default,
                    headers: headers)
-            .validate(statusCode: 200..<300)
+            
             .responseJSON { (response) in
                 switch response.result {
                 case .success(_):
@@ -104,7 +107,7 @@ class UserViewModel {
             }
     }
     
-    func loadUserInfo(completion: @escaping (Bool)-> Void) {
+    func loadUserInfo(completion: @escaping (Result<UserInfo, AFError>)-> Void) {
         
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
         
@@ -112,19 +115,32 @@ class UserViewModel {
                    method: .get,
                    encoding: URLEncoding.default,
                    headers: headers)
-            .validate(statusCode: 200..<300)
+            
             .responseDecodable(of: UserInfo.self) { (response) in
                 switch response.result {
                 case .success(_):
-                    self.userInfo.removeAll()
-                    self.userInfo.append(response.value!)
-                    
-                    completion(true)
+                    completion(response.result)
                 case .failure(let error):
                     print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
                 }
             }
     }
+    
+    func loadUserInfoRx() -> Observable<UserInfo>{
+        return Observable.create() { emitter in
+            self.loadUserInfo() { result in
+                switch result {
+                case let .success(data):
+                    emitter.onNext(data)
+                    emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
     
     func loadFriendInfo(friendId: Int ,completion: @escaping (Bool)-> Void) {
 
@@ -134,7 +150,6 @@ class UserViewModel {
                    method: .get,
                    encoding: URLEncoding.default,
                    headers: headers)
-            .validate(statusCode: 200..<300)
             .responseDecodable(of: UserInfo.self) { response in
                 switch response.result {
                 case .success(_):
@@ -182,8 +197,7 @@ class UserViewModel {
                     "Authorization" : returnToken()
                 ]
         
-        AF.request(urlUser ,method: .put,parameters: parameters,encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
-        ).responseJSON { response in
+        AF.request(urlUser ,method: .put,parameters: parameters,encoding:URLEncoding.default, headers: headers).responseJSON { response in
             switch response.result {
             case .success(_):
                 completion(true)
@@ -194,44 +208,65 @@ class UserViewModel {
         }
     }
   
-    func loadFollower(){
+    func loadFollowerRx() -> Observable<[Friend]>{
+        return Observable.create() { emitter in
+            self.loadFollower() { result in
+                    emitter.onNext(result)
+                    emitter.onCompleted()
+                }
+            return Disposables.create()
+        }
+    }
+    
+    func loadFollower(completion: @escaping ([Friend]) -> Void){
         let headers: HTTPHeaders = [
                     "Content-type": "application/x-www-form-urlencoded",
                     "Authorization" : returnToken()
                 ]
         
-        AF.request(urlUser + "friend/follower" ,method: .get , encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
-        ).responseDecodable(of: Friends.self) { response in
+        AF.request(urlUser + "friend/follower" ,method: .get , encoding:URLEncoding.default, headers: headers).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success(_):
                 self.followers.removeAll()
                 let data = response.value!
                 
-                for i in data.friends {
-                    self.followers.append(i)
-                }
-                
+                self.followers = data.friends.map({ data in
+                    return data
+                })
+                completion(self.followers)
             case .failure(let error):
                 print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
     
-    func loadFollowing(){
+    func loadFollowingRx() -> Observable<[Friend]>{
+        return Observable.create() { emitter in
+            self.loadFollowing() { result in
+                    emitter.onNext(result)
+                    emitter.onCompleted()
+                }
+            return Disposables.create()
+        }
+    }
+
+    
+    func loadFollowing(completion: @escaping ([Friend]) -> Void){
         let headers: HTTPHeaders = [
                     "Content-type": "application/x-www-form-urlencoded",
                     "Authorization" : returnToken()
                 ]
         
-        AF.request(urlUser + "friend/following" ,method: .get , encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
-        ).responseDecodable(of: Friends.self) { response in
+        AF.request(urlUser + "friend/following" ,method: .get , encoding:URLEncoding.default, headers: headers).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success(_):
                 self.followings.removeAll()
                 let data = response.value!
-                for i in data.friends {
-                    self.followings.append(i)
-                }
+                
+                self.followings = data.friends.map({ data in
+                    return data
+                })
+                completion(self.followings)
                 
             case .failure(let error):
                 print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -240,20 +275,29 @@ class UserViewModel {
     }
     
     
-    func deleteFollower(id: Int){
+    func loadDeleteFollowergRx(id: Int) -> Observable<Bool>{
+        
+        return Observable.create() { emitter in
+            self.deleteFollower(id: id) { result in
+                    emitter.onNext(result)
+                    emitter.onCompleted()
+                }
+            return Disposables.create()
+        }
+    }
+        
+    func deleteFollower(id: Int, completion: @escaping ((Bool) -> Void)){
         let headers: HTTPHeaders = [
                     "Content-type": "application/x-www-form-urlencoded",
                     "Authorization" : returnToken()
                 ]
-        
-        AF.request(urlUser + "friend/\(id)" ,method: .delete , encoding:URLEncoding.default, headers: headers).validate(statusCode: 200..<300
-        ).responseJSON { response in
+        AF.request(urlUser + "friend/\(id)" ,method: .delete , encoding:URLEncoding.default, headers: headers).response { response in
             switch response.result {
             case .success(_):
-                print("삭제 성공~")
-                
+                completion(true)
             case .failure(let error):
                 print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                completion(false)
             }
         }
     }

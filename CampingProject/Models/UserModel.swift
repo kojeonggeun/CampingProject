@@ -28,12 +28,6 @@ struct UserInfo: Codable {
         boardCnt = (try? values.decode(Int.self, forKey: .boardCnt)) ?? 0
         status = (try? values.decode(String.self, forKey: .status)) ?? nil
     }
-
-    
-
-    
-    
-   
 }
 
 struct User: Codable {

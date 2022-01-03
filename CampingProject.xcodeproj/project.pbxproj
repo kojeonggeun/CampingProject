@@ -33,6 +33,7 @@
 		CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103526C552460058F440 /* GearTypeViewModel.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
 		CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */; };
+		CBAF1062277AD79F007DF1FC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */; };
 		CBB519FA26FF7187005F8B00 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB519F926FF7187005F8B00 /* ImagePickerManager.swift */; };
 		CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */; };
 		CBB51A022700C74A005F8B00 /* GearImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */; };
@@ -90,6 +91,7 @@
 		CBAB103526C552460058F440 /* GearTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeViewModel.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
 		CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBB519F926FF7187005F8B00 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearEditViewController.swift; sourceTree = "<group>"; };
 		CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GearImageCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				CBD5F5D526E9E0B500E09B0D /* UserGearViewModel.swift */,
 				CBDC479C2732C97700537E5A /* SearchResultViewModel.swift */,
 				CBF791F327366EDC0089EE48 /* FriendViewModel.swift */,
+				CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
 				CBD44FB1276D971500D1B3EA /* FriendInfoViewController.swift in Sources */,
 				CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */,
+				CBAF1062277AD79F007DF1FC /* ProfileViewModel.swift in Sources */,
 				CBDC478F2729467900537E5A /* FollowerViewController.swift in Sources */,
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
 				CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */,

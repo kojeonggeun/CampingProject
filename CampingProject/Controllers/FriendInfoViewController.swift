@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class FriendInfoViewController: UIViewController {
     
@@ -18,7 +19,14 @@ class FriendInfoViewController: UIViewController {
     @IBOutlet weak var userDesc: UILabel!
     @IBOutlet weak var followButton: UIButton!
     
+    
+    
     var friendInfo: UserInfo? = nil
+    var api = APIManager.shared
+    var userVM = UserViewModel.shared
+    var profileVM = ProfileViewModel.shared
+    let disposeBag = DisposeBag()
+    
     
 //    MARK: LifeCycles
     override func viewDidLoad() {
@@ -35,16 +43,36 @@ class FriendInfoViewController: UIViewController {
             followButton.setTitle("팔로잉☑️", for: .normal)
             followButton.tintColor = .brown
         }
+        
         self.title = info.user?.email
         userName.text = info.user?.name
         userFollower.text = "\(info.followerCnt)"
         userFollowing.text = "\(info.followingCnt)"
         userDesc.text = info.user?.phone
+        
+
+        
     }
     
 
+    @IBAction func followBtn(_ sender: Any) {
+        if friendInfo?.status! == "FOLLOWING" {
+            userVM.loadDeleteFollowergRx(id: friendInfo!.user!.id)
+                .subscribe(onNext: { result in
+                    self.followButton.setTitle("팔로우", for: .normal)
+                    self.followButton.tintColor = .blue
+                    self.profileVM.loadFollowing()
+                })
+        } else {
+            api.followRequst(id: friendInfo!.user!.id, isPublic: friendInfo!.user!.isPublic, completion: { data in
+                self.followButton.setTitle("팔로잉☑️", for: .normal)
+                self.followButton.tintColor = .brown
+                self.profileVM.loadFollowing()
+            })
+        }
+    }
     
-}
+    }
 
 
 

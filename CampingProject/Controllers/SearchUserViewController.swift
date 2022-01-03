@@ -78,10 +78,6 @@ extension SearchUserViewController: UITableViewDelegate{
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
         }
-        
-        
-   
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -21,7 +21,6 @@ class APIManager{
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
     
-    
 //    장비 저장
     func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
         let headers: HTTPHeaders = [
@@ -221,8 +220,6 @@ class APIManager{
     비공개 일 경우 요청 & 승인 과정을 거쳐야 함
 */
     func followRequst(id: Int, isPublic: Bool, completion: @escaping (Bool) -> Void){
-//        if isPublic {
-//        }
         
         AF.request(urlUser + "friend/\(id)",
                    method: .post,
@@ -232,8 +229,8 @@ class APIManager{
             .responseJSON { (response) in
                 switch response.result {
                 case .success(_):
-          
                     completion(true)
+                   
                 case .failure(let error):
                     print(AFError.parameterEncodingFailed(reason: .customEncodingFailed(error: error)))
                     print("🚫 followRequst Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")

@@ -14,11 +14,6 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userVM.loadFollower()
-        userVM.loadFollowing()
-        
-        
-        
     }
 }
 

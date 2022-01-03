@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -133,9 +134,10 @@
         <!--친구-->
         <scene sceneID="OsH-y0-yvy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rSE-TU-ts9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController navigationBarHidden="YES" id="w0b-zc-7Bf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="친구" id="Svp-Ab-6bG"/>
+                    <tabBarItem key="tabBarItem" title="친구" id="Svp-Ab-6bG">
+                        <imageReference key="image" image="person.2.fill" catalog="system" symbolScale="small"/>
+                    </tabBarItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Eg-DG-QCf">
                         <autoresizingMask key="autoresizingMask"/>
@@ -144,6 +146,7 @@
                         <segue destination="c4D-Ux-otR" kind="relationship" relationship="rootViewController" id="Dnn-Tg-nMb"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rSE-TU-ts9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2872" y="1019"/>
         </scene>
@@ -197,7 +200,9 @@
                         <viewLayoutGuide key="safeArea" id="YF2-d6-en1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="게시글" id="5GK-BV-sPm"/>
+                    <tabBarItem key="tabBarItem" title="게시글" id="5GK-BV-sPm">
+                        <imageReference key="image" image="list.bullet.rectangle.fill" catalog="system" symbolScale="small"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQp-zw-Gcm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -296,6 +301,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="팔로우"/>
+                                <connections>
+                                    <action selector="followBtn:" destination="UBA-SK-i4L" eventType="touchUpInside" id="r7i-u6-cDB"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6uR-iw-cIl">
                                 <rect key="frame" x="17.000000000000007" y="86" width="98.666666666666686" height="100"/>
@@ -430,7 +438,9 @@
         <scene sceneID="88f-Nk-hCw">
             <objects>
                 <navigationController id="spn-Vf-dHl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="마이페이지" id="svW-ff-4Tz"/>
+                    <tabBarItem key="tabBarItem" title="마이페이지" id="svW-ff-4Tz">
+                        <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="small"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uNw-cj-BqZ">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -847,6 +857,9 @@
     </designables>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
+        <image name="person.2.fill" catalog="system" width="128" height="80"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

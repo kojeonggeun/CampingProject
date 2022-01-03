@@ -7,8 +7,8 @@
 
 import Foundation
 import UIKit
-
-
+import RxSwift
+import RxCocoa
 
 class ProfileViewController: UIViewController, ReloadData {
   
@@ -23,9 +23,13 @@ class ProfileViewController: UIViewController, ReloadData {
     @IBOutlet weak var profileIntro: UITextView!
     
     var userGearVM = UserGearViewModel.shared
+    var api = APIManager.shared
     var imageUrl: String = ""
     
-    let userVM: UserViewModel = UserViewModel.shared
+    let viewModel = ProfileViewModel.shared
+    let disposeBag = DisposeBag()
+    
+    var userVM: UserViewModel = UserViewModel.shared
     
     @IBAction func moveFollower(_ sender: Any) {
         
@@ -68,46 +72,59 @@ class ProfileViewController: UIViewController, ReloadData {
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
         
         profileIntro.isEditable = false
+       
+        
         reloadData()
         
-    }
-    
-    func reloadData() {
-        DispatchQueue.global().async {
-            self.userVM.loadUserInfo(completion: { check in
-                guard let user = self.userVM.userInfo[0].user else { return }
-                
-                if check {
-                    if user.userImageUrl != "" {
-                        self.imageUrl = user.userImageUrl
-                    } else {
-                        self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
-                    }
-                    
-                    let url = URL(string: self.imageUrl)
-                    let data = try? Data(contentsOf: url!)
-        //            TODO: 프로필 이미지 수정 좀 이상함
-                    DispatchQueue.main.async {
-                        let image = UIImage(data: data!)
-                        self.profileImage.image = image
-                        
-                        self.profileName.text = user.name
-                        self.profileIntro.text = user.phone
-                    }
-                }
-            })
-        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gearQuantity.text = "\(userGearVM.userGears.count)"
+
+        self.userVM.loadFollowerRx()
+            .subscribe(onNext: { follower in
+                self.viewModel.followerObservable.onNext(follower.count)
+        })
+    }
+    
+    
+    func reloadData() {
         
-        userVM.loadFollower()
-        userVM.loadFollowing()
         
-        follower.text = String(self.userVM.userInfo[0].followerCnt)
-        following.text = String(self.userVM.userInfo[0].followingCnt)
+        viewModel.totalFollower
+            .map { "\($0)"}
+            .observe(on: MainScheduler.instance)
+            .bind(to:self.follower.rx.text)
+            .disposed(by: self.disposeBag)
+
+        viewModel.totalFollowing
+            .map { "\($0)" }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {
+                self.following.text = $0
+            })
+            .disposed(by: self.disposeBag)
         
+        userVM.loadUserInfoRx()
+            .subscribe (onNext: { userInfo in
+                    if userInfo.user?.userImageUrl != "" {
+                        self.imageUrl = userInfo.user!.userImageUrl
+                    } else {
+                        self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
+                    }
+
+                    let url = URL(string: self.imageUrl)
+                    let data = try? Data(contentsOf: url!)
+        //            TODO: 프로필 이미지 수정 좀 이상함
+                    
+                    let image = UIImage(data: data!)
+                    self.profileImage.image = image
+
+                    self.profileName.text = userInfo.user!.name
+                    self.profileIntro.text = userInfo.user!.phone
+            })
     }
 }

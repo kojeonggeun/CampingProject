@@ -64,15 +64,12 @@ class ProfileEditViewController: UIViewController {
         profileImageView.layer.borderWidth = 5
         profileImageView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
 
-        guard let user = self.userVM.userInfo[0].user else { return }
-        guard let name = user.name else { return }
-        guard let intro = user.phone else { return }
+        userVM.loadUserInfoRx()
+            .subscribe (onNext: { userInfo in
+                self.profileName.text = userInfo.user?.name
+                self.profileIntro.text = userInfo.user?.phone
+            })
         
-        
-        
-        profileName.text = name
-        profileIntro.text = intro
-            
         DispatchQueue.global().async {
             let url = URL(string: self.image)
             let data = try? Data(contentsOf: url!)

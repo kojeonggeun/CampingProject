@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class FriendViewModel: FollowRepresentable {
   
@@ -27,9 +28,6 @@ class FriendViewModel: FollowRepresentable {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
             
-//            cell.sendEventButton.tag = indexPath.row
-//            cell.sendEventButton.addTarget(self, action: #selector(deleteRequest), for: .touchUpInside)
-       
             let email = self.searchFriend.email
             
             let name = self.searchFriend.name
@@ -59,10 +57,5 @@ class FriendViewModel: FollowRepresentable {
             
             return cell
         }
-    }
-    
-    @objc func deleteRequest(sender: UIButton){
-        let id = self.searchFriend.friendId
-        userVM.deleteFollower(id: id)
     }
 }
