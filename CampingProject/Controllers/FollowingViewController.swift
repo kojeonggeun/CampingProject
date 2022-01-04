@@ -91,7 +91,7 @@ extension FollowingViewController: UITableViewDelegate{
             .subscribe(onNext : { result in
                 print(result)
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
-                pushVC.friendInfo = result
+                pushVC.userInfo = result
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
 

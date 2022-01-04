@@ -196,6 +196,24 @@ class APIManager{
         }
         
     }
+    
+    func loadSearchUserGear(id: Int) {
+
+        AF.request(url + "gear"+"/\(id)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
+            .responseDecodable(of:[CellData].self)  { (response) in
+            switch response.result {
+            case .success(_):
+                print(id)
+                for i in response.value! {
+                    print(i.name)
+                }
+            case .failure(let error):
+                print("🚫loadSearchUserGear  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            
+            }
+        }
+        
+    }
 
 //    유저 검색
     func searchUser(searchText: String, page: Int = 0, completion: @escaping ([SearchUser]) -> Void){
@@ -470,12 +488,6 @@ class APIManager{
         }
     }
     
-    
-    
-    
-    
-    
-    
 //    API herder
     func headerInfo() -> HTTPHeaders {
         
@@ -499,4 +511,5 @@ class APIManager{
         
         return token
     }
+
 }
