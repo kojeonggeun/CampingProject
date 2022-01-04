@@ -20,7 +20,8 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    let userManager: UserViewModel = UserViewModel()
+    let apiManager = APIManager.shared
+    let userVM = UserViewModel.shared
 
     // MARK: LifeCycles
     override func viewDidLoad() {
@@ -46,7 +47,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     func signUpAction(email: String, password: String, passwordConform: String){
     
         
-        if !userManager.isValidEmail(email: email){
+        if !userVM.isValidEmail(email: email){
             checkTextField.isHidden = false
             checkTextField.text = "이메일 형식이 맞지 않습니다."
             emailAnimation()
@@ -54,7 +55,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
             
         }
         
-        if !userManager.isValidPassword(password: password){
+        if !userVM.isValidPassword(password: password){
             checkTextField.isHidden = false
             checkTextField.text = "비밀번호는 영어+숫자+특수문자, 8~20자리로 해야합니다."
             passwordAnimation()
@@ -64,7 +65,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
 //        let encrypt: String = AES256Util.encrypt(string: password)
         
         if password == passwordConform && password != "" {
-            userManager.Register(email: email, password: password)
+            apiManager.Register(email: email, password: password)
             checkTextField.isHidden = true
             
         } else {
@@ -124,7 +125,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         guard let email = textField.text else { return }
         
-        userManager.emailDuplicateCheck(email: email, completion: { data in
+        apiManager.emailDuplicateCheck(email: email, completion: { data in
             if data != 0 {
                 self.checkTextField.isHidden = false
                 self.checkTextField.text = "중복 되는 이메일입니다."

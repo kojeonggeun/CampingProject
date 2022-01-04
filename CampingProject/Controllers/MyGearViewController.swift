@@ -8,7 +8,7 @@
 import UIKit
 
 
-@available(iOS 15.0, *)
+
 class MyGearViewController: UIViewController{
     
   
@@ -136,7 +136,7 @@ class MyGearViewController: UIViewController{
 }// end FirstViewController
 
 
-@available(iOS 15.0, *)
+
 extension MyGearViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollectionView {
@@ -207,7 +207,7 @@ extension MyGearViewController: UICollectionViewDataSource{
 
     }
 }
-@available(iOS 15.0, *)
+
 extension MyGearViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -225,7 +225,7 @@ extension MyGearViewController: UICollectionViewDelegate{
    
 }
    
-@available(iOS 15.0, *)
+
 extension MyGearViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == myGearCollectionVIew {

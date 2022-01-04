@@ -15,12 +15,13 @@ class FollowerViewController: UIViewController {
     @IBOutlet weak var followerTableView: UITableView!
     @IBOutlet weak var follwerSearchBar: UISearchBar!
     
-    let manager = APIManager.shared
-    let userVM = UserViewModel.shared
     
+    let userVM = UserViewModel.shared
+    let apiManager = APIManager.shared
     var searchInputText: String = ""
     var fetchingMore: Bool = false
     var page: Int = 0
+    var id: Int = 0
     
     var followerData = [FollowRepresentable]()
     var followerSearchData = [FollowRepresentable]()
@@ -81,6 +82,23 @@ extension FollowerViewController: UITableViewDataSource {
 }
 
 extension FollowerViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if followerSearchData.isEmpty {
+            id = followerData[indexPath.row].searchFriend.friendId
+        } else {
+            id = followerSearchData[indexPath.row].searchFriend.friendId
+        }
+        
+        self.userVM.loadFriendInfoRx(id: id )
+            .subscribe(onNext : { result in
+                print(result)
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
+                pushVC.friendInfo = result
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
+        
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
         let offsetY = scrollView.contentOffset.y
@@ -122,7 +140,7 @@ extension FollowerViewController: UISearchBarDelegate{
 
 //        추후 팔로워 & 팔로잉 검색 기능 추가 예정
 //        그때 수정
-        for i in userVM.followers{
+        for i in apiManager.followers{
             let first = i.email.split(separator: "@")[0]
             if first.lowercased().contains(searchText.lowercased()) {
                 self.followerSearchData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))

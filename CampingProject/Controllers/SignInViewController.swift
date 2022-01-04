@@ -21,7 +21,7 @@ class SignInViewController: UIViewController{
    
     @IBOutlet weak var appleLoginView: UIStackView!
     
-    let userManager: UserViewModel = UserViewModel.shared
+    let userVM: UserViewModel = UserViewModel.shared
     let apiManager: APIManager = APIManager.shared
     @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
     
@@ -30,10 +30,10 @@ class SignInViewController: UIViewController{
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        userManager.login(email: email, password: password) { completion in
+        apiManager.login(email: email, password: password) { completion in
             if completion {
                 self.apiManager.loadUserGear(){ data in
-                    self.userManager.loadUserInfo(completion: {_ in })
+                    self.apiManager.loadUserInfo(completion: {_ in })
                 }
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
                 
@@ -79,8 +79,8 @@ class SignInViewController: UIViewController{
             if DB.userDefaults.object(forKey: "token") != nil {
                 let user = DB.userDefaults.value(forKey: "token") as! NSDictionary
                 print(user["token"])
-                self.userManager.loadUserInfo(completion: { _ in })
-                userManager.loginCheck(){ (completion) in
+                self.apiManager.loadUserInfo(completion: { _ in })
+                apiManager.loginCheck(){ (completion) in
                     if completion {
                         self.performSegue(withIdentifier: "MainTabBarController",sender: nil)
                     }

@@ -23,6 +23,7 @@ class ProfileEditViewController: UIViewController {
     
     let imagePicker = UIImagePickerController()
     let userVM = UserViewModel.shared
+    let apiManager = APIManager.shared
     
 
     @IBAction func imageSelectButton(_ sender: Any) {
@@ -34,9 +35,9 @@ class ProfileEditViewController: UIViewController {
 //    }
     
     @IBAction func saveProfile(_ sender: Any) {
-        userVM.saveUserProfileImage(image: profileImageView.image!, imageName: "asd", completion: { imageCheck in
+        apiManager.saveUserProfileImage(image: profileImageView.image!, imageName: "asd", completion: { imageCheck in
             if imageCheck{
-                self.userVM.saveUserProfile(name: self.profileName.text!, phone: "", intro: self.profileIntro.text!, public: true, completion: { saveCheck in
+                self.apiManager.saveUserProfile(name: self.profileName.text!, phone: "", intro: self.profileIntro.text!, public: true, completion: { saveCheck in
                     if saveCheck {
                         self.delegate?.reloadData()
                         

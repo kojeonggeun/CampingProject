@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController, ReloadData {
     @IBOutlet weak var profileIntro: UITextView!
     
     var userGearVM = UserGearViewModel.shared
-    var api = APIManager.shared
+    var apiManger = APIManager.shared
     var imageUrl: String = ""
     
     let viewModel = ProfileViewModel.shared
@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController, ReloadData {
         
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followerView") as! FollowerViewController
 
-        for i in userVM.followers{
+        for i in apiManger.followers{
             pushVC.followerData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
         }
         self.navigationController?.pushViewController(pushVC, animated: true)
@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController, ReloadData {
     @IBAction func moveFollowing(_ sender: Any) {
         
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followingView") as! FollowingViewController
-        for i in userVM.followings{
+        for i in apiManger.followings{
             pushVC.followingData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "following"))
         }
         self.navigationController?.pushViewController(pushVC, animated: true)

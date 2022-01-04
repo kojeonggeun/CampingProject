@@ -18,7 +18,7 @@ class SearchUserViewController: UIViewController {
     
     var searchData: [CellRepresentable] = []
     var cellHeightsDictionary: NSMutableDictionary = [:]
-    
+    var userVM = UserViewModel.shared
     var searchInputText: String = ""
     var fetchingMore: Bool = false
     var hasNext: Bool = false
@@ -71,12 +71,14 @@ extension SearchUserViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !self.searchData.isEmpty{
-            self.searchData[indexPath.row].moveFriendView(comple: { data  in
-                print(data)
-                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
-                pushVC.friendInfo = data
-                self.navigationController?.pushViewController(pushVC, animated: true)
-            })
+            let id = self.searchData[indexPath.row].searchData.id
+            self.userVM.loadFriendInfoRx(id: id )
+                .subscribe(onNext : { result in
+                    print(result)
+                    let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
+                    pushVC.friendInfo = result
+                    self.navigationController?.pushViewController(pushVC, animated: true)
+                })
         }
     }
     

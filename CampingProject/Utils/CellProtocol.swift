@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-protocol CellRepresentable {    
+protocol CellRepresentable {
+    var searchData: SearchUser { get }
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
-    func moveFriendView(comple: @escaping ((UserInfo) -> Void))
 }
 
 protocol FollowRepresentable {

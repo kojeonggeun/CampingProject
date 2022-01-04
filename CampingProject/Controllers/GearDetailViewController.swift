@@ -57,7 +57,7 @@ class GearDetailViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in
             return
         })
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true)
 
     }
     @IBAction func gearEdit(_ sender: Any) {

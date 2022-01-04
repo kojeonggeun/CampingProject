@@ -62,14 +62,4 @@ class SearchResultViewModel: CellRepresentable {
             return cell
         }
     }
-    
-    func moveFriendView(comple: @escaping ((UserInfo) -> Void)){
-       
-        self.userVM.loadFriendInfo(friendId: self.searchData.id, completion: { data in
-            if data {
-                comple(self.userVM.friendInfo[0])
-            }
-        })
-        
-    }
 }
