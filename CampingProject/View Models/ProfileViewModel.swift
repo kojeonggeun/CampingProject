@@ -12,7 +12,7 @@ import RxCocoa
 class ProfileViewModel {
     
     let userVM = UserViewModel.shared
-    
+    let disposeBag = DisposeBag()
     static let shared = ProfileViewModel()
     
     var followerObservable = BehaviorSubject<Int>(value: 0)
@@ -26,24 +26,35 @@ class ProfileViewModel {
     lazy var totalFollowing = followingObservable.map {
         $0 
     }
-
+    
     init() {
         userVM.loadFollowerRx()
             .subscribe(onNext: { follower in
                 self.followerObservable.onNext(follower.count)
-            })
+                
+            }).disposed(by: disposeBag)
         
         userVM.loadFollowingRx()
             .subscribe(onNext: { following in
                 self.followingObservable.onNext(following.count)
-            })
+                
+            }).disposed(by: disposeBag)
+  
     }
     
-    func loadFollowing(){
+    func reLoadFollowing(){
         self.userVM.loadFollowingRx()
             .subscribe(onNext: { following in
                 self.followingObservable.onNext(following.count)
-        })
+        }).disposed(by: disposeBag)
     }
     
+    func clearUserCount(){
+        followerObservable
+            .onNext(0)
+            
+        
+        followingObservable
+            .onNext(0)
+    }
 }

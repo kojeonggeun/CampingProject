@@ -97,8 +97,6 @@ class UserViewModel {
         let tokenDict =  DB.userDefaults.value(forKey: "token") as! NSDictionary
         let token = tokenDict["token"] as! String
         
-        
         return token
     }
-
 }

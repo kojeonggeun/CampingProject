@@ -22,14 +22,14 @@ class ProfileViewController: UIViewController, ReloadData {
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profileIntro: UITextView!
     
-    var userGearVM = UserGearViewModel.shared
-    var apiManger = APIManager.shared
-    var imageUrl: String = ""
-    
+    let userGearVM = UserGearViewModel.shared
     let viewModel = ProfileViewModel.shared
+    let userVM: UserViewModel = UserViewModel.shared
+    let apiManger = APIManager.shared
     let disposeBag = DisposeBag()
     
-    var userVM: UserViewModel = UserViewModel.shared
+    var imageUrl: String = ""
+    
     
     @IBAction func moveFollower(_ sender: Any) {
         
@@ -72,12 +72,8 @@ class ProfileViewController: UIViewController, ReloadData {
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
         
         profileIntro.isEditable = false
-       
         
         reloadData()
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,14 +81,21 @@ class ProfileViewController: UIViewController, ReloadData {
         gearQuantity.text = "\(userGearVM.userGears.count)"
 
         self.userVM.loadFollowerRx()
+            .debug()
             .subscribe(onNext: { follower in
                 self.viewModel.followerObservable.onNext(follower.count)
-        })
+            }
+            ).disposed(by: self.disposeBag)
     }
     
     
     func reloadData() {
         
+        self.userVM.loadFollowingRx()
+            .debug()
+            .subscribe(onNext: { following in
+                self.viewModel.followingObservable.onNext(following.count)
+            }).disposed(by: self.disposeBag)
         
         viewModel.totalFollower
             .map { "\($0)"}
@@ -103,9 +106,7 @@ class ProfileViewController: UIViewController, ReloadData {
         viewModel.totalFollowing
             .map { "\($0)" }
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: {
-                self.following.text = $0
-            })
+            .bind(to:self.following.rx.text)
             .disposed(by: self.disposeBag)
         
         userVM.loadUserInfoRx()
@@ -123,8 +124,9 @@ class ProfileViewController: UIViewController, ReloadData {
                     let image = UIImage(data: data!)
                     self.profileImage.image = image
 
-                    self.profileName.text = userInfo.user!.name
-                    self.profileIntro.text = userInfo.user!.phone
-            })
+                    self.profileName.text = userInfo.user?.name ?? "이름이 등록되지 않았습니다"
+                    self.profileIntro.text = userInfo.user?.aboutMe ?? "자기소개가 등록되지 않았습니다"
+            }, onCompleted: {}
+            ).disposed(by: disposeBag)
     }
 }

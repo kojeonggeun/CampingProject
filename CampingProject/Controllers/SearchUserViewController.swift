@@ -13,7 +13,7 @@ class SearchUserViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchTableView: UITableView!
 
-    let manager = APIManager.shared
+    let apiManager = APIManager.shared
     
     
     var searchData: [CellRepresentable] = []
@@ -29,7 +29,10 @@ class SearchUserViewController: UIViewController {
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
+        let email = apiManager.userInfo[0].user?.email
+        self.navigationController?.navigationBar.topItem?.title = email
+        
+
         searchTableView.keyboardDismissMode = .onDrag
         
         searchTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
@@ -107,7 +110,7 @@ extension SearchUserViewController: UITableViewDelegate{
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.page += 1
-            self.manager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
+            self.apiManager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
                 self.appendSearchData(data: data)
 
                 DispatchQueue.main.async {
@@ -140,7 +143,7 @@ extension SearchUserViewController: UISearchBarDelegate{
         self.searchData.removeAll()
         self.page = 0
    
-        manager.searchUser(searchText: searchText, completion: { data in
+        apiManager.searchUser(searchText: searchText, completion: { data in
             self.appendSearchData(data: data)
 
             DispatchQueue.main.async {

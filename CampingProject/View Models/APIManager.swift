@@ -23,6 +23,7 @@ class APIManager{
     var friendInfo: [UserInfo] = []
     var followers: [Friend] = []
     var followings: [Friend] = []
+    var userInfo: [UserInfo] = []
     
 //    장비 저장
     func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
@@ -205,7 +206,10 @@ class APIManager{
             case .success(_):
                 print(id)
                 for i in response.value! {
-                    print(i.name)
+                    self.loadGearImages(gearId: i.id, completion: { data in
+                        print(data)
+                        
+                    })
                 }
             case .failure(let error):
                 print("🚫loadSearchUserGear  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -285,20 +289,16 @@ class APIManager{
                    parameters: ["email":email,"password":password],
                    encoding: URLEncoding.default,
                    headers: nil)
-            
+            .validate(statusCode: 200..<300)
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = value as! NSDictionary
                     DB.userDefaults.set(["token":json["token"], "email" : json["email"]],forKey: "token")
                     print(json["token"])
                     completion(true)
-
-
                 case .failure(let error):
                     print("🚫 login Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-                    
                     completion(false)
                 }
             }
@@ -354,6 +354,7 @@ class APIManager{
             .responseDecodable(of: UserInfo.self) { (response) in
                 switch response.result {
                 case .success(_):
+                    self.userInfo.append(response.value!)
                     completion(response.result)
                 case .failure(let error):
                     print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -408,8 +409,8 @@ class APIManager{
         }
     }
 
-    func saveUserProfile(name: String, phone: String ,intro: String, public: Bool, completion: @escaping (Bool) -> Void) {
-        let parameters :Parameters = ["name": name, "phone": intro]
+    func saveUserProfile(name: String, phone: String ,aboutMe: String, public: Bool, completion: @escaping (Bool) -> Void) {
+        let parameters :Parameters = ["name": name, "aboutMe": aboutMe]
      
         let headers: HTTPHeaders = [
                     "Content-type": "application/x-www-form-urlencoded",

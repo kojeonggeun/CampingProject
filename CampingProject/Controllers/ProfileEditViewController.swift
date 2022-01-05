@@ -37,7 +37,7 @@ class ProfileEditViewController: UIViewController {
     @IBAction func saveProfile(_ sender: Any) {
         apiManager.saveUserProfileImage(image: profileImageView.image!, imageName: "asd", completion: { imageCheck in
             if imageCheck{
-                self.apiManager.saveUserProfile(name: self.profileName.text!, phone: "", intro: self.profileIntro.text!, public: true, completion: { saveCheck in
+                self.apiManager.saveUserProfile(name: self.profileName.text!, phone: "", aboutMe: self.profileIntro.text!, public: true, completion: { saveCheck in
                     if saveCheck {
                         self.delegate?.reloadData()
                         
@@ -65,11 +65,12 @@ class ProfileEditViewController: UIViewController {
         profileImageView.layer.borderWidth = 5
         profileImageView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
 
-        userVM.loadUserInfoRx()
-            .subscribe (onNext: { userInfo in
-                self.profileName.text = userInfo.user?.name
-                self.profileIntro.text = userInfo.user?.phone
-            })
+        let name = apiManager.userInfo[0].user?.name ?? "이름이 등록되지 않았습니다"
+        let aboutMe = apiManager.userInfo[0].user?.aboutMe ?? "자기소개가 등록되지 않았습니다"
+                    
+        self.profileName.text = name
+        self.profileIntro.text = aboutMe
+            
         
         DispatchQueue.global().async {
             let url = URL(string: self.image)

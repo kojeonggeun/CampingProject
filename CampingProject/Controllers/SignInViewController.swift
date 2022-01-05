@@ -88,15 +88,13 @@ class SignInViewController: UIViewController{
             }
         }
     }// end func
-    
-
-    
     func fieldDataInit(){
         emailTextField.text = ""
         passwordTextField.text = ""
         loginCheckLabel.text = ""
         loginStateButton.tintColor = .lightGray
         loginStateButton.isSelected = false
+        
     }
     
 }

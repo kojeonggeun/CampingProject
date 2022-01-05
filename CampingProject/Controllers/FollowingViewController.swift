@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class FollowingViewController: UIViewController {
     @IBOutlet weak var followingTableView: UITableView!
@@ -14,6 +15,7 @@ class FollowingViewController: UIViewController {
     
     let apiManager = APIManager.shared
     let userVM = UserViewModel.shared
+    let disposeBag = DisposeBag()
     
     var searchInputText: String = ""
     var fetchingMore: Bool = false
@@ -45,7 +47,6 @@ extension FollowingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.followingData.isEmpty && section != 1{
             return 1
-            
         } else if section == 0 {
             
             if !self.followingSearchData.isEmpty{
@@ -93,7 +94,8 @@ extension FollowingViewController: UITableViewDelegate{
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
                 pushVC.userInfo = result
                 self.navigationController?.pushViewController(pushVC, animated: true)
-            })
+            }, onCompleted: {}
+            ).disposed(by: disposeBag)
 
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

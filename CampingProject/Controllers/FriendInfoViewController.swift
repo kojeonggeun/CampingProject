@@ -55,21 +55,20 @@ class FriendInfoViewController: UIViewController {
 
         
     }
-    
-
     @IBAction func followBtn(_ sender: Any) {
         if userInfo?.status! == "FOLLOWING" {
             userVM.loadDeleteFollowergRx(id: userInfo!.user!.id)
                 .subscribe(onNext: { result in
                     self.followButton.setTitle("팔로우", for: .normal)
                     self.followButton.tintColor = .blue
-                    self.profileVM.loadFollowing()
-                })
+                    self.profileVM.reLoadFollowing()
+                },onCompleted: {}
+                ).disposed(by: disposeBag)
         } else {
             apiManager.followRequst(id: userInfo!.user!.id, isPublic: userInfo!.user!.isPublic, completion: { data in
                 self.followButton.setTitle("팔로잉☑️", for: .normal)
                 self.followButton.tintColor = .brown
-                self.profileVM.loadFollowing()
+                self.profileVM.reLoadFollowing()
             })
         }
     }
