@@ -19,6 +19,7 @@ class MyGearViewController: UIViewController{
     
     var segueText: String = ""
     var collectionIndexPath = IndexPath()
+    var myGear: [MyGearRepresentable] = []
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
@@ -38,11 +39,15 @@ class MyGearViewController: UIViewController{
 
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
-    
+  
   // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(self)
+            
 //        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.topItem?.title = "테스트"
+//
 //
 //        let appearance = UINavigationBarAppearance()
 //        appearance.backgroundColor = .lightGray
@@ -53,12 +58,10 @@ class MyGearViewController: UIViewController{
 //        navigationController?.navigationBar.standardAppearance = appearance
 //        navigationController?.navigationBar.compactAppearance = appearance
 //        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
     
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
         
-            
         
         myGearCollectionVIew.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
         
@@ -71,7 +74,7 @@ class MyGearViewController: UIViewController{
         
         
     } // end viewDidLoad
-    
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
     }
@@ -80,15 +83,6 @@ class MyGearViewController: UIViewController{
         apiManager.loadUserGear( completion: { userData in
             DispatchQueue.global().async {
                 self.apiManager.loadGearType(completion: { data in
-                    for i in 0..<self.gearTypeVM.gearTypes.count{
-                        self.apiManager.loadTableViewData(tableData: TableViewCellData(isOpened: false, gearTypeName: self.gearTypeVM.gearTypes[i].gearName))
-                        for j in self.userGearVM.userGears{
-                            if self.gearTypeVM.gearTypes[i].gearName == j.gearTypeName{
-                                self.apiManager.tableViewData[i].update(id: j.id, name: j.name ?? "")        
-                            }// end if
-                        }
-                    }// end first for
-    
                     DispatchQueue.main.async {
                         self.myGearCollectionVIew.reloadData()
                         self.categoryCollectionView.reloadData()
@@ -113,6 +107,7 @@ class MyGearViewController: UIViewController{
         
         }
         var CategoryIndexPath: IndexPath = []
+        
         if let row =  noti.userInfo?["gearRow"] as? Int {
             if row != -1 {
                 CategoryIndexPath = [0, row]
@@ -135,10 +130,7 @@ class MyGearViewController: UIViewController{
     }
   
     
-}// end FirstViewController
-
-
-
+}
 extension MyGearViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollectionView {
@@ -161,8 +153,10 @@ extension MyGearViewController: UICollectionViewDataSource{
             return cell
         }
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
+        print(myGear[indexPath.row].myGear.name)
         
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
+    
         let userGearId = self.userGearVM.userGears[indexPath.row].id
         
         if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {

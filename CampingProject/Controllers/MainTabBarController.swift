@@ -11,12 +11,27 @@ import UIKit
 class MainTabBarController: UITabBarController {
     
     let userVM = UserViewModel.shared
+    
+//    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.delegate = self
-        
+//        스토리보드가 서로 다를때
+        let mainSB: UIStoryboard = UIStoryboard(name: "MyGear", bundle: nil)
+        let objVC = mainSB.instantiateViewController(withIdentifier: "myGearView") as! MyGearViewController
+
+        APIManager.shared.loadUserGear( completion: { userData in
+            if userData{
+                for i in UserGearViewModel.shared.userGears{
+                    objVC.myGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
+                }
+            }
+        })
+        print(objVC)
+        self.setViewControllers([objVC], animated: false)
     }
+
 }
 
 extension MainTabBarController: UITabBarControllerDelegate {

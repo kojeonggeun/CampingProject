@@ -29,6 +29,7 @@ class FollowerViewController: UIViewController {
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         followerTableView.keyboardDismissMode = .onDrag
         

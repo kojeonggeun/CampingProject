@@ -37,6 +37,7 @@ class FriendInfoViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
 
         guard let info = userInfo else { return }
+        guard let userInfo = info.user else { return }
         guard let status = info.status else { return }
         
         if status == "FOLLOWING"{
@@ -44,26 +45,26 @@ class FriendInfoViewController: UIViewController {
             followButton.tintColor = .brown
         }
         
-        self.title = info.user?.email
-        userName.text = info.user?.name
+        self.title = userInfo.email
+        userName.text = userInfo.name
         userFollower.text = "\(info.followerCnt)"
         userFollowing.text = "\(info.followingCnt)"
-        userDesc.text = info.user?.phone
+        userDesc.text = userInfo.phone
         
-        apiManager.loadSearchUserGear(id: info.user!.id)
+        apiManager.loadSearchUserGear(id: userInfo.id)
         
 
         
     }
     @IBAction func followBtn(_ sender: Any) {
+        
         if userInfo?.status! == "FOLLOWING" {
             userVM.loadDeleteFollowergRx(id: userInfo!.user!.id)
                 .subscribe(onNext: { result in
                     self.followButton.setTitle("팔로우", for: .normal)
                     self.followButton.tintColor = .blue
                     self.profileVM.reLoadFollowing()
-                },onCompleted: {}
-                ).disposed(by: disposeBag)
+                }).disposed(by: disposeBag)
         } else {
             apiManager.followRequst(id: userInfo!.user!.id, isPublic: userInfo!.user!.isPublic, completion: { data in
                 self.followButton.setTitle("팔로잉☑️", for: .normal)

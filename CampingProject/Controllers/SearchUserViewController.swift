@@ -29,7 +29,7 @@ class SearchUserViewController: UIViewController {
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        let email = apiManager.userInfo[0].user?.email
+        let email = apiManager.userInfo?.user?.email
         self.navigationController?.navigationBar.topItem?.title = email
         
 
@@ -145,7 +145,6 @@ extension SearchUserViewController: UISearchBarDelegate{
    
         apiManager.searchUser(searchText: searchText, completion: { data in
             self.appendSearchData(data: data)
-
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }

@@ -65,8 +65,8 @@ class ProfileEditViewController: UIViewController {
         profileImageView.layer.borderWidth = 5
         profileImageView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
 
-        let name = apiManager.userInfo[0].user?.name ?? "이름이 등록되지 않았습니다"
-        let aboutMe = apiManager.userInfo[0].user?.aboutMe ?? "자기소개가 등록되지 않았습니다"
+        let name = apiManager.userInfo?.user?.name
+        let aboutMe = apiManager.userInfo?.user?.aboutMe
                     
         self.profileName.text = name
         self.profileIntro.text = aboutMe

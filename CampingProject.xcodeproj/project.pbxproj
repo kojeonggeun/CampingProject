@@ -29,6 +29,7 @@
 		CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB93BE1726D3BEAF0018AB0D /* Constants.swift */; };
 		CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */; };
 		CBA2327326BE763200946DA0 /* MyGearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2327226BE763200946DA0 /* MyGearViewController.swift */; };
+		CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */; };
 		CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103226C5510A0058F440 /* GearAddViewController.swift */; };
 		CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103526C552460058F440 /* GearTypeViewModel.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
@@ -87,6 +88,7 @@
 		CB90E4002719A47500CD2B1C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		CB93BE1726D3BEAF0018AB0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CBA2327226BE763200946DA0 /* MyGearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewController.swift; sourceTree = "<group>"; };
+		CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewModel.swift; sourceTree = "<group>"; };
 		CBAB103226C5510A0058F440 /* GearAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearAddViewController.swift; sourceTree = "<group>"; };
 		CBAB103526C552460058F440 /* GearTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeViewModel.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				CBDC479C2732C97700537E5A /* SearchResultViewModel.swift */,
 				CBF791F327366EDC0089EE48 /* FriendViewModel.swift */,
 				CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */,
+				CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				CBDC478D272823B100537E5A /* EmptySearchResultCell.swift in Sources */,
 				CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */,
 				CB534DF726C2664A0022EA20 /* MyGearCollectionViewCell.swift in Sources */,
+				CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */,
 				CB491B9726FC31ED00D2481F /* GearTextListCustomView.swift in Sources */,
 				CB3347A826DD16C200DE0126 /* GearDetailViewCell.swift in Sources */,
 				CB90E3FD27185A3F00CD2B1C /* SearchUserViewController.swift in Sources */,

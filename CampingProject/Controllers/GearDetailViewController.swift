@@ -69,6 +69,7 @@ class GearDetailViewController: UIViewController {
     }
     
     
+    
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,7 @@ class GearDetailViewController: UIViewController {
         
     }
     
+  
     @objc func reloadImage(){
         self.imageArray.removeAll()
         self.loadText()

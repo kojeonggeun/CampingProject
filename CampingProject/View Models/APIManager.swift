@@ -19,11 +19,11 @@ class APIManager{
     
     var gearTypes: [GearType] = []
     var userGears: [CellData] = []
-    var tableViewData: [TableViewCellData] = []
+
     var friendInfo: [UserInfo] = []
     var followers: [Friend] = []
     var followings: [Friend] = []
-    var userInfo: [UserInfo] = []
+    var userInfo: UserInfo? = nil
     
 //    장비 저장
     func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
@@ -127,7 +127,6 @@ class APIManager{
                 case .success:
                     let gears = response.value!
                     self.gearTypes.removeAll()
-                    self.tableViewData.removeAll()
                     
                     for i in gears.gearTypes {
                         self.gearTypes.append(i)
@@ -152,7 +151,6 @@ class APIManager{
             case .success(_):
                 self.userGears.removeAll()
                 let userGears = response.value!
-                
                 for i in userGears {
                     self.userGears.append(i)
                 }
@@ -199,7 +197,6 @@ class APIManager{
     }
     
     func loadSearchUserGear(id: Int) {
-
         AF.request(url + "gear"+"/\(id)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of:[CellData].self)  { (response) in
             switch response.result {
@@ -208,15 +205,12 @@ class APIManager{
                 for i in response.value! {
                     self.loadGearImages(gearId: i.id, completion: { data in
                         print(data)
-                        
                     })
                 }
             case .failure(let error):
                 print("🚫loadSearchUserGear  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-            
             }
         }
-        
     }
 
 //    유저 검색
@@ -227,7 +221,6 @@ class APIManager{
             .responseDecodable(of: SearchResult.self) { (response) in
             switch response.result {
             case .success(let data):
-                
                 let searchResult = response.value!
                 completion(searchResult.users)
                
@@ -354,7 +347,8 @@ class APIManager{
             .responseDecodable(of: UserInfo.self) { (response) in
                 switch response.result {
                 case .success(_):
-                    self.userInfo.append(response.value!)
+                    self.userInfo = response.value!
+                    
                     completion(response.result)
                 case .failure(let error):
                     print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -499,10 +493,6 @@ class APIManager{
             
         return headers
         
-    }
-    
-    func loadTableViewData(tableData: TableViewCellData){
-        tableViewData.append(tableData)
     }
     
     func returnToken() -> String{
