@@ -7,6 +7,7 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -134,7 +135,7 @@
         <!--친구-->
         <scene sceneID="OsH-y0-yvy">
             <objects>
-                <navigationController id="w0b-zc-7Bf" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="searchUserNC" id="w0b-zc-7Bf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="친구" id="Svp-Ab-6bG">
                         <imageReference key="image" image="person.2.fill" catalog="system" symbolScale="small"/>
                     </tabBarItem>
@@ -154,7 +155,7 @@
         <!--친구-->
         <scene sceneID="oVB-nW-9dd">
             <objects>
-                <viewController id="c4D-Ux-otR" customClass="SearchUserViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchUserView" id="c4D-Ux-otR" customClass="SearchUserViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Rm-qN-4lV">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -201,7 +202,7 @@
         <!--게시글-->
         <scene sceneID="FrR-JM-fO5">
             <objects>
-                <viewController storyboardIdentifier="SecondViewController" id="CjT-VE-r4R" customClass="SecondViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageView" id="CjT-VE-r4R" customClass="SecondViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3nK-8B-47p">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -224,18 +225,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmY-lB-M7J">
-                                <rect key="frame" x="0.0" y="342.66666666666674" width="402" height="467.33333333333326"/>
-                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qm2-wl-X5C">
                                 <rect key="frame" x="43" y="204" width="44.333333333333343" height="20.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 장비 보여줘야함" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mlh-N2-5WN">
-                                <rect key="frame" x="123" y="566.33333333333337" width="156" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -319,33 +310,53 @@
                                     <constraint firstAttribute="height" constant="100" id="mIv-R1-9q7"/>
                                 </constraints>
                             </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="A8F-I4-1Tq">
+                                <rect key="frame" x="17" y="328" width="357" height="493"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MmM-Oo-3Fv">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vBi-j0-3Ba">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7Rx-Mx-NSA">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="UBA-SK-i4L" id="X9R-h0-R2m"/>
+                                    <outlet property="delegate" destination="UBA-SK-i4L" id="nue-5M-yos"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wTX-oG-M19"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zQf-Pu-Ab0" firstAttribute="top" secondItem="TjK-l9-GNF" secondAttribute="bottom" constant="27.000000000000057" id="03G-7w-7aq"/>
                             <constraint firstItem="6uR-iw-cIl" firstAttribute="top" secondItem="wTX-oG-M19" secondAttribute="top" constant="42" id="3zM-hm-gzQ"/>
-                            <constraint firstItem="bmY-lB-M7J" firstAttribute="top" secondItem="zQf-Pu-Ab0" secondAttribute="bottom" constant="22.000000000000057" id="90l-sq-mf1"/>
                             <constraint firstItem="6uR-iw-cIl" firstAttribute="centerX" secondItem="TjK-l9-GNF" secondAttribute="centerX" id="BHm-5S-1jf"/>
                             <constraint firstItem="eaE-YB-Y9W" firstAttribute="leading" secondItem="6uR-iw-cIl" secondAttribute="trailing" constant="33.333333333333314" id="Fkk-CG-znP"/>
                             <constraint firstItem="zQf-Pu-Ab0" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="34" id="Hc4-5V-Tf1"/>
                             <constraint firstItem="TjK-l9-GNF" firstAttribute="top" secondItem="Qm2-wl-X5C" secondAttribute="bottom" constant="14.999999999999972" id="LiA-3C-lGF"/>
                             <constraint firstItem="Qm2-wl-X5C" firstAttribute="top" secondItem="6uR-iw-cIl" secondAttribute="bottom" constant="18" id="QsQ-nb-Mso"/>
-                            <constraint firstItem="bmY-lB-M7J" firstAttribute="bottom" secondItem="wTX-oG-M19" secondAttribute="bottom" id="XoI-ul-bKO"/>
-                            <constraint firstItem="bmY-lB-M7J" firstAttribute="centerX" secondItem="Mlh-N2-5WN" secondAttribute="centerX" id="YJo-3r-OeY"/>
                             <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="eaE-YB-Y9W" secondAttribute="trailing" constant="34.666666666666629" id="YRR-QI-PVh"/>
                             <constraint firstItem="zQf-Pu-Ab0" firstAttribute="centerX" secondItem="JXj-c8-dY7" secondAttribute="centerX" id="dbD-N7-BXS"/>
-                            <constraint firstItem="bmY-lB-M7J" firstAttribute="centerY" secondItem="Mlh-N2-5WN" secondAttribute="centerY" id="jx0-vA-lks"/>
                             <constraint firstItem="TjK-l9-GNF" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="34.666666666666657" id="kI6-dN-fGd"/>
                             <constraint firstItem="6uR-iw-cIl" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="17" id="qzo-m6-diX"/>
                             <constraint firstItem="eaE-YB-Y9W" firstAttribute="top" secondItem="wTX-oG-M19" secondAttribute="top" constant="72" id="sna-xb-kRU"/>
                             <constraint firstItem="6uR-iw-cIl" firstAttribute="centerX" secondItem="Qm2-wl-X5C" secondAttribute="centerX" constant="1.3333333333333286" id="t1R-bg-2NH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bmY-lB-M7J" secondAttribute="trailing" constant="-28" id="trO-6c-SmL"/>
-                            <constraint firstItem="bmY-lB-M7J" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" id="vN6-eQ-Mcx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="followButton" destination="zQf-Pu-Ab0" id="0v4-1U-eVi"/>
+                        <outlet property="friendCollectionView" destination="A8F-I4-1Tq" id="U8r-xW-TTS"/>
                         <outlet property="userDesc" destination="TjK-l9-GNF" id="H5R-zV-1dr"/>
                         <outlet property="userFollower" destination="ce0-sI-gbg" id="D6O-Tp-j8X"/>
                         <outlet property="userFollowing" destination="eGX-Ph-VOH" id="F8g-RE-jC3"/>
@@ -356,7 +367,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kkY-jr-sDN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2131" y="1973"/>
+            <point key="canvasLocation" x="-2132.3076923076924" y="1972.7488151658767"/>
         </scene>
         <!--Profile Edit View Controller-->
         <scene sceneID="5Xr-F8-fGg">
@@ -464,7 +475,7 @@
         <!--마이페이지-->
         <scene sceneID="jxC-cN-LOs">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="gsg-uE-dRg" customClass="ProfileViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileView" modalPresentationStyle="fullScreen" id="gsg-uE-dRg" customClass="ProfileViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="grC-9c-pMq">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -873,9 +884,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

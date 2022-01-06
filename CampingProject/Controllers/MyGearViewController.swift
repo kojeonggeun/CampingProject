@@ -43,25 +43,9 @@ class MyGearViewController: UIViewController{
   // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self)
-            
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.topItem?.title = "테스트"
-//
-//
-//        let appearance = UINavigationBarAppearance()
-//        appearance.backgroundColor = .lightGray
-//        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-//        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-//
-//        navigationController?.navigationBar.tintColor = .white
-//        navigationController?.navigationBar.standardAppearance = appearance
-//        navigationController?.navigationBar.compactAppearance = appearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
-        
         
         myGearCollectionVIew.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
         
@@ -80,7 +64,14 @@ class MyGearViewController: UIViewController{
     }
     
     func loadData(){
+//       TODO: 호출 위치 수정해야함 0106
         apiManager.loadUserGear( completion: { userData in
+            if userData{
+                print("a")
+                for i in self.userGearVM.userGears{
+                    self.myGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
+                }
+            }
             DispatchQueue.global().async {
                 self.apiManager.loadGearType(completion: { data in
                     DispatchQueue.main.async {
@@ -131,6 +122,7 @@ class MyGearViewController: UIViewController{
   
     
 }
+
 extension MyGearViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollectionView {
@@ -153,44 +145,8 @@ extension MyGearViewController: UICollectionViewDataSource{
             return cell
         }
         
-        print(myGear[indexPath.row].myGear.name)
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
-    
-        let userGearId = self.userGearVM.userGears[indexPath.row].id
-        
-        if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
-            DispatchQueue.main.async {
-                cell.collectionViewCellImage.image = cacheImage
-            }
-
-        } else {
-            apiManager.loadGearImages(gearId: userGearId, completion: { data in
-                DispatchQueue.global().async {
-                    if !data.isEmpty {
-                        let url = URL(string: data[0].url)
-                        let data = try? Data(contentsOf: url!)
-                        let image = UIImage(data: data!)
-                        DispatchQueue.main.async {
-                            cell.collectionViewCellImage.image = image
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            cell.collectionViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)")!
-                        }
-                    }
-                }
-            })
-        }
-        
-        if let gearName = self.userGearVM.userGears[indexPath.row].name,
-           let gearType = self.userGearVM.userGears[indexPath.row].gearTypeName,
-           let gearDate = self.userGearVM.userGears[indexPath.row].buyDt {
-            
-            cell.updateUI(name: gearName, type: gearType, date: gearDate)
-        }
-        
-        return cell
+        return myGear[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
     }
     
     @objc func categoryClicked(_ sender: UIButton){
@@ -208,12 +164,9 @@ extension MyGearViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //      카테고리 적용 시 필요
                 let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
-
                 collectionIndexPath = indexPath
-        //        let data = [indexPath.section,indexPath.row]
+        
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
-                
-                pushVC.tableIndex = indexPath
                 pushVC.gearRow = first
                 self.navigationController?.pushViewController(pushVC, animated: true)
     }

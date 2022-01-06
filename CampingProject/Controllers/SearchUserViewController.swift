@@ -71,8 +71,9 @@ extension SearchUserViewController: UITableViewDataSource{
 }
 
 extension SearchUserViewController: UITableViewDelegate{
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+//        TODO: 친구의 id값 활용 친구장비 넘겨줘야함
         if !self.searchData.isEmpty{
             let id = self.searchData[indexPath.row].searchData.id
             self.userVM.loadFriendInfoRx(id: id )
@@ -80,6 +81,7 @@ extension SearchUserViewController: UITableViewDelegate{
                     print(result)
                     let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
                     pushVC.userInfo = result
+//                    pushVC.friendGear
                     self.navigationController?.pushViewController(pushVC, animated: true)
                 })
         }

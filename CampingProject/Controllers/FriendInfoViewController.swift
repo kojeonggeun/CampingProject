@@ -19,12 +19,15 @@ class FriendInfoViewController: UIViewController {
     @IBOutlet weak var userDesc: UILabel!
     @IBOutlet weak var followButton: UIButton!
     
-    
+    @IBOutlet weak var friendCollectionView: UICollectionView!
     
     var userInfo: UserInfo? = nil
     var apiManager = APIManager.shared
     var userVM = UserViewModel.shared
     var profileVM = ProfileViewModel.shared
+    
+    var friendGear: [MyGearRepresentable] = []
+    
     let disposeBag = DisposeBag()
     
     
@@ -32,10 +35,9 @@ class FriendInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
+        friendCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
         
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
-
         guard let info = userInfo else { return }
         guard let userInfo = info.user else { return }
         guard let status = info.status else { return }
@@ -50,7 +52,7 @@ class FriendInfoViewController: UIViewController {
         userFollower.text = "\(info.followerCnt)"
         userFollowing.text = "\(info.followingCnt)"
         userDesc.text = userInfo.phone
-        
+//               TODO: 친구장비 가져오는거 구현해야함
         apiManager.loadSearchUserGear(id: userInfo.id)
         
 
@@ -74,7 +76,22 @@ class FriendInfoViewController: UIViewController {
         }
     }
     
+   }
+
+extension FriendInfoViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
-
-
-
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
+        
+        return cell
+    }
+    
+    
+}
+//
+//extension FriendInfoViewController: UICollectionViewDelegate{
+//    
+//}

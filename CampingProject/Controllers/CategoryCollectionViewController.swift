@@ -105,7 +105,7 @@ class CategoryCollectionViewController: UICollectionViewController{
       
         tableIndex = indexPath
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
-        pushVC.tableIndex = indexPath
+
         pushVC.gearRow = first
         
         

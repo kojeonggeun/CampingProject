@@ -17,19 +17,23 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         self.delegate = self
-//        스토리보드가 서로 다를때
-        let mainSB: UIStoryboard = UIStoryboard(name: "MyGear", bundle: nil)
-        let objVC = mainSB.instantiateViewController(withIdentifier: "myGearView") as! MyGearViewController
-
-        APIManager.shared.loadUserGear( completion: { userData in
-            if userData{
-                for i in UserGearViewModel.shared.userGears{
-                    objVC.myGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
-                }
-            }
-        })
-        print(objVC)
-        self.setViewControllers([objVC], animated: false)
+//        let searchUserVC = storyboard?.instantiateViewController(withIdentifier: "searchUserView") as! SearchUserViewController
+//        let myPage = storyboard?.instantiateViewController(withIdentifier: "myPageView") as! ProfileViewController
+//        let profileVC = storyboard?.instantiateViewController(withIdentifier: "profileView") as! ProfileViewController
+//        
+//        스토리보드 파일이 서로 다를때
+//        let mainSB: UIStoryboard = UIStoryboard(name: "MyGear", bundle: nil)
+//        let objVC = mainSB.instantiateViewController(withIdentifier: "myGearView") as! MyGearViewController
+//        
+//        
+//        APIManager.shared.loadUserGear( completion: { userData in
+//            if userData{
+//                for i in UserGearViewModel.shared.userGears{
+//                    objVC.myGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
+//                }
+//            }
+//        })
+//        self.setViewControllers([objVC,searchUserVC,profileVC], animated: false)
     }
 
 }

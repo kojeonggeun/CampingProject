@@ -22,7 +22,6 @@ class MyGearViewModel: MyGearRepresentable {
         
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(myGear)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
         
         let userGearId = self.userGearVM.userGears[indexPath.row].id
@@ -51,9 +50,9 @@ class MyGearViewModel: MyGearRepresentable {
             })
         }
         
-        if let gearName = self.userGearVM.userGears[indexPath.row].name,
-           let gearType = self.userGearVM.userGears[indexPath.row].gearTypeName,
-           let gearDate = self.userGearVM.userGears[indexPath.row].buyDt {
+        if let gearName = myGear.name,
+           let gearType = myGear.gearTypeName,
+           let gearDate = myGear.buyDt {
             
             cell.updateUI(name: gearName, type: gearType, date: gearDate)
         }

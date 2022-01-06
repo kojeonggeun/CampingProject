@@ -154,7 +154,6 @@ class APIManager{
                 for i in userGears {
                     self.userGears.append(i)
                 }
-                
                 completion(true)
                 
             case .failure(let error):

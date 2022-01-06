@@ -25,7 +25,6 @@ class GearDetailViewController: UIViewController {
     
     
     var imageArray: [ImageData] = []
-    var tableIndex: IndexPath = []
     var gearRow: Int = -1
     let apiService = APIManager.shared
     
