@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            GIDSignIn.sharedInstance().handle(URLContexts.first?.url)
 //        }
         
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

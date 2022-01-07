@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import AlamofireImage
+import RxSwift
 
 class APIManager{
     
@@ -144,7 +145,7 @@ class APIManager{
     
     
 //  유저 장비 로드
-    func loadUserGear(completion: @escaping (Bool) -> Void){
+    func loadUserGear(completion: @escaping (Result<[CellData], AFError>) -> Void){
         AF.request(urlUser + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of:[CellData].self)  { (response) in
             switch response.result {
@@ -154,11 +155,11 @@ class APIManager{
                 for i in userGears {
                     self.userGears.append(i)
                 }
-                completion(true)
+                completion(response.result)
                 
             case .failure(let error):
                 print("🚫loadUserData  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-                completion(false)
+                
                 
             }
         }
@@ -195,17 +196,18 @@ class APIManager{
         
     }
     
-    func loadSearchUserGear(id: Int) {
+    func loadSearchUserGear(id: Int, completion: @escaping ([CellData]) -> Void ) {
         AF.request(url + "gear"+"/\(id)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of:[CellData].self)  { (response) in
             switch response.result {
             case .success(_):
-                print(id)
+                
+                completion(response.value!)
                 for i in response.value! {
                     self.loadGearImages(gearId: i.id, completion: { data in
-                        print(data)
                     })
                 }
+                
             case .failure(let error):
                 print("🚫loadSearchUserGear  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
@@ -421,7 +423,7 @@ class APIManager{
         }
     }
  
-    func loadFollower(completion: @escaping ([Friend]) -> Void){
+    func loadFollower(completion: @escaping (Result<Friends, AFError>) -> Void){
         let headers: HTTPHeaders = [
                     "Content-type": "application/x-www-form-urlencoded",
                     "Authorization" : returnToken()
@@ -436,14 +438,14 @@ class APIManager{
                 self.followers = data.friends.map({ data in
                     return data
                 })
-                completion(self.followers)
+                completion(response.result)
             case .failure(let error):
                 print("🚫 loadFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
     
-    func loadFollowing(completion: @escaping ([Friend]) -> Void){
+    func loadFollowing(completion:  @escaping (Result<Friends, AFError>) -> Void){
         let headers: HTTPHeaders = [
                     "Content-type": "application/x-www-form-urlencoded",
                     "Authorization" : returnToken()
@@ -458,7 +460,7 @@ class APIManager{
                 self.followings = data.friends.map({ data in
                     return data
                 })
-                completion(self.followings)
+                completion(response.result)
                 
             case .failure(let error):
                 print("🚫 loadFollowing Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")

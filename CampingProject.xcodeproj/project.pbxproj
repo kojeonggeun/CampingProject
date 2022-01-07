@@ -30,6 +30,9 @@
 		CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */; };
 		CBA2327326BE763200946DA0 /* MyGearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2327226BE763200946DA0 /* MyGearViewController.swift */; };
 		CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */; };
+		CBAA3ACE2787DFB100E75B51 /* SearchUserNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */; };
+		CBAA3AD02787EC0300E75B51 /* ProfileNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */; };
+		CBAA3AD22787EC0D00E75B51 /* MyGearNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */; };
 		CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103226C5510A0058F440 /* GearAddViewController.swift */; };
 		CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103526C552460058F440 /* GearTypeViewModel.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
@@ -89,6 +92,9 @@
 		CB93BE1726D3BEAF0018AB0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CBA2327226BE763200946DA0 /* MyGearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewController.swift; sourceTree = "<group>"; };
 		CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewModel.swift; sourceTree = "<group>"; };
+		CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserNC.swift; sourceTree = "<group>"; };
+		CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNC.swift; sourceTree = "<group>"; };
+		CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearNC.swift; sourceTree = "<group>"; };
 		CBAB103226C5510A0058F440 /* GearAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearAddViewController.swift; sourceTree = "<group>"; };
 		CBAB103526C552460058F440 /* GearTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeViewModel.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
@@ -224,6 +230,9 @@
 				CBDC478E2729467900537E5A /* FollowerViewController.swift */,
 				CBF791F52737B0300089EE48 /* FollowingViewController.swift */,
 				CBD44FB0276D971500D1B3EA /* FriendInfoViewController.swift */,
+				CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */,
+				CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */,
+				CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -420,8 +429,11 @@
 				CB90E4012719A47500CD2B1C /* SearchTableViewCell.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
 				CBF791F62737B0300089EE48 /* FollowingViewController.swift in Sources */,
+				CBAA3AD02787EC0300E75B51 /* ProfileNC.swift in Sources */,
 				CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */,
 				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,
+				CBAA3ACE2787DFB100E75B51 /* SearchUserNC.swift in Sources */,
+				CBAA3AD22787EC0D00E75B51 /* MyGearNC.swift in Sources */,
 				CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */,
 				CBDC479927302B9100537E5A /* LoadingCell.swift in Sources */,
 				CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */,

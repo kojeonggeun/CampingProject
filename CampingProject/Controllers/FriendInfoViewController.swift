@@ -26,7 +26,7 @@ class FriendInfoViewController: UIViewController {
     var userVM = UserViewModel.shared
     var profileVM = ProfileViewModel.shared
     
-    var friendGear: [MyGearRepresentable] = []
+    var userSerachGear: [MyGearRepresentable] = []
     
     let disposeBag = DisposeBag()
     
@@ -52,8 +52,9 @@ class FriendInfoViewController: UIViewController {
         userFollower.text = "\(info.followerCnt)"
         userFollowing.text = "\(info.followingCnt)"
         userDesc.text = userInfo.phone
+        
 //               TODO: 친구장비 가져오는거 구현해야함
-        apiManager.loadSearchUserGear(id: userInfo.id)
+
         
 
         
@@ -80,18 +81,32 @@ class FriendInfoViewController: UIViewController {
 
 extension FriendInfoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return userSerachGear.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
-        
-        return cell
+        return userSerachGear[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
     }
     
     
 }
-//
-//extension FriendInfoViewController: UICollectionViewDelegate{
-//    
-//}
+
+
+extension FriendInfoViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == friendCollectionView {
+            let margin: CGFloat = 10
+            let itemSpacing: CGFloat = 10
+            
+            let width = (collectionView.frame.width - margin * 2 - itemSpacing) / 2
+            let height = width * 10/7.5
+
+            return CGSize(width: width, height: height)
+        
+        }
+        let width = collectionView.bounds.width / 4
+        let height = collectionView.bounds.height / 1.7
+        
+        return CGSize(width: width, height: height)
+    }
+}

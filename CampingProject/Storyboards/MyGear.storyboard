@@ -132,7 +132,7 @@
         <!--내 장비-->
         <scene sceneID="u5m-Qs-y3X">
             <objects>
-                <navigationController storyboardIdentifier="MyGearViewController" id="61O-1Q-g9U" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="myGearNC" id="61O-1Q-g9U" customClass="MyGearNC" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="내 장비" id="juE-rv-Krt"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oGu-JU-4jL">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -142,7 +142,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="6xK-VS-nmq" kind="relationship" relationship="rootViewController" id="1lL-Vb-aPY"/>
+                        <segue destination="6xK-VS-nmq" kind="relationship" relationship="rootViewController" id="9bk-rf-9Gn"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tox-hA-9St" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

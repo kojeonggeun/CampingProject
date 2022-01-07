@@ -73,7 +73,7 @@ class ProfileViewController: UIViewController, ReloadData {
         
         profileIntro.isEditable = false
         
-        reloadData()
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,18 +83,17 @@ class ProfileViewController: UIViewController, ReloadData {
         self.userVM.loadFollowerRx()
             .debug()
             .subscribe(onNext: { follower in
-                self.viewModel.followerObservable.onNext(follower.count)
-            }
-            ).disposed(by: self.disposeBag)
+                self.viewModel.followerObservable.onNext(follower.friends.count)
+            }).disposed(by: self.disposeBag)
     }
     
     
-    func reloadData() {
+    func loadData() {
         
         self.userVM.loadFollowingRx()
             .debug()
             .subscribe(onNext: { following in
-                self.viewModel.followingObservable.onNext(following.count)
+                self.viewModel.followingObservable.onNext(following.friends.count)
             }).disposed(by: self.disposeBag)
         
         viewModel.totalFollower

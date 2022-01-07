@@ -43,10 +43,9 @@ class MyGearViewController: UIViewController{
   // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        print(self)
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
-        
         myGearCollectionVIew.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
         
         self.loadData()
@@ -64,14 +63,7 @@ class MyGearViewController: UIViewController{
     }
     
     func loadData(){
-//       TODO: 호출 위치 수정해야함 0106
         apiManager.loadUserGear( completion: { userData in
-            if userData{
-                print("a")
-                for i in self.userGearVM.userGears{
-                    self.myGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
-                }
-            }
             DispatchQueue.global().async {
                 self.apiManager.loadGearType(completion: { data in
                     DispatchQueue.main.async {
@@ -88,10 +80,8 @@ class MyGearViewController: UIViewController{
         if (noti.userInfo?["gearAddId"] as? Int) != nil {
                 DispatchQueue.global().async {
                     self.apiManager.loadUserGear(completion: { data in
-                        if data {
-                            DispatchQueue.main.async {
-                                self.myGearCollectionVIew.reloadData()
-                            }
+                        DispatchQueue.main.async {
+                            self.myGearCollectionVIew.reloadData()
                         }
                     })// end closure
                 }

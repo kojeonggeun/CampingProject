@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class SearchUserViewController: UIViewController {
     
@@ -14,7 +15,7 @@ class SearchUserViewController: UIViewController {
     @IBOutlet weak var searchTableView: UITableView!
 
     let apiManager = APIManager.shared
-    
+    let disposeBag = DisposeBag()
     
     var searchData: [CellRepresentable] = []
     var cellHeightsDictionary: NSMutableDictionary = [:]
@@ -76,14 +77,23 @@ extension SearchUserViewController: UITableViewDelegate{
 //        TODO: 친구의 id값 활용 친구장비 넘겨줘야함
         if !self.searchData.isEmpty{
             let id = self.searchData[indexPath.row].searchData.id
-            self.userVM.loadFriendInfoRx(id: id )
+            let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
+
+            self.userVM.loadFriendInfoRx(id: id)
                 .subscribe(onNext : { result in
-                    print(result)
-                    let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
                     pushVC.userInfo = result
-//                    pushVC.friendGear
                     self.navigationController?.pushViewController(pushVC, animated: true)
-                })
+                }).disposed(by: disposeBag)
+            
+            self.userVM.loadUserGearRx()
+                .subscribe(onNext : { result in
+                    
+                
+                    for i in result {
+                        pushVC.userSerachGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
+                    }
+                    
+                }).disposed(by: disposeBag)
         }
     }
     

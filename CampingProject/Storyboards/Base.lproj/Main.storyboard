@@ -7,7 +7,6 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -135,7 +134,7 @@
         <!--친구-->
         <scene sceneID="OsH-y0-yvy">
             <objects>
-                <navigationController storyboardIdentifier="searchUserNC" id="w0b-zc-7Bf" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="searchUserNC" id="w0b-zc-7Bf" customClass="SearchUserNC" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="친구" id="Svp-Ab-6bG">
                         <imageReference key="image" image="person.2.fill" catalog="system" symbolScale="small"/>
                     </tabBarItem>
@@ -202,7 +201,7 @@
         <!--게시글-->
         <scene sceneID="FrR-JM-fO5">
             <objects>
-                <viewController storyboardIdentifier="pageView" id="CjT-VE-r4R" customClass="SecondViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageView" id="CjT-VE-r4R" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3nK-8B-47p">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -310,26 +309,16 @@
                                     <constraint firstAttribute="height" constant="100" id="mIv-R1-9q7"/>
                                 </constraints>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="A8F-I4-1Tq">
-                                <rect key="frame" x="17" y="328" width="357" height="493"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="A8F-I4-1Tq">
+                                <rect key="frame" x="0.0" y="339" width="390" height="471"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MmM-Oo-3Fv">
-                                    <size key="itemSize" width="128" height="128"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="MmM-Oo-3Fv">
+                                    <size key="itemSize" width="150" height="235"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vBi-j0-3Ba">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7Rx-Mx-NSA">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="UBA-SK-i4L" id="X9R-h0-R2m"/>
                                     <outlet property="delegate" destination="UBA-SK-i4L" id="nue-5M-yos"/>
@@ -341,6 +330,7 @@
                         <constraints>
                             <constraint firstItem="zQf-Pu-Ab0" firstAttribute="top" secondItem="TjK-l9-GNF" secondAttribute="bottom" constant="27.000000000000057" id="03G-7w-7aq"/>
                             <constraint firstItem="6uR-iw-cIl" firstAttribute="top" secondItem="wTX-oG-M19" secondAttribute="top" constant="42" id="3zM-hm-gzQ"/>
+                            <constraint firstItem="A8F-I4-1Tq" firstAttribute="top" secondItem="zQf-Pu-Ab0" secondAttribute="bottom" constant="18.333333333333314" id="BDW-M8-tMQ"/>
                             <constraint firstItem="6uR-iw-cIl" firstAttribute="centerX" secondItem="TjK-l9-GNF" secondAttribute="centerX" id="BHm-5S-1jf"/>
                             <constraint firstItem="eaE-YB-Y9W" firstAttribute="leading" secondItem="6uR-iw-cIl" secondAttribute="trailing" constant="33.333333333333314" id="Fkk-CG-znP"/>
                             <constraint firstItem="zQf-Pu-Ab0" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="34" id="Hc4-5V-Tf1"/>
@@ -348,7 +338,10 @@
                             <constraint firstItem="Qm2-wl-X5C" firstAttribute="top" secondItem="6uR-iw-cIl" secondAttribute="bottom" constant="18" id="QsQ-nb-Mso"/>
                             <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="eaE-YB-Y9W" secondAttribute="trailing" constant="34.666666666666629" id="YRR-QI-PVh"/>
                             <constraint firstItem="zQf-Pu-Ab0" firstAttribute="centerX" secondItem="JXj-c8-dY7" secondAttribute="centerX" id="dbD-N7-BXS"/>
+                            <constraint firstItem="A8F-I4-1Tq" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" id="g9y-Mu-hmT"/>
+                            <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="A8F-I4-1Tq" secondAttribute="trailing" id="j1d-bt-OLQ"/>
                             <constraint firstItem="TjK-l9-GNF" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="34.666666666666657" id="kI6-dN-fGd"/>
+                            <constraint firstItem="wTX-oG-M19" firstAttribute="bottom" secondItem="A8F-I4-1Tq" secondAttribute="bottom" id="q59-7t-aln"/>
                             <constraint firstItem="6uR-iw-cIl" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="17" id="qzo-m6-diX"/>
                             <constraint firstItem="eaE-YB-Y9W" firstAttribute="top" secondItem="wTX-oG-M19" secondAttribute="top" constant="72" id="sna-xb-kRU"/>
                             <constraint firstItem="6uR-iw-cIl" firstAttribute="centerX" secondItem="Qm2-wl-X5C" secondAttribute="centerX" constant="1.3333333333333286" id="t1R-bg-2NH"/>
@@ -367,7 +360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kkY-jr-sDN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2132.3076923076924" y="1972.7488151658767"/>
+            <point key="canvasLocation" x="-2740" y="1972.7488151658767"/>
         </scene>
         <!--Profile Edit View Controller-->
         <scene sceneID="5Xr-F8-fGg">
@@ -456,7 +449,7 @@
         <!--마이페이지-->
         <scene sceneID="88f-Nk-hCw">
             <objects>
-                <navigationController id="spn-Vf-dHl" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="profileNC" id="spn-Vf-dHl" customClass="ProfileNC" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="마이페이지" id="svW-ff-4Tz">
                         <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="small"/>
                     </tabBarItem>
@@ -751,7 +744,6 @@
                     <connections>
                         <segue destination="Jxv-k6-J0E" kind="relationship" relationship="viewControllers" id="Aqh-nh-Jnj"/>
                         <segue destination="w0b-zc-7Bf" kind="relationship" relationship="viewControllers" id="xND-tK-K75"/>
-                        <segue destination="CjT-VE-r4R" kind="relationship" relationship="viewControllers" id="qCn-7e-qFg"/>
                         <segue destination="spn-Vf-dHl" kind="relationship" relationship="viewControllers" id="PJa-My-uq7"/>
                     </connections>
                 </tabBarController>
@@ -855,10 +847,10 @@
             </objects>
             <point key="canvasLocation" x="-2055.3846153846152" y="-585.07109004739334"/>
         </scene>
-        <!--MyGearViewController-->
+        <!--myGearNC-->
         <scene sceneID="JhR-p3-UXk">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="MyGearViewController" storyboardName="MyGear" referencedIdentifier="MyGearViewController" id="Jxv-k6-J0E" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="myGearNC" storyboardName="MyGear" referencedIdentifier="myGearNC" id="Jxv-k6-J0E" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="J9d-h5-lU0"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7G-Lq-PTV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

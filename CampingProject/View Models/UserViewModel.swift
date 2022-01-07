@@ -46,23 +46,47 @@ class UserViewModel {
         }
     }
     
-  
-    func loadFollowerRx() -> Observable<[Friend]>{
+    func loadUserGearRx() -> Observable<[CellData]>{
+        return Observable.create() { emitter in
+            self.api.loadUserGear() { result in
+                switch result {
+                case let .success(data):
+                    emitter.onNext(data)
+                    emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func loadFollowerRx() -> Observable<Friends>{
         return Observable.create() { emitter in
             self.api.loadFollower() { result in
-                    emitter.onNext(result)
+                switch result {
+                case let .success(data):
+                    emitter.onNext(data)
                     emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
                 }
+            }
             return Disposables.create()
         }
     }
    
-    func loadFollowingRx() -> Observable<[Friend]>{
+    func loadFollowingRx() -> Observable<Friends>{
         return Observable.create() { emitter in
             self.api.loadFollowing() { result in
-                    emitter.onNext(result)
+                switch result {
+                case let .success(data):
+                    emitter.onNext(data)
                     emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
                 }
+            }
             return Disposables.create()
         }
     }
