@@ -7,56 +7,27 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxRelay
+import RxCocoa
 
-class MyGearViewModel: MyGearRepresentable {
+class MyGearViewModel {
     
-    let myGear: CellData
-    
+    static let shared = MyGearViewModel()
+ 
     let apiManager = APIManager.shared
     let userVM = UserViewModel.shared
-    let userGearVM = UserGearViewModel.shared
-    
-    init(myGear: CellData) {
-        self.myGear = myGear
-    }
-        
-        
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
-        
-        let userGearId = self.userGearVM.userGears[indexPath.row].id
-        
-        if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
-            DispatchQueue.main.async {
-                cell.collectionViewCellImage.image = cacheImage
-            }
 
-        } else {
-            apiManager.loadGearImages(gearId: userGearId, completion: { data in
-                DispatchQueue.global().async {
-                    if !data.isEmpty {
-                        let url = URL(string: data[0].url)
-                        let data = try? Data(contentsOf: url!)
-                        let image = UIImage(data: data!)
-                        DispatchQueue.main.async {
-                            cell.collectionViewCellImage.image = image
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            cell.collectionViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)")!
-                        }
-                    }
-                }
-            })
-        }
+    
+    let gears = BehaviorRelay<[CellData]>(value: [])
+    let disposeBag = DisposeBag()
+    
+    init() {
+        userVM.loadUserGearRx()
+            .subscribe(onNext: { data in
+                self.gears.accept(data)
+            }).disposed(by: disposeBag)
         
-        if let gearName = myGear.name,
-           let gearType = myGear.gearTypeName,
-           let gearDate = myGear.buyDt {
-            
-            cell.updateUI(name: gearName, type: gearType, date: gearDate)
-        }
         
-        return cell
     }
 }

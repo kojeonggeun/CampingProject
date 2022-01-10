@@ -18,7 +18,4 @@ protocol FollowRepresentable {
     func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
 }
 
-protocol MyGearRepresentable {
-    var myGear: CellData { get }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-}
+

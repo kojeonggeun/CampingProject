@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
 
 
 class MyGearViewController: UIViewController{
@@ -19,12 +20,14 @@ class MyGearViewController: UIViewController{
     
     var segueText: String = ""
     var collectionIndexPath = IndexPath()
-    var myGear: [MyGearRepresentable] = []
+//    var myGear: [MyGearRepresentable] = []
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
     
     let apiManager: APIManager = APIManager.shared
+    
+    let disposeBag:DisposeBag = DisposeBag()
     
 
     @IBAction func addGearMove(_ sender: Any) {
@@ -43,7 +46,7 @@ class MyGearViewController: UIViewController{
   // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self)
+        
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
         myGearCollectionVIew.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
@@ -63,7 +66,35 @@ class MyGearViewController: UIViewController{
     }
     
     func loadData(){
-        apiManager.loadUserGear( completion: { userData in
+        
+        MyGearViewModel.shared.gears
+        
+            .bind(to: myGearCollectionVIew.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+//               임시 이미지 불러오기 코드
+                self.apiManager.loadGearImages(gearId: element.id, completion: { data in
+                    DispatchQueue.global().async {
+                        if !data.isEmpty {
+                            let url = URL(string: data[0].url)
+                            let data = try? Data(contentsOf: url!)
+                            let image = UIImage(data: data!)
+                            DispatchQueue.main.async {
+                                cell.collectionViewCellImage.image = image
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                cell.collectionViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(element.id)")!
+                            }
+                        }
+                    }
+                })
+                
+                cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
+            }.disposed(by: disposeBag)
+        
+      
+        
+        
+        self.apiManager.loadUserGear( completion: { userData in
             DispatchQueue.global().async {
                 self.apiManager.loadGearType(completion: { data in
                     DispatchQueue.main.async {
@@ -77,9 +108,12 @@ class MyGearViewController: UIViewController{
     }
 
     @objc func reloadTableView(_ noti: Notification) {
+        MyGearViewModel.shared.gears
+            .subscribe()
         if (noti.userInfo?["gearAddId"] as? Int) != nil {
                 DispatchQueue.global().async {
                     self.apiManager.loadUserGear(completion: { data in
+                        
                         DispatchQueue.main.async {
                             self.myGearCollectionVIew.reloadData()
                         }
@@ -113,41 +147,41 @@ class MyGearViewController: UIViewController{
     
 }
 
-extension MyGearViewController: UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == categoryCollectionView {
-            return gearTypeVM.GearTypeNumberOfSections()
-        }
-        
-        return self.userGearVM.userGears.count
-    }
+//extension MyGearViewController: UICollectionViewDataSource{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        if collectionView == categoryCollectionView {
+//            return gearTypeVM.GearTypeNumberOfSections()
+//        }
+//
+//        return self.userGearVM.userGears.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//
+//        if collectionView == categoryCollectionView {
+//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+//
+//
+//            cell.categoryButton.tag = indexPath.row
+//            cell.categoryButton.addTarget(self, action: #selector(categoryClicked), for: .touchUpInside)
+//            cell.updateUI(title: gearTypeVM.gearTypes[indexPath.row].gearName)
+//
+//            return cell
+//        }
+//
+//
+//        return myGear[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
+//    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if collectionView == categoryCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-    
-    
-            cell.categoryButton.tag = indexPath.row
-            cell.categoryButton.addTarget(self, action: #selector(categoryClicked), for: .touchUpInside)
-            cell.updateUI(title: gearTypeVM.gearTypes[indexPath.row].gearName)
-    
-            return cell
-        }
-        
-        
-        return myGear[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
-    }
-    
-    @objc func categoryClicked(_ sender: UIButton){
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
-
-        pushVC.gearType = sender.tag
-        self.navigationController?.pushViewController(pushVC, animated: true)
-
-
-    }
-}
+//    @objc func categoryClicked(_ sender: UIButton){
+//        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
+//
+//        pushVC.gearType = sender.tag
+//        self.navigationController?.pushViewController(pushVC, animated: true)
+//
+//
+//    }
+//}
 
 extension MyGearViewController: UICollectionViewDelegate{
     

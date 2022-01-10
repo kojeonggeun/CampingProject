@@ -78,6 +78,7 @@ class ProfileViewController: UIViewController, ReloadData {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        Rx로 변경할것
         gearQuantity.text = "\(userGearVM.userGears.count)"
 
         self.userVM.loadFollowerRx()
@@ -123,9 +124,8 @@ class ProfileViewController: UIViewController, ReloadData {
                     let image = UIImage(data: data!)
                     self.profileImage.image = image
 
-                    self.profileName.text = userInfo.user?.name ?? "이름이 등록되지 않았습니다"
-                    self.profileIntro.text = userInfo.user?.aboutMe ?? "자기소개가 등록되지 않았습니다"
-            }, onCompleted: {}
-            ).disposed(by: disposeBag)
+                    self.profileName.text = userInfo.user?.name
+                    self.profileIntro.text = userInfo.user?.aboutMe
+            }).disposed(by: disposeBag)
     }
 }

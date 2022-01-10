@@ -26,7 +26,7 @@ class FriendInfoViewController: UIViewController {
     var userVM = UserViewModel.shared
     var profileVM = ProfileViewModel.shared
     
-    var userSerachGear: [MyGearRepresentable] = []
+//    var userSerachGear: [MyGearRepresentable] = []
     
     let disposeBag = DisposeBag()
     
@@ -81,11 +81,13 @@ class FriendInfoViewController: UIViewController {
 
 extension FriendInfoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userSerachGear.count
+//        return userSerachGear.count
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return userSerachGear[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
+//        return userSerachGear[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
+        return UICollectionViewCell()
     }
     
     

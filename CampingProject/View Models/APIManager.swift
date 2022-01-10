@@ -25,6 +25,7 @@ class APIManager{
     var followers: [Friend] = []
     var followings: [Friend] = []
     var userInfo: UserInfo? = nil
+  
     
 //    장비 저장
     func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
@@ -57,6 +58,7 @@ class APIManager{
         }).responseJSON { response in
             switch response.result {
             case .success(_):
+                
                 print("")
             case .failure(let error):
                 print(error)
@@ -143,7 +145,6 @@ class APIManager{
     }
 
     
-    
 //  유저 장비 로드
     func loadUserGear(completion: @escaping (Result<[CellData], AFError>) -> Void){
         AF.request(urlUser + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
@@ -159,7 +160,6 @@ class APIManager{
                 
             case .failure(let error):
                 print("🚫loadUserData  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-                
                 
             }
         }

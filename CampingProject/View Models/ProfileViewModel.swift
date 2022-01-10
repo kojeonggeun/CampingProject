@@ -31,13 +31,11 @@ class ProfileViewModel {
         userVM.loadFollowerRx()
             .subscribe(onNext: { follower in
                 self.followerObservable.onNext(follower.friends.count)
-                
             }).disposed(by: disposeBag)
         
         userVM.loadFollowingRx()
             .subscribe(onNext: { following in
                 self.followingObservable.onNext(following.friends.count)
-                
             }).disposed(by: disposeBag)
   
     }
@@ -48,7 +46,7 @@ class ProfileViewModel {
                 self.followingObservable.onNext(following.friends.count)
         }).disposed(by: disposeBag)
     }
-    
+
     func clearUserCount(){
         followerObservable
             .onNext(0)

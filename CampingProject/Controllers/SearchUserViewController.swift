@@ -79,21 +79,20 @@ extension SearchUserViewController: UITableViewDelegate{
             let id = self.searchData[indexPath.row].searchData.id
             let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
 
-            self.userVM.loadFriendInfoRx(id: id)
-                .subscribe(onNext : { result in
-                    pushVC.userInfo = result
-                    self.navigationController?.pushViewController(pushVC, animated: true)
-                }).disposed(by: disposeBag)
-            
-            self.userVM.loadUserGearRx()
-                .subscribe(onNext : { result in
-                    
-                
-                    for i in result {
-                        pushVC.userSerachGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
+//            두개의 Observable 합쳐서 내려보내준다
+            Observable.combineLatest(
+                self.userVM.loadFriendInfoRx(id: id),
+                self.userVM.loadUserGearRx())
+                .subscribe(onNext: { userInfo , userSearch in
+                    pushVC.userInfo = userInfo
+                    for i in userSearch {
+//                        pushVC.userSerachGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
                     }
-                    
+                    self.navigationController?.pushViewController(pushVC, animated: true)
+                }, onError: { err in
+                    print(err.localizedDescription)
                 }).disposed(by: disposeBag)
+                
         }
     }
     
