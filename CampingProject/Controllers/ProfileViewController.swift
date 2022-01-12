@@ -82,7 +82,6 @@ class ProfileViewController: UIViewController, ReloadData {
         gearQuantity.text = "\(userGearVM.userGears.count)"
 
         self.userVM.loadFollowerRx()
-            .debug()
             .subscribe(onNext: { follower in
                 self.viewModel.followerObservable.onNext(follower.friends.count)
             }).disposed(by: self.disposeBag)
@@ -92,7 +91,6 @@ class ProfileViewController: UIViewController, ReloadData {
     func loadData() {
         
         self.userVM.loadFollowingRx()
-            .debug()
             .subscribe(onNext: { following in
                 self.viewModel.followingObservable.onNext(following.friends.count)
             }).disposed(by: self.disposeBag)

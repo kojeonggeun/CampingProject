@@ -16,11 +16,9 @@ class MyGearViewController: UIViewController{
     @IBOutlet weak var myGearCollectionVIew: UICollectionView!
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
-    
-    
+        
     var segueText: String = ""
     var collectionIndexPath = IndexPath()
-//    var myGear: [MyGearRepresentable] = []
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
@@ -29,6 +27,7 @@ class MyGearViewController: UIViewController{
     
     let disposeBag:DisposeBag = DisposeBag()
     
+
 
     @IBAction func addGearMove(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView")
@@ -42,7 +41,8 @@ class MyGearViewController: UIViewController{
 
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
-  
+
+
   // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class MyGearViewController: UIViewController{
         
         self.loadData()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostMyGearViewController"), object: nil)
+      
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidDeleteGearPost"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
         
@@ -66,34 +66,17 @@ class MyGearViewController: UIViewController{
     }
     
     func loadData(){
-        
-        MyGearViewModel.shared.gears
-        
+        MyGearViewModel.shared.gearObservable
             .bind(to: myGearCollectionVIew.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-//               임시 이미지 불러오기 코드
-                self.apiManager.loadGearImages(gearId: element.id, completion: { data in
-                    DispatchQueue.global().async {
-                        if !data.isEmpty {
-                            let url = URL(string: data[0].url)
-                            let data = try? Data(contentsOf: url!)
-                            let image = UIImage(data: data!)
-                            DispatchQueue.main.async {
-                                cell.collectionViewCellImage.image = image
-                            }
-                        } else {
-                            DispatchQueue.main.async {
-                                cell.collectionViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(element.id)")!
-                            }
-                        }
-                    }
-                })
-                
+                UserViewModel.shared.loadGearImagesRx(id:element.id)
+                    .subscribe(onNext: { image in
+                        cell.collectionViewCellImage.image = image
+                    })
+
                 cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
             }.disposed(by: disposeBag)
         
       
-        
-        
         self.apiManager.loadUserGear( completion: { userData in
             DispatchQueue.global().async {
                 self.apiManager.loadGearType(completion: { data in
@@ -108,19 +91,7 @@ class MyGearViewController: UIViewController{
     }
 
     @objc func reloadTableView(_ noti: Notification) {
-        MyGearViewModel.shared.gears
-            .subscribe()
-        if (noti.userInfo?["gearAddId"] as? Int) != nil {
-                DispatchQueue.global().async {
-                    self.apiManager.loadUserGear(completion: { data in
-                        
-                        DispatchQueue.main.async {
-                            self.myGearCollectionVIew.reloadData()
-                        }
-                    })// end closure
-                }
-        
-        }
+
         var CategoryIndexPath: IndexPath = []
         
         if let row =  noti.userInfo?["gearRow"] as? Int {

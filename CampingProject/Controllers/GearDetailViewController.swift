@@ -115,18 +115,20 @@ class GearDetailViewController: UIViewController {
     }
     
     func loadImage() {
-        self.apiService.loadGearImages(gearId: self.userGearVM.userGears[self.gearRow].id, completion: { data in
-            for i in data {
-                self.imageArray.append(i)
-            }
-            self.pageControl.numberOfPages = self.imageArray.count
-            
-            DispatchQueue.main.async {
-                self.imageCollectionView.reloadData()
-                self.pageControl.reloadInputViews()
-            }
-            
-        })
+//        self.apiService.loadGearImages(gearId: self.userGearVM.userGears[self.gearRow].id, completion: { data in
+//            for i in data {
+//                self.imageArray.append(i)
+//            }
+//
+//
+//            self.pageControl.numberOfPages = self.imageArray.count
+//
+//            DispatchQueue.main.async {
+//                self.imageCollectionView.reloadData()
+//                self.pageControl.reloadInputViews()
+//            }
+//
+//        })
     }
     
     
@@ -145,7 +147,7 @@ extension GearDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.imageArray.count
+        return 5
         
     }
     
@@ -153,14 +155,22 @@ extension GearDetailViewController: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GearDetailViewCell", for: indexPath) as? GearDetailViewCell else { return UICollectionViewCell() }
      
-        DispatchQueue.global().async {
-            let url = URL(string: self.imageArray[indexPath.row].url)
-            let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
-                let image = UIImage(data: data!)
+        
+        UserViewModel.shared.loadGearImagesRx(id:self.userGearVM.userGears[self.gearRow].id)
+            .subscribe(onNext: { image in
+                print(image)
                 cell.updateUI(item: image)
-                }
-            }
+            })
+        
+        
+//        DispatchQueue.global().async {
+//            let url = URL(string: self.imageArray[indexPath.row].url)
+//            let data = try? Data(contentsOf: url!)
+//            DispatchQueue.main.async {
+//                let image = UIImage(data: data!)
+//                cell.updateUI(item: image)
+//                }
+//            }
         
         return cell
     }

@@ -66,13 +66,13 @@ class FriendInfoViewController: UIViewController {
                 .subscribe(onNext: { result in
                     self.followButton.setTitle("팔로우", for: .normal)
                     self.followButton.tintColor = .blue
-                    self.profileVM.reLoadFollowing()
+                    self.profileVM.reloadFollowing()
                 }).disposed(by: disposeBag)
         } else {
             apiManager.followRequst(id: userInfo!.user!.id, isPublic: userInfo!.user!.isPublic, completion: { data in
                 self.followButton.setTitle("팔로잉☑️", for: .normal)
                 self.followButton.tintColor = .brown
-                self.profileVM.reLoadFollowing()
+                self.profileVM.reloadFollowing()
             })
         }
     }

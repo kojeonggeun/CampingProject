@@ -40,7 +40,6 @@ class APIManager{
                                           "buyDt": date
         ]
         
-        
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in parameters {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
@@ -165,30 +164,35 @@ class APIManager{
         }
     }
     
+    
+    
 //    유저 장비 이미지 로드
-    func loadGearImages(gearId: Int, completion: @escaping ([ImageData]) -> Void){
-        
+    func loadGearImages(gearId: Int, completion: @escaping (UIImage) -> Void){
         AF.request(urlUser + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of:[ImageData].self)  { (response) in
-    
             switch response.result {
             case .success(_):
                 
                 let images = response.value!
+                
                 if !images.isEmpty{
                     AF.request(images[0].url).responseImage { response in
-                        if response.value != nil{
-                            let image = UIImage(data: response.data!)!
+                        switch response.result{
+                        case .success(let image):
+                            
                             self.imageCache.add(image, withIdentifier: "\(gearId)")
+                            completion(image)
+                        case .failure(let err):
+                            print(err)
                         }
                     }
                 } else {
                     let image = UIImage(systemName:"camera.circle")!
                     self.imageCache.add(image, withIdentifier: "\(gearId)")
+                    completion(image)
                 }
-          
-                completion(images)
-        
+    
+
             case .failure(let error):
                 print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             } // end switch
@@ -319,13 +323,13 @@ class APIManager{
     func loginCheck(completion: @escaping (Bool)-> Void ) {
         
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
-        
+    
         AF.request(urlUser,
                    method: .get,
                    encoding: URLEncoding.default,
                    headers: headers)
             
-            .responseJSON { (response) in
+            .response { (response) in
                 switch response.result {
                 case .success(_):
                     completion(true)

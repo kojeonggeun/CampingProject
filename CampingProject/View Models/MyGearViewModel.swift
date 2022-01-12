@@ -11,23 +11,32 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-class MyGearViewModel {
-    
-    static let shared = MyGearViewModel()
- 
-    let apiManager = APIManager.shared
-    let userVM = UserViewModel.shared
 
+class MyGearViewModel {
+
+    static let shared = MyGearViewModel()
+    let userVM = UserViewModel.shared
     
-    let gears = BehaviorRelay<[CellData]>(value: [])
+    private let gears = BehaviorRelay<[CellData]>(value: [])
+    
+    var gearObservable: Observable<[CellData]> {
+        return gears.asObservable()
+    }
+    
+    
     let disposeBag = DisposeBag()
     
     init() {
+        
+        loadGears()
+    }
+    
+    func loadGears(){
         userVM.loadUserGearRx()
             .subscribe(onNext: { data in
                 self.gears.accept(data)
             }).disposed(by: disposeBag)
-        
-        
+
     }
+    
 }

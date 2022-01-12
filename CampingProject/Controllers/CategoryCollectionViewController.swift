@@ -71,23 +71,23 @@ class CategoryCollectionViewController: UICollectionViewController{
             }
             
         } else {
-            apiManager.loadGearImages(gearId: userGearId, completion: { data in
-                DispatchQueue.global().async {
-                    if !data.isEmpty {
-                        let url = URL(string: data[0].url)
-                        let data = try? Data(contentsOf: url!)
-                        let image = UIImage(data: data!)
-                        DispatchQueue.main.async {
-                            cell.collectionViewCellImage.image = image
-                            
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            cell.collectionViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)")!
-                        }
-                    }
-                }
-            })
+//            apiManager.loadGearImages(gearId: userGearId, completion: { data in
+//                DispatchQueue.global().async {
+//                    if !data.isEmpty {
+//                        let url = URL(string: data[0].url)
+//                        let data = try? Data(contentsOf: url!)
+//                        let image = UIImage(data: data!)
+//                        DispatchQueue.main.async {
+//                            cell.collectionViewCellImage.image = image
+//                            
+//                        }
+//                    } else {
+//                        DispatchQueue.main.async {
+//                            cell.collectionViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)")!
+//                        }
+//                    }
+//                }
+//            })
         }
         
         if let gearName = userGearVM.categoryData[indexPath.row].name,

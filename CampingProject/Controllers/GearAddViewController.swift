@@ -12,6 +12,8 @@ import Photos
 import BSImagePicker
 import TextFieldEffects
 
+import RxCocoa
+import RxSwift
 
 class AddGearViewController: UIViewController {
     
@@ -23,10 +25,9 @@ class AddGearViewController: UIViewController {
     
     var apiService: APIManager = APIManager.shared
     
-    let DidReloadPostMyGearViewController: Notification.Name = Notification.Name("DidReloadPostMyGearViewController")
     let imagePicker = ImagePickerManager()
     let userGearViewModel = UserGearViewModel.shared
-    
+    let disposeBag = DisposeBag()
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -35,7 +36,6 @@ class AddGearViewController: UIViewController {
     
     @IBAction func imageSelectButton(_ sender: Any) {
         imagePicker.showMultipleImagePicker(vc: self, collection: gearCollectionView, countLabel: imageCount)
-
     }
     
     // MARK: LifeCycles
@@ -43,6 +43,7 @@ class AddGearViewController: UIViewController {
         super.viewDidLoad()
         self.title = "장비 등록"
         let rightBarButtonItem = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(gearSave(_:)))
+        
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         imageCount.text = "(\(imagePicker.photoArray.count) / 5"
@@ -63,8 +64,11 @@ class AddGearViewController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
+            
+            MyGearViewModel.shared.loadGears()
+                
             self.navigationController?.popViewController(animated: true)
-            NotificationCenter.default.post(name: self.DidReloadPostMyGearViewController, object: nil, userInfo: ["gearAddId": self.customView.gearTypeId])
+            
             
         })
         self.present(alert, animated: true)

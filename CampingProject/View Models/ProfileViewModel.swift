@@ -40,7 +40,7 @@ class ProfileViewModel {
   
     }
     
-    func reLoadFollowing(){
+    func reloadFollowing(){
         self.userVM.loadFollowingRx()
             .subscribe(onNext: { following in
                 self.followingObservable.onNext(following.friends.count)

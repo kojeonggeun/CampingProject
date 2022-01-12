@@ -10,13 +10,11 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-//TODO: Google login
-//    GIDSignIn.sharedInstance().clientID = "689958728870-8domaci2i4me66g9a4k2devgqclkdntr.apps.googleusercontent.com"
-    
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-         sleep(2)
+     
         return true
     }
 

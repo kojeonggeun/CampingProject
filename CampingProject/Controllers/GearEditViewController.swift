@@ -44,24 +44,24 @@ class GearEditViewController: UIViewController {
         customView.UpdateData(type: userData.gearTypeName!, name: userData.name!, color: userData.color!, company: userData.company!, capacity: userData.capacity!, buyDate: userData.buyDt!, price: userData.price!)
         
      
-        apiService.loadGearImages(gearId: userData.id, completion: { data in
-            for (index, item) in data.enumerated() {
-                let asset = self.allPhotos?.object(at: index)
-                self.imageItem.append(item)
-                let url = URL(string: item.url)
-                let data = try? Data(contentsOf: url!)
-                
-//              기존 이미지피커에 데이터 저장
-                self.imagePicker.photoArray.append(UIImage(data: data!)!)
-                self.imagePicker.userSelectedAssets.append(asset!)
-                self.imagePicker.imageFileName.append(item.orgFilename)
-               
-            }
-            self.imagePicker.total = self.imagePicker.photoArray.count
-            self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
-            self.imageCollectionView.reloadData()
-            
-        })
+//        apiService.loadGearImages(gearId: userData.id, completion: { data in
+//            for (index, item) in data.enumerated() {
+//                let asset = self.allPhotos?.object(at: index)
+//                self.imageItem.append(item)
+//                let url = URL(string: item.url)
+//                let data = try? Data(contentsOf: url!)
+//                
+////              기존 이미지피커에 데이터 저장
+//                self.imagePicker.photoArray.append(UIImage(data: data!)!)
+//                self.imagePicker.userSelectedAssets.append(asset!)
+//                self.imagePicker.imageFileName.append(item.orgFilename)
+//               
+//            }
+//            self.imagePicker.total = self.imagePicker.photoArray.count
+//            self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
+//            self.imageCollectionView.reloadData()
+//            
+//        })
 //        커스텀 nib 등록
         imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
     }
