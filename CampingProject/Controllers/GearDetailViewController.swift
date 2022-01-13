@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import TextFieldEffects
+import RxSwift
+import RxCocoa
 
 class GearDetailViewController: UIViewController {
 
@@ -32,6 +34,8 @@ class GearDetailViewController: UIViewController {
     
     let DidDeleteGearPost: Notification.Name = Notification.Name("DidDeleteGearPost")
     let DidDeleteCatogoryGearPost: Notification.Name = Notification.Name("DidDeleteCatogoryGearPost")
+    
+    let disposeBag:DisposeBag = DisposeBag()
     
     @IBAction func pageChanged(_ sender: UIPageControl) {
         let indexPath = IndexPath(item: sender.currentPage, section: 0)
@@ -115,20 +119,18 @@ class GearDetailViewController: UIViewController {
     }
     
     func loadImage() {
-//        self.apiService.loadGearImages(gearId: self.userGearVM.userGears[self.gearRow].id, completion: { data in
-//            for i in data {
-//                self.imageArray.append(i)
-//            }
-//
-//
-//            self.pageControl.numberOfPages = self.imageArray.count
-//
-//            DispatchQueue.main.async {
-//                self.imageCollectionView.reloadData()
-//                self.pageControl.reloadInputViews()
-//            }
-//
-//        })
+        
+        UserViewModel.shared.loadGearDetailImagesRx(id:self.userGearVM.userGears[self.gearRow].id)
+            .subscribe(onNext: { image in
+                self.pageControl.numberOfPages = image.count
+                self.pageControl.reloadInputViews()
+                MyGearViewModel.shared.loadimage(image: image)
+            }).disposed(by: disposeBag)
+        
+       MyGearViewModel.shared.gearImageObservable
+           .bind(to: imageCollectionView.rx.items(cellIdentifier: "GearDetailViewCell",cellType: GearDetailViewCell.self)) { (row, element, cell) in
+               cell.updateUI(item: element)
+           }
     }
     
     
@@ -141,40 +143,6 @@ class GearDetailViewController: UIViewController {
     }
 }
 
-extension GearDetailViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GearDetailViewCell", for: indexPath) as? GearDetailViewCell else { return UICollectionViewCell() }
-     
-        
-        UserViewModel.shared.loadGearImagesRx(id:self.userGearVM.userGears[self.gearRow].id)
-            .subscribe(onNext: { image in
-                print(image)
-                cell.updateUI(item: image)
-            })
-        
-        
-//        DispatchQueue.global().async {
-//            let url = URL(string: self.imageArray[indexPath.row].url)
-//            let data = try? Data(contentsOf: url!)
-//            DispatchQueue.main.async {
-//                let image = UIImage(data: data!)
-//                cell.updateUI(item: image)
-//                }
-//            }
-        
-        return cell
-    }
-}
 
 extension GearDetailViewController: UICollectionViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

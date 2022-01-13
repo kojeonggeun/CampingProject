@@ -18,16 +18,18 @@ class MyGearViewModel {
     let userVM = UserViewModel.shared
     
     private let gears = BehaviorRelay<[CellData]>(value: [])
-    
     var gearObservable: Observable<[CellData]> {
         return gears.asObservable()
     }
     
+    private let gearImage = PublishRelay<[UIImage]>()
+    var gearImageObservable: Observable<[UIImage]> {
+        return gearImage.asObservable()
+    }
     
     let disposeBag = DisposeBag()
     
     init() {
-        
         loadGears()
     }
     
@@ -36,7 +38,12 @@ class MyGearViewModel {
             .subscribe(onNext: { data in
                 self.gears.accept(data)
             }).disposed(by: disposeBag)
-
+    }
+    
+    func loadimage(image: [UIImage]) {
+        print(image)
+        gearImage.accept(image)
     }
     
 }
+

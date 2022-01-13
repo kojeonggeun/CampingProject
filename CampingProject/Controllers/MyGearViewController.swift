@@ -118,41 +118,6 @@ class MyGearViewController: UIViewController{
     
 }
 
-//extension MyGearViewController: UICollectionViewDataSource{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if collectionView == categoryCollectionView {
-//            return gearTypeVM.GearTypeNumberOfSections()
-//        }
-//
-//        return self.userGearVM.userGears.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//        if collectionView == categoryCollectionView {
-//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-//
-//
-//            cell.categoryButton.tag = indexPath.row
-//            cell.categoryButton.addTarget(self, action: #selector(categoryClicked), for: .touchUpInside)
-//            cell.updateUI(title: gearTypeVM.gearTypes[indexPath.row].gearName)
-//
-//            return cell
-//        }
-//
-//
-//        return myGear[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
-//    }
-    
-//    @objc func categoryClicked(_ sender: UIButton){
-//        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
-//
-//        pushVC.gearType = sender.tag
-//        self.navigationController?.pushViewController(pushVC, animated: true)
-//
-//
-//    }
-//}
 
 extension MyGearViewController: UICollectionViewDelegate{
     
@@ -167,8 +132,6 @@ extension MyGearViewController: UICollectionViewDelegate{
     }
    
 }
-   
-
 extension MyGearViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == myGearCollectionVIew {

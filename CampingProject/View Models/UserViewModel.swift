@@ -112,6 +112,17 @@ class UserViewModel {
         }
     }
     
+    func loadGearDetailImagesRx(id: Int) -> Observable<[UIImage]>{
+        return Observable.create() { emitter in
+            self.api.loadGearDetailImages(gearId: id) { result in
+                    emitter.onNext(result)
+                    emitter.onCompleted()
+                }
+            return Disposables.create()
+        }
+    }
+    
+    
     func isValidEmail(email: String) -> Bool{
         let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)

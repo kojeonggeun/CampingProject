@@ -65,12 +65,12 @@ class CategoryCollectionViewController: UICollectionViewController{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
         
         let userGearId = userGearVM.categoryData[indexPath.row].id
-        if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
-            DispatchQueue.main.async {
-                cell.collectionViewCellImage.image = cacheImage
-            }
+//        if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
+//            DispatchQueue.main.async {
+//                cell.collectionViewCellImage.image = cacheImage
+//            }
             
-        } else {
+//        } else {
 //            apiManager.loadGearImages(gearId: userGearId, completion: { data in
 //                DispatchQueue.global().async {
 //                    if !data.isEmpty {
@@ -88,7 +88,7 @@ class CategoryCollectionViewController: UICollectionViewController{
 //                    }
 //                }
 //            })
-        }
+//        }
         
         if let gearName = userGearVM.categoryData[indexPath.row].name,
            let gearType = userGearVM.categoryData[indexPath.row].gearTypeName,

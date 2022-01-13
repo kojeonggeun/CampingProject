@@ -293,7 +293,6 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="M0N-Qk-oPP" id="f5o-Fs-9fw"/>
                                     <outlet property="delegate" destination="M0N-Qk-oPP" id="3Df-M0-ROU"/>
                                 </connections>
                             </collectionView>

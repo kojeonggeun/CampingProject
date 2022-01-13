@@ -20,10 +20,9 @@ class GearDetailViewCell: UICollectionViewCell {
 
     }
     
-    func updateUI(item: UIImage?) {
+    func updateUI(item: UIImage) {
         
-        guard let image = item else { return }
-        self.gearDetailImage.image = image
+        self.gearDetailImage.image = item
         
     }
     

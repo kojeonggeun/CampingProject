@@ -14,7 +14,6 @@ class APIManager{
     
     static let shared = APIManager()
     
-    let imageCache = AutoPurgingImageCache( memoryCapacity: 111_111_111, preferredMemoryUsageAfterPurge: 90_000_000)
     let url = API.BASE_URL
     let urlUser = API.BASE_URL_MYSELF
     
@@ -172,33 +171,61 @@ class APIManager{
             .responseDecodable(of:[ImageData].self)  { (response) in
             switch response.result {
             case .success(_):
-                
                 let images = response.value!
-                
                 if !images.isEmpty{
-                    AF.request(images[0].url).responseImage { response in
-                        switch response.result{
-                        case .success(let image):
-                            
-                            self.imageCache.add(image, withIdentifier: "\(gearId)")
-                            completion(image)
-                        case .failure(let err):
-                            print(err)
+                    for image in images{
+                        AF.request(image.url).responseImage { response in
+                            switch response.result{
+                            case .success(let image):
+                                
+                                completion(image)
+                            case .failure(let err):
+                                print(err)
+                            }
                         }
                     }
                 } else {
                     let image = UIImage(systemName:"camera.circle")!
-                    self.imageCache.add(image, withIdentifier: "\(gearId)")
                     completion(image)
                 }
-    
-
             case .failure(let error):
                 print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             } // end switch
         }
-        
     }
+    
+    func loadGearDetailImages(gearId: Int, completion: @escaping ([UIImage]) -> Void){
+        AF.request(urlUser + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
+            .responseDecodable(of:[ImageData].self)  { (response) in
+            switch response.result {
+            case .success(_):
+                let images = response.value!
+                if !images.isEmpty{
+                    var gearImages: [UIImage] = []
+                    for (i,image) in images.enumerated(){
+                        AF.request(image.url).responseImage { response in
+                            switch response.result{
+                            case .success(let image):
+                                gearImages.append(image)
+                                if i == images.count - 1{
+                                    completion(gearImages)
+                                }
+                            case .failure(let err):
+                                print(err)
+                            }
+                        }
+                    }
+                    
+                } else {
+                    let image = UIImage(systemName:"camera.circle")!
+                    completion([image])
+                }
+            case .failure(let error):
+                print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            } // end switch
+        }
+    }
+    
     
     func loadSearchUserGear(id: Int, completion: @escaping ([CellData]) -> Void ) {
         AF.request(url + "gear"+"/\(id)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)

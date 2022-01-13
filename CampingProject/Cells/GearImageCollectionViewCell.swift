@@ -25,5 +25,4 @@ class GearImageCollectionViewCell: UICollectionViewCell {
         guard let image = item else { return }
         gearImage.image = image
     }
-    
 }
