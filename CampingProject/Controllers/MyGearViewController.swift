@@ -66,13 +66,13 @@ class MyGearViewController: UIViewController{
     }
     
     func loadData(){
+        MyGearViewModel.shared.loadGears()
         MyGearViewModel.shared.gearObservable
             .bind(to: myGearCollectionVIew.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 UserViewModel.shared.loadGearImagesRx(id:element.id)
                     .subscribe(onNext: { image in
                         cell.collectionViewCellImage.image = image
-                    })
-
+                    }).disposed(by: self.disposeBag)
                 cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
             }.disposed(by: disposeBag)
         

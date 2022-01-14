@@ -216,10 +216,10 @@
             </objects>
             <point key="canvasLocation" x="-2055" y="1091"/>
         </scene>
-        <!--Friend Info View Controller-->
+        <!--Search User Detail View Controller-->
         <scene sceneID="OYe-sj-O4h">
             <objects>
-                <viewController storyboardIdentifier="FriendInfo" id="UBA-SK-i4L" customClass="FriendInfoViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchUserDetail" id="UBA-SK-i4L" customClass="SearchUserDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JXj-c8-dY7">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -320,7 +320,6 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>
-                                    <outlet property="dataSource" destination="UBA-SK-i4L" id="X9R-h0-R2m"/>
                                     <outlet property="delegate" destination="UBA-SK-i4L" id="nue-5M-yos"/>
                                 </connections>
                             </collectionView>

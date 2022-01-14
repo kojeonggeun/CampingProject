@@ -215,7 +215,6 @@ class APIManager{
                             }
                         }
                     }
-                    
                 } else {
                     let image = UIImage(systemName:"camera.circle")!
                     completion([image])
@@ -226,6 +225,7 @@ class APIManager{
         }
     }
     
+  
     
     func loadSearchUserGear(id: Int, completion: @escaping ([CellData]) -> Void ) {
         AF.request(url + "gear"+"/\(id)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)

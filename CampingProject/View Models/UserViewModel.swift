@@ -102,6 +102,7 @@ class UserViewModel {
             return Disposables.create()
         }
     }
+    
     func loadGearImagesRx(id: Int) -> Observable<UIImage>{
         return Observable.create() { emitter in
             self.api.loadGearImages(gearId: id) { result in
@@ -122,6 +123,15 @@ class UserViewModel {
         }
     }
     
+    func loadSearchUserGearRx(userId: Int) -> Observable<[CellData]>{
+        return Observable.create() { emitter in
+            self.api.loadSearchUserGear(id:userId) { result in
+                emitter.onNext(result)
+                emitter.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
     
     func isValidEmail(email: String) -> Bool{
         let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"

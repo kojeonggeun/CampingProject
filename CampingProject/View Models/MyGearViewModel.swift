@@ -17,7 +17,7 @@ class MyGearViewModel {
     static let shared = MyGearViewModel()
     let userVM = UserViewModel.shared
     
-    private let gears = BehaviorRelay<[CellData]>(value: [])
+    private let gears = PublishRelay<[CellData]>()
     var gearObservable: Observable<[CellData]> {
         return gears.asObservable()
     }
@@ -29,9 +29,6 @@ class MyGearViewModel {
     
     let disposeBag = DisposeBag()
     
-    init() {
-        loadGears()
-    }
     
     func loadGears(){
         userVM.loadUserGearRx()

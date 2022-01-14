@@ -74,24 +74,14 @@ extension SearchUserViewController: UITableViewDataSource{
 extension SearchUserViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        TODO: 친구의 id값 활용 친구장비 넘겨줘야함
         if !self.searchData.isEmpty{
             let id = self.searchData[indexPath.row].searchData.id
-            let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
-
-//            두개의 Observable 합쳐서 내려보내준다
-            Observable.combineLatest(
-                self.userVM.loadFriendInfoRx(id: id),
-                self.userVM.loadUserGearRx())
-                .subscribe(onNext: { userInfo , userSearch in
-                    pushVC.userInfo = userInfo
-                    for i in userSearch {
-//                        pushVC.userSerachGear.append(MyGearViewModel(myGear:CellData(id: i.id, name: i.name, gearTypeId: i.gearTypeId, gearTypeName: i.gearTypeName, color: i.color, company: i.company, capacity: i.capacity, price: i.price, buyDt: i.buyDt)))
-                    }
-                    self.navigationController?.pushViewController(pushVC, animated: true)
-                }, onError: { err in
-                    print(err.localizedDescription)
-                }).disposed(by: disposeBag)
+            let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "searchUserDetail")as! SearchUserDetailViewController
+            
+            pushVC.userId = id
+            
+            self.navigationController?.pushViewController(pushVC, animated: true)
+            
                 
         }
     }

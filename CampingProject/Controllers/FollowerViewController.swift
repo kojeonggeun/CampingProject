@@ -94,9 +94,10 @@ extension FollowerViewController: UITableViewDelegate{
         self.userVM.loadFriendInfoRx(id: id )
             .subscribe(onNext : { result in
                 print(result)
-                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
-                pushVC.userInfo = result
-                self.navigationController?.pushViewController(pushVC, animated: true)
+//                TODO: 검색친구상세보기 구현해야함
+//                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendInfo")as! FriendInfoViewController
+//                pushVC.userInfo = result
+//                self.navigationController?.pushViewController(pushVC, animated: true)
             })
         
     }

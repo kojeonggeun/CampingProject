@@ -29,6 +29,7 @@ class MyGearCollectionViewCell: UICollectionViewCell {
 //        }
 
     func updateUI(name:String, type: String, date: String){
+        
         collectionViewCellText.text = name
         collectionViewCellGearType.text = type
         collectionViewCellDate.text = date
