@@ -43,6 +43,7 @@ class ProfileViewModel {
     func reloadFollowing(){
         self.userVM.loadFollowingRx()
             .subscribe(onNext: { following in
+                print(following.friends.count)
                 self.followingObservable.onNext(following.friends.count)
         }).disposed(by: disposeBag)
     }

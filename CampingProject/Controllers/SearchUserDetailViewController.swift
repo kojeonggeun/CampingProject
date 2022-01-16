@@ -31,6 +31,7 @@ class SearchUserDetailViewController: UIViewController {
 
     
     let disposeBag = DisposeBag()
+    var user: UserInfo? = nil
     
     
 //    MARK: LifeCycles
@@ -41,7 +42,8 @@ class SearchUserDetailViewController: UIViewController {
         
             self.userVM.loadFriendInfoRx(id: userId)
             .subscribe(onNext: { userInfo in
-                self.title = userInfo.user?.email
+                self.navigationItem.title = userInfo.user?.email
+                user = userInfo
                 self.userName.text = userInfo.user?.name
                 self.userFollower.text = "\(userInfo.followerCnt)"
                 self.userFollowing.text = "\(userInfo.followingCnt)"
@@ -52,6 +54,26 @@ class SearchUserDetailViewController: UIViewController {
                     self.followButton.tintColor = .brown
                 }
             })
+        
+        
+        followButton.rx.tap
+            .bind {
+                if self.user?.status == "FOLLOWING" {
+                    self.userVM.loadDeleteFollowergRx(id: self.user!.user!.id)
+                        .subscribe(onNext: { result in
+                            self.followButton.setTitle("팔로우", for: .normal)
+                            self.followButton.tintColor = .blue
+                            self.profileVM.reloadFollowing()
+                        }).disposed(by: self.disposeBag)
+                } else {
+                    self.apiManager.followRequst(id: self.user!.user!.id, isPublic: self.user!.user!.isPublic, completion: { data in
+                        self.followButton.setTitle("팔로잉☑️", for: .normal)
+                        self.followButton.tintColor = .brown
+                        self.profileVM.reloadFollowing()
+                    })
+                }
+  
+            }.disposed(by: disposeBag)
         
 //
 //           TODO: 이제 bind 이용해서 만들어서줘야 해!!
@@ -71,48 +93,11 @@ class SearchUserDetailViewController: UIViewController {
     
             }.disposed(by: disposeBag)
         
-        followButton.rx.tap
-            .bind {
-                print("awdawdaw")
-            }.disposed(by: disposeBag)
-            
-        
+   
+    }
 
-        
-    }
-    @IBAction func followBtn(_ sender: Any) {
-        
-//        if userInfo?.status! == "FOLLOWING" {
-//            userVM.loadDeleteFollowergRx(id: userInfo!.user!.id)
-//                .subscribe(onNext: { result in
-//                    self.followButton.setTitle("팔로우", for: .normal)
-//                    self.followButton.tintColor = .blue
-//                    self.profileVM.reloadFollowing()
-//                }).disposed(by: disposeBag)
-//        } else {
-//            apiManager.followRequst(id: userInfo!.user!.id, isPublic: userInfo!.user!.isPublic, completion: { data in
-//                self.followButton.setTitle("팔로잉☑️", for: .normal)
-//                self.followButton.tintColor = .brown
-//                self.profileVM.reloadFollowing()
-//            })
-//        }
-    }
     
 }
-
-//extension FriendInfoViewController: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-////        return userSerachGear.count
-//        return 1
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-////        return userSerachGear[indexPath.row].collectionView(collectionView, cellForItemAt: indexPath)
-//        return UICollectionViewCell()
-//    }
-//    
-//    
-//}
 
 
 extension SearchUserDetailViewController: UICollectionViewDelegateFlowLayout{

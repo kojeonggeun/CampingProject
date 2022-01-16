@@ -33,8 +33,6 @@
 		CBAA3ACE2787DFB100E75B51 /* SearchUserNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */; };
 		CBAA3AD02787EC0300E75B51 /* ProfileNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */; };
 		CBAA3AD22787EC0D00E75B51 /* MyGearNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */; };
-		CBAA3AD6278C16A100E75B51 /* LoadGear.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD5278C16A100E75B51 /* LoadGear.swift */; };
-		CBAA3AD8278C186C00E75B51 /* APIManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD7278C186C00E75B51 /* APIManager2.swift */; };
 		CBAA3ADA27914F7400E75B51 /* SearchUserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */; };
 		CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103226C5510A0058F440 /* GearAddViewController.swift */; };
 		CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103526C552460058F440 /* GearTypeViewModel.swift */; };
@@ -98,8 +96,6 @@
 		CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserNC.swift; sourceTree = "<group>"; };
 		CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNC.swift; sourceTree = "<group>"; };
 		CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearNC.swift; sourceTree = "<group>"; };
-		CBAA3AD5278C16A100E75B51 /* LoadGear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGear.swift; sourceTree = "<group>"; };
-		CBAA3AD7278C186C00E75B51 /* APIManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIManager2.swift; path = "CampingProject/View Models/APIManager2.swift"; sourceTree = SOURCE_ROOT; };
 		CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDetailViewModel.swift; sourceTree = "<group>"; };
 		CBAB103226C5510A0058F440 /* GearAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearAddViewController.swift; sourceTree = "<group>"; };
 		CBAB103526C552460058F440 /* GearTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeViewModel.swift; sourceTree = "<group>"; };
@@ -177,8 +173,6 @@
 		CB6037AE26B2728E0023042F = {
 			isa = PBXGroup;
 			children = (
-				CBAA3AD4278C162100E75B51 /* Domain */,
-				CBAA3AD3278C161800E75B51 /* Repository */,
 				CB6037B926B2728E0023042F /* CampingProject */,
 				CB6037B826B2728E0023042F /* Products */,
 				8ED9FF38710E1A9D62A303CC /* Pods */,
@@ -219,22 +213,6 @@
 				CBDC479E2732C9C900537E5A /* CellProtocol.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		CBAA3AD3278C161800E75B51 /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				CBAA3AD7278C186C00E75B51 /* APIManager2.swift */,
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		CBAA3AD4278C162100E75B51 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				CBAA3AD5278C16A100E75B51 /* LoadGear.swift */,
-			);
-			path = Domain;
 			sourceTree = "<group>";
 		};
 		CBAB103426C552380058F440 /* Controllers */ = {
@@ -442,7 +420,6 @@
 				CBDC479D2732C97700537E5A /* SearchResultViewModel.swift in Sources */,
 				CBDC47A12734187700537E5A /* FriendModel.swift in Sources */,
 				CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */,
-				CBAA3AD6278C16A100E75B51 /* LoadGear.swift in Sources */,
 				CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
 				CBD44FB1276D971500D1B3EA /* SearchUserDetailViewController.swift in Sources */,
@@ -464,7 +441,6 @@
 				CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */,
 				CBDC479927302B9100537E5A /* LoadingCell.swift in Sources */,
 				CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */,
-				CBAA3AD8278C186C00E75B51 /* APIManager2.swift in Sources */,
 				CB90E3FF271860E900CD2B1C /* SearchUserModel.swift in Sources */,
 				CB6037D326B28A530023042F /* UserViewModel.swift in Sources */,
 				CB58A79826E5F136006C80EA /* GearDetailViewController.swift in Sources */,

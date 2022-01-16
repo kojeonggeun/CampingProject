@@ -348,7 +348,6 @@ class APIManager{
     
 //    토큰 유무 확인하여 로그인
     func loginCheck(completion: @escaping (Bool)-> Void ) {
-        
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
     
         AF.request(urlUser,
@@ -356,10 +355,16 @@ class APIManager{
                    encoding: URLEncoding.default,
                    headers: headers)
             
-            .response { (response) in
+            .responseJSON { (response) in
                 switch response.result {
-                case .success(_):
-                    completion(true)
+                case .success(let data):
+                    let result = data as! NSDictionary
+                    if result["error"] != nil{
+                        completion(false)
+                        DB.userDefaults.set(false, forKey: "Auto")
+                    } else {
+                        completion(true)
+                    }
                 case .failure(let error):
                     print("🚫 loginCheck Error:\(error._code), Message: \(error.errorDescription!),\(error)")
                     completion(false)
