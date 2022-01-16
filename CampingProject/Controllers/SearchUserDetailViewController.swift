@@ -43,7 +43,7 @@ class SearchUserDetailViewController: UIViewController {
             self.userVM.loadFriendInfoRx(id: userId)
             .subscribe(onNext: { userInfo in
                 self.navigationItem.title = userInfo.user?.email
-                user = userInfo
+                self.user = userInfo
                 self.userName.text = userInfo.user?.name
                 self.userFollower.text = "\(userInfo.followerCnt)"
                 self.userFollowing.text = "\(userInfo.followingCnt)"
@@ -54,6 +54,21 @@ class SearchUserDetailViewController: UIViewController {
                     self.followButton.tintColor = .brown
                 }
             })
+        SearchUserDetailViewModel.shared.loadSearchGear(id: userId)
+
+        SearchUserDetailViewModel.shared.searchGearObservable
+            .bind(to: friendCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+                UserViewModel.shared.loadGearImagesRx(id:element.id)
+                    .subscribe(onNext: { image in
+                        cell.collectionViewCellImage.image = image
+                    })
+                if let name = element.name ,
+                   let gearTypeName = element.gearTypeName,
+                   let buyDt = element.buyDt {
+                    cell.updateUI(name: name, type: gearTypeName, date: buyDt)
+                }
+    
+            }.disposed(by: disposeBag)
         
         
         followButton.rx.tap
@@ -74,24 +89,8 @@ class SearchUserDetailViewController: UIViewController {
                 }
   
             }.disposed(by: disposeBag)
-        
-//
-//           TODO: 이제 bind 이용해서 만들어서줘야 해!!
-        SearchUserDetailViewModel.shared.loadSearchGear(id: userId)
 
-        SearchUserDetailViewModel.shared.searchGearObservable
-            .bind(to: friendCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-                UserViewModel.shared.loadGearImagesRx(id:element.id)
-                    .subscribe(onNext: { image in
-                        cell.collectionViewCellImage.image = image
-                    })
-                if let name = element.name ,
-                   let gearTypeName = element.gearTypeName,
-                   let buyDt = element.buyDt {
-                    cell.updateUI(name: name, type: gearTypeName, date: buyDt)
-                }
-    
-            }.disposed(by: disposeBag)
+        
         
    
     }

@@ -73,20 +73,33 @@ class MyGearViewController: UIViewController{
                     .subscribe(onNext: { image in
                         cell.collectionViewCellImage.image = image
                     }).disposed(by: self.disposeBag)
+                
                 cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
             }.disposed(by: disposeBag)
         
       
-        self.apiManager.loadUserGear( completion: { userData in
-            DispatchQueue.global().async {
-                self.apiManager.loadGearType(completion: { data in
-                    DispatchQueue.main.async {
-                        self.myGearCollectionVIew.reloadData()
-                        self.categoryCollectionView.reloadData()
-                    }
-                })
-            } // end global.async
-        })
+        MyGearViewModel.shared.gearTypeeObservable
+            .bind(to: categoryCollectionView.rx.items(cellIdentifier: "category", cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
+                
+                cell.categoryButton.rx.tap.asDriver()
+                                .drive(onNext: { [weak self] in
+                                    let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
+
+                                         pushVC.gearType = row
+                                        self?.navigationController?.pushViewController(pushVC, animated: true)
+                                }).disposed(by: self.disposeBag)
+                cell.updateUI(title: element.gearName)
+                
+            }
+        
+        categoryCollectionView.rx.modelSelected(GearType.self)
+            .subscribe(onNext: { data in
+                print(data)
+            })
+        
+        
+
+        
         
     }
 

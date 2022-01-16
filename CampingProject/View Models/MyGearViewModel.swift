@@ -16,7 +16,7 @@ class MyGearViewModel {
 
     static let shared = MyGearViewModel()
     let userVM = UserViewModel.shared
-    
+    let apiManager = APIManager.shared
     private let gears = PublishRelay<[CellData]>()
     var gearObservable: Observable<[CellData]> {
         return gears.asObservable()
@@ -27,8 +27,21 @@ class MyGearViewModel {
         return gearImage.asObservable()
     }
     
+    private let gearTypes = BehaviorRelay<[GearType]>(value: [])
+    var gearTypeeObservable: Observable<[GearType]> {
+        return gearTypes.asObservable()
+    }
+    
     let disposeBag = DisposeBag()
     
+    init() {
+        self.apiManager.loadGearType(completion: { [self] data in
+            if data {
+                
+                gearTypes.accept(self.apiManager.gearTypes)
+            }
+        })
+    }
     
     func loadGears(){
         userVM.loadUserGearRx()
@@ -38,7 +51,6 @@ class MyGearViewModel {
     }
     
     func loadimage(image: [UIImage]) {
-        print(image)
         gearImage.accept(image)
     }
     
