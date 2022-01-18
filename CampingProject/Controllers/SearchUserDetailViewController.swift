@@ -38,6 +38,8 @@ class SearchUserDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.leftBarButtonItem?.title = ""
+        
         friendCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
         
             self.userVM.loadFriendInfoRx(id: userId)

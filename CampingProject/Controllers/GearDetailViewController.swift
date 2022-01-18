@@ -10,6 +10,7 @@ import UIKit
 import TextFieldEffects
 import RxSwift
 import RxCocoa
+import simd
 
 class GearDetailViewController: UIViewController {
 
@@ -83,7 +84,7 @@ class GearDetailViewController: UIViewController {
 //        self.textFieldEdit(value: false)
 
         self.loadImage()
-        
+
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = UIColor.gray
         pageControl.currentPageIndicatorTintColor = UIColor.red
@@ -101,21 +102,18 @@ class GearDetailViewController: UIViewController {
     
     func loadText(){
         let userData = userGearVM.userGears[gearRow]
-        
-        guard let type = userData.gearTypeName else { return }
-        guard let name = userData.name else { return }
-        guard let color = userData.color else { return }
-        guard let company = userData.company else { return }
-        guard let capacity = userData.capacity else { return }
-        guard let buyDt = userData.buyDt else { return  }
-        guard let price = userData.price else { return }
-        
-        gearName.text = name
-        gearType.text = "[\(type)]"
-        gearCompany.text = company
-        gearColor.text = color
-        gearPrice.text = "\(price)"
-        gearBuyDt.text = buyDt
+
+        MyGearViewModel.shared.gearObservable
+            .subscribe(onNext: { [weak self] result in
+                self?.gearName.text = result[self!.gearRow].name!
+                self?.gearType.text = "[\(result[self!.gearRow].gearTypeName!)]"
+                self?.gearCompany.text = result[self!.gearRow].company!
+                self?.gearColor.text = result[self!.gearRow].color
+                self?.gearPrice.text = "\(result[self!.gearRow].price!)"
+                self?.gearBuyDt.text = result[self!.gearRow].buyDt
+                
+                
+            })
     }
     
     func loadImage() {
@@ -133,7 +131,6 @@ class GearDetailViewController: UIViewController {
            }
     }
     
-    
     func textFieldEdit(value: Bool) {
         let textFieldArr = [customView.gearType,customView.gearName,customView.gearColor,customView.gearCompany,customView.gearCapacity,customView.gearBuyDate,customView.gearPrice]
         for i in textFieldArr {
@@ -142,7 +139,6 @@ class GearDetailViewController: UIViewController {
         
     }
 }
-
 
 extension GearDetailViewController: UICollectionViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

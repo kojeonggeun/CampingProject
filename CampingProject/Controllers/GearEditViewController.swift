@@ -82,8 +82,9 @@ class GearEditViewController: UIViewController {
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
             self.navigationController?.popViewController(animated: true)
-            NotificationCenter.default.post(name: self.DidReloadPostDetailViewController, object: nil,userInfo: ["categoryDelete" : true])
-            NotificationCenter.default.post(name: self.DidReloadPostEdit, object: nil, userInfo: ["edit" : true])
+            MyGearViewModel.shared.loadGears()
+//            NotificationCenter.default.post(name: self.DidReloadPostDetailViewController, object: nil,userInfo: ["categoryDelete" : true])
+//            NotificationCenter.default.post(name: self.DidReloadPostEdit, object: nil, userInfo: ["edit" : true])
             
         })
         

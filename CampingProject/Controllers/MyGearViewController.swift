@@ -67,39 +67,37 @@ class MyGearViewController: UIViewController{
     
     func loadData(){
         MyGearViewModel.shared.loadGears()
+        
         MyGearViewModel.shared.gearObservable
             .bind(to: myGearCollectionVIew.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 UserViewModel.shared.loadGearImagesRx(id:element.id)
                     .subscribe(onNext: { image in
                         cell.collectionViewCellImage.image = image
                     }).disposed(by: self.disposeBag)
-                
                 cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
             }.disposed(by: disposeBag)
         
       
         MyGearViewModel.shared.gearTypeeObservable
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: "category", cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
-                
                 cell.categoryButton.rx.tap.asDriver()
                                 .drive(onNext: { [weak self] in
                                     let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
-
-                                         pushVC.gearType = row
+                                         pushVC.gearTypeNum = row
                                         self?.navigationController?.pushViewController(pushVC, animated: true)
                                 }).disposed(by: self.disposeBag)
-                cell.updateUI(title: element.gearName)
                 
-            }
+                cell.updateUI(title: element.gearName)
+            }.disposed(by: disposeBag)
         
-        categoryCollectionView.rx.modelSelected(GearType.self)
-            .subscribe(onNext: { data in
-                print(data)
+        
+        myGearCollectionVIew.rx.itemSelected
+            .subscribe(onNext:  { indexPath in
+                
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
+                pushVC.gearRow = indexPath.row
+                self.navigationController?.pushViewController(pushVC, animated: true)
             })
-        
-        
-
-        
         
     }
 
@@ -138,10 +136,7 @@ extension MyGearViewController: UICollectionViewDelegate{
         //      카테고리 적용 시 필요
                 let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
                 collectionIndexPath = indexPath
-        
-                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
-                pushVC.gearRow = first
-                self.navigationController?.pushViewController(pushVC, animated: true)
+
     }
    
 }

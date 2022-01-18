@@ -236,8 +236,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="157" translatesAutoresizingMaskIntoConstraints="NO" id="hKL-Ip-WA7">
-                                <rect key="frame" x="61" y="715" width="269" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="157" translatesAutoresizingMaskIntoConstraints="NO" id="hKL-Ip-WA7">
+                                <rect key="frame" x="61" y="812" width="269" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYi-nq-MQV">
                                         <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
@@ -262,10 +262,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7wF-r4-JZc">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7wF-r4-JZc">
                                 <rect key="frame" x="-1" y="124" width="414" height="334"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="334" id="CLl-56-unl"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="z5r-lT-qgk">
                                     <size key="itemSize" width="414" height="192"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -362,6 +364,14 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7Dg-9o-lXq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7wF-r4-JZc" firstAttribute="top" secondItem="7Dg-9o-lXq" secondAttribute="top" constant="80" id="DZU-Hp-TRR"/>
+                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="trailing" secondItem="hKL-Ip-WA7" secondAttribute="trailing" constant="84" id="GRB-L2-GT8"/>
+                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="leading" secondItem="7wF-r4-JZc" secondAttribute="leading" constant="1" id="IAJ-OB-noi"/>
+                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="trailing" secondItem="7wF-r4-JZc" secondAttribute="trailing" constant="1" id="W67-sd-SbL"/>
+                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="bottom" secondItem="hKL-Ip-WA7" secondAttribute="bottom" constant="20" id="pMq-WW-0Va"/>
+                            <constraint firstItem="hKL-Ip-WA7" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" constant="61" id="zJz-2A-NZN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="DX2-uq-6tE"/>
                     <connections>
@@ -394,10 +404,6 @@
                             <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells/>
-                        <connections>
-                            <outlet property="dataSource" destination="h3L-vi-ANB" id="iTf-Ov-lSb"/>
-                            <outlet property="delegate" destination="h3L-vi-ANB" id="kg8-4Z-W5g"/>
-                        </connections>
                     </collectionView>
                     <connections>
                         <outlet property="categoryCollectionView" destination="6HQ-hZ-86P" id="51z-XZ-TP2"/>

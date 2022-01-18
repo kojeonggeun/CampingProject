@@ -7,10 +7,18 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MainTabBarController: UITabBarController {
     
     let userVM = UserViewModel.shared
+    
+    let userGearVM = UserGearViewModel.shared
+    let viewModel = ProfileViewModel.shared
+
+    let apiManger = APIManager.shared
+    let disposeBag = DisposeBag()
     
 //    MARK: LifeCycles
     override func viewDidLoad() {
@@ -26,6 +34,7 @@ class MainTabBarController: UITabBarController {
 
         self.setViewControllers([myGearNC,searchUserNC,profileNC], animated: false)
     }
+
 
 }
 

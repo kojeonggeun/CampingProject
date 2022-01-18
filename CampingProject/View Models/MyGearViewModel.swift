@@ -17,12 +17,13 @@ class MyGearViewModel {
     static let shared = MyGearViewModel()
     let userVM = UserViewModel.shared
     let apiManager = APIManager.shared
-    private let gears = PublishRelay<[CellData]>()
+    
+    private let gears = BehaviorRelay<[CellData]>(value: [])
     var gearObservable: Observable<[CellData]> {
         return gears.asObservable()
     }
     
-    private let gearImage = PublishRelay<[UIImage]>()
+    private let gearImage = BehaviorRelay<[UIImage]>(value: [])
     var gearImageObservable: Observable<[UIImage]> {
         return gearImage.asObservable()
     }

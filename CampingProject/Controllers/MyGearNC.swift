@@ -17,6 +17,7 @@ class MyGearNC : UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(self)
         
 //        let myGearVC = self.viewControllers[0] as! MyGearViewController
 //        

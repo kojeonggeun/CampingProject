@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-
+import RxSwift
+import RxCocoa
 
 
 class CategoryCollectionViewController: UICollectionViewController{
@@ -18,8 +19,10 @@ class CategoryCollectionViewController: UICollectionViewController{
     let userGearVM = UserGearViewModel.shared
     
     let apiManager: APIManager = APIManager.shared
+    let disposeBag = DisposeBag()
     
-    var gearType: Int = 0
+    var gearTypeNum: Int = 0
+    var gearType: String = ""
     var tableIndex: IndexPath = []
    
   
@@ -27,10 +30,23 @@ class CategoryCollectionViewController: UICollectionViewController{
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        let type = gearTypeVM.gearTypes[gearType].gearName
-        self.title = type
-        userGearVM.categoryUserData(type: type)
+        gearType = gearTypeVM.gearTypes[gearTypeNum].gearName
+        self.title = gearType
+        userGearVM.categoryUserData(type: gearType)
         categoryCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
+  
+        MyGearViewModel.shared.gearObservable
+            .map {
+                $0.filter { $0.gearTypeName == self.gearType}
+            }
+            .bind(to: categoryCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+                
+                UserViewModel.shared.loadGearImagesRx(id:element.id)
+                    .subscribe(onNext: { image in
+                        cell.collectionViewCellImage.image = image
+                    }).disposed(by: self.disposeBag)
+                cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
+            }.disposed(by: disposeBag)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.deleteTableCell(_:)), name: NSNotification.Name("DidDeleteCatogoryGearPost"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
