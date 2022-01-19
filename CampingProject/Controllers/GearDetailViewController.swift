@@ -106,7 +106,7 @@ class GearDetailViewController: UIViewController {
         MyGearViewModel.shared.gearObservable
             .subscribe(onNext: { [weak self] result in
                 self?.gearName.text = result[self!.gearRow].name!
-                self?.gearType.text = "[\(result[self!.gearRow].gearTypeName!)]"
+                self?.gearType.text = "[\(result[self!.gearRow].gearTypeName ?? "awd")]"
                 self?.gearCompany.text = result[self!.gearRow].company!
                 self?.gearColor.text = result[self!.gearRow].color
                 self?.gearPrice.text = "\(result[self!.gearRow].price!)"

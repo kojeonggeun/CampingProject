@@ -1,20 +1,14 @@
-//
 //  First.swift
 //  CampingProject
 //
 //  Created by 고정근 on 2021/08/07.
-//
 
 import UIKit
 import RxSwift
 import RxCocoa
 
-
 class MyGearViewController: UIViewController{
-    
-  
     @IBOutlet weak var myGearCollectionVIew: UICollectionView!
-    
     @IBOutlet weak var categoryCollectionView: UICollectionView!
         
     var segueText: String = ""
@@ -22,12 +16,9 @@ class MyGearViewController: UIViewController{
     
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
-    
     let apiManager: APIManager = APIManager.shared
+    var disposeBag:DisposeBag = DisposeBag()
     
-    let disposeBag:DisposeBag = DisposeBag()
-    
-
 
     @IBAction func addGearMove(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView")
@@ -64,6 +55,7 @@ class MyGearViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
     }
+
     
     func loadData(){
         MyGearViewModel.shared.loadGears()
@@ -74,26 +66,26 @@ class MyGearViewController: UIViewController{
                     .subscribe(onNext: { image in
                         cell.collectionViewCellImage.image = image
                     }).disposed(by: self.disposeBag)
-                cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
+                cell.updateUI(name: element.name!, type: element.gearTypeName ?? "awd", date: element.buyDt!)
             }.disposed(by: disposeBag)
         
       
+//        TODO: 값이 여러개 요청됨 버그,
         MyGearViewModel.shared.gearTypeeObservable
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: "category", cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
                 cell.categoryButton.rx.tap.asDriver()
-                                .drive(onNext: { [weak self] in
-                                    let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
-                                         pushVC.gearTypeNum = row
-                                        self?.navigationController?.pushViewController(pushVC, animated: true)
-                                }).disposed(by: self.disposeBag)
+                    .drive(onNext: { [weak self] in
+                        let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
+                            pushVC.gearTypeNum = row
+                        self?.navigationController?.pushViewController(pushVC, animated: true)
+                    }).disposed(by: cell.disposeBag)
                 
+    
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
         
-        
         myGearCollectionVIew.rx.itemSelected
             .subscribe(onNext:  { indexPath in
-                
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
                 pushVC.gearRow = indexPath.row
                 self.navigationController?.pushViewController(pushVC, animated: true)
@@ -136,10 +128,9 @@ extension MyGearViewController: UICollectionViewDelegate{
         //      카테고리 적용 시 필요
                 let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
                 collectionIndexPath = indexPath
-
     }
-   
 }
+
 extension MyGearViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == myGearCollectionVIew {

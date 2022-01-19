@@ -11,7 +11,6 @@ import UIKit
 @IBDesignable
 class GearTextListCustomView: UIView{
     
-    
     @IBOutlet weak var gearType: UITextField!
     @IBOutlet weak var gearName: UITextField!
     @IBOutlet weak var gearColor: UITextField!
@@ -23,39 +22,44 @@ class GearTextListCustomView: UIView{
     var apiService: APIManager = APIManager.shared
     var gearTypeId: Int = 0
     var selectType: String = ""
+    var gearId:Int = 0
     let pickerView = UIPickerView()
     let datePickerView = UIDatePicker()
     
     override func awakeFromNib() {
        super.awakeFromNib()
-        
         gearPrice.keyboardType = .numberPad
         createPickerView()
         createDatePickerView()
         gearType.tintColor = .clear
-        
     }
     
-    override init(frame: CGRect) {
-          super.init(frame: frame)
-          self.commonInit()
-      }
+    init(frame : CGRect, gearId: Int) {
 
-      required init?(coder aDecoder: NSCoder) {
-          super.init(coder: aDecoder)
-          self.commonInit()
-      }
+        self.gearId = gearId
+        print("Number = \(number)")
+        super.init(frame: frame)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+    }
+ 
+    required init?(coder aDecoder: NSCoder) {
 
-      private func commonInit(){
-          let className = String(describing: type(of: self))
-          guard let view = loadViewFromNib(nib: className) else { return }
-          
-          view.translatesAutoresizingMaskIntoConstraints = false
-          
-          view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-          self.addSubview(view)
-          
-      }
+        fatalError("init(coder:) has not been implemented")
+
+       }
+    private func commonInit(){
+        let className = String(describing: type(of: self))
+        guard let view = loadViewFromNib(nib: className) else { return }
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(view)
+      
+    }
     
     func loadViewFromNib(nib: String) -> UIView? {
         let bundle = Bundle(for: type(of: self))
@@ -104,16 +108,16 @@ class GearTextListCustomView: UIView{
         
     }
     
-    
     func createPickerView(){
         
         pickerView.delegate = self
         pickerView.backgroundColor = .white
         
+        print(apiService.userGears[gearId])
         
         gearType.text = apiService.gearTypes[0].gearName
         gearType.inputView = pickerView
-        gearTypeId = apiService.gearTypes[0].gearID
+//        gearTypeId = apiService.gearTypes[0].gearID
         
         let button = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissPickerView))
         let toolBar = createToolbar(item: button)
@@ -139,6 +143,7 @@ class GearTextListCustomView: UIView{
         return toolbar
     }
     
+    
 }
 
 extension GearTextListCustomView: UIPickerViewDataSource{
@@ -162,7 +167,9 @@ extension GearTextListCustomView: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectType = apiService.gearTypes[row].gearName
         gearTypeId = apiService.gearTypes[row].gearID
-
+        
+        print(selectType)
+        print(gearTypeId)
     }
 
 }

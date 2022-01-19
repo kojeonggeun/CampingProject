@@ -7,12 +7,20 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class CategoryCollectionViewCell: UICollectionViewCell {
     
+    var disposeBag = DisposeBag()
     
     @IBOutlet weak var categoryButton: UIButton!
   
+    override func prepareForReuse() {
+      super.prepareForReuse()
+          
+      disposeBag = DisposeBag()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

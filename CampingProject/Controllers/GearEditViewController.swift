@@ -15,16 +15,17 @@ class GearEditViewController: UIViewController {
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var imageCount: UILabel!
     
-    var gearRow: Int = 0
-    var allPhotos: PHFetchResult<PHAsset>?
-    var imageItem = [ImageData]()
-    
     let userGearVM = UserGearViewModel.shared
     let apiService = APIManager.shared
     let imagePicker = ImagePickerManager()
-    
     let DidReloadPostDetailViewController: Notification.Name = Notification.Name("DidReloadPostDetailViewController")
     let DidReloadPostEdit: Notification.Name = Notification.Name("DidReloadPostEdit")
+    let custom: GearTextListCustomView? = nil
+    
+    var gearRow: Int = 0
+    var allPhotos: PHFetchResult<PHAsset>?
+    var imageItem = [ImageData]()
+    var userData: CellData? = nil
     
     @IBAction func showImagePicker(_ sender: Any) {
         imagePicker.showMultipleImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
@@ -34,40 +35,21 @@ class GearEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userData = userGearVM.userGears[gearRow]
+        userData = userGearVM.userGears[gearRow]
     
         self.allPhotos = PHAsset.fetchAssets(with: nil)
-
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
-
         
-        customView.UpdateData(type: userData.gearTypeName!, name: userData.name!, color: userData.color!, company: userData.company!, capacity: userData.capacity!, buyDate: userData.buyDt!, price: userData.price!)
+          
+                
+        customView.UpdateData(type: self.userData!.gearTypeName ?? "awd", name: self.userData!.name!, color: self.userData!.color!, company: self.userData!.company!, capacity: self.userData!.capacity!, buyDate: self.userData!.buyDt!, price: self.userData!.price!)
         
-     
-//        apiService.loadGearImages(gearId: userData.id, completion: { data in
-//            for (index, item) in data.enumerated() {
-//                let asset = self.allPhotos?.object(at: index)
-//                self.imageItem.append(item)
-//                let url = URL(string: item.url)
-//                let data = try? Data(contentsOf: url!)
-//                
-////              기존 이미지피커에 데이터 저장
-//                self.imagePicker.photoArray.append(UIImage(data: data!)!)
-//                self.imagePicker.userSelectedAssets.append(asset!)
-//                self.imagePicker.imageFileName.append(item.orgFilename)
-//               
-//            }
-//            self.imagePicker.total = self.imagePicker.photoArray.count
-//            self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
-//            self.imageCollectionView.reloadData()
-//            
-//        })
-//        커스텀 nib 등록
         imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
     }
     
     @objc func gearEdit(){
-
+        
         guard let name = customView.gearName.text else { return }
         guard let color = customView.gearColor.text else { return }
         guard let company = customView.gearCompany.text else { return }
@@ -76,6 +58,7 @@ class GearEditViewController: UIViewController {
         guard let price = customView.gearPrice.text else { return }
         let gearId = userGearVM.userGears[gearRow].id
         let type = customView.gearTypeId
+        
         
         self.userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
    

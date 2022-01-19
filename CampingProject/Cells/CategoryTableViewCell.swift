@@ -17,7 +17,6 @@ class CategoryTableViewCell: UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
      
-       
     }
     override func layoutSubviews() {
         super.layoutSubviews()

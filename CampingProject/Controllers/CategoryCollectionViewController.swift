@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 
-class CategoryCollectionViewController: UICollectionViewController{
+class CategoryCollectionViewController: UIViewController {
       
     @IBOutlet var categoryCollectionView: UICollectionView!
     
@@ -35,18 +35,10 @@ class CategoryCollectionViewController: UICollectionViewController{
         userGearVM.categoryUserData(type: gearType)
         categoryCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
   
-        MyGearViewModel.shared.gearObservable
-            .map {
-                $0.filter { $0.gearTypeName == self.gearType}
-            }
-            .bind(to: categoryCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-                
-                UserViewModel.shared.loadGearImagesRx(id:element.id)
-                    .subscribe(onNext: { image in
-                        cell.collectionViewCellImage.image = image
-                    }).disposed(by: self.disposeBag)
-                cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
-            }.disposed(by: disposeBag)
+        categoryCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag
+            )
+        loadData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.deleteTableCell(_:)), name: NSNotification.Name("DidDeleteCatogoryGearPost"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
@@ -68,74 +60,38 @@ class CategoryCollectionViewController: UICollectionViewController{
         }
     }
     
-  
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func loadData(){
+        MyGearViewModel.shared.gearObservable
+            .map {
+                $0.filter { $0.gearTypeName == self.gearType}
+            }
+            .bind(to: categoryCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+                UserViewModel.shared.loadGearImagesRx(id:element.id)
+                    .subscribe(onNext: { image in
+                        cell.collectionViewCellImage.image = image
+                        
+                    }).disposed(by: self.disposeBag)
+                cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
+            }.disposed(by: disposeBag)
         
-        return userGearVM.numberOfRowsInSection()
+        categoryCollectionView.rx.itemSelected
+            .subscribe(onNext:  { indexPath in
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
+                pushVC.gearRow = indexPath.row
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
     }
+}
 
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-     
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myGearViewCell", for: indexPath) as? MyGearCollectionViewCell else { return UICollectionViewCell() }
-        
-        let userGearId = userGearVM.categoryData[indexPath.row].id
-//        if let cacheImage = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)") {
-//            DispatchQueue.main.async {
-//                cell.collectionViewCellImage.image = cacheImage
-//            }
+extension CategoryCollectionViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+       
+            let margin: CGFloat = 10
+            let itemSpacing: CGFloat = 10
             
-//        } else {
-//            apiManager.loadGearImages(gearId: userGearId, completion: { data in
-//                DispatchQueue.global().async {
-//                    if !data.isEmpty {
-//                        let url = URL(string: data[0].url)
-//                        let data = try? Data(contentsOf: url!)
-//                        let image = UIImage(data: data!)
-//                        DispatchQueue.main.async {
-//                            cell.collectionViewCellImage.image = image
-//                            
-//                        }
-//                    } else {
-//                        DispatchQueue.main.async {
-//                            cell.collectionViewCellImage.image = self.apiManager.imageCache.image(withIdentifier: "\(userGearId)")!
-//                        }
-//                    }
-//                }
-//            })
-//        }
-        
-        if let gearName = userGearVM.categoryData[indexPath.row].name,
-           let gearType = userGearVM.categoryData[indexPath.row].gearTypeName,
-            let gearDate = userGearVM.categoryData[indexPath.row].buyDt {
-            cell.updateUI(name: gearName, type: gearType, date: gearDate)
-        }
-        
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.categoryData[indexPath.row].id
-        })!
-      
-        tableIndex = indexPath
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
+            let width = (collectionView.frame.width - margin * 2 - itemSpacing) / 2
+            let height = width * 10/7.5
 
-        pushVC.gearRow = first
-        
-        
-        self.navigationController?.pushViewController(pushVC, animated: true)
+            return CGSize(width: width, height: height)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let margin: CGFloat = 10
-//        let itemSpacing: CGFloat = 10
-//
-//        let width = (collectionView.frame.width - margin * 2 - itemSpacing) / 2
-//        let height = width * 10/7.5
-//
-//        return CGSize(width: width, height: height)
-//    }
-    
 }

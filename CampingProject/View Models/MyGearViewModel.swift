@@ -28,7 +28,7 @@ class MyGearViewModel {
         return gearImage.asObservable()
     }
     
-    private let gearTypes = BehaviorRelay<[GearType]>(value: [])
+    private let gearTypes = PublishRelay<[GearType]>()
     var gearTypeeObservable: Observable<[GearType]> {
         return gearTypes.asObservable()
     }
@@ -38,7 +38,6 @@ class MyGearViewModel {
     init() {
         self.apiManager.loadGearType(completion: { [self] data in
             if data {
-                
                 gearTypes.accept(self.apiManager.gearTypes)
             }
         })
