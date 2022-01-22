@@ -10,8 +10,7 @@ import UIKit
 import Photos
 
 class GearEditViewController: UIViewController {
-    
-    @IBOutlet weak var customView: GearTextListCustomView!
+    @IBOutlet weak var gearEditCustomView: GearTextListCustomView!
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var imageCount: UILabel!
     
@@ -20,12 +19,12 @@ class GearEditViewController: UIViewController {
     let imagePicker = ImagePickerManager()
     let DidReloadPostDetailViewController: Notification.Name = Notification.Name("DidReloadPostDetailViewController")
     let DidReloadPostEdit: Notification.Name = Notification.Name("DidReloadPostEdit")
-    let custom: GearTextListCustomView? = nil
-    
+
     var gearRow: Int = 0
     var allPhotos: PHFetchResult<PHAsset>?
     var imageItem = [ImageData]()
     var userData: CellData? = nil
+    var customView: GearTextListCustomView? = nil
     
     @IBAction func showImagePicker(_ sender: Any) {
         imagePicker.showMultipleImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
@@ -36,30 +35,27 @@ class GearEditViewController: UIViewController {
         super.viewDidLoad()
         
         userData = userGearVM.userGears[gearRow]
-    
+        gearEditCustomView.initPickerView(gearId: gearRow)
         self.allPhotos = PHAsset.fetchAssets(with: nil)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
-        
-          
-                
-        customView.UpdateData(type: self.userData!.gearTypeName ?? "awd", name: self.userData!.name!, color: self.userData!.color!, company: self.userData!.company!, capacity: self.userData!.capacity!, buyDate: self.userData!.buyDt!, price: self.userData!.price!)
+        gearEditCustomView.UpdateData(type: self.userData!.gearTypeName ?? "awd", name: self.userData!.name!, color: self.userData!.color!, company: self.userData!.company!, capacity: self.userData!.capacity!, buyDate: self.userData!.buyDt!, price: self.userData!.price!)
         
         imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
     }
     
     @objc func gearEdit(){
         
-        guard let name = customView.gearName.text else { return }
-        guard let color = customView.gearColor.text else { return }
-        guard let company = customView.gearCompany.text else { return }
-        guard let capacity = customView.gearCapacity.text else { return }
-        guard let date = customView.gearBuyDate.text else { return }
-        guard let price = customView.gearPrice.text else { return }
+        guard let name = gearEditCustomView.gearName.text else { return }
+        guard let color = gearEditCustomView.gearColor.text else { return }
+        guard let company = gearEditCustomView.gearCompany.text else { return }
+        guard let capacity = gearEditCustomView.gearCapacity.text else { return }
+        guard let date = gearEditCustomView.gearBuyDate.text else { return }
+        guard let price = gearEditCustomView.gearPrice.text else { return }
         let gearId = userGearVM.userGears[gearRow].id
-        let type = customView.gearTypeId
+        let type = gearEditCustomView.gearTypeId
         
-        
+        print(type)
         self.userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
    
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)

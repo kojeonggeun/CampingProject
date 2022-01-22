@@ -8,22 +8,16 @@
 import Foundation
 import UIKit
 
-class GearDetailViewCell: UICollectionViewCell {
-    
+class GearDetailCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var gearDetailImage: UIImageView!
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-
     }
     
     func updateUI(item: UIImage) {
         
         self.gearDetailImage.image = item
-        
     }
-    
 }

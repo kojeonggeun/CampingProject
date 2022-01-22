@@ -11,36 +11,44 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-
 class MyGearViewModel {
 
     static let shared = MyGearViewModel()
     let userVM = UserViewModel.shared
     let apiManager = APIManager.shared
+    let disposeBag = DisposeBag()
     
     private let gears = BehaviorRelay<[CellData]>(value: [])
+    private let gearImage = BehaviorRelay<[UIImage]>(value: [])
+    private let gearTypes = BehaviorRelay<[GearType]>(value: [])
+    
+    var makeMove: AnyObserver<Int>
+    let showDetailPage: Observable<[CellData]>
+    
     var gearObservable: Observable<[CellData]> {
         return gears.asObservable()
     }
-    
-    private let gearImage = BehaviorRelay<[UIImage]>(value: [])
     var gearImageObservable: Observable<[UIImage]> {
         return gearImage.asObservable()
     }
-    
-    private let gearTypes = PublishRelay<[GearType]>()
     var gearTypeeObservable: Observable<[GearType]> {
         return gearTypes.asObservable()
     }
     
-    let disposeBag = DisposeBag()
     
     init() {
-        self.apiManager.loadGearType(completion: { [self] data in
-            if data {
-                gearTypes.accept(self.apiManager.gearTypes)
+        let detailPageMoving = PublishSubject<Int>()
+        
+        makeMove = detailPageMoving.asObserver()
+        
+        showDetailPage = detailPageMoving.withLatestFrom(gears)
+            .map {
+                $0.filter { $0.gearTypeName == "타프"}
             }
-        })
+            .do(onNext: {
+                print($0,"Awdawd")
+            })
+        loadGearType()
     }
     
     func loadGears(){
@@ -54,5 +62,12 @@ class MyGearViewModel {
         gearImage.accept(image)
     }
     
+    func loadGearType(){
+        self.apiManager.loadGearType(completion: {  data in
+            if data {
+                self.gearTypes.accept(self.apiManager.gearTypes)
+            }
+        })
+    }
 }
 

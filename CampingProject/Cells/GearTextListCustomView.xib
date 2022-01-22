@@ -16,7 +16,7 @@
                 <outlet property="gearCompany" destination="V9n-FU-Zh3" id="OP0-Pi-f0B"/>
                 <outlet property="gearName" destination="hiR-au-60A" id="tBH-eS-9x2"/>
                 <outlet property="gearPrice" destination="Ywf-7f-ZmI" id="OIL-rI-Emh"/>
-                <outlet property="gearType" destination="h5x-Dd-pY1" id="W3O-UY-2We"/>
+                <outlet property="gearType" destination="h5x-Dd-pY1" id="gsf-aR-BTB"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

@@ -22,34 +22,27 @@ class GearTextListCustomView: UIView{
     var apiService: APIManager = APIManager.shared
     var gearTypeId: Int = 0
     var selectType: String = ""
-    var gearId:Int = 0
+
     let pickerView = UIPickerView()
     let datePickerView = UIDatePicker()
     
     override func awakeFromNib() {
        super.awakeFromNib()
+        
         gearPrice.keyboardType = .numberPad
-        createPickerView()
-        createDatePickerView()
         gearType.tintColor = .clear
     }
-    
-    init(frame : CGRect, gearId: Int) {
-
-        self.gearId = gearId
-        print("Number = \(number)")
+    override init(frame: CGRect) {
         super.init(frame: frame)
+        commonInit()
     }
+    
     required init?(coder aDecoder: NSCoder) {
+
         super.init(coder: aDecoder)
-        self.commonInit()
+        commonInit()
     }
  
-    required init?(coder aDecoder: NSCoder) {
-
-        fatalError("init(coder:) has not been implemented")
-
-       }
     private func commonInit(){
         let className = String(describing: type(of: self))
         guard let view = loadViewFromNib(nib: className) else { return }
@@ -57,6 +50,10 @@ class GearTextListCustomView: UIView{
         view.translatesAutoresizingMaskIntoConstraints = false
         
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        createPickerView()
+        createDatePickerView()
+        
         self.addSubview(view)
       
     }
@@ -86,7 +83,6 @@ class GearTextListCustomView: UIView{
         datePickerView.timeZone = NSTimeZone.local
         datePickerView.locale = Locale(identifier: "ko_KR")
         datePickerView.preferredDatePickerStyle = .wheels
-        
         datePickerView.backgroundColor = .white
         
         let doneButton = UIBarButtonItem(title: "선택", style: .plain, target : self, action: #selector(dismissDatePickerView))
@@ -111,20 +107,22 @@ class GearTextListCustomView: UIView{
     func createPickerView(){
         
         pickerView.delegate = self
+        pickerView.dataSource = self
         pickerView.backgroundColor = .white
         
-        print(apiService.userGears[gearId])
-        
-        gearType.text = apiService.gearTypes[0].gearName
         gearType.inputView = pickerView
-//        gearTypeId = apiService.gearTypes[0].gearID
+        
         
         let button = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissPickerView))
         let toolBar = createToolbar(item: button)
         
         gearType.inputAccessoryView = toolBar
+    }
+    
+    func initPickerView(gearId: Int){
         
-        
+        gearType.text = apiService.userGears[gearId].gearTypeName
+        gearTypeId = apiService.userGears[gearId].gearTypeId!
     }
     @objc func dismissPickerView() {
         gearType.text = selectType
@@ -142,8 +140,6 @@ class GearTextListCustomView: UIView{
         
         return toolbar
     }
-    
-    
 }
 
 extension GearTextListCustomView: UIPickerViewDataSource{
@@ -157,19 +153,16 @@ extension GearTextListCustomView: UIPickerViewDataSource{
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
+
         return apiService.gearTypes[row].gearName
 
     }
+    
 }
 
 extension GearTextListCustomView: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectType = apiService.gearTypes[row].gearName
         gearTypeId = apiService.gearTypes[row].gearID
-        
-        print(selectType)
-        print(gearTypeId)
     }
-
 }

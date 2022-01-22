@@ -15,27 +15,27 @@ class ProfileViewModel {
     let disposeBag = DisposeBag()
     static let shared = ProfileViewModel()
     
-    var followerObservable = BehaviorSubject<Int>(value: 0)
-    var followingObservable = BehaviorSubject<Int>(value: 0)
+    var follower = BehaviorRelay<Int>(value: 0)
+    var following = BehaviorRelay<Int>(value: 0)
     
 
-    lazy var totalFollower = followerObservable.map {
+    lazy var totalFollower = follower.map {
         $0
     }
     
-    lazy var totalFollowing = followingObservable.map {
+    lazy var totalFollowing = following.map {
         $0 
     }
     
     init() {
         userVM.loadFollowerRx()
             .subscribe(onNext: { follower in
-                self.followerObservable.onNext(follower.friends.count)
+                self.follower.accept(follower.friends.count)
             }).disposed(by: disposeBag)
         
         userVM.loadFollowingRx()
             .subscribe(onNext: { following in
-                self.followingObservable.onNext(following.friends.count)
+                self.following.accept(following.friends.count)
             }).disposed(by: disposeBag)
   
     }
@@ -43,16 +43,15 @@ class ProfileViewModel {
     func reloadFollowing(){
         self.userVM.loadFollowingRx()
             .subscribe(onNext: { following in
-                print(following.friends.count)
-                self.followingObservable.onNext(following.friends.count)
+                self.following.accept(following.friends.count)
         }).disposed(by: disposeBag)
     }
 
     func clearUserCount(){
-        followerObservable
-            .onNext(0)
+        follower
+            .accept(0)
             
-        followingObservable
-            .onNext(0)
+        following
+            .accept(0)
     }
 }

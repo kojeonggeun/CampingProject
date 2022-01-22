@@ -6,7 +6,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
 class MyGearViewController: UIViewController{
     @IBOutlet weak var myGearCollectionVIew: UICollectionView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
@@ -59,7 +58,6 @@ class MyGearViewController: UIViewController{
     
     func loadData(){
         MyGearViewModel.shared.loadGears()
-        
         MyGearViewModel.shared.gearObservable
             .bind(to: myGearCollectionVIew.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 UserViewModel.shared.loadGearImagesRx(id:element.id)
@@ -70,7 +68,7 @@ class MyGearViewController: UIViewController{
             }.disposed(by: disposeBag)
         
       
-//        TODO: 값이 여러개 요청됨 버그,
+
         MyGearViewModel.shared.gearTypeeObservable
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: "category", cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
                 cell.categoryButton.rx.tap.asDriver()
@@ -79,8 +77,6 @@ class MyGearViewController: UIViewController{
                             pushVC.gearTypeNum = row
                         self?.navigationController?.pushViewController(pushVC, animated: true)
                     }).disposed(by: cell.disposeBag)
-                
-    
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
         
@@ -91,6 +87,12 @@ class MyGearViewController: UIViewController{
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
         
+            
+//        MyGearViewModel.shared.makeMove.onNext(0)
+//        MyGearViewModel.shared.showDetailPage
+//            .subscribe(onNext:{
+//                print($0,"212312312")
+//            })
     }
 
     @objc func reloadTableView(_ noti: Notification) {
@@ -128,6 +130,7 @@ extension MyGearViewController: UICollectionViewDelegate{
         //      카테고리 적용 시 필요
                 let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
                 collectionIndexPath = indexPath
+                print(first)
     }
 }
 

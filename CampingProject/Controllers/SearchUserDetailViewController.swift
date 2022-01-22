@@ -43,18 +43,18 @@ class SearchUserDetailViewController: UIViewController {
         friendCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
         
             self.userVM.loadFriendInfoRx(id: userId)
-            .subscribe(onNext: { userInfo in
-                self.navigationItem.title = userInfo.user?.email
-                self.user = userInfo
-                self.userName.text = userInfo.user?.name
-                self.userFollower.text = "\(userInfo.followerCnt)"
-                self.userFollowing.text = "\(userInfo.followingCnt)"
-                self.userDesc.text = userInfo.user?.phone
-                
-                if userInfo.status == "FOLLOWING"{
-                    self.followButton.setTitle("팔로잉☑️", for: .normal)
-                    self.followButton.tintColor = .brown
-                }
+                .subscribe(onNext: { userInfo in
+                    self.navigationItem.title = userInfo.user?.email
+                    self.user = userInfo
+                    self.userName.text = userInfo.user?.name
+                    self.userFollower.text = "\(userInfo.followerCnt)"
+                    self.userFollowing.text = "\(userInfo.followingCnt)"
+                    self.userDesc.text = userInfo.user?.phone
+                    
+                    if userInfo.status == "FOLLOWING"{
+                        self.followButton.setTitle("팔로잉☑️", for: .normal)
+                        self.followButton.tintColor = .brown
+                    }
             })
         SearchUserDetailViewModel.shared.loadSearchGear(id: userId)
 

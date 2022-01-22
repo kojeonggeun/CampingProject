@@ -13,6 +13,5 @@ class SearchUserNC : UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self)
     }
 }

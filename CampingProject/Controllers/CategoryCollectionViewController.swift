@@ -61,18 +61,20 @@ class CategoryCollectionViewController: UIViewController {
     }
     
     func loadData(){
+        
         MyGearViewModel.shared.gearObservable
             .map {
                 $0.filter { $0.gearTypeName == self.gearType}
             }
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+                
                 UserViewModel.shared.loadGearImagesRx(id:element.id)
                     .subscribe(onNext: { image in
                         cell.collectionViewCellImage.image = image
-                        
                     }).disposed(by: self.disposeBag)
                 cell.updateUI(name: element.name!, type: element.gearTypeName!, date: element.buyDt!)
             }.disposed(by: disposeBag)
+        
         
         categoryCollectionView.rx.itemSelected
             .subscribe(onNext:  { indexPath in
@@ -80,6 +82,9 @@ class CategoryCollectionViewController: UIViewController {
                 pushVC.gearRow = indexPath.row
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
+//        first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
+        
+      
     }
 }
 

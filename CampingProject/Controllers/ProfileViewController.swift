@@ -83,7 +83,7 @@ class ProfileViewController: UIViewController, ReloadData {
 
         self.userVM.loadFollowerRx()
             .subscribe(onNext: { follower in
-                self.viewModel.followerObservable.onNext(follower.friends.count)
+                self.viewModel.follower.accept(follower.friends.count)
             }).disposed(by: self.disposeBag)
     }
     
@@ -92,13 +92,13 @@ class ProfileViewController: UIViewController, ReloadData {
         
         self.userVM.loadFollowingRx()
             .subscribe(onNext: { following in
-                self.viewModel.followingObservable.onNext(following.friends.count)
+                self.viewModel.following.accept(following.friends.count)
             }).disposed(by: self.disposeBag)
         
         viewModel.totalFollower
             .map { "\($0)"}
-            .observe(on: MainScheduler.instance)
-            .bind(to:self.follower.rx.text)
+            .asDriver(onErrorJustReturn: "0")
+            .drive(self.follower.rx.text)
             .disposed(by: self.disposeBag)
 
         viewModel.totalFollowing
