@@ -59,16 +59,15 @@ class SearchUserDetailViewController: UIViewController {
         SearchUserDetailViewModel.shared.loadSearchGear(id: userId)
 
         SearchUserDetailViewModel.shared.searchGearObservable
+            .map{ $0.map { ViewGear($0) } }
             .bind(to: friendCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 UserViewModel.shared.loadGearImagesRx(id:element.id)
                     .subscribe(onNext: { image in
                         cell.collectionViewCellImage.image = image
                     })
-                if let name = element.name ,
-                   let gearTypeName = element.gearTypeName,
-                   let buyDt = element.buyDt {
-                    cell.updateUI(name: name, type: gearTypeName, date: buyDt)
-                }
+                
+                    cell.onData.onNext(element)
+                
     
             }.disposed(by: disposeBag)
         

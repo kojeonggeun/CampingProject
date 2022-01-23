@@ -16,6 +16,7 @@ class MyGearViewController: UIViewController{
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
     let apiManager: APIManager = APIManager.shared
+    let myGearVM: MyGearViewModel = MyGearViewModel.shared
     var disposeBag:DisposeBag = DisposeBag()
     
 
@@ -31,7 +32,6 @@ class MyGearViewController: UIViewController{
 
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
-
 
   // MARK: LifeCycles
     override func viewDidLoad() {
@@ -55,21 +55,16 @@ class MyGearViewController: UIViewController{
 
     }
 
-    
     func loadData(){
-        MyGearViewModel.shared.loadGears()
-        MyGearViewModel.shared.gearObservable
-            .bind(to: myGearCollectionVIew.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-                UserViewModel.shared.loadGearImagesRx(id:element.id)
-                    .subscribe(onNext: { image in
-                        cell.collectionViewCellImage.image = image
-                    }).disposed(by: self.disposeBag)
-                cell.updateUI(name: element.name!, type: element.gearTypeName ?? "awd", date: element.buyDt!)
-            }.disposed(by: disposeBag)
+        myGearVM.loadGears()
         
-      
-
-        MyGearViewModel.shared.gearTypeeObservable
+        myGearVM.gearObservable
+            .map{ $0.map { ViewGear($0) } }
+            .bind(to: myGearCollectionVIew.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+                cell.onData.onNext(element)
+            }.disposed(by: disposeBag)
+    
+        myGearVM.gearTypeeObservable
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: "category", cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
                 cell.categoryButton.rx.tap.asDriver()
                     .drive(onNext: { [weak self] in
@@ -80,14 +75,13 @@ class MyGearViewController: UIViewController{
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
         
-        myGearCollectionVIew.rx.itemSelected
-            .subscribe(onNext:  { indexPath in
+        myGearCollectionVIew.rx.modelSelected(ViewGear.self)
+            .subscribe(onNext: { cell in
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
-                pushVC.gearRow = indexPath.row
+                pushVC.gearId = cell.id
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
         
-            
 //        MyGearViewModel.shared.makeMove.onNext(0)
 //        MyGearViewModel.shared.showDetailPage
 //            .subscribe(onNext:{
@@ -130,7 +124,7 @@ extension MyGearViewController: UICollectionViewDelegate{
         //      카테고리 적용 시 필요
                 let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
                 collectionIndexPath = indexPath
-                print(first)
+                
     }
 }
 

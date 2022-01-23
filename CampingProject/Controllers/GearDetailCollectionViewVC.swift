@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class DetailCollectionViewViewController: UIViewController{
+class GearDetailCollectionViewVC: UIViewController{
     
     @IBOutlet weak var detailCollectionView: UICollectionView!
     
@@ -27,31 +27,31 @@ class DetailCollectionViewViewController: UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pageControl.currentPage = 0
+        pageControl.pageIndicatorTintColor = UIColor.gray
+        pageControl.currentPageIndicatorTintColor = UIColor.red
+        
+        
         setupBinding()
     }
     
     func setupBinding(){
-        pageControl.currentPage = 0
-        pageControl.pageIndicatorTintColor = UIColor.gray
-        pageControl.currentPageIndicatorTintColor = UIColor.red
-            
-        
-        UserViewModel.shared.loadGearDetailImagesRx(id:self.userGearVM.userGears[16].id)
-            .subscribe(onNext: { image in
-                self.pageControl.numberOfPages = image.count
-                self.pageControl.reloadInputViews()
-                MyGearViewModel.shared.loadimage(image: image)
-            }).disposed(by: disposeBag)
-        
+
        MyGearViewModel.shared.gearImageObservable
+            .do{
+                self.pageControl.numberOfPages = $0.count
+                self.pageControl.reloadInputViews()
+            }
            .bind(to: detailCollectionView.rx.items(cellIdentifier: "GearDetailViewCell",cellType: GearDetailCollectionViewCell.self)) { (row, element, cell) in
+               
                cell.updateUI(item: element)
-           }
+           }.disposed(by: disposeBag)
     }
 }
 
 
-extension DetailCollectionViewViewController: UICollectionViewDelegate{
+extension GearDetailCollectionViewVC: UICollectionViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let width = scrollView.bounds.size.width // 너비 저장
               let x = scrollView.contentOffset.x + (width / 2.0) // 현재 스크롤한 x좌표 저장
@@ -63,7 +63,7 @@ extension DetailCollectionViewViewController: UICollectionViewDelegate{
     }
 }
 
-extension DetailCollectionViewViewController: UICollectionViewDelegateFlowLayout{
+extension GearDetailCollectionViewVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)

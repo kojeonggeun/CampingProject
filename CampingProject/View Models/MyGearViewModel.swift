@@ -35,7 +35,6 @@ class MyGearViewModel {
         return gearTypes.asObservable()
     }
     
-    
     init() {
         let detailPageMoving = PublishSubject<Int>()
         

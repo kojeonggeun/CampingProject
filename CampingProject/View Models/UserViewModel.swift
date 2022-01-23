@@ -62,6 +62,22 @@ class UserViewModel {
         }
     }
     
+    func loadDetailUserGearRx(userId: Int, gearId: Int) -> Observable<GearDetail>{
+        return Observable.create() { emitter in
+            self.api.loadDetailUserGear(userId: userId, gearId: gearId) { result in
+                switch result {
+                case let .success(data):
+                    emitter.onNext(data)
+                    emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    
     func loadFollowerRx() -> Observable<Friends>{
         return Observable.create() { emitter in
             self.api.loadFollower() { result in

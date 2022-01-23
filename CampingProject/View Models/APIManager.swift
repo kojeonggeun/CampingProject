@@ -142,7 +142,6 @@ class APIManager{
             }
     }
 
-    
 //  유저 장비 로드
     func loadUserGear(completion: @escaping (Result<[CellData], AFError>) -> Void){
         AF.request(urlUser + "gear", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
@@ -162,7 +161,19 @@ class APIManager{
             }
         }
     }
-    
+    func loadDetailUserGear(userId: Int, gearId: Int ,completion: @escaping (Result<GearDetail, AFError>) -> Void){
+        AF.request(url + "user/\(userId)/gear/\(gearId)", method: .get ,encoding:URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
+            .responseDecodable(of:GearDetail.self)  { (response) in
+            switch response.result {
+            case .success(_):
+                completion(response.result)
+                
+            case .failure(let error):
+                print("🚫loadDetailUserGear  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                
+            }
+        }
+    }
     
     
 //    유저 장비 이미지 로드
@@ -177,7 +188,6 @@ class APIManager{
                         AF.request(image.url).responseImage { response in
                             switch response.result{
                             case .success(let image):
-                                
                                 completion(image)
                             case .failure(let err):
                                 print(err)
@@ -372,6 +382,7 @@ class APIManager{
             }
     }
 //    유저 정보 로드
+//    TODO: Obserble 만들어야함
     func loadUserInfo(completion: @escaping (Result<UserInfo, AFError>)-> Void) {
         
         let headers: HTTPHeaders = ["Authorization" : returnToken()]

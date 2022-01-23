@@ -14,6 +14,7 @@ class GearDetailCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        gearDetailImage.layer.cornerRadius = 10
     }
     
     func updateUI(item: UIImage) {

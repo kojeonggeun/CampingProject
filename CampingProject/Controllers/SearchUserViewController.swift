@@ -33,7 +33,6 @@ class SearchUserViewController: UIViewController {
         let email = apiManager.userInfo?.user?.email
         self.navigationController?.navigationBar.topItem?.title = email
         
-
         searchTableView.keyboardDismissMode = .onDrag
         
         searchTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
@@ -65,9 +64,7 @@ extension SearchUserViewController: UITableViewDataSource{
             cell.updateLabel(text: searchInputText)
             return cell
         }
-        
         return self.searchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
-        
     }
 }
 
@@ -81,8 +78,6 @@ extension SearchUserViewController: UITableViewDelegate{
             pushVC.userId = id
             
             self.navigationController?.pushViewController(pushVC, animated: true)
-            
-                
         }
     }
     

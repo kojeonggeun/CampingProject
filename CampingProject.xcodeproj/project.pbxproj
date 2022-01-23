@@ -13,7 +13,8 @@
 		CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */; };
 		CB491B9726FC31ED00D2481F /* GearTextListCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */; };
 		CB491B9926FC3A8100D2481F /* GearTextListCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB491B9826FC3A8100D2481F /* GearTextListCustomView.xib */; };
-		CB4F6775279BD9CC0098C79D /* DetailCollectionViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4F6774279BD9CC0098C79D /* DetailCollectionViewViewController.swift */; };
+		CB4F6775279BD9CC0098C79D /* GearDetailCollectionViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4F6774279BD9CC0098C79D /* GearDetailCollectionViewVC.swift */; };
+		CB4F6777279D4B0E0098C79D /* ViewGear.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4F6776279D4B0E0098C79D /* ViewGear.swift */; };
 		CB534DF726C2664A0022EA20 /* MyGearCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB534DF626C2664A0022EA20 /* MyGearCollectionViewCell.swift */; };
 		CB58A79826E5F136006C80EA /* GearDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58A79726E5F136006C80EA /* GearDetailViewController.swift */; };
 		CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6037BA26B2728E0023042F /* AppDelegate.swift */; };
@@ -75,7 +76,8 @@
 		CB3C9F1826D79F5B00404D05 /* MyGearModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearModel.swift; sourceTree = "<group>"; };
 		CB491B9626FC31ED00D2481F /* GearTextListCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTextListCustomView.swift; sourceTree = "<group>"; };
 		CB491B9826FC3A8100D2481F /* GearTextListCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GearTextListCustomView.xib; sourceTree = "<group>"; };
-		CB4F6774279BD9CC0098C79D /* DetailCollectionViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewViewController.swift; sourceTree = "<group>"; };
+		CB4F6774279BD9CC0098C79D /* GearDetailCollectionViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearDetailCollectionViewVC.swift; sourceTree = "<group>"; };
+		CB4F6776279D4B0E0098C79D /* ViewGear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGear.swift; sourceTree = "<group>"; };
 		CB534DF626C2664A0022EA20 /* MyGearCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearCollectionViewCell.swift; sourceTree = "<group>"; };
 		CB58A79726E5F136006C80EA /* GearDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearDetailViewController.swift; sourceTree = "<group>"; };
 		CB6037B726B2728E0023042F /* CampingProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampingProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +170,7 @@
 				CBF371FF270C6FCF0028533C /* UserModel.swift */,
 				CB90E3FE271860E900CD2B1C /* SearchUserModel.swift */,
 				CBDC47A02734187700537E5A /* FriendModel.swift */,
+				CB4F6776279D4B0E0098C79D /* ViewGear.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */,
 				CBA2327226BE763200946DA0 /* MyGearViewController.swift */,
 				CB58A79726E5F136006C80EA /* GearDetailViewController.swift */,
+				CB4F6774279BD9CC0098C79D /* GearDetailCollectionViewVC.swift */,
 				CBAB103226C5510A0058F440 /* GearAddViewController.swift */,
 				CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */,
 				CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */,
@@ -237,7 +241,6 @@
 				CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */,
 				CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */,
 				CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */,
-				CB4F6774279BD9CC0098C79D /* DetailCollectionViewViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -439,10 +442,11 @@
 				CBF791F62737B0300089EE48 /* FollowingViewController.swift in Sources */,
 				CBAA3AD02787EC0300E75B51 /* ProfileNC.swift in Sources */,
 				CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */,
-				CB4F6775279BD9CC0098C79D /* DetailCollectionViewViewController.swift in Sources */,
+				CB4F6775279BD9CC0098C79D /* GearDetailCollectionViewVC.swift in Sources */,
 				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,
 				CBAA3ACE2787DFB100E75B51 /* SearchUserNC.swift in Sources */,
 				CBAA3AD22787EC0D00E75B51 /* MyGearNC.swift in Sources */,
+				CB4F6777279D4B0E0098C79D /* ViewGear.swift in Sources */,
 				CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */,
 				CBDC479927302B9100537E5A /* LoadingCell.swift in Sources */,
 				CBAB103626C552460058F440 /* GearTypeViewModel.swift in Sources */,
