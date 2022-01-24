@@ -16,7 +16,7 @@ class MyGearCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var collectionViewCellText: UILabel!
     @IBOutlet weak var collectionViewCellDate: UILabel!
     
-    static let identifier = "myGearViewCell"
+    static let identifier = "MyGearCollectionViewCell"
 
     private let cellDisposeBag = DisposeBag()
     

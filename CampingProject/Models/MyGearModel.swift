@@ -34,6 +34,8 @@ struct CellData: Decodable {
     var imageUrl: String?
 }
 
+
+
 struct GearDetail: Decodable {
     var id: Int
     var name: String?

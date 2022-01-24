@@ -21,9 +21,9 @@ class MyGearViewModel {
     private let gears = BehaviorRelay<[CellData]>(value: [])
     private let gearImage = BehaviorRelay<[UIImage]>(value: [])
     private let gearTypes = BehaviorRelay<[GearType]>(value: [])
+    private let gearDetail = PublishSubject<Void>()
     
-    var makeMove: AnyObserver<Int>
-    let showDetailPage: Observable<[CellData]>
+    let gearDetailObserver: AnyObserver<Void>
     
     var gearObservable: Observable<[CellData]> {
         return gears.asObservable()
@@ -31,22 +31,18 @@ class MyGearViewModel {
     var gearImageObservable: Observable<[UIImage]> {
         return gearImage.asObservable()
     }
-    var gearTypeeObservable: Observable<[GearType]> {
+    var gearTypeObservable: Observable<[GearType]> {
         return gearTypes.asObservable()
     }
     
+        
     init() {
-        let detailPageMoving = PublishSubject<Int>()
         
-        makeMove = detailPageMoving.asObserver()
+        gearDetailObserver = gearDetail.asObserver()
+       
+        gearDetail
+            .flatMap(userVM.loadDetailUserGearRx2)
         
-        showDetailPage = detailPageMoving.withLatestFrom(gears)
-            .map {
-                $0.filter { $0.gearTypeName == "타프"}
-            }
-            .do(onNext: {
-                print($0,"Awdawd")
-            })
         loadGearType()
     }
     
@@ -67,6 +63,13 @@ class MyGearViewModel {
                 self.gearTypes.accept(self.apiManager.gearTypes)
             }
         })
+    }
+    
+    func asd(){
+        
+        let userId = apiManager.userInfo?.user?.id
+        
+      
     }
 }
 

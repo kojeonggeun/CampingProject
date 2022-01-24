@@ -13,9 +13,10 @@ import RxCocoa
 import simd
 
 class GearDetailViewController: UIViewController {
-    @IBOutlet weak var detailTableVC: UIView!
-    @IBOutlet weak var detailCollectionVC: UIView!
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var gearDetailCollectionView: UICollectionView!
     
+    static let identifier: String = "GearDetailViewController"
     var imageArray: [ImageData] = []
     var gearId: Int = -1
     let apiManager = APIManager.shared
@@ -27,10 +28,19 @@ class GearDetailViewController: UIViewController {
     
     let disposeBag:DisposeBag = DisposeBag()
     
+    @IBAction func pageChanged(_ sender: UIPageControl) {
+        let indexPath = IndexPath(item: sender.currentPage, section: 0)
+        gearDetailCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+    }
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "장비 상세"
+        pageControl.currentPage = 0
+        pageControl.pageIndicatorTintColor = UIColor.gray
+        pageControl.currentPageIndicatorTintColor = UIColor.red
+              
+        
         requestData()
     }
     
@@ -64,12 +74,30 @@ class GearDetailViewController: UIViewController {
         let userId = apiManager.userInfo?.user?.id
         
         userVM.loadDetailUserGearRx(userId: userId!, gearId: gearId)
-            .subscribe(onNext: { data in
-                    print(data)
-            })
-        
+            .do{
+                self.pageControl.numberOfPages = $0.images.count
+                self.pageControl.reloadInputViews()
+            }
+                
     }
 
 
+}
+extension GearDetailViewController: UICollectionViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = scrollView.bounds.size.width // 너비 저장
+              let x = scrollView.contentOffset.x + (width / 2.0) // 현재 스크롤한 x좌표 저장
+              
+              let newPage = Int(x / width)
+              if pageControl.currentPage != newPage {
+                  pageControl.currentPage = newPage
+              }
+    }
+}
 
+extension GearDetailViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    }
 }

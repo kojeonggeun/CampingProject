@@ -7,7 +7,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 class MyGearViewController: UIViewController{
-    @IBOutlet weak var myGearCollectionVIew: UICollectionView!
+    @IBOutlet weak var myGearCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
         
     var segueText: String = ""
@@ -39,7 +39,7 @@ class MyGearViewController: UIViewController{
         
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
-        myGearCollectionVIew.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
+        myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
         
         self.loadData()
         
@@ -60,24 +60,24 @@ class MyGearViewController: UIViewController{
         
         myGearVM.gearObservable
             .map{ $0.map { ViewGear($0) } }
-            .bind(to: myGearCollectionVIew.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+            .bind(to: myGearCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 cell.onData.onNext(element)
             }.disposed(by: disposeBag)
     
-        myGearVM.gearTypeeObservable
-            .bind(to: categoryCollectionView.rx.items(cellIdentifier: "category", cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
+        myGearVM.gearTypeObservable
+            .bind(to: categoryCollectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
                 cell.categoryButton.rx.tap.asDriver()
                     .drive(onNext: { [weak self] in
-                        let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: "CategoryCollectionView") as! CategoryCollectionViewController
+                        let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: CategoryCollectionViewController.identifier) as! CategoryCollectionViewController
                             pushVC.gearTypeNum = row
                         self?.navigationController?.pushViewController(pushVC, animated: true)
                     }).disposed(by: cell.disposeBag)
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
         
-        myGearCollectionVIew.rx.modelSelected(ViewGear.self)
+        myGearCollectionView.rx.modelSelected(ViewGear.self)
             .subscribe(onNext: { cell in
-                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
                 pushVC.gearId = cell.id
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
@@ -102,15 +102,15 @@ class MyGearViewController: UIViewController{
         }
 
         if noti.userInfo?["delete"] as? Bool ?? false {
-            self.myGearCollectionVIew.performBatchUpdates({
-                self.myGearCollectionVIew.deleteItems(at:[CategoryIndexPath])
+            self.myGearCollectionView.performBatchUpdates({
+                self.myGearCollectionView.deleteItems(at:[CategoryIndexPath])
             }, completion: { (done) in
                  //perform table refresh
             })
         }
         
         if noti.userInfo?["edit"] as? Bool ?? false {
-            self.myGearCollectionVIew.reloadData()
+            self.myGearCollectionView.reloadData()
         }
     }
   
@@ -130,7 +130,7 @@ extension MyGearViewController: UICollectionViewDelegate{
 
 extension MyGearViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == myGearCollectionVIew {
+        if collectionView == myGearCollectionView {
             let margin: CGFloat = 10
             let itemSpacing: CGFloat = 10
             

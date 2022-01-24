@@ -11,10 +11,11 @@ import RxSwift
 
 class CategoryCollectionViewCell: UICollectionViewCell {
     
-    var disposeBag = DisposeBag()
-    
     @IBOutlet weak var categoryButton: UIButton!
-  
+    
+    var disposeBag = DisposeBag()
+    static let identifier:String  = "CategoryCollectionViewCell"
+    
     override func prepareForReuse() {
       super.prepareForReuse()
           

@@ -42,7 +42,7 @@
                                     <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="category" id="Gsm-Uq-uxo" customClass="CategoryCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCollectionViewCell" id="Gsm-Uq-uxo" customClass="CategoryCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
                                         <rect key="frame" x="5" y="17" width="93" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Sc0-fH-bf9">
@@ -120,7 +120,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="categoryCollectionView" destination="qjG-ab-eWF" id="wlk-E8-4Kr"/>
-                        <outlet property="myGearCollectionVIew" destination="FUX-fO-Ou0" id="f8J-Zs-jxU"/>
+                        <outlet property="myGearCollectionView" destination="FUX-fO-Ou0" id="f8J-Zs-jxU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YNW-e4-w9l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -231,19 +231,14 @@
         <!--Title-->
         <scene sceneID="lHF-IB-Ejr">
             <objects>
-                <viewController storyboardIdentifier="GearDetailView" modalPresentationStyle="fullScreen" id="M0N-Qk-oPP" customClass="GearDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GearDetailViewController" modalPresentationStyle="fullScreen" id="M0N-Qk-oPP" customClass="GearDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b05-H2-oCJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7h-EJ-GpE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="300"/>
-                                <connections>
-                                    <segue destination="Y8X-Gv-Fi2" kind="embed" id="1dT-xl-XIp"/>
-                                </connections>
-                            </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myI-fq-04T">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="myI-fq-04T">
                                 <rect key="frame" x="0.0" y="344" width="414" height="423.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="아이보리 &amp; 블랙" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNs-00-rbx">
                                         <rect key="frame" x="86" y="103.5" width="109" height="21"/>
@@ -305,11 +300,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Egg-Ok-4K7">
-                                <rect key="frame" x="7" y="793" width="400" height="37"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Egg-Ok-4K7">
+                                <rect key="frame" x="7" y="793" width="185" height="34.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P84-vl-bZL">
-                                        <rect key="frame" x="0.0" y="0.0" width="195" height="37"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="87.5" height="34.5"/>
                                         <color key="tintColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="장비 수정"/>
                                         <buttonConfiguration key="configuration" style="filled" title="장비 수정" cornerStyle="large"/>
@@ -318,7 +313,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zik-Tb-gaV">
-                                        <rect key="frame" x="205" y="0.0" width="195" height="37"/>
+                                        <rect key="frame" x="97.5" y="0.0" width="87.5" height="34.5"/>
                                         <color key="tintColor" systemColor="systemRedColor"/>
                                         <state key="normal" title="장비 삭제"/>
                                         <buttonConfiguration key="configuration" style="filled" title="장비 삭제" cornerStyle="large"/>
@@ -327,31 +322,57 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="QfI-c6-IG2"/>
-                                    <constraint firstAttribute="height" constant="37" id="uaQ-ZE-zb9"/>
-                                </constraints>
                             </stackView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="z25-C0-ON3">
+                                <rect key="frame" x="107" y="259" width="200" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="pageChanged:" destination="M0N-Qk-oPP" eventType="valueChanged" id="AL0-8E-QLw"/>
+                                    <action selector="pageChanged:" destination="Y8X-Gv-Fi2" eventType="valueChanged" id="C7a-uh-mPw"/>
+                                </connections>
+                            </pageControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zfg-vY-fLI">
+                                <rect key="frame" x="0.0" y="32" width="414" height="252"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6Vy-46-xoa">
+                                    <size key="itemSize" width="411" height="230"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="PFf-R2-EsG" customClass="GearDetailImageCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="11" width="411" height="230"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Olz-KD-m4c">
+                                            <rect key="frame" x="0.0" y="0.0" width="411" height="230"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f6z-ZZ-3B4">
+                                                    <rect key="frame" x="10" y="10" width="391" height="210"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="411" height="230"/>
+                                        <connections>
+                                            <outlet property="gearDetailImage" destination="f6z-ZZ-3B4" id="dPr-on-j7a"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="delegate" destination="M0N-Qk-oPP" id="ARQ-S9-dxw"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7Dg-9o-lXq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="myI-fq-04T" firstAttribute="top" secondItem="a7h-EJ-GpE" secondAttribute="bottom" id="6Hs-Aa-byk"/>
-                            <constraint firstItem="a7h-EJ-GpE" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" id="9cR-2U-Yw9"/>
-                            <constraint firstItem="myI-fq-04T" firstAttribute="top" secondItem="b05-H2-oCJ" secondAttribute="top" constant="344" id="JR2-Dq-T44"/>
-                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="trailing" secondItem="myI-fq-04T" secondAttribute="trailing" id="Jdk-36-Zp5"/>
-                            <constraint firstItem="myI-fq-04T" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" id="ceE-FA-5e8"/>
-                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="trailing" secondItem="Egg-Ok-4K7" secondAttribute="trailing" constant="7" id="dg1-Np-0Ie"/>
-                            <constraint firstItem="Egg-Ok-4K7" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" constant="7" id="fTw-lT-W8s"/>
-                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="bottom" secondItem="Egg-Ok-4K7" secondAttribute="bottom" constant="32" id="iYw-rz-hYh"/>
-                            <constraint firstItem="a7h-EJ-GpE" firstAttribute="top" secondItem="7Dg-9o-lXq" secondAttribute="top" id="t0J-Ux-uRp"/>
-                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="trailing" secondItem="a7h-EJ-GpE" secondAttribute="trailing" id="tri-0n-iBw"/>
-                            <constraint firstItem="Egg-Ok-4K7" firstAttribute="top" secondItem="myI-fq-04T" secondAttribute="bottom" constant="25.5" id="wKx-7l-dHN"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="DX2-uq-6tE"/>
                     <connections>
-                        <outlet property="detailCollectionVC" destination="a7h-EJ-GpE" id="IFB-h5-wCi"/>
+                        <outlet property="gearDetailCollectionView" destination="zfg-vY-fLI" id="nK5-vy-8fK"/>
+                        <outlet property="pageControl" destination="z25-C0-ON3" id="Jcn-kI-v2m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idW-r6-Vl7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -361,7 +382,7 @@
         <!--Category Collection View Controller-->
         <scene sceneID="w2L-hs-ruO">
             <objects>
-                <viewController storyboardIdentifier="CategoryCollectionView" id="GS8-kM-hzc" customClass="CategoryCollectionViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryCollectionViewController" id="GS8-kM-hzc" customClass="CategoryCollectionViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hn2-3o-S5Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -494,11 +515,11 @@
             <objects>
                 <viewController storyboardIdentifier="DetailCollectionViewViewController" id="Y8X-Gv-Fi2" customClass="GearDetailCollectionViewVC" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WSV-vX-wQP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7wF-r4-JZc">
-                                <rect key="frame" x="0.0" y="2" width="414" height="252"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7wF-r4-JZc" customClass="GearDetailImageCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="2" width="414" height="814"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="z5r-lT-qgk">
                                     <size key="itemSize" width="411" height="230"/>
@@ -507,8 +528,8 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearDetailViewCell" id="AJ2-qg-eoM" customClass="GearDetailCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="11" width="411" height="230"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GearImageCollectionViewCell" id="AJ2-qg-eoM" customClass="GearImageCollectionViewCell" customModule="CampingProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="411" height="230"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zbm-sy-Z61">
                                             <rect key="frame" x="0.0" y="0.0" width="411" height="230"/>
@@ -543,6 +564,7 @@
                                 </connections>
                             </pageControl>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="3oJ-k1-5bp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7wF-r4-JZc" firstAttribute="top" secondItem="WSV-vX-wQP" secondAttribute="top" constant="2" id="HFd-zx-xHk"/>
@@ -558,7 +580,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NNu-ne-25d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1779.7101449275365" y="184.15178571428569"/>
+            <point key="canvasLocation" x="1749" y="373"/>
         </scene>
     </scenes>
     <resources>

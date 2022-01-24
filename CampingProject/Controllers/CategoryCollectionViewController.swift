@@ -15,6 +15,7 @@ class CategoryCollectionViewController: UIViewController {
       
     @IBOutlet var categoryCollectionView: UICollectionView!
     
+    static let identifier:String  = "CategoryCollectionViewController"
     let gearTypeVM = GearTypeViewModel()
     let userGearVM = UserGearViewModel.shared
     
@@ -33,7 +34,7 @@ class CategoryCollectionViewController: UIViewController {
         gearType = gearTypeVM.gearTypes[gearTypeNum].gearName
         self.title = gearType
         userGearVM.categoryUserData(type: gearType)
-        categoryCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
+        categoryCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: MyGearCollectionViewCell.identifier)
   
         categoryCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag
@@ -66,23 +67,13 @@ class CategoryCollectionViewController: UIViewController {
                 $0.filter { $0.gearTypeName == self.gearType}
             }
             .map{ $0.map { ViewGear($0) } }
-            .bind(to: categoryCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-                UserViewModel.shared.loadGearImagesRx(id:element.id)
-                    .subscribe(onNext: { image in
-                        cell.collectionViewCellImage.image = image
-                    }).disposed(by: self.disposeBag)
+            .bind(to: categoryCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 cell.onData.onNext(element)
             }.disposed(by: disposeBag)
         
-        categoryCollectionView.rx.modelSelected(CellData.self)
-            .subscribe(onNext: { cell in
-                print(cell.id)
-            }).disposed(by: disposeBag)
-        
-        
         categoryCollectionView.rx.modelSelected(ViewGear.self)
             .subscribe(onNext: { cell in
-                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearDetailView") as! GearDetailViewController
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
                 pushVC.gearId = cell.id
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })

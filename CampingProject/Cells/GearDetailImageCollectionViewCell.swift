@@ -7,18 +7,21 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
-class GearDetailCollectionViewCell: UICollectionViewCell {
+class GearDetailImageCollectionViewCell: UICollectionView {
     
     @IBOutlet weak var gearDetailImage: UIImageView!
+    
+    static let identifier:String = "GearDetailImageCollectionViewCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()
         gearDetailImage.layer.cornerRadius = 10
     }
     
+    
     func updateUI(item: UIImage) {
         
-        self.gearDetailImage.image = item
     }
 }
