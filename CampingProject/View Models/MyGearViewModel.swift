@@ -21,9 +21,6 @@ class MyGearViewModel {
     private let gears = BehaviorRelay<[CellData]>(value: [])
     private let gearImage = BehaviorRelay<[UIImage]>(value: [])
     private let gearTypes = BehaviorRelay<[GearType]>(value: [])
-    private let gearDetail = PublishSubject<Void>()
-    
-    let gearDetailObserver: AnyObserver<Void>
     
     var gearObservable: Observable<[CellData]> {
         return gears.asObservable()
@@ -37,12 +34,7 @@ class MyGearViewModel {
     
         
     init() {
-        
-        gearDetailObserver = gearDetail.asObserver()
-       
-        gearDetail
-            .flatMap(userVM.loadDetailUserGearRx2)
-        
+    
         loadGearType()
     }
     
@@ -64,12 +56,6 @@ class MyGearViewModel {
             }
         })
     }
-    
-    func asd(){
-        
-        let userId = apiManager.userInfo?.user?.id
-        
-      
-    }
+
 }
 

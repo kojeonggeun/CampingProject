@@ -12,20 +12,12 @@ import RxSwift
 
 import AlamofireImage
 
-protocol GearFetchable {
-    func loadDetailUserGearRx2() -> Observable<GearDetail>
-}
 
 class UserViewModel {
 
     static let shared = UserViewModel()
     let api = APIManager.shared
-    func loadDetailUserGearRx2() -> Observable<GearDetail> {
-        
-        return loadDetailUserGearRx(userId: 16, gearId: 35)
-          
-        
-    }
+ 
     func loadUserInfoRx() -> Observable<UserInfo>{
         return Observable.create() { emitter in
             self.api.loadUserInfo() { result in

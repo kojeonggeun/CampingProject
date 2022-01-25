@@ -47,6 +47,7 @@ class MyGearCollectionViewCell: UICollectionViewCell {
                             print(err)
                         }
                     }
+                    
                 } else {
                     self!.collectionViewCellImage.image = UIImage(systemName: gear.imageUrl)
                 }

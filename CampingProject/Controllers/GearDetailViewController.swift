@@ -74,11 +74,18 @@ class GearDetailViewController: UIViewController {
         let userId = apiManager.userInfo?.user?.id
         
         userVM.loadDetailUserGearRx(userId: userId!, gearId: gearId)
+            .map {
+                $0.images
+            }
             .do{
-                self.pageControl.numberOfPages = $0.images.count
+                self.pageControl.numberOfPages = $0.count
                 self.pageControl.reloadInputViews()
             }
-                
+            
+            .bind(to:gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (row, element, cell) in
+                cell.onData.onNext(element)
+            
+            }.disposed(by: disposeBag)
     }
 
 

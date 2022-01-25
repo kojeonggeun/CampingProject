@@ -28,8 +28,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         categoryButton.tintColor = .white
         categoryButton.titleLabel?.font = UIFont.systemFont(ofSize:15, weight: .bold)
         categoryButton.layer.cornerRadius = 5
-        
-
     }
        
     func updateUI(title: String){

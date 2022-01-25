@@ -166,6 +166,7 @@ class APIManager{
             .responseDecodable(of:GearDetail.self)  { (response) in
             switch response.result {
             case .success(_):
+                
                 completion(response.result)
                 
             case .failure(let error):
