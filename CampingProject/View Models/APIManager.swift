@@ -341,13 +341,15 @@ class APIManager{
     }
     
 // 이메일 중복검사
-    func emailDuplicateCheck(email: String, completion: @escaping (Int) -> Void) {
+
+    
+    func emailDuplicateCheck(email: String, completion: @escaping (Bool) -> Void) {
         let parameters: [String: Any] = ["email": email]
         
         AF.request(url+"user/existEmail/" , method: .get, parameters: parameters).responseJSON { (response) in
             switch response.result {
             case .success(let data):
-                guard let result = data as? Int else { return }
+                guard let result = data as? Bool else { return }
                 completion(result)
                
             case .failure(let error):
@@ -455,12 +457,7 @@ class APIManager{
     func saveUserProfile(name: String, phone: String ,aboutMe: String, public: Bool, completion: @escaping (Bool) -> Void) {
         let parameters :Parameters = ["name": name, "aboutMe": aboutMe]
      
-        let headers: HTTPHeaders = [
-                    "Content-type": "application/x-www-form-urlencoded",
-                    "Authorization" : returnToken()
-                ]
-        
-        AF.request(urlUser ,method: .put,parameters: parameters,encoding:URLEncoding.default, headers: headers).responseJSON { response in
+        AF.request(urlUser ,method: .put,parameters: parameters,encoding:URLEncoding.default, headers: headerInfo()).responseJSON { response in
             switch response.result {
             case .success(_):
                 completion(true)
@@ -472,12 +469,9 @@ class APIManager{
     }
  
     func loadFollower(completion: @escaping (Result<Friends, AFError>) -> Void){
-        let headers: HTTPHeaders = [
-                    "Content-type": "application/x-www-form-urlencoded",
-                    "Authorization" : returnToken()
-                ]
+ 
         
-        AF.request(urlUser + "friend/follower" ,method: .get , encoding:URLEncoding.default, headers: headers).responseDecodable(of: Friends.self) { response in
+        AF.request(urlUser + "friend/follower" ,method: .get , encoding:URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success(_):
                 self.followers.removeAll()
@@ -494,12 +488,9 @@ class APIManager{
     }
     
     func loadFollowing(completion:  @escaping (Result<Friends, AFError>) -> Void){
-        let headers: HTTPHeaders = [
-                    "Content-type": "application/x-www-form-urlencoded",
-                    "Authorization" : returnToken()
-                ]
+  
         
-        AF.request(urlUser + "friend/following" ,method: .get , encoding:URLEncoding.default, headers: headers).responseDecodable(of: Friends.self) { response in
+        AF.request(urlUser + "friend/following" ,method: .get , encoding:URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success(_):
                 self.followings.removeAll()
@@ -517,17 +508,29 @@ class APIManager{
     }
     
     func deleteFollower(id: Int, completion: @escaping ((Bool) -> Void)){
-        let headers: HTTPHeaders = [
-                    "Content-type": "application/x-www-form-urlencoded",
-                    "Authorization" : returnToken()
-                ]
-        AF.request(urlUser + "friend/\(id)" ,method: .delete , encoding:URLEncoding.default, headers: headers).response { response in
+        
+        AF.request(urlUser + "friend/\(id)" ,method: .delete , encoding:URLEncoding.default, headers: headerInfo()).response { response in
             switch response.result {
             case .success(_):
                 completion(true)
             case .failure(let error):
                 print("🚫 deleteFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                 completion(false)
+            }
+        }
+    }
+    
+    func requestEmailCertificationCode(email: String, completion: @escaping (Bool)->Void){
+        let parameter:Parameters = ["email": email]
+        
+        AF.request(url + "email/send-certification-code/" ,method: .post ,parameters: parameter, encoding:URLEncoding.default,headers: headerInfo()).response { response in
+            switch response.result {
+            case .success(_):
+                completion(true)
+            case .failure(let error):
+                print("🚫 deleteFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                completion(false)
+                
             }
         }
     }
@@ -551,5 +554,17 @@ class APIManager{
         
         return token
     }
+    func isValidEmail(email: String) -> Bool{
+        let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return predicate.evaluate(with: email)
+    }
+    
+    func isValidPassword(password: String) -> Bool {
+        // 8~20자리 영어+숫자+특수문자 사용
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,20}"
 
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return predicate.evaluate(with: password)
+    }
 }

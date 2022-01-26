@@ -150,18 +150,14 @@ class UserViewModel {
         }
     }
     
-    func isValidEmail(email: String) -> Bool{
-        let emailRegEx = "[A-Z0-9a-z.%=-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        return predicate.evaluate(with: email)
-    }
-    
-    func isValidPassword(password: String) -> Bool {
-        // 8~20자리 영어+숫자+특수문자 사용
-        let passwordRegex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,20}"
-
-        let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        return predicate.evaluate(with: password)
+    func emailDuplicateCheckRx(email:String) -> Observable<Bool>{
+        return Observable.create() { emitter in
+            self.api.emailDuplicateCheck(email:email) { result in
+                emitter.onNext(result)
+                emitter.onCompleted()
+            }
+            return Disposables.create()
+        }
     }
 
     func returnToken() -> String{

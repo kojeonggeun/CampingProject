@@ -50,10 +50,6 @@ class GearDetailImageCollectionViewCell: UICollectionViewCell {
                 }
                 
             }).disposed(by: cellDisposeBag)
-            
-              
-                
-        
     }
 
     override func prepareForReuse() {

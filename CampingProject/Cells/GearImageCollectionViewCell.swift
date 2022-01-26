@@ -16,10 +16,8 @@ class GearImageCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         
     }
-    
     
     func updateUI(item: UIImage?) {
         guard let image = item else { return }

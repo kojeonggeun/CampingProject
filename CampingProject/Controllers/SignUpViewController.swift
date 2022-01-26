@@ -6,115 +6,55 @@
 
 import UIKit
 import Alamofire
+import RxSwift
 
-class SignUpViewController: UIViewController,UITextFieldDelegate {
 
+class SignUpViewController: UIViewController {
+
+  
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var passwordConformTextField: UITextField!
     
-    @IBOutlet weak var checkTextField: UILabel!
+    @IBOutlet weak var checkEmail: UILabel!
     
-    
+    @IBOutlet weak var emailNextButton: UIButton!
     @IBAction func backScreen(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     let apiManager = APIManager.shared
     let userVM = UserViewModel.shared
-
+    let disposeBag: DisposeBag = DisposeBag()
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        passwordTextField.isSecureTextEntry = true
-        passwordConformTextField.isSecureTextEntry = true
-        checkTextField.isHidden = true
+        emailTextField.layer.cornerRadius = emailTextField.frame.height / 4
+        self.checkEmail.isHidden = true
+        emailTextField.rx.text.orEmpty
+            .map(apiManager.isValidEmail)
+            .subscribe(onNext: { [weak self]result in
+                self?.emailNextButton.isEnabled = result
+            }).disposed(by: disposeBag)
+        
+    }
 
-        
-    }
-    
+    @IBAction func emailVerification(_ sender: Any) {
+        guard let email = self.emailTextField.text else { return }
+        self.userVM.emailDuplicateCheckRx(email: self.emailTextField.text!)
+            .subscribe(onNext: { result in
+                if result {
+                    self.checkEmail.isHidden = false
+                    
+                } else {
+                    self.checkEmail.isHidden = true
+                    let pushVC = self.storyboard?.instantiateViewController(withIdentifier: EmailCertificationViewController.identifier) as! EmailCertificationViewController
+                    pushVC.email = email
+                    self.navigationController?.pushViewController(pushVC, animated: true)
+                }
+                
+            })
 
-    @IBAction func signUpBtn(_ sender: Any) {
-        guard let email = emailTextField.text  else{ return }
-        guard let password = passwordTextField.text else{ return }
-        guard let passwordConform = passwordConformTextField.text else{ return }
-        
-        signUpAction(email: email, password: password, passwordConform: passwordConform)
-        
     }
-    
-    func signUpAction(email: String, password: String, passwordConform: String){
-    
-        
-        if !userVM.isValidEmail(email: email){
-            checkTextField.isHidden = false
-            checkTextField.text = "이메일 형식이 맞지 않습니다."
-            emailAnimation()
-            return
-            
-        }
-        
-        if !userVM.isValidPassword(password: password){
-            checkTextField.isHidden = false
-            checkTextField.text = "비밀번호는 영어+숫자+특수문자, 8~20자리로 해야합니다."
-            passwordAnimation()
-            return
-        }
-        
-//        let encrypt: String = AES256Util.encrypt(string: password)
-        
-        if password == passwordConform && password != "" {
-            apiManager.Register(email: email, password: password)
-            checkTextField.isHidden = true
-            
-        } else {
-            checkTextField.isHidden = false
-            checkTextField.text = "비밀번호가 서로 다릅니다."
-            passwordAnimation()
-            return
-        }
-        
-//        let alert = UIAlertController(title: nil, message: "회원가입이 완료 되었습니다.!!", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-//        self.present(alert, animated: true)
-        
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
-    func passwordAnimation(){
-            UIView.animate(withDuration: 0.2, animations: {
-            self.passwordTextField.frame.origin.x -= 20
-            self.passwordConformTextField.frame.origin.x -= 20
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.passwordTextField.frame.origin.x += 20
-                    self.passwordConformTextField.frame.origin.x += 20
-                }, completion: { _ in
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.passwordTextField.frame.origin.x -= 20
-                        self.passwordConformTextField.frame.origin.x -= 20
-                    })
-                })
-            })
-    }
-    
-    func emailAnimation(){
-        UIView.animate(withDuration: 0.2, animations: {
-        self.emailTextField.frame.origin.x -= 20
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                self.emailTextField.frame.origin.x += 20
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.emailTextField.frame.origin.x -= 20
-                })
-            })
-        })
-    }
- 
     
     // 키보드 리턴키 눌렀을때 키보드 사라지게
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -122,17 +62,4 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        guard let email = textField.text else { return }
-        
-        apiManager.emailDuplicateCheck(email: email, completion: { data in
-            if data != 0 {
-                self.checkTextField.isHidden = false
-                self.checkTextField.text = "중복 되는 이메일입니다."
-                self.emailAnimation()
-            } else {
-                self.checkTextField.isHidden = true
-            }
-        })
-    }
 }

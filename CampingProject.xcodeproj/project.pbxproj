@@ -45,6 +45,7 @@
 		CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */; };
 		CBB51A022700C74A005F8B00 /* GearImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */; };
 		CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB51A032702F61E005F8B00 /* ProfileViewController.swift */; };
+		CBB7EA9527A12D12002CC1B1 /* EmailCertificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7EA9427A12D12002CC1B1 /* EmailCertificationViewController.swift */; };
 		CBBB2A9D26F238BF006B2E3C /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */; };
 		CBD44FB1276D971500D1B3EA /* SearchUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD44FB0276D971500D1B3EA /* SearchUserDetailViewController.swift */; };
 		CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */; };
@@ -109,6 +110,7 @@
 		CBB519FF2700BBA9005F8B00 /* GearEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearEditViewController.swift; sourceTree = "<group>"; };
 		CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GearImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		CBB51A032702F61E005F8B00 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CBB7EA9427A12D12002CC1B1 /* EmailCertificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCertificationViewController.swift; sourceTree = "<group>"; };
 		CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
 		CBD44FB0276D971500D1B3EA /* SearchUserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDetailViewController.swift; sourceTree = "<group>"; };
 		CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				CB6037D026B289980023042F /* SignUpViewController.swift */,
+				CBB7EA9427A12D12002CC1B1 /* EmailCertificationViewController.swift */,
 				CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */,
 				CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */,
 				CBA2327226BE763200946DA0 /* MyGearViewController.swift */,
@@ -453,6 +456,7 @@
 				CBF791F427366EDC0089EE48 /* FriendViewModel.swift in Sources */,
 				CBBB2A9D26F238BF006B2E3C /* CategoryCollectionViewController.swift in Sources */,
 				CBD5F5D626E9E0B500E09B0D /* UserGearViewModel.swift in Sources */,
+				CBB7EA9527A12D12002CC1B1 /* EmailCertificationViewController.swift in Sources */,
 				CBF37200270C6FCF0028533C /* UserModel.swift in Sources */,
 				CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */,
 				CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */,

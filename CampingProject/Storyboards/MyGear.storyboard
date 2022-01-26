@@ -322,18 +322,9 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="z25-C0-ON3">
-                                <rect key="frame" x="107" y="259" width="200" height="26"/>
-                                <connections>
-                                    <action selector="pageChanged:" destination="M0N-Qk-oPP" eventType="valueChanged" id="AL0-8E-QLw"/>
-                                </connections>
-                            </pageControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zfg-vY-fLI">
                                 <rect key="frame" x="0.0" y="32" width="414" height="252"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="252" id="Hh9-De-eSi"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6Vy-46-xoa">
                                     <size key="itemSize" width="411" height="230"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -364,22 +355,29 @@
                                     <outlet property="delegate" destination="M0N-Qk-oPP" id="ARQ-S9-dxw"/>
                                 </connections>
                             </collectionView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="z25-C0-ON3">
+                                <rect key="frame" x="107" y="257" width="200" height="26"/>
+                                <connections>
+                                    <action selector="pageChanged:" destination="M0N-Qk-oPP" eventType="valueChanged" id="AL0-8E-QLw"/>
+                                </connections>
+                            </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7Dg-9o-lXq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="bottom" secondItem="Egg-Ok-4K7" secondAttribute="bottom" constant="34.5" id="4nR-n4-Y1l"/>
-                            <constraint firstItem="myI-fq-04T" firstAttribute="top" secondItem="z25-C0-ON3" secondAttribute="bottom" constant="59" id="5Au-b8-Dv4"/>
-                            <constraint firstItem="myI-fq-04T" firstAttribute="top" secondItem="zfg-vY-fLI" secondAttribute="bottom" constant="60" id="72X-gF-X8A"/>
-                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="trailing" secondItem="zfg-vY-fLI" secondAttribute="trailing" id="UfY-sy-j4t"/>
-                            <constraint firstItem="Egg-Ok-4K7" firstAttribute="top" secondItem="myI-fq-04T" secondAttribute="bottom" constant="25.5" id="foU-B0-fB9"/>
-                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="top" secondItem="zfg-vY-fLI" secondAttribute="top" constant="12" id="hYK-MU-yho"/>
-                            <constraint firstItem="Egg-Ok-4K7" firstAttribute="top" secondItem="myI-fq-04T" secondAttribute="bottom" constant="25.5" id="hbQ-IA-O24"/>
-                            <constraint firstItem="zfg-vY-fLI" firstAttribute="centerX" secondItem="z25-C0-ON3" secondAttribute="centerX" id="o4C-lc-0PQ"/>
-                            <constraint firstItem="Egg-Ok-4K7" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" constant="7" id="qe4-la-usb"/>
-                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="trailing" secondItem="myI-fq-04T" secondAttribute="trailing" id="sV1-1C-X83"/>
-                            <constraint firstItem="zfg-vY-fLI" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" id="uBC-Df-A5w"/>
-                            <constraint firstItem="myI-fq-04T" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" id="ud9-GH-7W6"/>
+                            <constraint firstItem="myI-fq-04T" firstAttribute="top" secondItem="zfg-vY-fLI" secondAttribute="bottom" constant="60" id="IqQ-tV-dKZ"/>
+                            <constraint firstItem="myI-fq-04T" firstAttribute="leading" secondItem="zfg-vY-fLI" secondAttribute="leading" id="M9M-v3-BRT"/>
+                            <constraint firstItem="Egg-Ok-4K7" firstAttribute="top" secondItem="myI-fq-04T" secondAttribute="bottom" constant="25.5" id="P7f-J5-JPF"/>
+                            <constraint firstItem="myI-fq-04T" firstAttribute="trailing" secondItem="zfg-vY-fLI" secondAttribute="trailing" id="TVY-33-jac"/>
+                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="top" secondItem="zfg-vY-fLI" secondAttribute="top" constant="12" id="WKm-zY-lu6"/>
+                            <constraint firstItem="zfg-vY-fLI" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" id="dpU-Np-0EK"/>
+                            <constraint firstItem="7Dg-9o-lXq" firstAttribute="trailing" secondItem="zfg-vY-fLI" secondAttribute="trailing" id="m15-Gb-h4v"/>
+                            <constraint firstItem="z25-C0-ON3" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" constant="107" id="n4e-LI-3ZT"/>
+                            <constraint firstItem="z25-C0-ON3" firstAttribute="top" secondItem="7Dg-9o-lXq" secondAttribute="top" constant="213" id="nI0-uw-ObT"/>
+                            <constraint firstItem="myI-fq-04T" firstAttribute="top" secondItem="b05-H2-oCJ" secondAttribute="top" constant="344" id="p5E-Xw-Hmb"/>
+                            <constraint firstItem="Egg-Ok-4K7" firstAttribute="leading" secondItem="7Dg-9o-lXq" secondAttribute="leading" constant="7" id="r1a-kP-5TE"/>
+                            <constraint firstAttribute="bottom" secondItem="myI-fq-04T" secondAttribute="bottom" constant="128.5" id="smb-fV-ogi"/>
+                            <constraint firstItem="myI-fq-04T" firstAttribute="centerX" secondItem="z25-C0-ON3" secondAttribute="centerX" id="weo-KE-XFN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="DX2-uq-6tE"/>
@@ -390,7 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idW-r6-Vl7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1781" y="385"/>
+            <point key="canvasLocation" x="1779.7101449275365" y="384.375"/>
         </scene>
         <!--Category Collection View Controller-->
         <scene sceneID="w2L-hs-ruO">

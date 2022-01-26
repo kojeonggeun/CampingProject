@@ -66,7 +66,7 @@ class GearDetailViewController: UIViewController {
         pushVC.gearRow = self.gearId
         
         self.navigationController?.pushViewController(pushVC, animated: true)
-        
+
     }
     
     func requestData(){
@@ -81,10 +81,8 @@ class GearDetailViewController: UIViewController {
                 self.pageControl.numberOfPages = $0.count
                 self.pageControl.reloadInputViews()
             }
-            
             .bind(to:gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (row, element, cell) in
                 cell.onData.onNext(element)
-            
             }.disposed(by: disposeBag)
     }
 
