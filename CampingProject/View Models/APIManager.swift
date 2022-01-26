@@ -535,6 +535,21 @@ class APIManager{
         }
     }
     
+    func checkEmailCertificationCode(email:String ,code: String, completion: @escaping (Bool)->Void){
+        let parameter:Parameters = ["email": email, "code": code]
+        
+        AF.request(url + "email/check-certification-code/" ,method: .post ,parameters: parameter, encoding:URLEncoding.default,headers: headerInfo()).response { response in
+            switch response.result {
+            case .success(_):
+                completion(true)
+            case .failure(let error):
+                print("🚫 deleteFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                completion(false)
+                
+            }
+        }
+    }
+    
 //    API herder
     func headerInfo() -> HTTPHeaders {
         

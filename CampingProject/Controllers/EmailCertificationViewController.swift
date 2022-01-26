@@ -26,20 +26,19 @@ class EmailCertificationViewController: UIViewController {
         apiManager.requestEmailCertificationCode(email: email){ code in
             let alert = UIAlertController(title: "인증 요청 성공", message: "이메일을 확인해 주세요", preferredStyle: .alert)
             alert.addAction(.init(title: "확인", style: .cancel))
-            
+            self.startTimer()
             self.present(alert, animated: true, completion: nil)
-           
-            self.sec = 180
-            
-            self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                    self.sec -= 1
-                    self.updateTimerLabel()
-                
-                    }
         }
     }
     
-//    MARK: lifeCycle
+    @IBAction func checkCertification(_ sender: Any) {
+//        TODO: certificationCodeTextField에 8자리 코드가 다 입력 되면 인증 버튼 활성화
+//        인증이 완료되면 다음 버튼 활성화
+        certificationCodeTextField.text
+    }
+    
+    
+    //    MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         checkEmailTextField.layer.cornerRadius = 10
@@ -48,8 +47,15 @@ class EmailCertificationViewController: UIViewController {
         checkEmailTextField.isUserInteractionEnabled = false
     }
     
+    func startTimer(){
+        self.sec = 5
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                self.sec -= 1
+                self.updateTimerLabel()
+        }
+    }
     
-    func  resetTimer() {
+    func resetTimer() {
         timer?.invalidate()
         timer = nil
     }
@@ -62,6 +68,7 @@ class EmailCertificationViewController: UIViewController {
                 
             } else {
                 self.certificationTimer.text = "시간 초과"
+                resetTimer()
             }
     }
 }
