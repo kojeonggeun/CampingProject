@@ -18,4 +18,3 @@ enum DB{
     static let userDefaults = UserDefaults.standard
 }
 
-

@@ -152,7 +152,17 @@ class UserViewModel {
     
     func emailDuplicateCheckRx(email:String) -> Observable<Bool>{
         return Observable.create() { emitter in
-            self.api.emailDuplicateCheck(email:email) { result in
+            self.api.checkEmailDuplicate(email:email) { result in
+                emitter.onNext(result)
+                emitter.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func requestEmailCertificationCodeRx(email:String) -> Observable<Bool> {
+        return Observable.create() { emitter in
+            self.api.requestEmailCertificationCode(email:email) { result in
                 emitter.onNext(result)
                 emitter.onCompleted()
             }

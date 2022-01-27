@@ -37,12 +37,14 @@ class MyGearViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
         myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
         
         self.loadData()
-        
+
       
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidDeleteGearPost"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
@@ -56,12 +58,14 @@ class MyGearViewController: UIViewController{
     }
 
     func loadData(){
+        
         myGearVM.loadGears()
         
         myGearVM.gearObservable
             .map{ $0.map { ViewGear($0) } }
             .bind(to: myGearCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 cell.onData.onNext(element)
+                
             }.disposed(by: disposeBag)
     
         myGearVM.gearTypeObservable

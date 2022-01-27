@@ -301,7 +301,7 @@ class APIManager{
     }
     
 //    회원가입
-    func Register(email: String, password: String){
+    func register(email: String, password: String){
         // POST 로 보낼 정보
         let params:Parameters = ["email": email, "password":password]
         
@@ -343,7 +343,7 @@ class APIManager{
 // 이메일 중복검사
 
     
-    func emailDuplicateCheck(email: String, completion: @escaping (Bool) -> Void) {
+    func checkEmailDuplicate(email: String, completion: @escaping (Bool) -> Void) {
         let parameters: [String: Any] = ["email": email]
         
         AF.request(url+"user/existEmail/" , method: .get, parameters: parameters).responseJSON { (response) in
@@ -522,8 +522,11 @@ class APIManager{
     
     func requestEmailCertificationCode(email: String, completion: @escaping (Bool)->Void){
         let parameter:Parameters = ["email": email]
+        let headers: HTTPHeaders = [
+                "Content-Type" : "application/x-www-form-urlencoded",
+                ]
         
-        AF.request(url + "email/send-certification-code/" ,method: .post ,parameters: parameter, encoding:URLEncoding.default,headers: headerInfo()).response { response in
+        AF.request(url + "email/send-certification-code/" ,method: .post ,parameters: parameter, encoding:URLEncoding.default,headers: headers).response { response in
             switch response.result {
             case .success(_):
                 completion(true)
@@ -537,8 +540,10 @@ class APIManager{
     
     func checkEmailCertificationCode(email:String ,code: String, completion: @escaping (Bool)->Void){
         let parameter:Parameters = ["email": email, "code": code]
-        
-        AF.request(url + "email/check-certification-code/" ,method: .post ,parameters: parameter, encoding:URLEncoding.default,headers: headerInfo()).response { response in
+        let headers: HTTPHeaders = [
+                "Content-Type" : "application/x-www-form-urlencoded",
+                ]
+        AF.request(url + "email/check-certification-code/" ,method: .post ,parameters: parameter, encoding:URLEncoding.default,headers: headers).response { response in
             switch response.result {
             case .success(_):
                 completion(true)

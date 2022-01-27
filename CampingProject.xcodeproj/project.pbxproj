@@ -46,6 +46,7 @@
 		CBB51A022700C74A005F8B00 /* GearImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */; };
 		CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB51A032702F61E005F8B00 /* ProfileViewController.swift */; };
 		CBB7EA9527A12D12002CC1B1 /* EmailCertificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7EA9427A12D12002CC1B1 /* EmailCertificationViewController.swift */; };
+		CBB7EA9727A26669002CC1B1 /* PaswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7EA9627A26669002CC1B1 /* PaswordViewController.swift */; };
 		CBBB2A9D26F238BF006B2E3C /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */; };
 		CBD44FB1276D971500D1B3EA /* SearchUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD44FB0276D971500D1B3EA /* SearchUserDetailViewController.swift */; };
 		CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */; };
@@ -111,6 +112,7 @@
 		CBB51A012700C74A005F8B00 /* GearImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GearImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		CBB51A032702F61E005F8B00 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CBB7EA9427A12D12002CC1B1 /* EmailCertificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCertificationViewController.swift; sourceTree = "<group>"; };
+		CBB7EA9627A26669002CC1B1 /* PaswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaswordViewController.swift; sourceTree = "<group>"; };
 		CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
 		CBD44FB0276D971500D1B3EA /* SearchUserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDetailViewController.swift; sourceTree = "<group>"; };
 		CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				CB6037D026B289980023042F /* SignUpViewController.swift */,
 				CBB7EA9427A12D12002CC1B1 /* EmailCertificationViewController.swift */,
+				CBB7EA9627A26669002CC1B1 /* PaswordViewController.swift */,
 				CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */,
 				CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */,
 				CBA2327226BE763200946DA0 /* MyGearViewController.swift */,
@@ -452,6 +455,7 @@
 				CB90E3FF271860E900CD2B1C /* SearchUserModel.swift in Sources */,
 				CB6037D326B28A530023042F /* UserViewModel.swift in Sources */,
 				CB58A79826E5F136006C80EA /* GearDetailViewController.swift in Sources */,
+				CBB7EA9727A26669002CC1B1 /* PaswordViewController.swift in Sources */,
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,
 				CBF791F427366EDC0089EE48 /* FriendViewModel.swift in Sources */,
 				CBBB2A9D26F238BF006B2E3C /* CategoryCollectionViewController.swift in Sources */,

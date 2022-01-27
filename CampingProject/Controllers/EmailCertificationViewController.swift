@@ -8,22 +8,59 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
 
 class EmailCertificationViewController: UIViewController {
     
     @IBOutlet weak var checkEmailTextField: UITextField!
     @IBOutlet weak var certificationCodeTextField: UITextField!
     @IBOutlet weak var certificationTimer: UILabel!
+    @IBOutlet weak var passwordNextButton: UIButton!
     
     static let identifier = "EmailVerificationViewController"
+    
+    let apiManager = APIManager.shared
     
     var email = String()
     var sec: Int = 0
     var timer: Timer?
+//MARK: lifeCycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        checkEmailTextField.addLeftPadding()
+        certificationCodeTextField.addLeftPadding()
+        
+        checkEmailTextField.layer.cornerRadius = 10
+        certificationCodeTextField.layer.cornerRadius = 10
+        checkEmailTextField.text = email
+        checkEmailTextField.isUserInteractionEnabled = false
+        
+        certificationCodeTextField.rx.text
+            .orEmpty
+            .skip(1)
+            .subscribe(onNext:{
+                self.trimCode(code: $0)
+            })
+    }
     
-    let apiManager = APIManager.shared
+    
+    lazy var alertController: UIAlertController = {
+        let alert = UIAlertController(title: "인증 메일 보내는 중", message: "\n\n", preferredStyle: .alert)
+        alert.view.tintColor = .black
+        let loading = UIActivityIndicatorView(frame: CGRect(x: 110, y: 35, width: 50, height: 50))
+        loading.hidesWhenStopped = true
+        loading.style = .gray
+        loading.startAnimating();
+        alert.view.addSubview(loading)
+        return alert
+    }()
+    
     @IBAction func requstCertification(_ sender: Any) {
+   
+        present(alertController, animated: true)
+        
         apiManager.requestEmailCertificationCode(email: email){ code in
+            self.dismiss(animated: true)
             let alert = UIAlertController(title: "인증 요청 성공", message: "이메일을 확인해 주세요", preferredStyle: .alert)
             alert.addAction(.init(title: "확인", style: .cancel))
             self.startTimer()
@@ -32,19 +69,30 @@ class EmailCertificationViewController: UIViewController {
     }
     
     @IBAction func checkCertification(_ sender: Any) {
-//        TODO: certificationCodeTextField에 8자리 코드가 다 입력 되면 인증 버튼 활성화
-//        인증이 완료되면 다음 버튼 활성화
-        certificationCodeTextField.text
+        let code = certificationCodeTextField.text!
+        apiManager.checkEmailCertificationCode(email: email, code: code, completion: { result in
+            self.passwordNextButton.isEnabled = true
+            
+        })
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: PasswordViewController.identifier) as! PasswordViewController
+        pushVC.email = email
+        self.navigationController?.pushViewController(pushVC, animated: true)
+
+        
     }
     
     
-    //    MARK: lifeCycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        checkEmailTextField.layer.cornerRadius = 10
-        certificationCodeTextField.layer.cornerRadius = 10
-        checkEmailTextField.text = email
-        checkEmailTextField.isUserInteractionEnabled = false
+ 
+    
+
+    func trimCode(code: String) {
+        if code.count >= 8 {
+            let index = code.index(code.startIndex, offsetBy: 8)
+            self.certificationCodeTextField.text = String(code[..<index])
+            self.passwordNextButton.isEnabled = true
+        } else {
+            self.passwordNextButton.isEnabled = false
+        }
     }
     
     func startTimer(){

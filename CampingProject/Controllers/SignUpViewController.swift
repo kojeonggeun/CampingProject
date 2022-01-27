@@ -13,10 +13,9 @@ class SignUpViewController: UIViewController {
 
   
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var checkEmail: UILabel!
-    
     @IBOutlet weak var emailNextButton: UIButton!
+    
     @IBAction func backScreen(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -28,6 +27,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emailTextField.addLeftPadding()
         emailTextField.layer.cornerRadius = emailTextField.frame.height / 4
         self.checkEmail.isHidden = true
         emailTextField.rx.text.orEmpty
@@ -35,6 +35,7 @@ class SignUpViewController: UIViewController {
             .subscribe(onNext: { [weak self]result in
                 self?.emailNextButton.isEnabled = result
             }).disposed(by: disposeBag)
+        
         
     }
 
@@ -63,3 +64,4 @@ class SignUpViewController: UIViewController {
     }
     
 }
+
