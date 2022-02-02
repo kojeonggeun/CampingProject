@@ -38,14 +38,12 @@ class MyGearViewController: UIViewController{
         super.viewDidLoad()
         
 
-        
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
         myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
         
         self.loadData()
 
-      
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidDeleteGearPost"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
         

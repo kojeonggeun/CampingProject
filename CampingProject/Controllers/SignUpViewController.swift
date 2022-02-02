@@ -27,9 +27,11 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         emailTextField.addLeftPadding()
         emailTextField.layer.cornerRadius = emailTextField.frame.height / 4
         self.checkEmail.isHidden = true
+        
         emailTextField.rx.text.orEmpty
             .map(apiManager.isValidEmail)
             .subscribe(onNext: { [weak self]result in
@@ -53,7 +55,7 @@ class SignUpViewController: UIViewController {
                     self.navigationController?.pushViewController(pushVC, animated: true)
                 }
                 
-            })
+            }).disposed(by: disposeBag)
 
     }
     

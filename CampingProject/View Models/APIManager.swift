@@ -543,12 +543,16 @@ class APIManager{
         let headers: HTTPHeaders = [
                 "Content-Type" : "application/x-www-form-urlencoded",
                 ]
-        AF.request(url + "email/check-certification-code/" ,method: .post ,parameters: parameter, encoding:URLEncoding.default,headers: headers).response { response in
+        AF.request(url + "email/check-certification-code/" ,method: .post ,parameters: parameter, encoding:URLEncoding.default,headers: headers).validate(statusCode: 200..<300)
+            .response { response in
             switch response.result {
             case .success(_):
+               
                 completion(true)
+                
+
             case .failure(let error):
-                print("🚫 deleteFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                print("🚫 checkEmail Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                 completion(false)
                 
             }

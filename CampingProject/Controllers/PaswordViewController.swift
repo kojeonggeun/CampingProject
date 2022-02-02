@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 
+//TODO: 로그인화면으로 돌아가게 ㅎ야함
 class PasswordViewController: UIViewController{
     
     static let identifier = "PasswordViewController"
@@ -26,6 +27,14 @@ class PasswordViewController: UIViewController{
     let apiManager = APIManager.shared
     let disposeBag = DisposeBag()
     
+    @IBAction func unwind(_ sender: Any) {
+        DB.userDefaults.removeObject(forKey: "token")
+        DB.userDefaults.set(false, forKey: "Auto")
+        ProfileViewModel.shared.clearUserCount()
+
+        performSegue(withIdentifier: "signIn", sender: self)
+    }
+    
     @IBAction func signUp(_ sender: Any) {
         apiManager.register(email: email, password: pwTextField.text!)
     }
@@ -39,12 +48,13 @@ class PasswordViewController: UIViewController{
         pwTextField.layer.cornerRadius = 10
         repwTextField.layer.cornerRadius = 10
 
+        pwTextField.autocorrectionType = .no
+        
         let pwInput = pwTextField.rx.text.orEmpty.asObservable()
         let pwVaild = pwInput.skip(1).map{ self.apiManager.isValidPassword(password: $0) }
         
         let repwInput = repwTextField.rx.text.orEmpty.asObservable()
-        let repwValid = repwInput.skip(1).map{ self.pwTextField.text! == $0 && $0 != "" }
-      
+        let repwValid = repwInput.skip(1).map{ self.pwTextField.text! == $0 }
         
         Observable.combineLatest(pwVaild, repwValid, resultSelector: {$0 && $1})
             .subscribe(onNext: { result in
