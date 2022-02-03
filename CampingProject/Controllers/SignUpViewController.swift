@@ -7,7 +7,7 @@
 import UIKit
 import Alamofire
 import RxSwift
-
+import RxCocoa
 
 class SignUpViewController: UIViewController {
 
@@ -23,6 +23,8 @@ class SignUpViewController: UIViewController {
     let apiManager = APIManager.shared
     let userVM = UserViewModel.shared
     let disposeBag: DisposeBag = DisposeBag()
+    let signUpVM = SignUpViewModel()
+    
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,29 +34,32 @@ class SignUpViewController: UIViewController {
         emailTextField.layer.cornerRadius = emailTextField.frame.height / 4
         self.checkEmail.isHidden = true
         
+
         emailTextField.rx.text.orEmpty
+            .asDriver()
             .map(apiManager.isValidEmail)
-            .subscribe(onNext: { [weak self]result in
-                self?.emailNextButton.isEnabled = result
+            .drive(self.emailNextButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+//        input
+        emailNextButton.rx.tap
+            .subscribe(onNext: {
+                self.signUpVM.checkEmail.onNext(self.emailTextField.text!)
             }).disposed(by: disposeBag)
         
-        
-    }
-
-    @IBAction func emailVerification(_ sender: Any) {
-        guard let email = self.emailTextField.text else { return }
-        self.userVM.emailDuplicateCheckRx(email: self.emailTextField.text!)
-            .subscribe(onNext: { result in
-                if result {
-                    self.checkEmail.isHidden = false
-                    
-                } else {
-                    self.checkEmail.isHidden = true
+//        output
+        signUpVM.hideLabel
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.checkEmail.rx.isHidden)
+            .disposed(by: disposeBag)
+            
+        signUpVM.showNextPage
+            .subscribe(onNext:{
+                if $0 {
                     let pushVC = self.storyboard?.instantiateViewController(withIdentifier: EmailCertificationViewController.identifier) as! EmailCertificationViewController
-                    pushVC.email = email
+                    pushVC.email = self.emailTextField.text!
                     self.navigationController?.pushViewController(pushVC, animated: true)
                 }
-                
             }).disposed(by: disposeBag)
 
     }

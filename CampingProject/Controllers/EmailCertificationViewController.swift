@@ -78,12 +78,12 @@ class EmailCertificationViewController: UIViewController {
         let code = certificationCodeTextField.text!
         apiManager.checkEmailCertificationCode(email: email, code: code, completion: { result in
             print(result)
-            if result {
+//            if result {
                 self.passwordNextButton.isEnabled = true
-                self.checkCertificationLabel.isHidden = false
-            }else {
-                print("인증 번호 틀림")
-            }
+//                self.checkCertificationLabel.isHidden = false
+//            }else {
+//                print("인증 번호 틀림")
+//            }
         })
     }
     

@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import UIKit
 import RxSwift
 
 import AlamofireImage

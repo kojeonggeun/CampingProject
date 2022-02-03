@@ -42,9 +42,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="다음으로" cornerStyle="capsule"/>
-                                <connections>
-                                    <action selector="emailVerification:" destination="oLR-L4-H28" eventType="touchUpInside" id="Idq-Mj-1uy"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="중복 되는 이메일입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DkG-s0-Kio">
                                 <rect key="frame" x="113" y="324" width="161" height="21"/>
@@ -215,9 +212,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="회원 가입" cornerStyle="capsule"/>
-                                <connections>
-                                    <action selector="signUp:" destination="0Ov-bF-vb7" eventType="touchUpInside" id="dOC-LG-Fa5"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3AD-Qx-fdQ"/>
