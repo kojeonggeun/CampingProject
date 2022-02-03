@@ -24,7 +24,7 @@ class EmailCertificationViewController: UIViewController {
     let apiManager = APIManager.shared
     
     var email = String()
-    var sec: Int = 0
+    var sec: Int = 180
     var timer: Timer?
     
     lazy var alertController: UIAlertController = {
@@ -77,13 +77,17 @@ class EmailCertificationViewController: UIViewController {
     @IBAction func checkCertification(_ sender: Any) {
         let code = certificationCodeTextField.text!
         apiManager.checkEmailCertificationCode(email: email, code: code, completion: { result in
-            print(result)
-//            if result {
+            if result {
                 self.passwordNextButton.isEnabled = true
-//                self.checkCertificationLabel.isHidden = false
-//            }else {
-//                print("인증 번호 틀림")
-//            }
+                self.checkCertificationLabel.text = "인증이 완료되었습니다"
+                self.checkCertificationLabel.textColor = .green
+                self.checkCertificationLabel.isHidden = false
+            } else {
+                
+                self.checkCertificationLabel.text = "인증 번호가 다릅니다"
+                self.checkCertificationLabel.textColor = .red
+                self.checkCertificationLabel.isHidden = false
+            }
         })
     }
     
@@ -105,7 +109,6 @@ class EmailCertificationViewController: UIViewController {
     
 
     func startTimer(){
-        self.sec = 5
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 self.sec -= 1
                 self.updateTimerLabel()
