@@ -24,7 +24,7 @@ class SearchUserDetailViewController: UIViewController {
     
     
     var apiManager = APIManager.shared
-    var userVM = UserViewModel.shared
+    var store = Store.shared
     var profileVM = ProfileViewModel.shared
     
     var userId: Int = 0
@@ -42,7 +42,7 @@ class SearchUserDetailViewController: UIViewController {
         
         friendCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
         
-            self.userVM.loadFriendInfoRx(id: userId)
+            self.store.loadFriendInfoRx(id: userId)
                 .subscribe(onNext: { userInfo in
                     self.navigationItem.title = userInfo.user?.email
                     self.user = userInfo
@@ -61,7 +61,7 @@ class SearchUserDetailViewController: UIViewController {
         SearchUserDetailViewModel.shared.searchGearObservable
             .map{ $0.map { ViewGear($0) } }
             .bind(to: friendCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-                UserViewModel.shared.loadGearImagesRx(id:element.id)
+                Store.shared.loadGearImagesRx(id:element.id)
                     .subscribe(onNext: { image in
                         cell.collectionViewCellImage.image = image
                     })
@@ -75,7 +75,7 @@ class SearchUserDetailViewController: UIViewController {
         followButton.rx.tap
             .bind {
                 if self.user?.status == "FOLLOWING" {
-                    self.userVM.loadDeleteFollowergRx(id: self.user!.user!.id)
+                    self.store.loadDeleteFollowergRx(id: self.user!.user!.id)
                         .subscribe(onNext: { result in
                             self.followButton.setTitle("팔로우", for: .normal)
                             self.followButton.tintColor = .blue

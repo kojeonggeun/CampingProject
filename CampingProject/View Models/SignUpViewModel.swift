@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SignUpViewModel {
- 
+// TODO: do 활용 얼럿 창
     let disposeBag = DisposeBag()
 
     let checkEmail: AnyObserver<String>
@@ -19,7 +19,7 @@ class SignUpViewModel {
     let showNextPage: Observable<Bool>
     
     init(){
-        let userVM = UserViewModel.shared
+        let store = Store.shared
         
         let checking = PublishSubject<String>()
         let hidingLabel = PublishRelay<Bool>()
@@ -28,7 +28,7 @@ class SignUpViewModel {
         hideLabel = hidingLabel.asObservable()
         
         checking
-            .flatMap{ userVM.emailDuplicateCheckRx(email: $0) }
+            .flatMap{ store.emailDuplicateCheckRx(email: $0) }
             .subscribe(onNext:{ result in
                 hidingLabel.accept(!result)
             }).disposed(by: disposeBag)

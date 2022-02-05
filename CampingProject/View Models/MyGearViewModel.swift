@@ -13,7 +13,7 @@ import RxCocoa
 class MyGearViewModel {
 
     static let shared = MyGearViewModel()
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     let apiManager = APIManager.shared
     let disposeBag = DisposeBag()
     
@@ -38,12 +38,12 @@ class MyGearViewModel {
     }
     
     func loadGears(){
-        userVM.loadUserGearRx()
+        store.loadUserGearRx()
             .subscribe(onNext: { data in
                 self.gears.accept(data)
             }).disposed(by: disposeBag)
     }
-    
+
     func loadimage(image: [UIImage]) {
         gearImage.accept(image)
     }

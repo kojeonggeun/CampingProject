@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController, ReloadData {
     
     let userGearVM = UserGearViewModel.shared
     let viewModel = ProfileViewModel.shared
-    let userVM: UserViewModel = UserViewModel.shared
+    let store: Store = Store.shared
     let apiManger = APIManager.shared
     let disposeBag = DisposeBag()
     
@@ -81,7 +81,7 @@ class ProfileViewController: UIViewController, ReloadData {
 //        Rx로 변경할것
         gearQuantity.text = "\(userGearVM.userGears.count)"
 
-        self.userVM.loadFollowerRx()
+        self.store.loadFollowerRx()
             .subscribe(onNext: { follower in
                 self.viewModel.follower.accept(follower.friends.count)
             }).disposed(by: self.disposeBag)
@@ -90,7 +90,7 @@ class ProfileViewController: UIViewController, ReloadData {
     
     func loadData() {
         
-        self.userVM.loadFollowingRx()
+        self.store.loadFollowingRx()
             .subscribe(onNext: { following in
                 self.viewModel.following.accept(following.friends.count)
             }).disposed(by: self.disposeBag)
@@ -107,23 +107,23 @@ class ProfileViewController: UIViewController, ReloadData {
             .bind(to:self.following.rx.text)
             .disposed(by: self.disposeBag)
         
-        userVM.loadUserInfoRx()
-            .subscribe (onNext: { userInfo in
-                    if userInfo.user?.userImageUrl != "" {
-                        self.imageUrl = userInfo.user!.userImageUrl
-                    } else {
-                        self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
-                    }
+        UserViewModel().userObservable
+            .subscribe(onNext:{ userInfo in
+                if userInfo.user?.userImageUrl != "" {
+                    self.imageUrl = userInfo.user!.userImageUrl
+                } else {
+                    self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
+                }
 
-                    let url = URL(string: self.imageUrl)
-                    let data = try? Data(contentsOf: url!)
-        //            TODO: 프로필 이미지 수정 좀 이상함
-                    
-                    let image = UIImage(data: data!)
-                    self.profileImage.image = image
+                let url = URL(string: self.imageUrl)
+                let data = try? Data(contentsOf: url!)
+    //            TODO: 프로필 이미지 수정 좀 이상함
+                
+                let image = UIImage(data: data!)
+                self.profileImage.image = image
 
-                    self.profileName.text = userInfo.user?.name
-                    self.profileIntro.text = userInfo.user?.aboutMe
-            }).disposed(by: disposeBag)
+                self.profileName.text = userInfo.user?.name
+                self.profileIntro.text = userInfo.user?.aboutMe
+        }).disposed(by: disposeBag)
     }
 }

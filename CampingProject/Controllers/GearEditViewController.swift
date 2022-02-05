@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Photos
+import RxSwift
 
 class GearEditViewController: UIViewController {
     @IBOutlet weak var gearEditCustomView: GearTextListCustomView!
@@ -15,12 +16,15 @@ class GearEditViewController: UIViewController {
     @IBOutlet weak var imageCount: UILabel!
     
     let userGearVM = UserGearViewModel.shared
+    let store = Store.shared
     let apiService = APIManager.shared
     let imagePicker = ImagePickerManager()
     let DidReloadPostDetailViewController: Notification.Name = Notification.Name("DidReloadPostDetailViewController")
     let DidReloadPostEdit: Notification.Name = Notification.Name("DidReloadPostEdit")
-
-    var gearRow: Int = 0
+    let disposeBag = DisposeBag()
+    
+    var gearId: Int = 0
+    var userId: Int = 0
     var allPhotos: PHFetchResult<PHAsset>?
     var imageItem = [ImageData]()
     var userData: CellData? = nil
@@ -33,15 +37,32 @@ class GearEditViewController: UIViewController {
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        userData = userGearVM.userGears[gearRow]
-        gearEditCustomView.initPickerView(gearId: gearRow)
         self.allPhotos = PHAsset.fetchAssets(with: nil)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
-        gearEditCustomView.UpdateData(type: self.userData!.gearTypeName ?? "awd", name: self.userData!.name!, color: self.userData!.color!, company: self.userData!.company!, capacity: self.userData!.capacity!, buyDate: self.userData!.buyDt!, price: self.userData!.price!)
+        store.loadDetailUserGearRx(userId: userId, gearId: gearId)
+            .subscribe(onNext:{ result in
+                self.gearEditCustomView.initPickerView(type: result.gearTypeName!, id: result.gearTypeId!)
+                self.gearEditCustomView.UpdateData(type: result.gearTypeName!, name: result.name!, color: result.color!, company: result.company!, capacity: result.capacity!, buyDate: result.buyDt!, price: result.price!)
+              
+                result.images.enumerated().forEach{
+                    let asset = self.allPhotos?.object(at: $0)
+                    self.imageItem.append($1)
+                    let url = URL(string: $1.url)
+                    let data = try? Data(contentsOf: url!)
+                    self.imagePicker.photoArray.append(UIImage(data: data!)!)
+                    self.imagePicker.userSelectedAssets.append(asset!)
+                    self.imagePicker.imageFileName.append($1.orgFilename)
+                        
+                }
+                self.imagePicker.total = self.imagePicker.photoArray.count
+                self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
+                self.imageCollectionView.reloadData()
+                
+            }).disposed(by:disposeBag)
         
         imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
+        
     }
     
     @objc func gearEdit(){
@@ -52,22 +73,27 @@ class GearEditViewController: UIViewController {
         guard let capacity = gearEditCustomView.gearCapacity.text else { return }
         guard let date = gearEditCustomView.gearBuyDate.text else { return }
         guard let price = gearEditCustomView.gearPrice.text else { return }
-        let gearId = userGearVM.userGears[gearRow].id
         let type = gearEditCustomView.gearTypeId
+    
         
-        print(type)
         self.userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
-   
+        
+        UserViewModel.shared.userObservable
+            .subscribe(onNext:{
+                print($0.user?.id)
+            })
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
+            self.store.loadDetailUserGearRx(userId: self.userId, gearId: self.gearId)
+                .subscribe(onNext:{
+                    print($0)
+                })
             self.navigationController?.popViewController(animated: true)
-            MyGearViewModel.shared.loadGears()
-//            NotificationCenter.default.post(name: self.DidReloadPostDetailViewController, object: nil,userInfo: ["categoryDelete" : true])
-//            NotificationCenter.default.post(name: self.DidReloadPostEdit, object: nil, userInfo: ["edit" : true])
             
         })
         
         present(alert, animated: true, completion: nil)
+     
     }
 }
 

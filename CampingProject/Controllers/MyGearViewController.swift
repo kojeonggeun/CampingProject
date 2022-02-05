@@ -80,9 +80,11 @@ class MyGearViewController: UIViewController{
         myGearCollectionView.rx.modelSelected(ViewGear.self)
             .subscribe(onNext: { cell in
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
+              
                 pushVC.gearId = cell.id
+                
                 self.navigationController?.pushViewController(pushVC, animated: true)
-            })
+            }).disposed(by: disposeBag)
         
 //        MyGearViewModel.shared.makeMove.onNext(0)
 //        MyGearViewModel.shared.showDetailPage

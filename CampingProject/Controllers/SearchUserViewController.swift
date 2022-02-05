@@ -19,7 +19,7 @@ class SearchUserViewController: UIViewController {
     
     var searchData: [CellRepresentable] = []
     var cellHeightsDictionary: NSMutableDictionary = [:]
-    var userVM = UserViewModel.shared
+    var store = Store.shared
     var searchInputText: String = ""
     var fetchingMore: Bool = false
     var hasNext: Bool = false

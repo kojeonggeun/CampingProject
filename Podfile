@@ -13,5 +13,6 @@ target 'CampingProject' do
  pod 'TextFieldEffects'
  pod 'RxSwift'
  pod 'RxCocoa'
+ pod 'RxViewController'
 
 end

@@ -15,7 +15,7 @@ class FriendViewModel: FollowRepresentable {
     var friendType: String
     
     let manager = APIManager.shared
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     
     init(searchFriend: Friend, friendType: String) {
         self.searchFriend = searchFriend

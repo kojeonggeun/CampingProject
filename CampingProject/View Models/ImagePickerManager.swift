@@ -46,8 +46,10 @@ class ImagePickerManager: ImagePickerController {
             if self.userSelectedAssets.count + tempAssets.count > 5 {
                 self.imageErrorAlert(vc: imagePicker)
                 imagePicker.deselect(asset: asset)
+                
                 tempAssets.remove(at: tempAssets.endIndex - 1)
             }
+  
             
         }, deselect: { (asset) in
             if let firstIndex = tempAssets.firstIndex(where: { $0 == asset }) {
@@ -55,7 +57,6 @@ class ImagePickerManager: ImagePickerController {
             }
             else {
                 return
-                
             }
         }, cancel: { (assets) in
             // User canceled selection.

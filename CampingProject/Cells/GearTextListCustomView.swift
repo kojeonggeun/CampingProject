@@ -119,10 +119,10 @@ class GearTextListCustomView: UIView{
         gearType.inputAccessoryView = toolBar
     }
     
-    func initPickerView(gearId: Int){
+    func initPickerView(type: String, id: Int){
         
-        gearType.text = apiService.userGears[gearId].gearTypeName
-        gearTypeId = apiService.userGears[gearId].gearTypeId!
+        gearType.text = type
+        gearTypeId = id
     }
     @objc func dismissPickerView() {
         gearType.text = selectType

@@ -12,7 +12,7 @@ import RxCocoa
 class SearchUserDetailViewModel {
     
     static let shared = SearchUserDetailViewModel()
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     let disposeBag = DisposeBag()
     
     private let searchGears = PublishRelay<[CellData]>()
@@ -22,7 +22,7 @@ class SearchUserDetailViewModel {
     }
     
     func loadSearchGear(id: Int){
-        userVM.loadSearchUserGearRx(userId: id)
+        store.loadSearchUserGearRx(userId: id)
             .subscribe(onNext: { data in
                 self.searchGears.accept(data)
             }).disposed(by: disposeBag)

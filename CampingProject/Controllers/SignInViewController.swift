@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 //import AuthenticationServices
 
 
@@ -21,7 +22,7 @@ class SignInViewController: UIViewController{
    
     @IBOutlet weak var appleLoginView: UIStackView!
     
-    let userVM: UserViewModel = UserViewModel.shared
+    let store: Store = Store.shared
     let apiManager: APIManager = APIManager.shared
     @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
     
@@ -32,9 +33,9 @@ class SignInViewController: UIViewController{
         
         apiManager.login(email: email, password: password) { completion in
             if completion {
-                self.apiManager.loadUserGear(){ data in
-                    self.apiManager.loadUserInfo(completion: {_ in })
-                }
+                MyGearViewModel.shared.loadGears()
+                
+                UserViewModel()
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
                 
             } else {
@@ -79,7 +80,7 @@ class SignInViewController: UIViewController{
             if DB.userDefaults.object(forKey: "token") != nil {
                 let user = DB.userDefaults.value(forKey: "token") as! NSDictionary
                 print(user["token"])
-                self.apiManager.loadUserInfo(completion: { _ in })
+                UserViewModel()
                 apiManager.loginCheck(){ (completion) in
                     if completion {
                         self.performSegue(withIdentifier: "MainTabBarController",sender: nil)

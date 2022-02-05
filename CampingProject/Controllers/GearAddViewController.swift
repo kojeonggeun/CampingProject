@@ -60,10 +60,11 @@ class AddGearViewController: UIViewController {
         guard let date = customView.gearBuyDate.text else { return }
         guard let price = customView.gearPrice.text else { return }
         
-        self.userGearViewModel.addUserGear(name: name, type: customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: imagePicker.photoArray, imageName: imagePicker.imageFileName)
+      
         
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
+            self.userGearViewModel.addUserGear(name: name, type: self.customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
             
             MyGearViewModel.shared.loadGears()
                 

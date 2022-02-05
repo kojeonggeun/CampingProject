@@ -21,7 +21,7 @@ class SignUpViewController: UIViewController {
     }
     
     let apiManager = APIManager.shared
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     let disposeBag: DisposeBag = DisposeBag()
     let signUpVM = SignUpViewModel()
     

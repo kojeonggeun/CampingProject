@@ -11,7 +11,7 @@ import RxCocoa
 
 class ProfileViewModel {
     
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     let disposeBag = DisposeBag()
     static let shared = ProfileViewModel()
     
@@ -28,12 +28,12 @@ class ProfileViewModel {
     }
     
     init() {
-        userVM.loadFollowerRx()
+        store.loadFollowerRx()
             .subscribe(onNext: { follower in
                 self.follower.accept(follower.friends.count)
             }).disposed(by: disposeBag)
         
-        userVM.loadFollowingRx()
+        store.loadFollowingRx()
             .subscribe(onNext: { following in
                 self.following.accept(following.friends.count)
             }).disposed(by: disposeBag)
@@ -41,7 +41,7 @@ class ProfileViewModel {
     }
     
     func reloadFollowing(){
-        self.userVM.loadFollowingRx()
+        self.store.loadFollowingRx()
             .subscribe(onNext: { following in
                 self.following.accept(following.friends.count)
         }).disposed(by: disposeBag)

@@ -25,9 +25,9 @@ class UserGearViewModel {
         apiManager.addGear(name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName)
     }
     
-    func deleteUserGear(gearId: Int, row: Int){
+    func deleteUserGear(gearId: Int){
         
-        apiManager.deleteGear(gearId: gearId,row: row)
+        apiManager.deleteGear(gearId: gearId)
     }
     
     

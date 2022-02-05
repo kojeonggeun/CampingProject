@@ -14,7 +14,7 @@ class FollowingViewController: UIViewController {
     @IBOutlet weak var followingSearchBar: UISearchBar!
     
     let apiManager = APIManager.shared
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     let disposeBag = DisposeBag()
     
     var searchInputText: String = ""
@@ -88,7 +88,7 @@ extension FollowingViewController: UITableViewDelegate{
             id = followingSearchData[indexPath.row].searchFriend.friendId
         }
         
-        self.userVM.loadFriendInfoRx(id: id )
+        self.store.loadFriendInfoRx(id: id )
             .subscribe(onNext : { result in
                 print(result)
 //                TODO: 검색친구상세보기 구현해야함

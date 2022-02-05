@@ -15,7 +15,7 @@ class SearchResultViewModel: CellRepresentable {
     
     
     let manager = APIManager.shared
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     let userGearVM = UserGearViewModel.shared
     
     init(searchData: SearchUser, searchInputText: String) {

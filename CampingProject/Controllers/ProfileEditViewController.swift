@@ -22,7 +22,7 @@ class ProfileEditViewController: UIViewController {
     var delegate: ReloadData?
     
     let imagePicker = UIImagePickerController()
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     let apiManager = APIManager.shared
     
 

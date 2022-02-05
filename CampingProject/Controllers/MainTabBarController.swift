@@ -12,7 +12,7 @@ import RxCocoa
 
 class MainTabBarController: UITabBarController {
     
-    let userVM = UserViewModel.shared
+    let store = Store.shared
     
     let userGearVM = UserGearViewModel.shared
     let viewModel = ProfileViewModel.shared

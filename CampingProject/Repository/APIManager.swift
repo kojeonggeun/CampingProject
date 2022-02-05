@@ -56,8 +56,8 @@ class APIManager{
         }).responseJSON { response in
             switch response.result {
             case .success(_):
+                MyGearViewModel.shared.loadGears()
                 
-                print("")
             case .failure(let error):
                 print(error)
             }
@@ -65,11 +65,10 @@ class APIManager{
     }
     
 //    장비 삭제
-    func deleteGear(gearId: Int,  row: Int) {
-        userGears.remove(at: row)
+    func deleteGear(gearId: Int) {
         
         AF.request(urlUser + "gear/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
-            print(response)
+            MyGearViewModel.shared.loadGears()
         }
     }
     
@@ -90,6 +89,7 @@ class APIManager{
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key as String)
             }
             for (index,value) in item.enumerated() {
+                
                 multipartFormData.append("\(value.imageId)".data(using: .utf8)!, withName: "gearImages[\(index)].imageId")
             }
             
@@ -105,8 +105,9 @@ class APIManager{
         }).responseString { response in
             switch response.result {
             case .success(_):
-                self.loadUserGear(completion: { data in
-                })
+//                TODO: 수정해야함
+                MyGearViewModel.shared.loadGears()
+                
             case .failure(let error):
                 print(error)
             }
@@ -386,6 +387,7 @@ class APIManager{
     }
 //    유저 정보 로드
 //    TODO: Obserble 만들어야함
+
     func loadUserInfo(completion: @escaping (Result<UserInfo, AFError>)-> Void) {
         
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
