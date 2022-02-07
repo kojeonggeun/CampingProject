@@ -22,8 +22,14 @@ class SignUpViewController: UIViewController {
     
     let apiManager = APIManager.shared
     let store = Store.shared
-    let disposeBag: DisposeBag = DisposeBag()
     let signUpVM = SignUpViewModel()
+    let disposeBag: DisposeBag = DisposeBag()
+    
+    private lazy var input = SignUpViewModel.Input(checkEmail: emailNextButton.rx.tap.map{
+        self.emailTextField.text!
+    })
+    private lazy var output = signUpVM.transform(input: input, disposeBag: disposeBag)
+ 
     
     // MARK: LifeCycles
     override func viewDidLoad() {
@@ -33,7 +39,6 @@ class SignUpViewController: UIViewController {
         emailTextField.addLeftPadding()
         emailTextField.layer.cornerRadius = emailTextField.frame.height / 4
         self.checkEmail.isHidden = true
-        
 
         emailTextField.rx.text.orEmpty
             .asDriver()
@@ -41,26 +46,19 @@ class SignUpViewController: UIViewController {
             .drive(self.emailNextButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-//        input
-        emailNextButton.rx.tap
-            .subscribe(onNext: {
-                self.signUpVM.checkEmail.onNext(self.emailTextField.text!)
-            }).disposed(by: disposeBag)
-        
-//        output
-        signUpVM.hideLabel
+        output.hideLabel
             .asDriver(onErrorJustReturn: false)
             .drive(self.checkEmail.rx.isHidden)
             .disposed(by: disposeBag)
-            
-        signUpVM.showNextPage
+        
+        output.showNextPage
             .subscribe(onNext:{
-                if $0 {
-                    let pushVC = self.storyboard?.instantiateViewController(withIdentifier: EmailCertificationViewController.identifier) as! EmailCertificationViewController
-                    pushVC.email = self.emailTextField.text!
-                    self.navigationController?.pushViewController(pushVC, animated: true)
-                }
-            }).disposed(by: disposeBag)
+              if $0 {
+                  let pushVC = self.storyboard?.instantiateViewController(withIdentifier: EmailCertificationViewController.identifier) as! EmailCertificationViewController
+                  pushVC.email = self.emailTextField.text!
+                  self.navigationController?.pushViewController(pushVC, animated: true)
+              }
+          }).disposed(by: disposeBag)
 
     }
     

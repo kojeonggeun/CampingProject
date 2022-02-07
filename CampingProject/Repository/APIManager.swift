@@ -342,8 +342,6 @@ class APIManager{
     }
     
 // 이메일 중복검사
-
-    
     func checkEmailDuplicate(email: String, completion: @escaping (Bool) -> Void) {
         let parameters: [String: Any] = ["email": email]
         
@@ -401,7 +399,6 @@ class APIManager{
                 switch response.result {
                 case .success(_):
                     self.userInfo = response.value!
-                    
                     completion(response.result)
                 case .failure(let error):
                     print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")

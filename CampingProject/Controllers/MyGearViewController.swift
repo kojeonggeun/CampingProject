@@ -65,14 +65,16 @@ class MyGearViewController: UIViewController{
                 cell.onData.onNext(element)
                 
             }.disposed(by: disposeBag)
-    
+            
         myGearVM.gearTypeObservable
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
+                
                 cell.categoryButton.rx.tap.asDriver()
                     .drive(onNext: { [weak self] in
                         let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: CategoryCollectionViewController.identifier) as! CategoryCollectionViewController
                             pushVC.gearTypeNum = row
                         self?.navigationController?.pushViewController(pushVC, animated: true)
+                        
                     }).disposed(by: cell.disposeBag)
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
@@ -80,17 +82,9 @@ class MyGearViewController: UIViewController{
         myGearCollectionView.rx.modelSelected(ViewGear.self)
             .subscribe(onNext: { cell in
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
-              
                 pushVC.gearId = cell.id
-                
                 self.navigationController?.pushViewController(pushVC, animated: true)
             }).disposed(by: disposeBag)
-        
-//        MyGearViewModel.shared.makeMove.onNext(0)
-//        MyGearViewModel.shared.showDetailPage
-//            .subscribe(onNext:{
-//                print($0,"212312312")
-//            })
     }
 
     @objc func reloadTableView(_ noti: Notification) {

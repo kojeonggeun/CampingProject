@@ -13,7 +13,7 @@ class MyGearNC : UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        MyGearViewModel.shared.loadGears()
     }
 }
 

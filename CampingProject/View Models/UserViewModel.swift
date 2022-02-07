@@ -23,12 +23,14 @@ class UserViewModel {
     var userObservable: Observable<UserInfo> {
         return user.asObservable()
     }
+    lazy var userId = user.map {
+        $0.user!.id
+    }
+    
     init(){
-        
         loadUser()
         
     }
-    
     func loadUser(){
         store.loadUserInfoRx()
             .subscribe(onNext: { user in

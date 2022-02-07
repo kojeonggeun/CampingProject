@@ -29,6 +29,9 @@ class GearDetailViewController: UIViewController {
     let DidDeleteCatogoryGearPost: Notification.Name = Notification.Name("DidDeleteCatogoryGearPost")
     
     let disposeBag:DisposeBag = DisposeBag()
+//    let detailVM = GearDetailViewModel()
+    
+    
     
     @IBAction func pageChanged(_ sender: UIPageControl) {
         let indexPath = IndexPath(item: sender.currentPage, section: 0)
@@ -41,8 +44,6 @@ class GearDetailViewController: UIViewController {
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = UIColor.gray
         pageControl.currentPageIndicatorTintColor = UIColor.red
-              
-  
         
         requestData()
     }
@@ -73,7 +74,12 @@ class GearDetailViewController: UIViewController {
     
     func requestData() {
  
-//        GearDetailViewModel.shared.gearDetail
+        
+//        GearDetailViewModel.shared.show
+//            .debug()
+//            .do{
+//                print($0)
+//            }
 //            .map { $0.images }
 //            .do{
 //                self.pageControl.numberOfPages = $0.count

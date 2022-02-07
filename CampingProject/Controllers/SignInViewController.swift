@@ -34,7 +34,6 @@ class SignInViewController: UIViewController{
         apiManager.login(email: email, password: password) { completion in
             if completion {
                 MyGearViewModel.shared.loadGears()
-                
                 UserViewModel()
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
                 
@@ -80,9 +79,9 @@ class SignInViewController: UIViewController{
             if DB.userDefaults.object(forKey: "token") != nil {
                 let user = DB.userDefaults.value(forKey: "token") as! NSDictionary
                 print(user["token"])
-                UserViewModel()
                 apiManager.loginCheck(){ (completion) in
                     if completion {
+                        UserViewModel()
                         self.performSegue(withIdentifier: "MainTabBarController",sender: nil)
                     }
                 }
