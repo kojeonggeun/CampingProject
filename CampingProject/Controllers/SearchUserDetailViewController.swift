@@ -91,14 +91,8 @@ class SearchUserDetailViewController: UIViewController {
   
             }.disposed(by: disposeBag)
 
-        
-        
-   
     }
-
-    
 }
-
 
 extension SearchUserDetailViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

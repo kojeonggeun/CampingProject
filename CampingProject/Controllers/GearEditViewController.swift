@@ -27,7 +27,7 @@ class GearEditViewController: UIViewController {
     var userId: Int = 0
     var allPhotos: PHFetchResult<PHAsset>?
     var imageItem = [ImageData]()
-    var userData: CellData? = nil
+    
     var customView: GearTextListCustomView? = nil
     
     @IBAction func showImagePicker(_ sender: Any) {
@@ -40,7 +40,10 @@ class GearEditViewController: UIViewController {
         self.allPhotos = PHAsset.fetchAssets(with: nil)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
-        store.loadDetailUserGearRx(userId: userId, gearId: gearId)
+        let input = GearDetailViewModel.Input(gearId: Observable.just(gearId))
+        let output = GearDetailViewModel().transform(input: input, disposeBag: disposeBag)
+        
+        output.showGearDetail
             .subscribe(onNext:{ result in
                 self.gearEditCustomView.initPickerView(type: result.gearTypeName!, id: result.gearTypeId!)
                 self.gearEditCustomView.UpdateData(type: result.gearTypeName!, name: result.name!, color: result.color!, company: result.company!, capacity: result.capacity!, buyDate: result.buyDt!, price: result.price!)

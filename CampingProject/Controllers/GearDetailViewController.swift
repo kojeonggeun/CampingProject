@@ -18,8 +18,7 @@ class GearDetailViewController: UIViewController {
     @IBOutlet weak var gearDetailCollectionView: UICollectionView!
     
     static let identifier: String = "GearDetailViewController"
-    var gearId: Int = -1
-    var userId: Int = 0
+    var gearId: Int = 0
     
     let apiManager = APIManager.shared
     
@@ -29,6 +28,9 @@ class GearDetailViewController: UIViewController {
     let DidDeleteCatogoryGearPost: Notification.Name = Notification.Name("DidDeleteCatogoryGearPost")
     
     let disposeBag:DisposeBag = DisposeBag()
+    
+    lazy var input = GearDetailViewModel.Input(gearId: Observable.just(gearId))
+    lazy var output = GearDetailViewModel().transform(input: input, disposeBag: disposeBag)
 //    let detailVM = GearDetailViewModel()
     
     
@@ -66,7 +68,7 @@ class GearDetailViewController: UIViewController {
     @IBAction func gearEdit(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearEditView") as! GearEditViewController
         pushVC.gearId = self.gearId
-        pushVC.userId = self.userId
+//        pushVC.userId = self.userId
         
         self.navigationController?.pushViewController(pushVC, animated: true)
 
@@ -75,19 +77,18 @@ class GearDetailViewController: UIViewController {
     func requestData() {
  
         
-//        GearDetailViewModel.shared.show
-//            .debug()
-//            .do{
-//                print($0)
-//            }
-//            .map { $0.images }
-//            .do{
-//                self.pageControl.numberOfPages = $0.count
-//                self.pageControl.reloadInputViews()
-//            }
-//            .bind(to:gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (row, element, cell) in
-//                cell.onData.onNext(element)
-//            }.disposed(by: disposeBag)
+        
+        output.showGearDetail
+            .map { $0.images }
+            .do{
+                self.pageControl.numberOfPages = $0.count
+                self.pageControl.reloadInputViews()
+            }
+            .bind(to:gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (row, element, cell) in
+                cell.onData.onNext(element)
+            }.disposed(by: disposeBag)
+
+            
           
     }
 

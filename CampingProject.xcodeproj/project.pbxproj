@@ -202,13 +202,13 @@
 		CB6037B926B2728E0023042F /* CampingProject */ = {
 			isa = PBXGroup;
 			children = (
-				CBB3217127AE5D8A005D2A3C /* Domain */,
-				CBB3217027AE5D72005D2A3C /* Repository */,
 				CB6507C82768BB670002257E /* CampingProject.entitlements */,
 				CB6037BA26B2728E0023042F /* AppDelegate.swift */,
 				CB6037BC26B2728E0023042F /* SceneDelegate.swift */,
 				CB6037C326B2728F0023042F /* Assets.xcassets */,
 				CB6037C826B2728F0023042F /* Info.plist */,
+				CBB3217127AE5D8A005D2A3C /* Domain */,
+				CBB3217027AE5D72005D2A3C /* Repository */,
 				CBD5F5D226E9D54600E09B0D /* Cells */,
 				CBD5F5D126E9D50E00E09B0D /* Storyboards */,
 				CB93BE1626D3BE970018AB0D /* Utils */,
