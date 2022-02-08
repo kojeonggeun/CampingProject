@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-struct TableViewCellData {
-    var gearId = [Int]()
-    var isOpened = Bool()
-    var gearTypeName = String()
-    var name = [String]()
-    
-    mutating func update(id:Int, name:String){
-        self.gearId.append(id)
-        self.name.append(name)
-    }
-}
+//struct TableViewCellData {
+//    var gearId = [Int]()
+//    var isOpened = Bool()
+//    var gearTypeName = String()
+//    var name = [String]()
+//    
+//    mutating func update(id:Int, name:String){
+//        self.gearId.append(id)
+//        self.name.append(name)
+//    }
+//}
 
 struct CellData: Decodable {
     var id: Int

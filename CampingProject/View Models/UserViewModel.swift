@@ -23,10 +23,7 @@ class UserViewModel {
     var userObservable: Observable<UserInfo> {
         return user.asObservable()
     }
-    lazy var userId = user.map {
-        $0.user!.id
-    }
-    
+
     init(){
         loadUser()
         
@@ -35,7 +32,6 @@ class UserViewModel {
         store.loadUserInfoRx()
             .subscribe(onNext: { user in
                 self.user.accept(user)
-                
             }).disposed(by: disposeBag)
     }
     

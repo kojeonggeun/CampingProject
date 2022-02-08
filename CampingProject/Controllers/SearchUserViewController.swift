@@ -108,7 +108,6 @@ extension SearchUserViewController: UITableViewDelegate{
             self.page += 1
             self.apiManager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
                 self.appendSearchData(data: data)
-
                 DispatchQueue.main.async {
                     self.fetchingMore = false
                     self.searchTableView.reloadData()
@@ -130,7 +129,6 @@ extension SearchUserViewController: UITableViewDelegate{
         }
         return UITableView.automaticDimension
     }
-    
 }
 
 extension SearchUserViewController: UISearchBarDelegate{

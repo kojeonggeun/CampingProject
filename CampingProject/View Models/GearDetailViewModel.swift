@@ -14,11 +14,13 @@ class GearDetailViewModel: ViewModel {
         let gearId: Observable<Int>
         
     }
+    
     struct Output {
         let showGearDetail: Observable<GearDetail>
     }
+    
     let apiManager = APIManager.shared
- 
+    
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let userId: Int = apiManager.userInfo!.user!.id
@@ -27,8 +29,8 @@ class GearDetailViewModel: ViewModel {
         input.gearId.subscribe(onNext: {
             Store.shared.loadDetailUserGearRx(userId: userId, gearId: $0)
                 .subscribe(onNext: {fetchData.onNext($0)})
+            
         }).disposed(by: disposeBag)
-        
         
         return Output(showGearDetail: fetchData.asObserver())
         

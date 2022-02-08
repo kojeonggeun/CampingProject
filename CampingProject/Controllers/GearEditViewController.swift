@@ -17,18 +17,21 @@ class GearEditViewController: UIViewController {
     
     let userGearVM = UserGearViewModel.shared
     let store = Store.shared
-    let apiService = APIManager.shared
+    let apiManager = APIManager.shared
     let imagePicker = ImagePickerManager()
     let DidReloadPostDetailViewController: Notification.Name = Notification.Name("DidReloadPostDetailViewController")
     let DidReloadPostEdit: Notification.Name = Notification.Name("DidReloadPostEdit")
     let disposeBag = DisposeBag()
     
     var gearId: Int = 0
-    var userId: Int = 0
+    var gearDetail: GearDetail?
     var allPhotos: PHFetchResult<PHAsset>?
     var imageItem = [ImageData]()
     
     var customView: GearTextListCustomView? = nil
+    
+    lazy var input = GearDetailViewModel.Input(gearId: Observable.just(gearId))
+    lazy var output = GearDetailViewModel().transform(input: input, disposeBag: disposeBag)
     
     @IBAction func showImagePicker(_ sender: Any) {
         imagePicker.showMultipleImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
@@ -37,35 +40,30 @@ class GearEditViewController: UIViewController {
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.allPhotos = PHAsset.fetchAssets(with: nil)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
-        let input = GearDetailViewModel.Input(gearId: Observable.just(gearId))
-        let output = GearDetailViewModel().transform(input: input, disposeBag: disposeBag)
         
-        output.showGearDetail
-            .subscribe(onNext:{ result in
-                self.gearEditCustomView.initPickerView(type: result.gearTypeName!, id: result.gearTypeId!)
-                self.gearEditCustomView.UpdateData(type: result.gearTypeName!, name: result.name!, color: result.color!, company: result.company!, capacity: result.capacity!, buyDate: result.buyDt!, price: result.price!)
-              
-                result.images.enumerated().forEach{
-                    let asset = self.allPhotos?.object(at: $0)
-                    self.imageItem.append($1)
-                    let url = URL(string: $1.url)
-                    let data = try? Data(contentsOf: url!)
-                    self.imagePicker.photoArray.append(UIImage(data: data!)!)
-                    self.imagePicker.userSelectedAssets.append(asset!)
-                    self.imagePicker.imageFileName.append($1.orgFilename)
-                        
-                }
-                self.imagePicker.total = self.imagePicker.photoArray.count
-                self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
-                self.imageCollectionView.reloadData()
-                
-            }).disposed(by:disposeBag)
-        
+        if let result = gearDetail{
+            self.gearEditCustomView.initPickerView(type: result.gearTypeName!, id: result.gearTypeId!)
+            self.gearEditCustomView.UpdateData(type: result.gearTypeName!, name: result.name!, color: result.color!, company: result.company!, capacity: result.capacity!, buyDate: result.buyDt!, price: result.price!, desc: result.description!)
+          
+            result.images.enumerated().forEach{
+                let asset = self.allPhotos?.object(at: $0)
+                self.imageItem.append($1)
+                let url = URL(string: $1.url)
+                let data = try? Data(contentsOf: url!)
+                self.imagePicker.photoArray.append(UIImage(data: data!)!)
+                self.imagePicker.userSelectedAssets.append(asset!)
+                self.imagePicker.imageFileName.append($1.orgFilename)
+                    
+            }
+            self.imagePicker.total = self.imagePicker.photoArray.count
+            self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
+            self.imageCollectionView.reloadData()
+        }
         imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
-        
     }
     
     @objc func gearEdit(){
@@ -79,22 +77,16 @@ class GearEditViewController: UIViewController {
         let type = gearEditCustomView.gearTypeId
     
         
-        self.userGearVM.editUserGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
         
-        UserViewModel.shared.userObservable
-            .subscribe(onNext:{
-                print($0.user?.id)
-            })
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
-            self.store.loadDetailUserGearRx(userId: self.userId, gearId: self.gearId)
-                .subscribe(onNext:{
-                    print($0)
-                })
+            self.apiManager.editGear(gearId: self.gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
+                .subscribe()
+                .disposed(by: self.disposeBag)
+            NotificationCenter.default.post(name: NSNotification.Name("edit"), object: nil)
+
             self.navigationController?.popViewController(animated: true)
-            
         })
-        
         present(alert, animated: true, completion: nil)
      
     }

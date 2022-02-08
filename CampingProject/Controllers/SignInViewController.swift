@@ -80,6 +80,7 @@ class SignInViewController: UIViewController{
                 let user = DB.userDefaults.value(forKey: "token") as! NSDictionary
                 print(user["token"])
                 apiManager.loginCheck(){ (completion) in
+                    
                     if completion {
                         UserViewModel()
                         self.performSegue(withIdentifier: "MainTabBarController",sender: nil)

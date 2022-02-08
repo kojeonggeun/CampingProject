@@ -44,7 +44,7 @@ class APIManager{
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
                 
             }
-            // withName에 디비와 매칭되는 값을 넣어야함
+            // withName에 키값 매칭되는 값을 넣어야함
             for i in 0..<image.count{
                 multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: imageName[i],mimeType: "image/jpg")
             }
@@ -73,45 +73,50 @@ class APIManager{
     }
     
 //    장비 수정
-    func editGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String], item: [ImageData]){
-        
-        let headers: HTTPHeaders = [
-                    "Content-type": "multipart/form-data",
-                    "Authorization" : returnToken()]
-        
-        let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
-                                  "color": color, "company": company,
-                                  "capacity": capacity, "price": price,
-                                  "buyDt": date]
-    
-        AF.upload(multipartFormData: { multipartFormData in
-            for (key, value) in parameters {
-                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key as String)
-            }
-            for (index,value) in item.enumerated() {
-                
-                multipartFormData.append("\(value.imageId)".data(using: .utf8)!, withName: "gearImages[\(index)].imageId")
-            }
+    func editGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String], item: [ImageData]) -> Observable<Void>{
+        return Observable.create() { emitter in
+            let headers: HTTPHeaders = [
+                        "Content-type": "multipart/form-data",
+                        "Authorization" : self.returnToken()]
             
-            // withName에 디비와 매칭되는 값을 넣어야함
-            for i in 0..<image.count{
-                multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages[\(i)].image", fileName: imageName[i],mimeType: "image/jpg")
+            let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
+                                      "color": color, "company": company,
+                                      "capacity": capacity, "price": price,
+                                      "buyDt": date]
+        
+            AF.upload(multipartFormData: { multipartFormData in
+                for (key, value) in parameters {
+                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key as String)
+                }
+                for (index,value) in item.enumerated() {
+                    
+                    multipartFormData.append("\(value.imageId)".data(using: .utf8)!, withName: "gearImages[\(index)].imageId")
+                }
                 
-            }
-        }, to: urlUser + "gear/\(gearId)" ,method: .put, headers: headers).uploadProgress(queue: .main, closure: { progress in
+                // withName에 디비와 매칭되는 값을 넣어야함
+                for i in 0..<image.count{
+                    multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages[\(i)].image", fileName: imageName[i],mimeType: "image/jpg")
+                    
+                }
+            }, to: self.urlUser + "gear/\(gearId)" ,method: .put, headers: headers).uploadProgress(queue: .main, closure: { progress in
 
-            print("Upload Progress: \(progress.fractionCompleted)")
+                print("Upload Progress: \(progress.fractionCompleted)")
 
-        }).responseString { response in
-            switch response.result {
-            case .success(_):
-//                TODO: 수정해야함
-                MyGearViewModel.shared.loadGears()
-                
-            case .failure(let error):
-                print(error)
+            }).responseString { response in
+                switch response.result {
+                case .success(_):
+    
+                    emitter.onNext(())
+                    emitter.onCompleted()
+                    
+                    
+                case .failure(let error):
+                    emitter.onError(error)
+                }
             }
+            return Disposables.create()
         }
+        
     
     }
 //    장비타입 로드
@@ -398,7 +403,9 @@ class APIManager{
             .responseDecodable(of: UserInfo.self) { (response) in
                 switch response.result {
                 case .success(_):
+                    
                     self.userInfo = response.value!
+                    
                     completion(response.result)
                 case .failure(let error):
                     print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -468,8 +475,6 @@ class APIManager{
     }
  
     func loadFollower(completion: @escaping (Result<Friends, AFError>) -> Void){
- 
-        
         AF.request(urlUser + "friend/follower" ,method: .get , encoding:URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success(_):

@@ -18,6 +18,7 @@ class GearDetailViewController: UIViewController {
     @IBOutlet weak var gearDetailCollectionView: UICollectionView!
     
     static let identifier: String = "GearDetailViewController"
+    
     var gearId: Int = 0
     
     let apiManager = APIManager.shared
@@ -26,15 +27,14 @@ class GearDetailViewController: UIViewController {
     let store = Store.shared
     let DidDeleteGearPost: Notification.Name = Notification.Name("DidDeleteGearPost")
     let DidDeleteCatogoryGearPost: Notification.Name = Notification.Name("DidDeleteCatogoryGearPost")
-    
+
     let disposeBag:DisposeBag = DisposeBag()
+    
+    var gearDetail: GearDetail?
     
     lazy var input = GearDetailViewModel.Input(gearId: Observable.just(gearId))
     lazy var output = GearDetailViewModel().transform(input: input, disposeBag: disposeBag)
-//    let detailVM = GearDetailViewModel()
-    
-    
-    
+ 
     @IBAction func pageChanged(_ sender: UIPageControl) {
         let indexPath = IndexPath(item: sender.currentPage, section: 0)
         gearDetailCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
@@ -47,7 +47,15 @@ class GearDetailViewController: UIViewController {
         pageControl.pageIndicatorTintColor = UIColor.gray
         pageControl.currentPageIndicatorTintColor = UIColor.red
         
+        
+        
         requestData()
+        
+        NotificationCenter.default.rx.notification(Notification.Name("edit"))
+                    .subscribe(onNext: { [weak self] _ in
+                        self?.requestData()
+                        self?.gearDetailCollectionView.reloadData()
+                    }).disposed(by: disposeBag)
     }
     
     @IBAction func showDeleteAlert(_ sender: Any) {
@@ -68,18 +76,20 @@ class GearDetailViewController: UIViewController {
     @IBAction func gearEdit(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearEditView") as! GearEditViewController
         pushVC.gearId = self.gearId
-//        pushVC.userId = self.userId
+        pushVC.gearDetail = self.gearDetail
         
         self.navigationController?.pushViewController(pushVC, animated: true)
 
     }
     
     func requestData() {
- 
+        gearDetailCollectionView.dataSource = nil
+        gearDetailCollectionView.delegate = nil
         
         
         output.showGearDetail
-            .map { $0.images }
+            .do{ self.gearDetail = $0 }
+            .map{ $0.images }
             .do{
                 self.pageControl.numberOfPages = $0.count
                 self.pageControl.reloadInputViews()
@@ -87,9 +97,6 @@ class GearDetailViewController: UIViewController {
             .bind(to:gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (row, element, cell) in
                 cell.onData.onNext(element)
             }.disposed(by: disposeBag)
-
-            
-          
     }
 
 }

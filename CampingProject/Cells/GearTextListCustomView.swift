@@ -18,6 +18,7 @@ class GearTextListCustomView: UIView{
     @IBOutlet weak var gearCapacity: UITextField!
     @IBOutlet weak var gearBuyDate: UITextField!
     @IBOutlet weak var gearPrice: UITextField!
+    @IBOutlet weak var gearDesc: UITextField!
     
     var apiService: APIManager = APIManager.shared
     var gearTypeId: Int = 0
@@ -65,7 +66,7 @@ class GearTextListCustomView: UIView{
                         
     }
     
-    func UpdateData(type:String, name:String, color:String, company:String, capacity:String,buyDate:String, price:Int ){
+    func UpdateData(type:String, name:String, color:String, company:String, capacity:String,buyDate:String, price:Int, desc:String ){
         
         gearType.text = type
         gearName.text = name
@@ -74,6 +75,7 @@ class GearTextListCustomView: UIView{
         gearCapacity.text = capacity
         gearBuyDate.text = buyDate
         gearPrice.text = "\(price)"
+        gearPrice.text = desc
     }
     
     

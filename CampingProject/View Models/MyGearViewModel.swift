@@ -18,19 +18,23 @@ class MyGearViewModel {
     let disposeBag = DisposeBag()
     
     private let gears = BehaviorRelay<[CellData]>(value: [])
+    private let gearImage = BehaviorRelay<[UIImage]>(value: [])
     private let gearTypes = BehaviorRelay<[GearType]>(value: [])
     
     var gearObservable: Observable<[CellData]> {
         return gears.asObservable()
     }
+    var gearImageObservable: Observable<[UIImage]> {
+        return gearImage.asObservable()
+    }
     var gearTypeObservable: Observable<[GearType]> {
         return gearTypes.asObservable()
     }
-    
-        
+
     init() {
-    
+        
         loadGearType()
+     
     }
     
     func loadGears(){
@@ -39,8 +43,7 @@ class MyGearViewModel {
                 self.gears.accept(data)
             }).disposed(by: disposeBag)
     }
-
-
+    
     func loadGearType(){
         self.apiManager.loadGearType(completion: {  data in
             if data {

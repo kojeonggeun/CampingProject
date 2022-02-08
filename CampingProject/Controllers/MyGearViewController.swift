@@ -78,12 +78,14 @@ class MyGearViewController: UIViewController{
                     }).disposed(by: cell.disposeBag)
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
-        
+
         myGearCollectionView.rx.modelSelected(ViewGear.self)
             .subscribe(onNext: { cell in
+                
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
                 pushVC.gearId = cell.id
                 self.navigationController?.pushViewController(pushVC, animated: true)
+                
             }).disposed(by: disposeBag)
     }
 
