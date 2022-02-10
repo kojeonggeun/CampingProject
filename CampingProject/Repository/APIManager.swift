@@ -27,40 +27,45 @@ class APIManager{
   
     
 //    장비 저장
-    func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]){
-        let headers: HTTPHeaders = [
-                    "Content-type": "multipart/form-data",
-                    "Authorization" : returnToken()
-                ]
-        
-        let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
-                                          "color": color, "company": company,
-                                          "capacity": capacity, "price": price,
-                                          "buyDt": date
-        ]
-        
-        AF.upload(multipartFormData: { multipartFormData in
-            for (key, value) in parameters {
-                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+    func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String]) -> Observable<Void> {
+        return Observable.create() { emitter in
+            let headers: HTTPHeaders = [
+                        "Content-type": "multipart/form-data",
+                        "Authorization" : self.returnToken()
+                    ]
+            
+            let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
+                                              "color": color, "company": company,
+                                              "capacity": capacity, "price": price,
+                                              "buyDt": date
+            ]
+            
+            AF.upload(multipartFormData: { multipartFormData in
+                for (key, value) in parameters {
+                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                    
+                }
+                // withName에 키값 매칭되는 값을 넣어야함
+                for i in 0..<image.count{
+                    multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: imageName[i],mimeType: "image/jpg")
+                }
                 
+            }, to: self.urlUser + "gear",method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
+                
+                print("Upload Progress: \(progress.fractionCompleted)")
+                
+            }).responseJSON { response in
+                switch response.result {
+                case .success(_):
+                        
+                    emitter.onNext(())
+                    emitter.onCompleted()
+                case .failure(let error):
+                    print(error)
+                    emitter.onError(error)
+                }
             }
-            // withName에 키값 매칭되는 값을 넣어야함
-            for i in 0..<image.count{
-                multipartFormData.append(image[i].jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: imageName[i],mimeType: "image/jpg")
-            }
-            
-        }, to: urlUser + "gear",method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
-            
-            print("Upload Progress: \(progress.fractionCompleted)")
-            
-        }).responseJSON { response in
-            switch response.result {
-            case .success(_):
-//                MyGearViewModel.shared.loadGears()
-                print("~~~")
-            case .failure(let error):
-                print(error)
-            }
+            return Disposables.create()
         }
     }
     

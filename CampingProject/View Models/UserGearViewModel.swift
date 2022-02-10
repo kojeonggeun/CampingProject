@@ -20,10 +20,10 @@ class UserGearViewModel {
         return apiManager.userGears
     }
     
-    func addUserGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, image: [UIImage], imageName: [String]){
-        
-        apiManager.addGear(name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName)
-    }
+//    func addUserGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, image: [UIImage], imageName: [String]){
+//        
+//        apiManager.addGear(name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName)
+//    }
     
     func deleteUserGear(gearId: Int){
         

@@ -23,19 +23,13 @@ class GearDetailViewController: UIViewController {
     var gearId: Int = 0
     
     let apiManager = APIManager.shared
-    
     let userGearVM = UserGearViewModel.shared
     let store = Store.shared
-    let DidDeleteGearPost: Notification.Name = Notification.Name("DidDeleteGearPost")
-    let DidDeleteCatogoryGearPost: Notification.Name = Notification.Name("DidDeleteCatogoryGearPost")
-
     let disposeBag:DisposeBag = DisposeBag()
     
     var gearDetail: GearDetail?
     var viewModel: GearDetailViewModel!
     
-    
- 
     init(viewModel: GearDetailViewModel){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -67,9 +61,13 @@ class GearDetailViewController: UIViewController {
                     }).disposed(by: disposeBag)
         
         requestData()
-        
-      
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        
+    }
+
     
     @IBAction func showDeleteAlert(_ sender: Any) {
         

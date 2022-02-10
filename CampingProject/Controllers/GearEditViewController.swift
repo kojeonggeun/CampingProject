@@ -19,8 +19,6 @@ class GearEditViewController: UIViewController {
     let store = Store.shared
     let apiManager = APIManager.shared
     let imagePicker = ImagePickerManager()
-    let DidReloadPostDetailViewController: Notification.Name = Notification.Name("DidReloadPostDetailViewController")
-    let DidReloadPostEdit: Notification.Name = Notification.Name("DidReloadPostEdit")
     let disposeBag = DisposeBag()
     
     var gearId: Int = 0
@@ -29,9 +27,6 @@ class GearEditViewController: UIViewController {
     var imageItem = [ImageData]()
     
     var customView: GearTextListCustomView? = nil
-    
-//    lazy var input = GearDetailViewModel.Input(loadGearDetail: Observable.just(()))
-//    lazy var output = GearDetailViewModel(gearId: gearId).transform(input: input, disposeBag: disposeBag)
 
     @IBAction func showImagePicker(_ sender: Any) {
         imagePicker.showMultipleImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)

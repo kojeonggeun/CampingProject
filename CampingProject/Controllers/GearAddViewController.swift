@@ -16,27 +16,23 @@ import RxCocoa
 import RxSwift
 
 class AddGearViewController: UIViewController {
-    
-    @IBOutlet weak var gearCollectionView: UICollectionView!
-    @IBOutlet weak var customView: GearTextListCustomView!
-    
-    @IBOutlet weak var imageCount: UILabel!
-    
-    
-    var apiService: APIManager = APIManager.shared
+    var apiManager: APIManager = APIManager.shared
     
     let imagePicker = ImagePickerManager()
     let userGearViewModel = UserGearViewModel.shared
     let disposeBag = DisposeBag()
+    var viewModel: MyGearViewModel!
     
-    @IBAction func closeButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    
+    init(viewModel: MyGearViewModel){
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
     }
-    
-    
-    @IBAction func imageSelectButton(_ sender: Any) {
-        imagePicker.showMultipleImagePicker(vc: self, collection: gearCollectionView, countLabel: imageCount)
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
     }
+ 
     
     // MARK: LifeCycles
     override func viewDidLoad() {
@@ -60,14 +56,14 @@ class AddGearViewController: UIViewController {
         guard let date = customView.gearBuyDate.text else { return }
         guard let price = customView.gearPrice.text else { return }
         
-      
+        
+        self.apiManager.addGear(name: name, type: self.customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
+            .subscribe()
+            .disposed(by: disposeBag)
         
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
-            self.userGearViewModel.addUserGear(name: name, type: self.customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
-            
-//            MyGearViewModel.shared.loadGears()
-                
+            self.viewModel.loadGears()
             self.navigationController?.popViewController(animated: true)
             
             
@@ -75,6 +71,20 @@ class AddGearViewController: UIViewController {
         self.present(alert, animated: true)
         
     }
+    
+    @IBOutlet weak var gearCollectionView: UICollectionView!
+    @IBOutlet weak var customView: GearTextListCustomView!
+    
+    @IBOutlet weak var imageCount: UILabel!
+    
+    @IBAction func closeButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func imageSelectButton(_ sender: Any) {
+        imagePicker.showMultipleImagePicker(vc: self, collection: gearCollectionView, countLabel: imageCount)
+    }
+    
 }
 
 
@@ -112,7 +122,7 @@ extension AddGearViewController: UICollectionViewDataSource {
 
         self.imageCount.text = "(\(imagePicker.photoArray.count) / 5"
     }
-
+    
 }
 
 

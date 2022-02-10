@@ -7,34 +7,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 class MyGearViewController: UIViewController{
-    @IBOutlet weak var myGearCollectionView: UICollectionView!
-    @IBOutlet weak var categoryCollectionView: UICollectionView!
-        
-    var segueText: String = ""
     var collectionIndexPath = IndexPath()
     
-    let gearTypeVM = GearTypeViewModel()
-    let userGearVM = UserGearViewModel.shared
-    let apiManager: APIManager = APIManager.shared
-    let myGearVM: MyGearViewModel = MyGearViewModel.shared
-    
     var viewModel: MyGearViewModel!
-    
     var disposeBag:DisposeBag = DisposeBag()
-    
-
-    @IBAction func addGearMove(_ sender: Any) {
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView")
-        self.navigationController?.pushViewController(pushVC!, animated: true)
-        
-    }
-    @IBAction func unwind(_ sender: Any) {
-        DB.userDefaults.removeObject(forKey: "token")
-        DB.userDefaults.set(false, forKey: "Auto")
-        ProfileViewModel.shared.clearUserCount()
-
-        performSegue(withIdentifier: "unwindVC1", sender: self)
-    }
     
     init(viewModel: MyGearViewModel){
         self.viewModel = viewModel
@@ -54,43 +30,37 @@ class MyGearViewController: UIViewController{
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
         myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
-        
-        self.loadData()
+        myGearCollectionView.rx.setDelegate(self)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidDeleteGearPost"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
-        
-        
-        
+        loadData()
     } // end viewDidLoad
-  
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-    }
 
     func loadData(){
+        
         let didSelect = myGearCollectionView.rx
             .modelSelected(ViewGear.self)
             .asDriver()
-
+        
         let input = MyGearViewModel.Input(didSelectCell: didSelect)
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
         input.loadGears.onNext(())
         
-        output.gearObservable
+        viewModel.gears
             .map{ $0.map { ViewGear($0) } }
             .bind(to: myGearCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 cell.onData.onNext(element)
             }.disposed(by: disposeBag)
         
-        output.gearTypeObservable
+
+        viewModel.gearTypes
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
                 
                 cell.categoryButton.rx.tap.asDriver()
                     .drive(onNext: { [weak self] in
                         let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: CategoryCollectionViewController.identifier) as! CategoryCollectionViewController
                             pushVC.gearTypeNum = row
+                            pushVC.viewModel = self?.viewModel
                         self?.navigationController?.pushViewController(pushVC, animated: true)
                         
                     }).disposed(by: cell.disposeBag)
@@ -106,45 +76,26 @@ class MyGearViewController: UIViewController{
                 self.navigationController?.pushViewController(pushVC, animated: true)
             }).disposed(by: disposeBag)
     }
-
-    @objc func reloadTableView(_ noti: Notification) {
-
-        var CategoryIndexPath: IndexPath = []
-        
-        if let row =  noti.userInfo?["gearRow"] as? Int {
-            if row != -1 {
-                CategoryIndexPath = [0, row]
-            } else {
-                CategoryIndexPath = self.collectionIndexPath
-            }
-        }
-
-        if noti.userInfo?["delete"] as? Bool ?? false {
-            self.myGearCollectionView.performBatchUpdates({
-                self.myGearCollectionView.deleteItems(at:[CategoryIndexPath])
-            }, completion: { (done) in
-                 //perform table refresh
-            })
-        }
-        
-        if noti.userInfo?["edit"] as? Bool ?? false {
-            self.myGearCollectionView.reloadData()
-        }
-    }
   
-    
-}
 
+    @IBOutlet weak var myGearCollectionView: UICollectionView!
+    @IBOutlet weak var categoryCollectionView: UICollectionView!
 
-extension MyGearViewController: UICollectionViewDelegate{
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //      카테고리 적용 시 필요
-                let first = self.userGearVM.userGears.firstIndex(where: { $0.id == self.userGearVM.userGears[indexPath.row].id})!
-                collectionIndexPath = indexPath
-                
+    @IBAction func addGearMove(_ sender: Any) {
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView") as! AddGearViewController
+        pushVC.viewModel = viewModel
+        self.navigationController?.pushViewController(pushVC, animated: true)
+        
+    }
+    @IBAction func unwind(_ sender: Any) {
+        DB.userDefaults.removeObject(forKey: "token")
+        DB.userDefaults.set(false, forKey: "Auto")
+        ProfileViewModel.shared.clearUserCount()
+
+        performSegue(withIdentifier: "unwindVC1", sender: self)
     }
 }
+
 
 extension MyGearViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -25,8 +25,17 @@ class CategoryCollectionViewController: UIViewController {
     var gearTypeNum: Int = 0
     var gearType: String = ""
     var tableIndex: IndexPath = []
+    var viewModel: MyGearViewModel!
    
-  
+    
+    init(viewModel: MyGearViewModel){
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
     
     // MARK: LifeCycles
     override func viewDidLoad() {
@@ -62,21 +71,22 @@ class CategoryCollectionViewController: UIViewController {
     }
     
     func loadData(){
-//        MyGearViewModel.shared.gearObservable
-//            .map {
-//                $0.filter { $0.gearTypeName == self.gearType}
-//            }
-//            .map{ $0.map { ViewGear($0) } }
-//            .bind(to: categoryCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-//                cell.onData.onNext(element)
-//            }.disposed(by: disposeBag)
-//        
-//        categoryCollectionView.rx.modelSelected(ViewGear.self)
-//            .subscribe(onNext: { cell in
-//                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
-//                pushVC.gearId = cell.id
-//                self.navigationController?.pushViewController(pushVC, animated: true)
-//            })
+        viewModel.gears
+            .map {
+                $0.filter { $0.gearTypeName == self.gearType}
+            }
+            .map{ $0.map { ViewGear($0) } }
+            .bind(to: categoryCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+                cell.onData.onNext(element)
+            }.disposed(by: disposeBag)
+        
+        categoryCollectionView.rx.modelSelected(ViewGear.self)
+            .subscribe(onNext: { cell in
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
+                pushVC.gearId = cell.id
+                pushVC.viewModel = GearDetailViewModel(gearId: cell.id)
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
     }
 }
 
