@@ -11,12 +11,6 @@ import Photos
 import RxSwift
 
 class GearEditViewController: UIViewController {
-    @IBOutlet weak var gearEditCustomView: GearTextListCustomView!
-    @IBOutlet weak var imageCollectionView: UICollectionView!
-    @IBOutlet weak var imageCount: UILabel!
-    
-    let userGearVM = UserGearViewModel.shared
-    let store = Store.shared
     let apiManager = APIManager.shared
     let imagePicker = ImagePickerManager()
     let disposeBag = DisposeBag()
@@ -28,10 +22,6 @@ class GearEditViewController: UIViewController {
     
     var customView: GearTextListCustomView? = nil
 
-    @IBAction func showImagePicker(_ sender: Any) {
-        imagePicker.showMultipleImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
-    }
-    
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +29,10 @@ class GearEditViewController: UIViewController {
         self.allPhotos = PHAsset.fetchAssets(with: nil)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
-        print(gearDetail)
+    
         if let result = gearDetail{
             self.gearEditCustomView.initPickerView(type: result.gearTypeName!, id: result.gearTypeId!)
             self.gearEditCustomView.UpdateData(type: result.gearTypeName!, name: result.name!, color: result.color!, company: result.company!, capacity: result.capacity!, buyDate: result.buyDt!, price: result.price!, desc: result.description!)
-//          TODO: data! 에러 해결해야함
             result.images.enumerated().forEach{
                 let asset = self.allPhotos?.object(at: $0)
                 self.imageItem.append($1)
@@ -77,12 +66,22 @@ class GearEditViewController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
+//            TODO: 수정 이상함 에러뜸,🚫loadDetailUserGear  Alamofire Request Error
+            NotificationCenter.default.post(name: .edit, object: nil)
+            NotificationCenter.default.post(name: .home, object: nil)
             
-            NotificationCenter.default.post(name: NSNotification.Name("edit"), object: nil)
             self.navigationController?.popViewController(animated: true)
         })
         present(alert, animated: true, completion: nil)
      
+    }
+    
+    @IBOutlet weak var gearEditCustomView: GearTextListCustomView!
+    @IBOutlet weak var imageCollectionView: UICollectionView!
+    @IBOutlet weak var imageCount: UILabel!
+    
+    @IBAction func showImagePicker(_ sender: Any) {
+        imagePicker.showMultipleImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
     }
 }
 
@@ -102,7 +101,6 @@ extension GearEditViewController: UICollectionViewDataSource{
         
         return cell
     }
-    
     
     @objc func buttonAction(_ sender: UIButton){
         

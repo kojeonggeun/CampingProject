@@ -49,3 +49,12 @@ extension UITextField {
         self.leftViewMode = ViewMode.always
     }
 }
+
+extension NSNotification.Name {
+    static let edit = NSNotification.Name("reloadAgfterEdit")
+    static let delete = NSNotification.Name("reloadAfterDelete")
+    static let home = NSNotification.Name("reloadAfterMyGearVC")
+  
+    
+}
+

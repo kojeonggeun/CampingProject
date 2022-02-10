@@ -33,7 +33,6 @@ class SignInViewController: UIViewController{
         
         apiManager.login(email: email, password: password) { completion in
             if completion {
-                print("11111")
                 UserViewModel()
                 self.performSegue(withIdentifier: "MainTabBarController", sender: email)
                 
@@ -79,10 +78,8 @@ class SignInViewController: UIViewController{
             if DB.userDefaults.object(forKey: "token") != nil {
                 let user = DB.userDefaults.value(forKey: "token") as! NSDictionary
                 print(user["token"])
-
                 apiManager.loginCheck(){ (completion) in
                     if completion {
-                        
                         UserViewModel()
                         self.performSegue(withIdentifier: "MainTabBarController",sender: nil)
                     }
@@ -100,66 +97,3 @@ class SignInViewController: UIViewController{
     }
     
 }
-
-
-
-//    TODO: 추후 소셜 로그인 구현 예정(백엔드 친구와 의논 후)
-/*
-    func setupAppleLogin(){
-        let appleLoginButton = ASAuthorizationAppleIDButton(type:.signIn, style:.black)
-        appleLoginButton.addTarget(self, action: #selector(appleLoginButtonPress), for: .touchUpInside)
-        self.appleLoginView.addArrangedSubview(appleLoginButton)
-
-    }
-
-    @objc func appleLoginButtonPress(){
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.fullName, .email]
-
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()
-
-    }
-
-extension SignInViewController: ASAuthorizationControllerDelegate{
-//  Apple로그인 인증 성공 시 인증 정보 반환 함수
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        print(authorization.credential)
-        switch authorization.credential {
-            
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            
-            
-            let tokeStr = String(data: appleIDCredential.identityToken!, encoding: .utf8)
-            print(tokeStr)
-            print(userIdentifier, fullName, email)
-            
-        case let passwordCredential as ASPasswordCredential:
-            let userName = passwordCredential.user
-            let password = passwordCredential.password
-            print(userName, password)
-            
-        default:
-            break
-    }
-
-}
-//    Apple로그인 인증 실패 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("Error: \(error)")
-    }
-}
- 
- 
- extension SignInViewController: ASAuthorizationControllerPresentationContextProviding{
-     
-     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-         return self.view.window!
-     }
- }
-*/

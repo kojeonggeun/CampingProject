@@ -43,8 +43,6 @@ class AddGearViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         imageCount.text = "(\(imagePicker.photoArray.count) / 5"
-        gearCollectionView.register(UINib(nibName:String(describing: GearImageCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "imageCell")
-//        imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
     }
     
     @objc func gearSave(_ sender: UIButton) {
@@ -122,24 +120,5 @@ extension AddGearViewController: UICollectionViewDataSource {
 
         self.imageCount.text = "(\(imagePicker.photoArray.count) / 5"
     }
-    
+
 }
-
-
-extension AddGearViewController: UICollectionViewDelegate{
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
-}
-
-//extension AddGearViewController: UICollectionViewDelegateFlowLayout {
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        // 5 - card(width) - 5 - card(width) - 5
-//        let width: CGFloat = (collectionView.bounds.width - (30 * 3))
-//
-//        let height: CGFloat = width + 60
-//        return CGSize(width: width, height: height)
-//    }
-//}
-
-

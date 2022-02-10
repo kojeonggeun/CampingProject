@@ -73,7 +73,7 @@ class APIManager{
     func deleteGear(gearId: Int) {
         
         AF.request(urlUser + "gear/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
-//            MyGearViewModel.shared.loadGears()
+            NotificationCenter.default.post(name: .delete, object: nil)
         }
     }
     

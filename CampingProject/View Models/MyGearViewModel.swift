@@ -56,7 +56,6 @@ class MyGearViewModel {
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         input.loadGears
             .subscribe({_ in 
-                print("123123")
             })
         let didSelectCell = input.didSelectCell.do(onNext: { [weak self] gearId in })
 

@@ -51,23 +51,17 @@ class GearDetailViewController: UIViewController {
         pageControl.pageIndicatorTintColor = UIColor.gray
         pageControl.currentPageIndicatorTintColor = UIColor.red
         
+        setBind()
         
-        NotificationCenter.default.rx.notification(Notification.Name("edit"))
+        NotificationCenter.default.rx.notification(.edit)
                     .subscribe(onNext: { [weak self] _ in
                         self?.gearDetailCollectionView.dataSource = nil
                         self?.gearDetailCollectionView.delegate = nil
                         self?.gearDetailCollectionView.rx.setDelegate(self!).disposed(by: self!.disposeBag)
-                        self?.requestData()
+                        self?.setBind()
                     }).disposed(by: disposeBag)
         
-        requestData()
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        
-    }
-
     
     @IBAction func showDeleteAlert(_ sender: Any) {
         
@@ -93,7 +87,7 @@ class GearDetailViewController: UIViewController {
 
     }
     
-    func requestData() {
+    func setBind() {
         let input = GearDetailViewModel.Input()
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         

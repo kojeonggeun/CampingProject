@@ -25,16 +25,23 @@ class MyGearViewController: UIViewController{
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+    
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
         myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
         myGearCollectionView.rx.setDelegate(self)
-
+        
+        NotificationCenter.default.rx.notification(.home)
+                    .subscribe(onNext: { [weak self] _ in
+                        self?.viewModel.loadGears()
+                    }).disposed(by: disposeBag)
+        NotificationCenter.default.rx.notification(.delete)
+                    .subscribe(onNext: { [weak self] _ in
+                        self?.viewModel.loadGears()
+                    }).disposed(by: disposeBag)
         loadData()
     } // end viewDidLoad
-
+ 
     func loadData(){
         
         let didSelect = myGearCollectionView.rx
@@ -55,7 +62,6 @@ class MyGearViewController: UIViewController{
 
         viewModel.gearTypes
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
-                
                 cell.categoryButton.rx.tap.asDriver()
                     .drive(onNext: { [weak self] in
                         let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: CategoryCollectionViewController.identifier) as! CategoryCollectionViewController
@@ -83,7 +89,7 @@ class MyGearViewController: UIViewController{
 
     @IBAction func addGearMove(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView") as! AddGearViewController
-        pushVC.viewModel = viewModel
+        
         self.navigationController?.pushViewController(pushVC, animated: true)
         
     }

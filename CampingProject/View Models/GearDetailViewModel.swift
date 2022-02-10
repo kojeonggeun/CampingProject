@@ -27,6 +27,7 @@ class GearDetailViewModel: ViewModel {
     init(gearId: Int){
         self.gearId = gearId
     }
+    
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         
         let userId: Int = apiManager.userInfo!.user!.id

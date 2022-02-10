@@ -12,21 +12,16 @@ import RxCocoa
 
 
 class CategoryCollectionViewController: UIViewController {
-      
-    @IBOutlet var categoryCollectionView: UICollectionView!
+
     
     static let identifier:String  = "CategoryCollectionViewController"
-    let gearTypeVM = GearTypeViewModel()
-    let userGearVM = UserGearViewModel.shared
     
-    let apiManager: APIManager = APIManager.shared
     let disposeBag = DisposeBag()
+
+    var viewModel: MyGearViewModel!
     
     var gearTypeNum: Int = 0
     var gearType: String = ""
-    var tableIndex: IndexPath = []
-    var viewModel: MyGearViewModel!
-   
     
     init(viewModel: MyGearViewModel){
         self.viewModel = viewModel
@@ -40,37 +35,19 @@ class CategoryCollectionViewController: UIViewController {
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        gearType = gearTypeVM.gearTypes[gearTypeNum].gearName
+        viewModel.gearTypes.do{ self.gearType = $0[self.gearTypeNum].gearName }.subscribe().disposed(by: disposeBag)
         self.title = gearType
-        userGearVM.categoryUserData(type: gearType)
+    
         categoryCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: MyGearCollectionViewCell.identifier)
   
         categoryCollectionView.rx.setDelegate(self)
-            .disposed(by: disposeBag
-            )
-        loadData()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.deleteTableCell(_:)), name: NSNotification.Name("DidDeleteCatogoryGearPost"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView(_:)), name: NSNotification.Name("DidReloadPostEdit"), object: nil)
+        setBind()
+        
     }
     
-    @objc func deleteTableCell(_ noti: Notification) {
-        self.categoryCollectionView.performBatchUpdates({
-            self.userGearVM.deleteCategoryData(row: tableIndex.row)
-            self.categoryCollectionView.deleteItems(at: [self.tableIndex])
-        }, completion: { (done) in
-             //perform table refresh
-        })
     
-    }
-    
-    @objc func reloadTableView(_ noti: Notification){
-        if noti.userInfo?["edit"] as! Bool{
-            self.categoryCollectionView.reloadData()
-        }
-    }
-    
-    func loadData(){
+    func setBind(){
         viewModel.gears
             .map {
                 $0.filter { $0.gearTypeName == self.gearType}
@@ -86,8 +63,10 @@ class CategoryCollectionViewController: UIViewController {
                 pushVC.gearId = cell.id
                 pushVC.viewModel = GearDetailViewModel(gearId: cell.id)
                 self.navigationController?.pushViewController(pushVC, animated: true)
-            })
+            }).disposed(by: disposeBag)
     }
+    
+    @IBOutlet var categoryCollectionView: UICollectionView!
 }
 
 extension CategoryCollectionViewController: UICollectionViewDelegateFlowLayout{
