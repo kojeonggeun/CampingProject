@@ -66,7 +66,7 @@ class AddGearViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
             self.userGearViewModel.addUserGear(name: name, type: self.customView.gearTypeId, color: color, company: company, capacity: capacity, date: date ,price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
             
-            MyGearViewModel.shared.loadGears()
+//            MyGearViewModel.shared.loadGears()
                 
             self.navigationController?.popViewController(animated: true)
             

@@ -30,9 +30,9 @@ class GearEditViewController: UIViewController {
     
     var customView: GearTextListCustomView? = nil
     
-    lazy var input = GearDetailViewModel.Input(gearId: Observable.just(gearId))
-    lazy var output = GearDetailViewModel().transform(input: input, disposeBag: disposeBag)
-    
+//    lazy var input = GearDetailViewModel.Input(loadGearDetail: Observable.just(()))
+//    lazy var output = GearDetailViewModel(gearId: gearId).transform(input: input, disposeBag: disposeBag)
+
     @IBAction func showImagePicker(_ sender: Any) {
         imagePicker.showMultipleImagePicker(vc: self, collection: imageCollectionView, countLabel: imageCount)
     }
@@ -44,11 +44,11 @@ class GearEditViewController: UIViewController {
         self.allPhotos = PHAsset.fetchAssets(with: nil)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
-        
+        print(gearDetail)
         if let result = gearDetail{
             self.gearEditCustomView.initPickerView(type: result.gearTypeName!, id: result.gearTypeId!)
             self.gearEditCustomView.UpdateData(type: result.gearTypeName!, name: result.name!, color: result.color!, company: result.company!, capacity: result.capacity!, buyDate: result.buyDt!, price: result.price!, desc: result.description!)
-          
+//          TODO: data! 에러 해결해야함
             result.images.enumerated().forEach{
                 let asset = self.allPhotos?.object(at: $0)
                 self.imageItem.append($1)
@@ -57,7 +57,7 @@ class GearEditViewController: UIViewController {
                 self.imagePicker.photoArray.append(UIImage(data: data!)!)
                 self.imagePicker.userSelectedAssets.append(asset!)
                 self.imagePicker.imageFileName.append($1.orgFilename)
-                    
+                
             }
             self.imagePicker.total = self.imagePicker.photoArray.count
             self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
@@ -75,16 +75,15 @@ class GearEditViewController: UIViewController {
         guard let date = gearEditCustomView.gearBuyDate.text else { return }
         guard let price = gearEditCustomView.gearPrice.text else { return }
         let type = gearEditCustomView.gearTypeId
-    
         
+        self.apiManager.editGear(gearId: self.gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
+            .subscribe()
+            .disposed(by: self.disposeBag)
         
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
-            self.apiManager.editGear(gearId: self.gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
-                .subscribe()
-                .disposed(by: self.disposeBag)
+            
             NotificationCenter.default.post(name: NSNotification.Name("edit"), object: nil)
-
             self.navigationController?.popViewController(animated: true)
         })
         present(alert, animated: true, completion: nil)

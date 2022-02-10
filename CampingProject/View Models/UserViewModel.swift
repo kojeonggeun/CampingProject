@@ -16,8 +16,7 @@ class UserViewModel {
     let store = Store.shared
     let apiManager = APIManager.shared
     let disposeBag = DisposeBag()
-    
-    
+
     private let user = PublishRelay<UserInfo>()
     
     var userObservable: Observable<UserInfo> {

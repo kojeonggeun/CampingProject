@@ -62,21 +62,21 @@ class CategoryCollectionViewController: UIViewController {
     }
     
     func loadData(){
-        MyGearViewModel.shared.gearObservable
-            .map {
-                $0.filter { $0.gearTypeName == self.gearType}
-            }
-            .map{ $0.map { ViewGear($0) } }
-            .bind(to: categoryCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-                cell.onData.onNext(element)
-            }.disposed(by: disposeBag)
-        
-        categoryCollectionView.rx.modelSelected(ViewGear.self)
-            .subscribe(onNext: { cell in
-                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
-                pushVC.gearId = cell.id
-                self.navigationController?.pushViewController(pushVC, animated: true)
-            })
+//        MyGearViewModel.shared.gearObservable
+//            .map {
+//                $0.filter { $0.gearTypeName == self.gearType}
+//            }
+//            .map{ $0.map { ViewGear($0) } }
+//            .bind(to: categoryCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
+//                cell.onData.onNext(element)
+//            }.disposed(by: disposeBag)
+//        
+//        categoryCollectionView.rx.modelSelected(ViewGear.self)
+//            .subscribe(onNext: { cell in
+//                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
+//                pushVC.gearId = cell.id
+//                self.navigationController?.pushViewController(pushVC, animated: true)
+//            })
     }
 }
 

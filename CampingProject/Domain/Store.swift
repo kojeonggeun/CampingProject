@@ -61,7 +61,6 @@ class Store {
             return Disposables.create()
         }
     }
-
     func loadDetailUserGearRx(userId: Int, gearId: Int) -> Observable<GearDetail>{
         return Observable.create() { emitter in
             self.api.loadDetailUserGear(userId: userId, gearId: gearId) { result in

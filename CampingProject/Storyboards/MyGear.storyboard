@@ -351,6 +351,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="delegate" destination="M0N-Qk-oPP" id="TzT-5g-hk6"/>
+                                </connections>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="z25-C0-ON3">
                                 <rect key="frame" x="107" y="257" width="200" height="26"/>

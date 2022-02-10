@@ -9,10 +9,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+
+
 class GearDetailViewModel: ViewModel {
     struct Input {
-        let gearId: Observable<Int>
-        
+        let loadGearDetail: PublishSubject<Void> = PublishSubject<Void>()
     }
     
     struct Output {
@@ -20,16 +21,20 @@ class GearDetailViewModel: ViewModel {
     }
     
     let apiManager = APIManager.shared
+
+    private var gearId:Int
     
-    
+    init(gearId: Int){
+        self.gearId = gearId
+    }
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        
         let userId: Int = apiManager.userInfo!.user!.id
         let fetchData = PublishSubject<GearDetail>()
         
-        input.gearId.subscribe(onNext: {
-            Store.shared.loadDetailUserGearRx(userId: userId, gearId: $0)
+        input.loadGearDetail.subscribe(onNext: {
+            Store.shared.loadDetailUserGearRx(userId: userId, gearId: self.gearId)
                 .subscribe(onNext: {fetchData.onNext($0)})
-            
         }).disposed(by: disposeBag)
         
         return Output(showGearDetail: fetchData.asObserver())

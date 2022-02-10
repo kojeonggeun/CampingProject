@@ -16,41 +16,39 @@ class MyGearViewModel {
     let store = Store.shared
     let apiManager = APIManager.shared
     let disposeBag = DisposeBag()
+   
+    struct Input {
+        let loadGears: PublishSubject<Void> = PublishSubject<Void>()
+        let didSelectCell: Driver<ViewGear>
+    }
     
-    private let gears = BehaviorRelay<[CellData]>(value: [])
-    private let gearImage = BehaviorRelay<[UIImage]>(value: [])
-    private let gearTypes = BehaviorRelay<[GearType]>(value: [])
-    
-    var gearObservable: Observable<[CellData]> {
-        return gears.asObservable()
-    }
-    var gearImageObservable: Observable<[UIImage]> {
-        return gearImage.asObservable()
-    }
-    var gearTypeObservable: Observable<[GearType]> {
-        return gearTypes.asObservable()
-    }
-
-    init() {
+    struct Output {
+        let gearObservable: BehaviorRelay<[CellData]>
+        let gearTypeObservable: BehaviorRelay<[GearType]>
+        let didSelectCell: Driver<ViewGear>
         
-        loadGearType()
-     
-    }
-    
-    func loadGears(){
-        store.loadUserGearRx()
-            .subscribe(onNext: { data in
-                self.gears.accept(data)
-            }).disposed(by: disposeBag)
-    }
-    
-    func loadGearType(){
-        self.apiManager.loadGearType(completion: {  data in
-            if data {
-                self.gearTypes.accept(self.apiManager.gearTypes)
-            }
-        })
     }
 
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        let gears = BehaviorRelay<[CellData]>(value: [])
+        let gearTypes = BehaviorRelay<[GearType]>(value: [])
+        
+        input.loadGears
+            .subscribe(onNext: {[weak self] _ in
+                 self?.store.loadUserGearRx().map{ $0 }.subscribe(onNext:{
+                    gears.accept($0)
+                })
+                 self?.apiManager.loadGearType().map{ $0 }.subscribe(onNext:{
+                    gearTypes.accept($0)
+                })
+            }).disposed(by: disposeBag)
+        
+        let didSelectCell = input.didSelectCell.do(onNext: { [weak self] gearId in
+            
+        })
+          
+        return Output(gearObservable: gears, gearTypeObservable: gearTypes, didSelectCell: didSelectCell)
+    }
+    
 }
 

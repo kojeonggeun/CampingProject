@@ -25,6 +25,7 @@ class SignUpViewController: UIViewController {
     let signUpVM = SignUpViewModel()
     let disposeBag: DisposeBag = DisposeBag()
     
+    
     private lazy var input = SignUpViewModel.Input(checkEmail: emailNextButton.rx.tap.map{
         self.emailTextField.text!
     })

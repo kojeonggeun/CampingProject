@@ -13,6 +13,7 @@ import RxCocoa
 
 import simd
 
+//TODO: MyGearVC에서 GearDetail 데이터를 받아서 GearDetailVM에 주입해
 class GearDetailViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var gearDetailCollectionView: UICollectionView!
@@ -31,10 +32,19 @@ class GearDetailViewController: UIViewController {
     let disposeBag:DisposeBag = DisposeBag()
     
     var gearDetail: GearDetail?
+    var viewModel: GearDetailViewModel!
     
-    lazy var input = GearDetailViewModel.Input(gearId: Observable.just(gearId))
-    lazy var output = GearDetailViewModel().transform(input: input, disposeBag: disposeBag)
+    
  
+    init(viewModel: GearDetailViewModel){
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+    
     @IBAction func pageChanged(_ sender: UIPageControl) {
         let indexPath = IndexPath(item: sender.currentPage, section: 0)
         gearDetailCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
@@ -48,14 +58,17 @@ class GearDetailViewController: UIViewController {
         pageControl.currentPageIndicatorTintColor = UIColor.red
         
         
+        NotificationCenter.default.rx.notification(Notification.Name("edit"))
+                    .subscribe(onNext: { [weak self] _ in
+                        self?.gearDetailCollectionView.dataSource = nil
+                        self?.gearDetailCollectionView.delegate = nil
+                        self?.gearDetailCollectionView.rx.setDelegate(self!).disposed(by: self!.disposeBag)
+                        self?.requestData()
+                    }).disposed(by: disposeBag)
         
         requestData()
         
-        NotificationCenter.default.rx.notification(Notification.Name("edit"))
-                    .subscribe(onNext: { [weak self] _ in
-                        self?.requestData()
-                        self?.gearDetailCollectionView.reloadData()
-                    }).disposed(by: disposeBag)
+      
     }
     
     @IBAction func showDeleteAlert(_ sender: Any) {
@@ -83,10 +96,11 @@ class GearDetailViewController: UIViewController {
     }
     
     func requestData() {
-        gearDetailCollectionView.dataSource = nil
-        gearDetailCollectionView.delegate = nil
+        let input = GearDetailViewModel.Input()
+        let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
-        
+        input.loadGearDetail.onNext(())
+
         output.showGearDetail
             .do{ self.gearDetail = $0 }
             .map{ $0.images }
@@ -95,6 +109,7 @@ class GearDetailViewController: UIViewController {
                 self.pageControl.reloadInputViews()
             }
             .bind(to:gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (row, element, cell) in
+                
                 cell.onData.onNext(element)
             }.disposed(by: disposeBag)
     }

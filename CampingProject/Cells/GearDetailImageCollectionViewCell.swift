@@ -39,7 +39,7 @@ class GearDetailImageCollectionViewCell: UICollectionViewCell {
                     AF.request(gear.url).responseImage { response in
                         switch response.result{
                         case .success(let image):
-                            print(image)
+                            
                             self!.gearDetailImage.image = image
                         case .failure(let err):
                             print(err)

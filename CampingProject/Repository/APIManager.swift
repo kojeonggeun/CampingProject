@@ -56,8 +56,8 @@ class APIManager{
         }).responseJSON { response in
             switch response.result {
             case .success(_):
-                MyGearViewModel.shared.loadGears()
-                
+//                MyGearViewModel.shared.loadGears()
+                print("~~~")
             case .failure(let error):
                 print(error)
             }
@@ -68,7 +68,7 @@ class APIManager{
     func deleteGear(gearId: Int) {
         
         AF.request(urlUser + "gear/\(gearId)", method: .delete,headers: self.headerInfo()).validate(statusCode: 200..<300).response { (response) in
-            MyGearViewModel.shared.loadGears()
+//            MyGearViewModel.shared.loadGears()
         }
     }
     
@@ -105,11 +105,9 @@ class APIManager{
             }).responseString { response in
                 switch response.result {
                 case .success(_):
-    
+                    
                     emitter.onNext(())
                     emitter.onCompleted()
-                    
-                    
                 case .failure(let error):
                     emitter.onError(error)
                 }
@@ -120,32 +118,34 @@ class APIManager{
     
     }
 //    장비타입 로드
-    func loadGearType(completion: @escaping (Bool) -> Void ) {
-        
-        AF.request(url + "common/config",
-                   method: .get,
-                   parameters: nil,
-                   encoding: URLEncoding.default,
-                   headers: nil)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of:Response.self) { (response) in
-                
-                switch response.result{
-                case .success:
-                    let gears = response.value!
-                    self.gearTypes.removeAll()
+    func loadGearType() -> Observable<[GearType]> {
+        return Observable.create() { emitter in
+            AF.request(self.url + "common/config",
+                       method: .get,
+                       parameters: nil,
+                       encoding: URLEncoding.default,
+                       headers: nil)
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of:Response.self) { (response) in
                     
-                    for i in gears.gearTypes {
-                        self.gearTypes.append(i)
+                    switch response.result{
+                    case .success:
+                        let gears = response.value!
+                        self.gearTypes.removeAll()
+                        
+                        for i in gears.gearTypes {
+                            self.gearTypes.append(i)
+                        }
+                        emitter.onNext(self.gearTypes)
+                        emitter.onCompleted()
+                    case .failure(let error):
+                        print(error)
+                        emitter.onError(error)
+                        
                     }
-                
-                    completion(true)
-                    
-                case .failure(let error):
-                    print(error)
-                    completion(false)
                 }
-            }
+            return Disposables.create()
+        }
     }
 
 //  유저 장비 로드
@@ -392,9 +392,7 @@ class APIManager{
 //    TODO: Obserble 만들어야함
 
     func loadUserInfo(completion: @escaping (Result<UserInfo, AFError>)-> Void) {
-        
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
-        
         AF.request(urlUser,
                    method: .get,
                    encoding: URLEncoding.default,
@@ -403,7 +401,6 @@ class APIManager{
             .responseDecodable(of: UserInfo.self) { (response) in
                 switch response.result {
                 case .success(_):
-                    
                     self.userInfo = response.value!
                     
                     completion(response.result)

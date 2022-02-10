@@ -17,6 +17,9 @@ class MyGearViewController: UIViewController{
     let userGearVM = UserGearViewModel.shared
     let apiManager: APIManager = APIManager.shared
     let myGearVM: MyGearViewModel = MyGearViewModel.shared
+    
+    var viewModel: MyGearViewModel!
+    
     var disposeBag:DisposeBag = DisposeBag()
     
 
@@ -32,8 +35,18 @@ class MyGearViewController: UIViewController{
 
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }
-
-  // MARK: LifeCycles
+    
+    init(viewModel: MyGearViewModel){
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+ 
+    
+    // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,17 +69,22 @@ class MyGearViewController: UIViewController{
     }
 
     func loadData(){
+        let didSelect = myGearCollectionView.rx
+            .modelSelected(ViewGear.self)
+            .asDriver()
+
+        let input = MyGearViewModel.Input(didSelectCell: didSelect)
+        let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
-        myGearVM.loadGears()
+        input.loadGears.onNext(())
         
-        myGearVM.gearObservable
+        output.gearObservable
             .map{ $0.map { ViewGear($0) } }
             .bind(to: myGearCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 cell.onData.onNext(element)
-                
             }.disposed(by: disposeBag)
-            
-        myGearVM.gearTypeObservable
+        
+        output.gearTypeObservable
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
                 
                 cell.categoryButton.rx.tap.asDriver()
@@ -78,14 +96,14 @@ class MyGearViewController: UIViewController{
                     }).disposed(by: cell.disposeBag)
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
-
-        myGearCollectionView.rx.modelSelected(ViewGear.self)
-            .subscribe(onNext: { cell in
-                
+        
+        
+        output.didSelectCell
+            .drive(onNext:{ result in
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
-                pushVC.gearId = cell.id
+                pushVC.gearId = result.id
+                pushVC.viewModel = GearDetailViewModel(gearId: result.id)
                 self.navigationController?.pushViewController(pushVC, animated: true)
-                
             }).disposed(by: disposeBag)
     }
 

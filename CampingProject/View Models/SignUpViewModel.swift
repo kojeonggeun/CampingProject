@@ -21,7 +21,6 @@ class SignUpViewModel:ViewModel {
         let showNextPage: Observable<Bool>
     }
     
-   
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let store = Store.shared
         let hidingLabel = PublishRelay<Bool>()
