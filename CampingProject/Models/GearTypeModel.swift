@@ -9,7 +9,7 @@ struct Response: Decodable {
     var gearTypes: [GearType] = []
 }
 
-struct GearType: Decodable {
+public struct GearType: Decodable {
     var gearID: Int
     var gearName: String
     

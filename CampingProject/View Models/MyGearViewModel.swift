@@ -10,26 +10,36 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-class MyGearViewModel {
+public protocol MyGearInput{
+    func didSelectCell(cell:Observable<ViewGear>)
+    func loadGears()
+    func loadGearTypes()
+}
+public protocol MyGearOutput{
+    var gears: Observable<[CellData]> { get }
+    var gearTypes: Observable<[GearType]> { get }
+    var didSelectViewGear: Observable<ViewGear> { get }
+}
+
+public protocol MyGearViewModelType {
+    var inputs: MyGearInput { get }
+    var outputs: MyGearOutput { get }
     
-    let store = Store.shared
-    let apiManager = APIManager.shared
-    let disposeBag = DisposeBag()
-    
-    struct Input {
-        let loadGears: PublishSubject<Void> = PublishSubject<Void>()
-        let didSelectCell: Driver<ViewGear>
-    }
-    
-    struct Output {
-        let didSelectCell: Driver<ViewGear>
-        
-    }
+}
+
+public class MyGearViewModel: MyGearInput,MyGearOutput, MyGearViewModelType {
+    private let store = Store.shared
+    private let apiManager = APIManager.shared
+    private let disposeBag = DisposeBag()
     
     private let _gears = BehaviorRelay<[CellData]>(value: [])
     private let _gearTypes = BehaviorRelay<[GearType]>(value: [])
+    private let _viewGear = PublishSubject<ViewGear>()
     
     
+    public var didSelectViewGear: Observable<ViewGear> {
+        return _viewGear.asObserver()
+    }
     public var gears: Observable<[CellData]> {
         return _gears.asObservable()
     }
@@ -38,29 +48,24 @@ class MyGearViewModel {
         return _gearTypes.asObservable()
     }
     
-    init() {
-        apiManager.loadGearType().map{ $0 }.subscribe(onNext:{
-            self._gearTypes.accept($0)
-        }).disposed(by: disposeBag)
-        
-        loadGears()
-    }
-    
-    func loadGears(){
+    public func loadGears(){
         store.loadUserGearRx().map{ $0 }.subscribe(onNext:{
             self._gears.accept($0)
         }).disposed(by: disposeBag)
-    
-    }
-
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        input.loadGears
-            .subscribe({_ in 
-            })
-        let didSelectCell = input.didSelectCell.do(onNext: { [weak self] gearId in })
-
-        return Output(didSelectCell: didSelectCell)
     }
     
+    public func loadGearTypes(){
+        apiManager.loadGearType().map{ $0 }.subscribe(onNext:{
+            self._gearTypes.accept($0)
+        }).disposed(by: disposeBag)
+    }
+
+    public func didSelectCell(cell: Observable<ViewGear>) {
+        cell.subscribe(onNext: {
+            self._viewGear.onNext($0)
+        }).disposed(by: disposeBag)
+    }
+    
+    public var inputs: MyGearInput { return self }
+    public var outputs: MyGearOutput { return self }
 }
-

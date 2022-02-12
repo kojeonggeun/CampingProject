@@ -11,8 +11,6 @@ import RxSwift
 import RxCocoa
 
 class ProfileViewController: UIViewController, ReloadData {
-  
-    
     @IBOutlet weak var gearQuantity: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
@@ -118,7 +116,6 @@ class ProfileViewController: UIViewController, ReloadData {
                 let url = URL(string: self.imageUrl)
                 let data = try? Data(contentsOf: url!)
     //            TODO: 프로필 이미지 수정 좀 이상함
-                
                 let image = UIImage(data: data!)
                 self.profileImage.image = image
 

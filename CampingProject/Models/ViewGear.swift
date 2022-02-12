@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ViewGear {
+public struct ViewGear {
     var id: Int
     var name: String
     var type: String

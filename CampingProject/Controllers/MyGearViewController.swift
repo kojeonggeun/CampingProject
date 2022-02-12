@@ -25,12 +25,13 @@ class MyGearViewController: UIViewController{
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        let config = UIImage.SymbolConfiguration(scale: .small)
-        navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
-        myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
-        myGearCollectionView.rx.setDelegate(self)
+        setView()
+        setBind()
+        setNotification()
         
+    }
+    
+    func setNotification(){
         NotificationCenter.default.rx.notification(.home)
                     .subscribe(onNext: { [weak self] _ in
                         self?.viewModel.loadGears()
@@ -39,28 +40,34 @@ class MyGearViewController: UIViewController{
                     .subscribe(onNext: { [weak self] _ in
                         self?.viewModel.loadGears()
                     }).disposed(by: disposeBag)
-        loadData()
-    } // end viewDidLoad
- 
-    func loadData(){
+    }
+    
+    func setView(){
+        let config = UIImage.SymbolConfiguration(scale: .small)
+        
+        navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
+        myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
+        
+        myGearCollectionView.rx.setDelegate(self)
         
         let didSelect = myGearCollectionView.rx
             .modelSelected(ViewGear.self)
-            .asDriver()
+            .asObservable()
+            
+        viewModel.inputs.loadGears()
+        viewModel.inputs.loadGearTypes()
+        viewModel.inputs.didSelectCell(cell: didSelect)
         
-        let input = MyGearViewModel.Input(didSelectCell: didSelect)
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
-        
-        input.loadGears.onNext(())
-        
-        viewModel.gears
+    }
+    
+    func setBind(){
+        viewModel.outputs.gears
             .map{ $0.map { ViewGear($0) } }
             .bind(to: myGearCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                 cell.onData.onNext(element)
             }.disposed(by: disposeBag)
         
-
-        viewModel.gearTypes
+        viewModel.outputs.gearTypes
             .bind(to: categoryCollectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
                 cell.categoryButton.rx.tap.asDriver()
                     .drive(onNext: { [weak self] in
@@ -73,9 +80,8 @@ class MyGearViewController: UIViewController{
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
         
-        
-        output.didSelectCell
-            .drive(onNext:{ result in
+        viewModel.outputs.didSelectViewGear
+            .subscribe(onNext:{ result in
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
                 pushVC.gearId = result.id
                 pushVC.viewModel = GearDetailViewModel(gearId: result.id)
@@ -91,7 +97,6 @@ class MyGearViewController: UIViewController{
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView") as! AddGearViewController
         
         self.navigationController?.pushViewController(pushVC, animated: true)
-        
     }
     @IBAction func unwind(_ sender: Any) {
         DB.userDefaults.removeObject(forKey: "token")

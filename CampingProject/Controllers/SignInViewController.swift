@@ -30,7 +30,6 @@ class SignInViewController: UIViewController{
         
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        
         apiManager.login(email: email, password: password) { completion in
             if completion {
                 UserViewModel()
@@ -43,7 +42,6 @@ class SignInViewController: UIViewController{
             }
         }
     }
-    
     @IBAction func autoLogin(_ sender: UIButton) {
         
         if sender.isSelected{

@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-struct CellData: Decodable {
+public struct CellData: Decodable {
     var id: Int
     var name: String?
     var gearTypeId: Int?
@@ -23,7 +23,7 @@ struct CellData: Decodable {
 
 
 
-struct GearDetail: Decodable {
+public struct GearDetail: Decodable {
     var id: Int
     var name: String?
     var gearTypeId: Int?

@@ -66,7 +66,6 @@ class GearEditViewController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
-//            TODO: 수정 이상함 에러뜸,🚫loadDetailUserGear  Alamofire Request Error
             NotificationCenter.default.post(name: .edit, object: nil)
             NotificationCenter.default.post(name: .home, object: nil)
             

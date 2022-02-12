@@ -9,36 +9,44 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+public protocol gearDetailInput {
+    func loadGearDetail()
+}
 
+public protocol gearDetailOutput {
+    var showGearDetail: Observable<GearDetail> { get }
+}
 
-class GearDetailViewModel: ViewModel {
-    struct Input {
-        let loadGearDetail: PublishSubject<Void> = PublishSubject<Void>()
+public protocol gearDetailViewModelType {
+    var inputs: gearDetailInput { get }
+    var outputs: gearDetailOutput { get }
+    
+}
+class GearDetailViewModel: gearDetailViewModelType, gearDetailInput, gearDetailOutput {
+    private let apiManager = APIManager.shared
+    private let disposeBag = DisposeBag()
+    private let store = Store.shared
+    
+    private var gearId: Int
+    private let gearDetail = PublishSubject<GearDetail>()
+    
+    public var showGearDetail: Observable<GearDetail> {
+        return gearDetail.asObserver()
     }
-    
-    struct Output {
-        let showGearDetail: Observable<GearDetail>
-    }
-    
-    let apiManager = APIManager.shared
 
-    private var gearId:Int
-    
     init(gearId: Int){
         self.gearId = gearId
+        
+    }
+    func loadGearDetail(){
+        let userId: Int = apiManager.userInfo!.user!.id
+        
+        store.loadDetailUserGearRx(userId: userId, gearId: self.gearId)
+            .subscribe(onNext: {self.gearDetail.onNext($0)})
+            .disposed(by: disposeBag)
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        
-        let userId: Int = apiManager.userInfo!.user!.id
-        let fetchData = PublishSubject<GearDetail>()
-        
-        input.loadGearDetail.subscribe(onNext: {
-            Store.shared.loadDetailUserGearRx(userId: userId, gearId: self.gearId)
-                .subscribe(onNext: {fetchData.onNext($0)})
-        }).disposed(by: disposeBag)
-        
-        return Output(showGearDetail: fetchData.asObserver())
-        
-    }
+    public var inputs: gearDetailInput { return self }
+    public var outputs: gearDetailOutput { return self }
+    
 }

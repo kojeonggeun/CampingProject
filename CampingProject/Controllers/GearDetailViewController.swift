@@ -11,13 +11,7 @@ import TextFieldEffects
 import RxSwift
 import RxCocoa
 
-import simd
-
-//TODO: MyGearVC에서 GearDetail 데이터를 받아서 GearDetailVM에 주입해
 class GearDetailViewController: UIViewController {
-    @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var gearDetailCollectionView: UICollectionView!
-    
     static let identifier: String = "GearDetailViewController"
     
     var gearId: Int = 0
@@ -46,13 +40,12 @@ class GearDetailViewController: UIViewController {
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "장비 상세"
-        pageControl.currentPage = 0
-        pageControl.pageIndicatorTintColor = UIColor.gray
-        pageControl.currentPageIndicatorTintColor = UIColor.red
         
+        setView()
         setBind()
-        
+        setNotification()
+    }
+    func setNotification(){
         NotificationCenter.default.rx.notification(.edit)
                     .subscribe(onNext: { [weak self] _ in
                         self?.gearDetailCollectionView.dataSource = nil
@@ -60,8 +53,34 @@ class GearDetailViewController: UIViewController {
                         self?.gearDetailCollectionView.rx.setDelegate(self!).disposed(by: self!.disposeBag)
                         self?.setBind()
                     }).disposed(by: disposeBag)
+    }
+    
+    func setView(){
+        self.title = "장비 상세"
+        pageControl.currentPage = 0
+        pageControl.pageIndicatorTintColor = UIColor.gray
+        pageControl.currentPageIndicatorTintColor = UIColor.red
+        
+        viewModel.inputs.loadGearDetail()
         
     }
+    
+    func setBind() {
+        viewModel.outputs.showGearDetail
+            .do{ self.gearDetail = $0 }
+            .map{ $0.images }
+            .do{
+                self.pageControl.numberOfPages = $0.count
+                self.pageControl.reloadInputViews()
+            }
+            .bind(to:gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (row, element, cell) in
+                cell.onData.onNext(element)
+            }.disposed(by: disposeBag)
+    }
+    
+    
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var gearDetailCollectionView: UICollectionView!
     
     @IBAction func showDeleteAlert(_ sender: Any) {
         
@@ -85,25 +104,6 @@ class GearDetailViewController: UIViewController {
         
         self.navigationController?.pushViewController(pushVC, animated: true)
 
-    }
-    
-    func setBind() {
-        let input = GearDetailViewModel.Input()
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
-        
-        input.loadGearDetail.onNext(())
-
-        output.showGearDetail
-            .do{ self.gearDetail = $0 }
-            .map{ $0.images }
-            .do{
-                self.pageControl.numberOfPages = $0.count
-                self.pageControl.reloadInputViews()
-            }
-            .bind(to:gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (row, element, cell) in
-                
-                cell.onData.onNext(element)
-            }.disposed(by: disposeBag)
     }
 
 }
