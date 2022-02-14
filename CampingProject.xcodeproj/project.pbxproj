@@ -28,6 +28,7 @@
 		CB90E3FF271860E900CD2B1C /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90E3FE271860E900CD2B1C /* SearchUserModel.swift */; };
 		CB90E4012719A47500CD2B1C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90E4002719A47500CD2B1C /* SearchTableViewCell.swift */; };
 		CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB93BE1726D3BEAF0018AB0D /* Constants.swift */; };
+		CB9595CC27BA930E006AC55E /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9595CB27BA930E006AC55E /* SignInViewModel.swift */; };
 		CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */; };
 		CBA2327326BE763200946DA0 /* MyGearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2327226BE763200946DA0 /* MyGearViewController.swift */; };
 		CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */; };
@@ -97,6 +98,7 @@
 		CB90E3FE271860E900CD2B1C /* SearchUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
 		CB90E4002719A47500CD2B1C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		CB93BE1726D3BEAF0018AB0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CB9595CB27BA930E006AC55E /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		CBA2327226BE763200946DA0 /* MyGearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewController.swift; sourceTree = "<group>"; };
 		CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewModel.swift; sourceTree = "<group>"; };
 		CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserNC.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				CBB99AFD27AB85FB00166526 /* SignUpViewModel.swift */,
 				CBB3216C27AE4FE3005D2A3C /* GearDetailViewModel.swift */,
 				CBB3216E27AE5D50005D2A3C /* UserViewModel.swift */,
+				CB9595CB27BA930E006AC55E /* SignInViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				CBB3216F27AE5D50005D2A3C /* UserViewModel.swift in Sources */,
 				CBF791F62737B0300089EE48 /* FollowingViewController.swift in Sources */,
 				CBAA3AD02787EC0300E75B51 /* ProfileNC.swift in Sources */,
+				CB9595CC27BA930E006AC55E /* SignInViewModel.swift in Sources */,
 				CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */,
 				CBB99AFE27AB85FB00166526 /* SignUpViewModel.swift in Sources */,
 				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxViewController
 //import AuthenticationServices
 
 
@@ -16,14 +17,15 @@ class SignInViewController: UIViewController{
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginStateButton: UIButton!
-    
     @IBOutlet weak var loginCheckLabel: UILabel!
-   
     @IBOutlet weak var appleLoginView: UIStackView!
+    @IBOutlet weak var loginStateButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     let store: Store = Store.shared
     let apiManager: APIManager = APIManager.shared
+    let viewModel = SignInViewModel()
+    let disposeBag = DisposeBag()
     @IBAction func unwindVC1 (segue : UIStoryboardSegue) {}
     
     @IBAction func loginBtn(_ sender: Any) {
@@ -59,12 +61,29 @@ class SignInViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
    
     }
+    
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
         passwordTextField.isSecureTextEntry = true
-//        setupAppleLogin()
+        loginButton.rx.tap
+            .bind(to: viewModel.inputs.loginButtonTouched)
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.text.orEmpty
+            .bind(to:viewModel.inputs.emailValueChanged)
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.text.orEmpty
+            .bind(to:viewModel.inputs.pwValueChanged)
+            .disposed(by: disposeBag)
+        
+        
+        
+        
+            
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

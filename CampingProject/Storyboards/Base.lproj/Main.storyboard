@@ -929,6 +929,7 @@
                     <connections>
                         <outlet property="appleLoginView" destination="UiS-iY-X3O" id="C6J-f6-FCS"/>
                         <outlet property="emailTextField" destination="uqb-PF-qkB" id="Bdo-gI-myY"/>
+                        <outlet property="loginButton" destination="e03-ML-wPH" id="peq-QS-iao"/>
                         <outlet property="loginCheckLabel" destination="Rre-ev-o7C" id="xVa-Fd-CF0"/>
                         <outlet property="loginStateButton" destination="OdB-G6-SW5" id="dUD-dH-uS6"/>
                         <outlet property="passwordTextField" destination="74c-nf-WwY" id="d8s-Ne-pDX"/>

@@ -40,11 +40,11 @@ class GearDetailViewController: UIViewController {
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setView()
         setBind()
         setNotification()
     }
+    
     func setNotification(){
         NotificationCenter.default.rx.notification(.edit)
                     .subscribe(onNext: { [weak self] _ in
@@ -83,7 +83,6 @@ class GearDetailViewController: UIViewController {
     @IBOutlet weak var gearDetailCollectionView: UICollectionView!
     
     @IBAction func showDeleteAlert(_ sender: Any) {
-        
         let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
             self.userGearVM.deleteUserGear(gearId: self.gearId)

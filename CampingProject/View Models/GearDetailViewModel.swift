@@ -9,20 +9,20 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-public protocol gearDetailInput {
+public protocol GearDetailInput {
     func loadGearDetail()
 }
 
-public protocol gearDetailOutput {
+public protocol GearDetailOutput {
     var showGearDetail: Observable<GearDetail> { get }
 }
 
-public protocol gearDetailViewModelType {
-    var inputs: gearDetailInput { get }
-    var outputs: gearDetailOutput { get }
+public protocol GearDetailViewModelType {
+    var inputs: GearDetailInput { get }
+    var outputs: GearDetailOutput { get }
     
 }
-class GearDetailViewModel: gearDetailViewModelType, gearDetailInput, gearDetailOutput {
+class GearDetailViewModel: GearDetailViewModelType, GearDetailInput, GearDetailOutput {
     private let apiManager = APIManager.shared
     private let disposeBag = DisposeBag()
     private let store = Store.shared
@@ -42,11 +42,12 @@ class GearDetailViewModel: gearDetailViewModelType, gearDetailInput, gearDetailO
         let userId: Int = apiManager.userInfo!.user!.id
         
         store.loadDetailUserGearRx(userId: userId, gearId: self.gearId)
-            .subscribe(onNext: {self.gearDetail.onNext($0)})
-            .disposed(by: disposeBag)
+            .subscribe(onNext: {
+                self.gearDetail.onNext($0)
+            }).disposed(by: disposeBag)
     }
     
-    public var inputs: gearDetailInput { return self }
-    public var outputs: gearDetailOutput { return self }
+    public var inputs: GearDetailInput { return self }
+    public var outputs: GearDetailOutput { return self }
     
 }
