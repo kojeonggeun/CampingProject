@@ -37,16 +37,7 @@ class SignInViewModel: SignInViewModelType, SignInlInput, SignInOutput{
     var loginButtonTouched: PublishRelay<Void> = PublishRelay<Void>()
     
     var loginCheck: PublishRelay<Bool> = PublishRelay<Bool>()
-    
     let apiManager: APIManager = APIManager.shared
     
-    
-    init(){
-
-        
-       
-            
-            
-    }
     
 }
