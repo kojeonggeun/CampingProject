@@ -36,7 +36,6 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         emailTextField.addLeftPadding()
         emailTextField.layer.cornerRadius = emailTextField.frame.height / 4
         self.checkEmail.isHidden = true

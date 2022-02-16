@@ -61,6 +61,7 @@ class MyGearViewController: UIViewController{
     }
     
     func setBind(){
+        print(DB.userDefaults.bool(forKey: "Auto"))
         viewModel.outputs.gears
             .map{ $0.map { ViewGear($0) } }
             .bind(to: myGearCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
@@ -95,7 +96,6 @@ class MyGearViewController: UIViewController{
 
     @IBAction func addGearMove(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView") as! AddGearViewController
-        
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     @IBAction func unwind(_ sender: Any) {

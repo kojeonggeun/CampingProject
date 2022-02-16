@@ -371,19 +371,16 @@ class APIManager{
 //    토큰 유무 확인하여 로그인
     func loginCheck(completion: @escaping (Bool)-> Void ) {
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
-    
         AF.request(urlUser,
                    method: .get,
                    encoding: URLEncoding.default,
                    headers: headers)
-            
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let data):
                     let result = data as! NSDictionary
                     if result["error"] != nil{
                         completion(false)
-                        DB.userDefaults.set(false, forKey: "Auto")
                     } else {
                         completion(true)
                     }
@@ -416,7 +413,7 @@ class APIManager{
     }
 //    친구 정보 로드
     func loadFriendInfo(friendId: Int ,completion: @escaping (Result<UserInfo, AFError>)-> Void) {
-
+        
         let headers: HTTPHeaders = ["Authorization" : returnToken()]
 
         AF.request(url+"/user/\(friendId)",

@@ -38,8 +38,9 @@ public class MyGearViewModel: MyGearInput,MyGearOutput, MyGearViewModelType {
     
     
     public var didSelectViewGear: Observable<ViewGear> {
-        return _viewGear.asObserver()
+        return _viewGear.asObservable()
     }
+    
     public var gears: Observable<[CellData]> {
         return _gears.asObservable()
     }

@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-
 class UserViewModel {
     
     static let shared = UserViewModel()

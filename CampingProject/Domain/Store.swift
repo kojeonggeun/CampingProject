@@ -17,6 +17,16 @@ class Store {
     static let shared = Store()
     let api = APIManager.shared
  
+    func loginRx(email:String, password: String) -> Observable<Bool>{
+        return Observable.create() { emitter in
+            self.api.login(email:email, password: password) { result in
+                    emitter.onNext(result)
+                    emitter.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+        
     func loadUserInfoRx() -> Observable<UserInfo>{
         return Observable.create() { emitter in
             self.api.loadUserInfo() { result in
@@ -168,10 +178,5 @@ class Store {
         }
     }
 
-    func returnToken() -> String{
-        let tokenDict =  DB.userDefaults.value(forKey: "token") as! NSDictionary
-        let token = tokenDict["token"] as! String
-        
-        return token
-    }
+  
 }
