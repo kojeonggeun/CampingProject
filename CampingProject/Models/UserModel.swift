@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserInfo: Codable {
+public struct UserInfo: Codable {
     var user: User?
     var followerCnt: Int
     var followingCnt: Int
@@ -19,7 +19,7 @@ struct UserInfo: Codable {
         case user, followerCnt, followingCnt, gearCnt, boardCnt, status
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         user = (try? values.decode(User.self, forKey: .user)) ?? nil
         followerCnt = (try? values.decode(Int.self, forKey: .followerCnt)) ?? 0

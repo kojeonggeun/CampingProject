@@ -11,23 +11,78 @@ import RxSwift
 import RxCocoa
 
 class ProfileViewController: UIViewController, ReloadData {
-    @IBOutlet weak var gearQuantity: UILabel!
-    @IBOutlet weak var profileImage: UIImageView!
-    
-    @IBOutlet weak var follower: UILabel!
-    @IBOutlet weak var following: UILabel!
-    
-    @IBOutlet weak var profileName: UILabel!
-    @IBOutlet weak var profileIntro: UITextView!
-    
     let userGearVM = UserGearViewModel.shared
-    let viewModel = ProfileViewModel.shared
+    let viewModel = ProfileViewModel()
     let store: Store = Store.shared
     let apiManger = APIManager.shared
     let disposeBag = DisposeBag()
     
     var imageUrl: String = ""
     
+//  MARK: LifeCycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        profileImage.layer.cornerRadius = profileImage.frame.width / 2
+        profileImage.layer.borderWidth = 5
+        profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+        profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
+
+        profileIntro.isEditable = false
+        
+        setBind()
+    }
+
+    func setBind() {
+        viewModel.inputs.loadProfileInfo()
+        
+        viewModel.outputs.followerCount
+            .map { "\($0)"}
+            .asDriver(onErrorJustReturn: "0")
+            .drive(self.follower.rx.text)
+            .disposed(by: self.disposeBag)
+
+        viewModel.outputs.followingCount
+            .map { "\($0)" }
+            .asDriver(onErrorJustReturn: "0")
+            .drive(self.following.rx.text)
+            .disposed(by: self.disposeBag)
+
+        viewModel.outputs.gearCount
+            .map { "\($0)" }
+            .asDriver(onErrorJustReturn: "0")
+            .drive(self.gearQuantity.rx.text)
+            .disposed(by: self.disposeBag)
+
+        
+        viewModel.outputs.profileInfo
+            .subscribe(onNext: { userInfo in
+                if userInfo.user?.userImageUrl != "" {
+                    self.imageUrl = userInfo.user!.userImageUrl
+                } else {
+                    self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
+                }
+
+                let url = URL(string: self.imageUrl)
+                let data = try? Data(contentsOf: url!)
+                let image = UIImage(data: data!)
+                
+                self.profileImage.image = image
+                self.profileName.text = userInfo.user?.name
+                self.profileIntro.text = userInfo.user?.aboutMe
+            }).disposed(by: disposeBag)
+ 
+    }
+    
+    
+    @IBOutlet weak var gearQuantity: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
+
+    @IBOutlet weak var follower: UILabel!
+    @IBOutlet weak var following: UILabel!
+
+    @IBOutlet weak var profileName: UILabel!
+    @IBOutlet weak var profileIntro: UITextView!
     
     @IBAction func moveFollower(_ sender: Any) {
         
@@ -53,74 +108,5 @@ class ProfileViewController: UIViewController, ReloadData {
         pushEditVC.delegate = self
         self.navigationController?.pushViewController(pushEditVC, animated: true)
         
-    }
-    //      09/29
-//      TODO: 유저정보에서 프로필 이미지 가져와야 함 -> 따로 유저 정보 저장하는 뷰모델 필요할듯?
-//      TODO: 프로필 수정 기능 구현 해야 함
-//      TODO: 친구 추가, 요청 & 승인 기능 구현 해야 함
-
-
-//  MARK: LifeCycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        profileImage.layer.cornerRadius = profileImage.frame.width / 2
-        profileImage.layer.borderWidth = 5
-        profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-        profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
-        
-        profileIntro.isEditable = false
-        
-        loadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        Rx로 변경할것
-        gearQuantity.text = "\(userGearVM.userGears.count)"
-
-        self.store.loadFollowerRx()
-            .subscribe(onNext: { follower in
-                self.viewModel.follower.accept(follower.friends.count)
-            }).disposed(by: self.disposeBag)
-    }
-    
-    
-    func loadData() {
-        
-        self.store.loadFollowingRx()
-            .subscribe(onNext: { following in
-                self.viewModel.following.accept(following.friends.count)
-            }).disposed(by: self.disposeBag)
-        
-        viewModel.totalFollower
-            .map { "\($0)"}
-            .asDriver(onErrorJustReturn: "0")
-            .drive(self.follower.rx.text)
-            .disposed(by: self.disposeBag)
-
-        viewModel.totalFollowing
-            .map { "\($0)" }
-            .observe(on: MainScheduler.instance)
-            .bind(to:self.following.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        UserViewModel().userObservable
-            .subscribe(onNext:{ userInfo in
-                if userInfo.user?.userImageUrl != "" {
-                    self.imageUrl = userInfo.user!.userImageUrl
-                } else {
-                    self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
-                }
-
-                let url = URL(string: self.imageUrl)
-                let data = try? Data(contentsOf: url!)
-    //            TODO: 프로필 이미지 수정 좀 이상함
-                let image = UIImage(data: data!)
-                self.profileImage.image = image
-
-                self.profileName.text = userInfo.user?.name
-                self.profileIntro.text = userInfo.user?.aboutMe
-        }).disposed(by: disposeBag)
     }
 }

@@ -61,17 +61,21 @@ class GearEditViewController: UIViewController {
         let type = gearEditCustomView.gearTypeId
         
         self.apiManager.editGear(gearId: self.gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
-            .subscribe()
+            .subscribe({_ in
+                
+                let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
+                    NotificationCenter.default.post(name: .edit, object: nil)
+                    NotificationCenter.default.post(name: .home, object: nil)
+                    
+                    self.navigationController?.popViewController(animated: true)
+                })
+                self.present(alert, animated: true, completion: nil)
+                
+            })
             .disposed(by: self.disposeBag)
         
-        let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
-            NotificationCenter.default.post(name: .edit, object: nil)
-            NotificationCenter.default.post(name: .home, object: nil)
-            
-            self.navigationController?.popViewController(animated: true)
-        })
-        present(alert, animated: true, completion: nil)
+       
      
     }
     

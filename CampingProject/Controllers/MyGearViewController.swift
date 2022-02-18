@@ -44,7 +44,6 @@ class MyGearViewController: UIViewController{
     
     func setView(){
         let config = UIImage.SymbolConfiguration(scale: .small)
-        
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
         myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
         
@@ -69,7 +68,8 @@ class MyGearViewController: UIViewController{
             }.disposed(by: disposeBag)
         
         viewModel.outputs.gearTypes
-            .bind(to: categoryCollectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
+            .asDriver(onErrorJustReturn: [GearType.init(gearID: 0, gearName: "")])
+            .drive(categoryCollectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { (row, element, cell) in
                 cell.categoryButton.rx.tap.asDriver()
                     .drive(onNext: { [weak self] in
                         let pushVC = self?.storyboard?.instantiateViewController(withIdentifier: CategoryCollectionViewController.identifier) as! CategoryCollectionViewController

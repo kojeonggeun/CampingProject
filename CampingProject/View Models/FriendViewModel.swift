@@ -47,7 +47,7 @@ class FriendViewModel: FollowRepresentable {
 //                    }
 //                }
             
-            cell.updateUI(email: email, name: name)
+//            cell.updateUI(email: email, name: name)
             
             return cell
         } else  {

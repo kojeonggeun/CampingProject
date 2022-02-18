@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SearchTableViewCell: UITableViewCell{
     
@@ -14,20 +16,47 @@ class SearchTableViewCell: UITableViewCell{
     @IBOutlet weak var searchEmail: UILabel!
     @IBOutlet weak var searchName: UILabel!
     
+    static let identifier:String = "SearchTableViewCell"
+    
+    private let cellDisposeBag = DisposeBag()
+    
+    var disposeBag = DisposeBag()
+    var onData: PublishRelay<SearchUser>
     
     override func awakeFromNib() {
         super.awakeFromNib()
-     
+        
+    }
+    required init?(coder: NSCoder) {
+        onData = PublishRelay<SearchUser>()
+    
+        super.init(coder: coder)
+        
+        onData.bind(onNext: {[weak self] user in
+            self?.searchEmail.text = user.email
+            self?.searchName.text = user.name
+
+            let imageUrl = user.userImageUrl
+            if imageUrl == "" {
+                self?.searchProfileImage.image = UIImage(systemName: "camera.circle")
+            } else {
+                DispatchQueue.global().async {
+                    let url = URL(string: imageUrl)
+                    let data = try? Data(contentsOf: url!)
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: data!)
+                        self?.searchProfileImage.image = image
+                    }
+                }
+            }
+        })
+        .disposed(by: cellDisposeBag)
     }
     
-    func updateUI(email: String, name: String){
-        searchEmail.text = email
-        searchName.text = name
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
-    func updateImage(image: UIImage?){
-        if let searchImage = image {
-            searchProfileImage.image = searchImage
-        }
-    }
+
 }
 

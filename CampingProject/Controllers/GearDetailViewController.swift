@@ -48,10 +48,7 @@ class GearDetailViewController: UIViewController {
     func setNotification(){
         NotificationCenter.default.rx.notification(.edit)
                     .subscribe(onNext: { [weak self] _ in
-                        self?.gearDetailCollectionView.dataSource = nil
-                        self?.gearDetailCollectionView.delegate = nil
-                        self?.gearDetailCollectionView.rx.setDelegate(self!).disposed(by: self!.disposeBag)
-                        self?.setBind()
+                        self?.viewModel.inputs.loadGearDetail()
                     }).disposed(by: disposeBag)
     }
     

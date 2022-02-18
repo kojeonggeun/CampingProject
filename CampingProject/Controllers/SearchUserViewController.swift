@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
 
 class SearchUserViewController: UIViewController {
     
@@ -24,7 +25,7 @@ class SearchUserViewController: UIViewController {
     var fetchingMore: Bool = false
     var hasNext: Bool = false
     var page: Int = 0
-
+    let viewModel = SearchResultViewModel()
  
     
 //    MARK: LifeCycles
@@ -35,38 +36,58 @@ class SearchUserViewController: UIViewController {
         
         searchTableView.keyboardDismissMode = .onDrag
         
+    
         searchTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
-        searchTableView.register(UINib(nibName:String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
+//        searchTableView.register(UINib(nibName:String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
         searchTableView.register(UINib(nibName:String(describing: LoadingCell.self), bundle: nil), forCellReuseIdentifier: "LoadingCell")
+        
+        searchBar.rx.text.orEmpty
+            .debounce(RxTimeInterval.milliseconds(5), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .bind(to: viewModel.inputs.searchText)
+            .disposed(by: disposeBag)
+        
+        viewModel.outputs.searchUser
+            .asDriver(onErrorJustReturn: [])
+            .do{
+                print($0)
+            }
+            .drive(searchTableView.rx.items(cellIdentifier: SearchTableViewCell.identifier, cellType: SearchTableViewCell.self)){ (row, element, cell) in
+                cell.onData.accept(element)
+                
+            }
+            .disposed(by: disposeBag)
     }
+    
 }
 
-extension SearchUserViewController: UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
+//extension SearchUserViewController: UITableViewDataSource{
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 2
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if self.searchData.isEmpty && section != 1{
+//            return 1
+//        } else if section == 0 {
+//            return self.searchData.count
+//        } else if section == 1 && fetchingMore{
+//            return 1
+//        }
+//        return 0
+//    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.searchData.isEmpty && section != 1{
-            return 1
-        } else if section == 0 {
-            return self.searchData.count
-        } else if section == 1 && fetchingMore{
-            return 1
-        }
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-   
-        if self.searchData.isEmpty && indexPath.section == 0{
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySearchResultCell", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
-            cell.updateLabel(text: searchInputText)
-            return cell
-        }
-        return self.searchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
-    }
-}
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        if self.searchData.isEmpty && indexPath.section == 0{
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySearchResultCell", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
+//            cell.updateLabel(text: searchInputText)
+//            return cell
+//        }
+////        return self.searchData[indexPath.row].cellForRowAt(tableView, indexPath: indexPath)
+//        return UITableViewCell()
+//    }
+//}
 
 extension SearchUserViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -82,7 +103,6 @@ extension SearchUserViewController: UITableViewDelegate{
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         if self.searchData.isEmpty{
             return
         }
@@ -107,7 +127,7 @@ extension SearchUserViewController: UITableViewDelegate{
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.page += 1
             self.apiManager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
-                self.appendSearchData(data: data)
+//                self.appendSearchData(data: data)
                 DispatchQueue.main.async {
                     self.fetchingMore = false
                     self.searchTableView.reloadData()
@@ -115,8 +135,6 @@ extension SearchUserViewController: UITableViewDelegate{
             })
         })
     }
-    
-
 //    셀의 높이를 저장
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cellHeightsDictionary.setObject(cell.frame.size.height, forKey: indexPath as NSCopying)
@@ -138,18 +156,18 @@ extension SearchUserViewController: UISearchBarDelegate{
         self.page = 0
    
         apiManager.searchUser(searchText: searchText, completion: { data in
-            self.appendSearchData(data: data)
+//            self.appendSearchData(data: data)
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }
         })
     }
     
-    func appendSearchData(data: [SearchUser]){
-        for i in data{
-            self.searchData.append(SearchResultViewModel(searchData: SearchUser(id: i.id, name: i.name, email: i.email, phone: i.phone, userImageId: i.userImageId, userImageUrl: i.userImageUrl, isPublic: i.isPublic),searchInputText: self.searchInputText))
-        }
-    }
+//    func appendSearchData(data: [SearchUser]){
+//        for i in data{
+//            self.searchData.append(SearchResultViewModel(searchData: SearchUser(id: i.id, name: i.name, email: i.email, phone: i.phone, userImageId: i.userImageId, userImageUrl: i.userImageUrl, isPublic: i.isPublic),searchInputText: self.searchInputText))
+//        }
+//    }
 }
 
 

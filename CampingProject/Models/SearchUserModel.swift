@@ -8,11 +8,11 @@
 import Foundation
 
 
-struct SearchResult: Decodable {
+public struct SearchResult: Decodable {
     var users: [SearchUser] = []
 }
 
-struct SearchUser: Decodable {
+public struct SearchUser: Decodable {
     var id: Int
     var name: String
     var email:String

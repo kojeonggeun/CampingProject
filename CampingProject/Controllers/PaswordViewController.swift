@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import RxSwift
 
-//TODO: 로그인화면으로 돌아가게 ㅎ야함
 class PasswordViewController: UIViewController{
     
     static let identifier = "PasswordViewController"
@@ -25,9 +24,7 @@ class PasswordViewController: UIViewController{
     let disposeBag = DisposeBag()
     
     @IBAction func unwind(_ sender: Any) {
-        DB.userDefaults.removeObject(forKey: "token")
-        DB.userDefaults.set(false, forKey: "Auto")
-        ProfileViewModel.shared.clearUserCount()
+        
 
         performSegue(withIdentifier: "signIn", sender: self)
     }

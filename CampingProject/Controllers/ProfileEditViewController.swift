@@ -39,7 +39,7 @@ class ProfileEditViewController: UIViewController {
             if imageCheck{
                 self.apiManager.saveUserProfile(name: self.profileName.text!, phone: "", aboutMe: self.profileIntro.text!, public: true, completion: { saveCheck in
                     if saveCheck {
-                        self.delegate?.loadData()
+                        self.delegate?.setBind()
                         
                         let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
@@ -108,5 +108,5 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
 }
 
 protocol ReloadData {
-    func loadData()
+    func setBind()
 }

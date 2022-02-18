@@ -27,46 +27,46 @@ public protocol MyGearViewModelType {
     
 }
 
-public class MyGearViewModel: MyGearInput,MyGearOutput, MyGearViewModelType {
+class MyGearViewModel: MyGearInput,MyGearOutput, MyGearViewModelType {
     private let store = Store.shared
     private let apiManager = APIManager.shared
     private let disposeBag = DisposeBag()
     
     private let _gears = BehaviorRelay<[CellData]>(value: [])
     private let _gearTypes = BehaviorRelay<[GearType]>(value: [])
-    private let _viewGear = PublishSubject<ViewGear>()
+    private let _viewGear = PublishRelay<ViewGear>()
     
     
-    public var didSelectViewGear: Observable<ViewGear> {
+    var didSelectViewGear: Observable<ViewGear> {
         return _viewGear.asObservable()
     }
     
-    public var gears: Observable<[CellData]> {
+    var gears: Observable<[CellData]> {
         return _gears.asObservable()
     }
     
-    public var gearTypes: Observable<[GearType]> {
+    var gearTypes: Observable<[GearType]> {
         return _gearTypes.asObservable()
     }
     
-    public func loadGears(){
+    func loadGears(){
         store.loadUserGearRx().map{ $0 }.subscribe(onNext:{
             self._gears.accept($0)
         }).disposed(by: disposeBag)
     }
     
-    public func loadGearTypes(){
+    func loadGearTypes(){
         apiManager.loadGearType().map{ $0 }.subscribe(onNext:{
             self._gearTypes.accept($0)
         }).disposed(by: disposeBag)
     }
 
-    public func didSelectCell(cell: Observable<ViewGear>) {
+    func didSelectCell(cell: Observable<ViewGear>) {
         cell.subscribe(onNext: {
-            self._viewGear.onNext($0)
+            self._viewGear.accept($0)
         }).disposed(by: disposeBag)
     }
     
-    public var inputs: MyGearInput { return self }
-    public var outputs: MyGearOutput { return self }
+    var inputs: MyGearInput { return self }
+    var outputs: MyGearOutput { return self }
 }

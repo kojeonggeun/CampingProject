@@ -75,10 +75,8 @@ class SignInViewController: UIViewController{
             .subscribe(onNext: { [weak self] result in
                 if result {
                     self?.loginStateButton.tintColor = .green
-                    
                 }else {
                     self?.loginStateButton.tintColor = .lightGray
-                    
                 }
             })
             .disposed(by: disposeBag)
@@ -97,7 +95,6 @@ class SignInViewController: UIViewController{
             self.fieldDataInit()
             
             if DB.userDefaults.bool(forKey: "Auto") && DB.userDefaults.value(forKey: "token") != nil{
-                
                 self.apiManager.loginCheck(){ comple in
                     if comple{
                         UserViewModel()

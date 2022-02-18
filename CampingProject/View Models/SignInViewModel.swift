@@ -54,13 +54,12 @@ class SignInViewModel: SignInViewModelType, SignInlInput, SignInOutput{
         
         let email = emailValueChanged.asObservable()
         let password = pwValueChanged.asObservable()
-        
-        emailVaild = email.map{ apiManager.isValidEmail(email: $0)}
-        passwordVaild = password.skip(1).map{ apiManager.isValidPassword(password: $0)}
-            
         let combindLoginInfo = Observable.combineLatest(email, password){ ($0,$1) }
         
         autoLogin = autoLoginStatusChanged.asObservable()
+        
+        emailVaild = email.map{ apiManager.isValidEmail(email: $0)}
+        passwordVaild = password.skip(1).map{ apiManager.isValidPassword(password: $0)}
         
         loginButtonTouched.withLatestFrom(combindLoginInfo)
             .subscribe(onNext: { [weak self] info in
@@ -68,7 +67,7 @@ class SignInViewModel: SignInViewModelType, SignInlInput, SignInOutput{
                     .subscribe(onNext:{ result in
                         UserViewModel()
                         self?.loginResult.onNext(result)
-                    }).disposed(by: DisposeBag())
+                    }).disposed(by: self!.disposeBag)
             })
             .disposed(by: disposeBag)
         
