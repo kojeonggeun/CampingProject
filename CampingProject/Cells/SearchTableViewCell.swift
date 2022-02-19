@@ -22,7 +22,8 @@ class SearchTableViewCell: UITableViewCell{
     
     var disposeBag = DisposeBag()
     var onData: PublishRelay<SearchUser>
-    
+    var image: UIImage?
+    var data: Data?
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -32,31 +33,34 @@ class SearchTableViewCell: UITableViewCell{
     
         super.init(coder: coder)
         
-        onData.bind(onNext: {[weak self] user in
-            self?.searchEmail.text = user.email
-            self?.searchName.text = user.name
-
-            let imageUrl = user.userImageUrl
-            if imageUrl == "" {
-                self?.searchProfileImage.image = UIImage(systemName: "camera.circle")
-            } else {
-                DispatchQueue.global().async {
-                    let url = URL(string: imageUrl)
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async {
-                        let image = UIImage(data: data!)
-                        self?.searchProfileImage.image = image
-                    }
+        onData
+            .observe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
+            .do{
+                if $0.userImageUrl != "" {
+                    let url = URL(string: $0.userImageUrl)
+                    self.data = try? Data(contentsOf: url!)
+                    
                 }
             }
-        })
-        .disposed(by: cellDisposeBag)
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: {[weak self] user in
+                self?.searchEmail.text = user.email
+                self?.searchName.text = user.name
+                if user.userImageUrl == "" {
+                    self?.searchProfileImage.image = UIImage(systemName: "camera.circle")
+                } else {
+                    self?.image = UIImage(data: self?.data! ?? Data())
+                    self?.searchProfileImage.image = self?.image
+                }
+            })
+            .disposed(by: cellDisposeBag)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
     }
-
+    
+    
 }
 

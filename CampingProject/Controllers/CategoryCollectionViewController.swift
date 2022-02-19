@@ -1,5 +1,5 @@
 //
-//  CategoryTableViewController.swift
+//  CategoryCollectionViewController.swift
 //  CampingProject
 //
 //  Created by 고정근 on 2021/09/15.

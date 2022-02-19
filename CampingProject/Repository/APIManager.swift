@@ -266,9 +266,9 @@ class APIManager{
             }
         }
     }
-
+    
 //    유저 검색
-    func searchUser(searchText: String, page: Int = 0, completion: @escaping ([SearchUser]) -> Void){
+    func searchUser(searchText: String, page: Int = 0, completion: @escaping (Result<SearchResult, AFError>) -> Void){
         let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 5]
         
         AF.request(url+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300)
@@ -276,7 +276,7 @@ class APIManager{
             switch response.result {
             case .success(let data):
                 let searchResult = response.value!
-                completion(searchResult.users)
+                completion(response.result)
                
             case .failure(let error):
                 print("🚫searchUser  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")

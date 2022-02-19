@@ -158,6 +158,22 @@ class Store {
         }
     }
     
+    func searchUserRx(searchText: String, page: Int = 0) -> Observable<SearchResult>{
+        return Observable.create() { emitter in
+            self.api.searchUser(searchText:searchText, page: page) { result in
+                switch result {
+                case let .success(data):
+                    emitter.onNext(data)
+                    emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    
     func emailDuplicateCheckRx(email:String) -> Observable<Bool>{
         return Observable.create() { emitter in
             self.api.checkEmailDuplicate(email:email) { result in

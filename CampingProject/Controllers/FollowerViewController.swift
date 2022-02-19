@@ -69,6 +69,7 @@ extension FollowerViewController: UITableViewDataSource {
 
     //    친구가 없을 때 예외처리 해야함
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("Awdㅁㅁㅁㅁ")
         if !searchInputText.isEmpty && followerSearchData.isEmpty || followerData.isEmpty{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySearchResultCell", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
             cell.updateLabel(text: searchInputText)
