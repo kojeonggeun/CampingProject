@@ -95,6 +95,7 @@ class SignInViewController: UIViewController{
             self.fieldDataInit()
             
             if DB.userDefaults.bool(forKey: "Auto") && DB.userDefaults.value(forKey: "token") != nil{
+                print(DB.userDefaults.value(forKey: "token"))
                 self.apiManager.loginCheck(){ comple in
                     if comple{
                         UserViewModel()

@@ -10,6 +10,7 @@ import Foundation
 
 public struct SearchResult: Decodable {
     var users: [SearchUser] = []
+    var total: Int = 0
 }
 
 public struct SearchUser: Decodable {

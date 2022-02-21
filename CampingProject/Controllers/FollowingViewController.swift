@@ -68,7 +68,7 @@ extension FollowingViewController: UITableViewDataSource {
 
         if !searchInputText.isEmpty && followingSearchData.isEmpty || followingData.isEmpty{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmptySearchResultCell", for: indexPath) as? EmptySearchResultCell else { return UITableViewCell() }
-            cell.updateLabel(text: searchInputText)
+//            cell.updateLabel(text: searchInputText)
             return cell
         }
         if !followingSearchData.isEmpty{
