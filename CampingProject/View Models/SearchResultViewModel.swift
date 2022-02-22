@@ -19,7 +19,7 @@ public protocol SearchResultInput{
 public protocol SearchResultOutput{
     var searchUsers: BehaviorRelay<[SearchUser]> { get }
     var isLoadingSpinnerAvaliable: PublishRelay<Bool> { get }
-    var isEmptySearchData: PublishRelay<Bool> { get }
+    
 }
 
 public protocol SearchResultViewModelType {
@@ -40,7 +40,6 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
     var fetchMoreDatas: PublishRelay<Void> = PublishRelay<Void>()
     var refreshCompelted: PublishRelay<Void> = PublishRelay<Void>()
     var isLoadingSpinnerAvaliable: PublishRelay<Bool> = PublishRelay<Bool>()
-    var isEmptySearchData: PublishRelay<Bool> = PublishRelay<Bool>()
     
     private var text = ""
     private var page = 0
@@ -48,17 +47,11 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
     private var totalPage = 1
     private var isPaginationRequestStillResume = false
     
-    
     init(){
         searchText
-            .do{ self.text = $0 ;self.refreshTriggered()}
+            .do{ self.text = $0; self.refreshTriggered()}
             .subscribe(onNext:{ input in
-                switch input{
-                case "":
-                    self.isEmptySearchData.accept(true)
-                default:
-                    self.fetchData(page:self.page)
-                }
+                self.fetchData(page:self.page)
         })
         .disposed(by: self.disposeBag)
         
@@ -72,7 +65,8 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
     }
     
     func fetchData(page: Int){
-        if isPaginationRequestStillResume  { return }
+//      중복 호출 막기 위해
+        if isPaginationRequestStillResume { return }
         
 //      검색 된 데이터의 totalPage를 넘으면 호출 안되게
         if page > totalPage  {
@@ -90,23 +84,23 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
         
         self.store.searchUserRx(searchText: text,page: page)
             .subscribe(onNext:{[weak self] result in
-            if !result.users.isEmpty {
-                self?.isEmptySearchData.accept(false)
-                self?.handleData(data: result)
-                self?.isLoadingSpinnerAvaliable.accept(false)
-                self?.isPaginationRequestStillResume = false
-            } else {
-                self?.isEmptySearchData.accept(true)
-            }
-            
-        })
-        .disposed(by: disposeBag)
+                guard let self = self else { return }
+                
+                if !result.users.isEmpty || !self.searchUsers.value.isEmpty{
+                    self.handleData(data: result)
+                    self.isLoadingSpinnerAvaliable.accept(false)
+                    self.isPaginationRequestStillResume = false
+                } else {
+                    self.searchUsers.accept([SearchUser.init(name: self.text)])
+                }
+            })
+            .disposed(by: disposeBag)
         
         
     }
 //    다음 page의 데이터를 가져와 합친 후 page 를 +1 해준다.
     func handleData(data: SearchResult ) {
-//        리스트의 size는 5로 고정
+//      가져오는 리스트의 size는 5로 고정
         totalPage = data.total / size
 
         let newData = data.users

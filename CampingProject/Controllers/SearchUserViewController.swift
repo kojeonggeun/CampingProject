@@ -68,8 +68,18 @@ class SearchUserViewController: UIViewController {
 //        FIXME: Cell 생성 시 여러번 호출됨 왜이러지?!?!
         viewModel.outputs.searchUsers
             .asDriver(onErrorJustReturn: [])
-            .drive(searchTableView.rx.items(cellIdentifier: SearchTableViewCell.identifier, cellType: SearchTableViewCell.self)){ (row, element, cell) in
-                cell.onData.accept(element)
+            .drive(searchTableView.rx.items){ (tableView, row, element) in
+                if element.id == 0 {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptySearchResultCell.identifier, for: IndexPath(row: row, section: 0)) as? EmptySearchResultCell
+                    else{ return UITableViewCell()}
+                    cell.updateLabel(text: element.name)
+                    return cell
+                } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier,for: IndexPath(row: row, section: 0)) as? SearchTableViewCell
+                    else { return UITableViewCell()}
+                    cell.onData.accept(element)
+                    return cell
+                }
             }
             .disposed(by: disposeBag)
         
@@ -80,10 +90,6 @@ class SearchUserViewController: UIViewController {
         }
         .disposed(by: disposeBag)
         
-//        viewModel.outputs.isEmptySearchData.subscribe(onNext:{ result in
-//
-//        })
-        .disposed(by: disposeBag)
         
         searchTableView.rx.didScroll.subscribe { [weak self] _ in
             guard let self = self else { return }

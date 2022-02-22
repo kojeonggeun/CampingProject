@@ -53,7 +53,6 @@ class SignUpViewController: UIViewController {
         
         output.showNextPage
             .subscribe(onNext:{
-                print($0)
               if $0 {
                   let pushVC = self.storyboard?.instantiateViewController(withIdentifier: EmailCertificationViewController.identifier) as! EmailCertificationViewController
                   pushVC.email = self.emailTextField.text!

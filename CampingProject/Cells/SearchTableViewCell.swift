@@ -30,16 +30,13 @@ class SearchTableViewCell: UITableViewCell{
     }
     required init?(coder: NSCoder) {
         onData = PublishRelay<SearchUser>()
-    
         super.init(coder: coder)
-        
         onData
             .observe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
             .do{
                 if $0.userImageUrl != "" {
                     let url = URL(string: $0.userImageUrl)
                     self.data = try? Data(contentsOf: url!)
-                    
                 }
             }
             .observe(on: MainScheduler.instance)

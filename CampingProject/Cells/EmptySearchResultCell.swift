@@ -10,17 +10,17 @@ import UIKit
 
 class EmptySearchResultCell: UITableViewCell {
     @IBOutlet weak var searchResult: UILabel!
-    
+    static let identifier:String = "EmptySearchResultCell"
     override func awakeFromNib() {
         super.awakeFromNib()
-        searchResult.text = "친구를 검색해보세요"
+
     }
     
-//    func updateLabel(text: String){
-//        if text != "" {
-//            searchResult.text = "\"\(text)\" 친구는 아직 ,,,"
-//        } else {
-//            searchResult.text = "친구를 검색해보세요"
-//        }
-//    }
+    func updateLabel(text: String){
+        if text != "" {
+            searchResult.text = "\"\(text)\" 검색 결과 없음"
+        } else {
+            searchResult.text = "친구를 검색해보세요"
+        }
+    }
 }

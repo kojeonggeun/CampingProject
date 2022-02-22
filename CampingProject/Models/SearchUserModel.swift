@@ -23,5 +23,14 @@ public struct SearchUser: Decodable {
     var userImageUrl: String
     
     var isPublic: Bool
-    
+ 
+    init(name:String){
+        self.id = 0
+        self.name = name
+        self.email = ""
+        self.phone = ""
+        self.userImageId = 0
+        self.userImageUrl = ""
+        self.isPublic = true
+    }
 }
