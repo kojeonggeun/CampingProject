@@ -60,12 +60,7 @@ class SearchUserViewController: UIViewController {
             .bind(to: viewModel.inputs.searchText)
             .disposed(by: disposeBag)
 
-//        TODO: 1. 무한 스크롤 구현해야하고 , 구조 다듬어야 함 -> 끝
-//        TODO: 2. 검색 중일때 더미 셀 구성해야 함 -> 안하는걸로
-//        TODO: 3. 기본 이미지 수정 -> 끝
-//        TODO: 4. 테이블뷰 footer에 로딩셀 추가 -> 끝, 검색결과없을때 해야함
-        
-//        FIXME: Cell 생성 시 여러번 호출됨 왜이러지?!?!
+
         viewModel.outputs.searchUsers
             .asDriver(onErrorJustReturn: [])
             .drive(searchTableView.rx.items){ (tableView, row, element) in
@@ -104,14 +99,13 @@ class SearchUserViewController: UIViewController {
         }
         .disposed(by: disposeBag)
         
-//        searchTableView.rx.modelSelected(SearchUser.self)
-//            .subscribe(onNext:{ user in
-//                print(user)
-//            }).disposed(by: disposeBag)
-//        searchTableView.rx.itemSelected
-//            .subscribe(onNext:{ index in
-//                print(index)
-//            }).disposed(by: disposeBag)
+        searchTableView.rx.modelSelected(SearchUser.self)
+            .subscribe(onNext:{ user in
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: SearchUserDetailViewController.identifier) as! SearchUserDetailViewController
+                pushVC.userId = user.id
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            }).disposed(by: disposeBag)
+
     }
     
 }

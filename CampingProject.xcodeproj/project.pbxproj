@@ -312,9 +312,9 @@
 				CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */,
 				CBAB103526C552460058F440 /* GearTypeViewModel.swift */,
 				CBDC479C2732C97700537E5A /* SearchResultViewModel.swift */,
+				CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */,
 				CBF791F327366EDC0089EE48 /* FriendViewModel.swift */,
 				CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */,
-				CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */,
 				CBB3216C27AE4FE3005D2A3C /* GearDetailViewModel.swift */,
 				CBB519F926FF7187005F8B00 /* ImagePickerManager.swift */,
 			);

@@ -314,7 +314,7 @@
         <!--Search User Detail View Controller-->
         <scene sceneID="OYe-sj-O4h">
             <objects>
-                <viewController storyboardIdentifier="searchUserDetail" id="UBA-SK-i4L" customClass="SearchUserDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchUserDetailViewController" id="UBA-SK-i4L" customClass="SearchUserDetailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JXj-c8-dY7">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

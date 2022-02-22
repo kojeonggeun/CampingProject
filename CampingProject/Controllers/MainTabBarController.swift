@@ -28,8 +28,8 @@ class MainTabBarController: UITabBarController {
         let searchUserNC = storyboard?.instantiateViewController(withIdentifier: "searchUserNC") as! SearchUserNC
         let profileNC = storyboard?.instantiateViewController(withIdentifier: "profileNC") as! ProfileNC
 //        스토리보드 파일이 서로 다를때
-        let mainSB: UIStoryboard = UIStoryboard(name: "MyGear", bundle: nil)
-        let myGearNC = mainSB.instantiateViewController(withIdentifier: "myGearNC") as! MyGearNC
+        let myGearSB: UIStoryboard = UIStoryboard(name: "MyGear", bundle: nil)
+        let myGearNC = myGearSB.instantiateViewController(withIdentifier: "myGearNC") as! MyGearNC
         
         self.setViewControllers([myGearNC,searchUserNC,profileNC], animated: false)
     }

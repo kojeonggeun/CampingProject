@@ -16,10 +16,10 @@ class UserViewModel {
     let apiManager = APIManager.shared
     let disposeBag = DisposeBag()
 
-    private let user = PublishRelay<UserInfo>()
+    private let _user = PublishRelay<UserInfo>()
     
     var userObservable: Observable<UserInfo> {
-        return user.asObservable()
+        return _user.asObservable()
     }
 
     init(){
@@ -29,7 +29,7 @@ class UserViewModel {
     func loadUser(){
         store.loadUserInfoRx()
             .subscribe(onNext: { user in
-                self.user.accept(user)
+                self._user.accept(user)
             }).disposed(by: disposeBag)
     }
     

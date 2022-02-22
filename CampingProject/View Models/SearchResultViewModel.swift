@@ -17,7 +17,7 @@ public protocol SearchResultInput{
     
 }
 public protocol SearchResultOutput{
-    var searchUsers: BehaviorRelay<[SearchUser]> { get }
+    var searchUsers: Observable<[SearchUser]> { get }
     var isLoadingSpinnerAvaliable: PublishRelay<Bool> { get }
     
 }
@@ -35,10 +35,12 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
     var inputs: SearchResultInput { return self }
     var outputs: SearchResultOutput { return self }
     
+    
+    private let _searchUsers = BehaviorRelay<[SearchUser]>(value: [])
+    
+    var searchUsers: Observable<[SearchUser]> { return _searchUsers.asObservable() }
     var searchText: PublishRelay<String> = PublishRelay<String>()
-    var searchUsers: BehaviorRelay<[SearchUser]> = BehaviorRelay<[SearchUser]>(value: [])
     var fetchMoreDatas: PublishRelay<Void> = PublishRelay<Void>()
-    var refreshCompelted: PublishRelay<Void> = PublishRelay<Void>()
     var isLoadingSpinnerAvaliable: PublishRelay<Bool> = PublishRelay<Bool>()
     
     private var text = ""
@@ -86,12 +88,12 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
             .subscribe(onNext:{[weak self] result in
                 guard let self = self else { return }
                 
-                if !result.users.isEmpty || !self.searchUsers.value.isEmpty{
+                if !result.users.isEmpty || !self._searchUsers.value.isEmpty{
                     self.handleData(data: result)
                     self.isLoadingSpinnerAvaliable.accept(false)
                     self.isPaginationRequestStillResume = false
                 } else {
-                    self.searchUsers.accept([SearchUser.init(name: self.text)])
+                    self._searchUsers.accept([SearchUser.init(name: self.text)])
                 }
             })
             .disposed(by: disposeBag)
@@ -102,15 +104,15 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
     func handleData(data: SearchResult ) {
 //      가져오는 리스트의 size는 5로 고정
         totalPage = data.total / size
-
+        
         let newData = data.users
         if page == 0 {
             self.totalPage = data.total
-            self.searchUsers.accept(newData)
+            self._searchUsers.accept(newData)
         }
         else {
-            let oldDatas = self.searchUsers.value
-            self.searchUsers.accept(oldDatas + newData)
+            let oldDatas = self._searchUsers.value
+            self._searchUsers.accept(oldDatas + newData)
         }
         page += 1
     }
@@ -118,8 +120,6 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
     func refreshTriggered() {
         isPaginationRequestStillResume = false
         page = 0
-        self.searchUsers.accept([])
-        
+        self._searchUsers.accept([])
     }
-    
 }

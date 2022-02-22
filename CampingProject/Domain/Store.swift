@@ -42,9 +42,9 @@ class Store {
         }
     }
     
-    func loadFriendInfoRx(id: Int) -> Observable<UserInfo>{
+    func loadFriendInfoRx(userId: Int) -> Observable<UserInfo>{
         return Observable.create() { emitter in
-            self.api.loadFriendInfo(friendId: id) { result in
+            self.api.loadFriendInfo(friendId: userId) { result in
                 switch result {
                 case let .success(data):
                     emitter.onNext(data)
@@ -121,16 +121,6 @@ class Store {
         
         return Observable.create() { emitter in
             self.api.deleteFollower(id: id) { result in
-                    emitter.onNext(result)
-                    emitter.onCompleted()
-                }
-            return Disposables.create()
-        }
-    }
-    
-    func loadGearImagesRx(id: Int) -> Observable<UIImage>{
-        return Observable.create() { emitter in
-            self.api.loadGearImages(gearId: id) { result in
                     emitter.onNext(result)
                     emitter.onCompleted()
                 }

@@ -188,34 +188,6 @@ class APIManager{
     }
     
     
-//    유저 장비 이미지 로드
-    func loadGearImages(gearId: Int, completion: @escaping (UIImage) -> Void){
-        AF.request(urlUser + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
-            .responseDecodable(of:[ImageData].self)  { (response) in
-            switch response.result {
-            case .success(_):
-                let images = response.value!
-                if !images.isEmpty{
-                    for image in images{
-                        AF.request(image.url).responseImage { response in
-                            switch response.result{
-                            case .success(let image):
-                                completion(image)
-                            case .failure(let err):
-                                print(err)
-                            }
-                        }
-                    }
-                } else {
-                    let image = UIImage(systemName:"camera.circle")!
-                    completion(image)
-                }
-            case .failure(let error):
-                print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-            } // end switch
-        }
-    }
-    
     func loadGearDetailImages(gearId: Int, completion: @escaping ([UIImage]) -> Void){
         AF.request(urlUser + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of:[ImageData].self)  { (response) in
@@ -242,7 +214,7 @@ class APIManager{
                     completion([image])
                 }
             case .failure(let error):
-                print("🚫loadGearImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                print("🚫loadGearDetailImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             } // end switch
         }
     }
@@ -250,16 +222,13 @@ class APIManager{
   
     
     func loadSearchUserGear(id: Int, completion: @escaping ([CellData]) -> Void ) {
-        AF.request(url + "gear"+"/\(id)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
+        AF.request(url + "user/\(id)/gear", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of:[CellData].self)  { (response) in
             switch response.result {
             case .success(_):
                 
                 completion(response.value!)
-                for i in response.value! {
-                    self.loadGearImages(gearId: i.id, completion: { data in
-                    })
-                }
+             
                 
             case .failure(let error):
                 print("🚫loadSearchUserGear  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")

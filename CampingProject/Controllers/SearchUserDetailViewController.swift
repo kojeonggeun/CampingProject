@@ -22,10 +22,11 @@ class SearchUserDetailViewController: UIViewController {
     
     @IBOutlet weak var friendCollectionView: UICollectionView!
     
-    
+    static let identifier = "SearchUserDetailViewController"
     var apiManager = APIManager.shared
     var store = Store.shared
     var profileVM = ProfileViewModel.shared
+    var viewModel = SearchUserDetailViewModel()
     
     var userId: Int = 0
 
@@ -40,37 +41,44 @@ class SearchUserDetailViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItem?.title = ""
         
-        friendCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "myGearViewCell")
+        friendCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: MyGearCollectionViewCell.identifier)
+        let myGearSB: UIStoryboard = UIStoryboard(name: "MyGear", bundle: nil)
         
-            self.store.loadFriendInfoRx(id: userId)
-                .subscribe(onNext: { userInfo in
-                    self.navigationItem.title = userInfo.user?.email
-                    self.user = userInfo
-                    self.userName.text = userInfo.user?.name
-                    self.userFollower.text = "\(userInfo.followerCnt)"
-                    self.userFollowing.text = "\(userInfo.followingCnt)"
-                    self.userDesc.text = userInfo.user?.phone
-                    
-                    if userInfo.status == "FOLLOWING"{
-                        self.followButton.setTitle("팔로잉☑️", for: .normal)
-                        self.followButton.tintColor = .brown
-                    }
+        viewModel.inputs.loadSearchInfo(id: userId)
+        
+        viewModel.outputs.searchUser
+            .subscribe(onNext: { userInfo in
+                self.navigationItem.title = userInfo.user?.email
+                self.user = userInfo
+                self.userName.text = userInfo.user?.name
+                self.userFollower.text = "\(userInfo.followerCnt)"
+                self.userFollowing.text = "\(userInfo.followingCnt)"
+                self.userGear.text = "\(userInfo.gearCnt)"
+                
+                self.userDesc.text = userInfo.user?.phone
+                
+                if userInfo.status == "FOLLOWING"{
+                    self.followButton.setTitle("팔로잉☑️", for: .normal)
+                    self.followButton.tintColor = .brown
+                }
             })
-        SearchUserDetailViewModel.shared.loadSearchGear(id: userId)
-
-        SearchUserDetailViewModel.shared.searchGearObservable
+            .disposed(by: disposeBag)
+        
+        viewModel.outputs.searchGears
             .map{ $0.map { ViewGear($0) } }
-            .bind(to: friendCollectionView.rx.items(cellIdentifier: "myGearViewCell",cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
-                Store.shared.loadGearImagesRx(id:element.id)
-                    .subscribe(onNext: { image in
-                        cell.collectionViewCellImage.image = image
-                    })
-                
+            .bind(to: friendCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
                     cell.onData.onNext(element)
-                
-    
             }.disposed(by: disposeBag)
         
+//        TODO: 로그인한 model id와 검색한 유저의 model id 가지고 장비 수정 및 삭제 권한 부여해줘야 함
+        friendCollectionView.rx.modelSelected(ViewGear.self)
+            .subscribe(onNext:{ user in
+                let pushVC = myGearSB.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
+                pushVC.gearId = user.id
+                pushVC.viewModel = GearDetailViewModel(gearId: user.id)
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
+            .disposed(by: disposeBag)
         
         followButton.rx.tap
             .bind {

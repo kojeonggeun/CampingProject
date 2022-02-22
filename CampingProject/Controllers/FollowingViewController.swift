@@ -88,7 +88,7 @@ extension FollowingViewController: UITableViewDelegate{
             id = followingSearchData[indexPath.row].searchFriend.friendId
         }
         
-        self.store.loadFriendInfoRx(id: id )
+        self.store.loadFriendInfoRx(userId: id )
             .subscribe(onNext : { result in
                 print(result)
 //                TODO: 검색친구상세보기 구현해야함

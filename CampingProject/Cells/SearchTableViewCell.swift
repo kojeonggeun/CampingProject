@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 import RxSwift
 import RxCocoa
 
@@ -43,11 +44,13 @@ class SearchTableViewCell: UITableViewCell{
             .bind(onNext: {[weak self] user in
                 self?.searchEmail.text = user.email
                 self?.searchName.text = user.name
-                if user.userImageUrl == "" {
-                    self?.searchProfileImage.image = UIImage(systemName: "camera.circle")
-                } else {
+                
+                if user.userImageUrl != "" {
                     self?.image = UIImage(data: self?.data! ?? Data())
                     self?.searchProfileImage.image = self?.image
+                    
+                } else {
+                    self?.searchProfileImage.image = UIImage(systemName: "camera.circle")
                 }
             })
             .disposed(by: cellDisposeBag)
