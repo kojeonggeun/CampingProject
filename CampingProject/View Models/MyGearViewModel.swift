@@ -11,14 +11,12 @@ import RxRelay
 import RxCocoa
 
 public protocol MyGearInput{
-    func didSelectCell(cell:Observable<ViewGear>)
     func loadGears()
     func loadGearTypes()
 }
 public protocol MyGearOutput{
     var gears: Observable<[CellData]> { get }
     var gearTypes: Observable<[GearType]> { get }
-    var didSelectViewGear: Observable<ViewGear> { get }
 }
 
 public protocol MyGearViewModelType {
@@ -52,20 +50,18 @@ class MyGearViewModel: MyGearInput,MyGearOutput, MyGearViewModelType {
     func loadGears(){
         store.loadUserGearRx().map{ $0 }.subscribe(onNext:{
             self._gears.accept($0)
-        }).disposed(by: disposeBag)
+        })
+        .disposed(by: disposeBag)
     }
     
     func loadGearTypes(){
         apiManager.loadGearType().map{ $0 }.subscribe(onNext:{
             self._gearTypes.accept($0)
-        }).disposed(by: disposeBag)
+        })
+        .disposed(by: disposeBag)
     }
 
-    func didSelectCell(cell: Observable<ViewGear>) {
-        cell.subscribe(onNext: {
-            self._viewGear.accept($0)
-        }).disposed(by: disposeBag)
-    }
+    
     
     var inputs: MyGearInput { return self }
     var outputs: MyGearOutput { return self }

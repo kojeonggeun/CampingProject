@@ -44,16 +44,22 @@ class SearchUserViewController: UIViewController {
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setView()
+        setBind()
+    }
+    
+    func setView(){
         let email = apiManager.userInfo?.user?.email
         self.navigationController?.navigationBar.topItem?.title = email
         
         searchTableView.keyboardDismissMode = .onDrag
         
-    
         searchTableView.register(UINib(nibName:String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
         searchTableView.register(UINib(nibName:String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
-        
-
+            
+    }
+    func setBind(){
         searchBar.rx.text.orEmpty
             .debounce(RxTimeInterval.milliseconds(5), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
@@ -78,7 +84,8 @@ class SearchUserViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.outputs.isLoadingSpinnerAvaliable.subscribe { [weak self] isAvaliable in
+        viewModel.outputs.isLoadingSpinnerAvaliable
+            .subscribe { [weak self] isAvaliable in
             guard let isAvaliable = isAvaliable.element,
                   let self = self else { return }
             self.searchTableView.tableFooterView = isAvaliable ? self.viewSpinner : UIView(frame: .zero)
@@ -86,9 +93,10 @@ class SearchUserViewController: UIViewController {
         .disposed(by: disposeBag)
         
         
-        searchTableView.rx.didScroll.subscribe { [weak self] _ in
+        searchTableView.rx.didScroll
+            .subscribe { [weak self] _ in
             guard let self = self else { return }
-            
+
             let offsetY = self.searchTableView.contentOffset.y
             let contentSize = self.searchTableView.contentSize.height
             let boundsSizeHeight = self.searchTableView.bounds.size.height - 50
@@ -105,9 +113,8 @@ class SearchUserViewController: UIViewController {
                 pushVC.userId = user.id
                 self.navigationController?.pushViewController(pushVC, animated: true)
             }).disposed(by: disposeBag)
-
+        
     }
-    
 }
 
 

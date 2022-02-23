@@ -11,6 +11,7 @@ import RxCocoa
 
 public protocol GearDetailInput {
     func loadGearDetail()
+    var deleteButtonTouched: PublishRelay<Void> { get }
 }
 
 public protocol GearDetailOutput {
@@ -29,22 +30,31 @@ class GearDetailViewModel: GearDetailViewModelType, GearDetailInput, GearDetailO
     
     private var gearId: Int
     private let gearDetail = PublishSubject<GearDetail>()
+    var deleteButtonTouched: PublishRelay<Void> = PublishRelay<Void>()
     
     public var showGearDetail: Observable<GearDetail> {
         return gearDetail.asObserver()
     }
-
+  
     init(gearId: Int){
+        
         self.gearId = gearId
+        
+        deleteButtonTouched.subscribe({ _ in
+            self.apiManager.deleteGear(gearId: self.gearId)
+        })
+        .disposed(by: disposeBag)
         
     }
     func loadGearDetail(){
         let userId: Int = apiManager.userInfo!.user!.id
         
+        print(userId, self.gearId)
         store.loadDetailUserGearRx(userId: userId, gearId: self.gearId)
             .subscribe(onNext: {
                 self.gearDetail.onNext($0)
             }).disposed(by: disposeBag)
+        
     }
     
     public var inputs: GearDetailInput { return self }

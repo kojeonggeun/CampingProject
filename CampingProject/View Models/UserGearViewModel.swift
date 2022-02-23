@@ -20,21 +20,8 @@ class UserGearViewModel {
         return apiManager.userGears
     }
     
-//    func addUserGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, image: [UIImage], imageName: [String]){
-//        
-//        apiManager.addGear(name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName)
-//    }
+
     
-    func deleteUserGear(gearId: Int){
-        
-        apiManager.deleteGear(gearId: gearId)
-    }
-    
-    
-    func editUserGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, image: [UIImage], imageName: [String], item: [ImageData]){
-        
-        apiManager.editGear(gearId: gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: image, imageName: imageName, item: item)
-    }
     
     func categoryUserData(type: String){
         categoryData.removeAll()

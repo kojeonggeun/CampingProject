@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import Photos
 import RxSwift
-
 class GearEditViewController: UIViewController {
     let apiManager = APIManager.shared
     let imagePicker = ImagePickerManager()
@@ -19,7 +18,7 @@ class GearEditViewController: UIViewController {
     var gearDetail: GearDetail?
     var allPhotos: PHFetchResult<PHAsset>?
     var imageItem = [ImageData]()
-    
+    var delegate: GearDetailReloadable?
     var customView: GearTextListCustomView? = nil
 
     // MARK: LifeCycles
@@ -31,6 +30,7 @@ class GearEditViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
     
         if let result = gearDetail{
+            
             self.gearEditCustomView.initPickerView(type: result.gearTypeName!, id: result.gearTypeId!)
             self.gearEditCustomView.UpdateData(type: result.gearTypeName!, name: result.name!, color: result.color!, company: result.company!, capacity: result.capacity!, buyDate: result.buyDt!, price: result.price!, desc: result.description!)
             result.images.enumerated().forEach{
@@ -58,14 +58,14 @@ class GearEditViewController: UIViewController {
         guard let capacity = gearEditCustomView.gearCapacity.text else { return }
         guard let date = gearEditCustomView.gearBuyDate.text else { return }
         guard let price = gearEditCustomView.gearPrice.text else { return }
+        guard let desc = gearEditCustomView.gearDesc.text else { return }
         let type = gearEditCustomView.gearTypeId
         
-        self.apiManager.editGear(gearId: self.gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
-            .subscribe({_ in
-                
+        self.apiManager.editGear(gearId: self.gearId,name: name, type: type, color: color, company: company, capacity: capacity, date: date, price: price,desc:desc, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName,item: self.imageItem)
+            .subscribe({ _ in
                 let alert = UIAlertController(title: nil, message: "장비를 수정 완료 되었습니다.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "수정", style: .default) { action in
-                    NotificationCenter.default.post(name: .edit, object: nil)
+                    self.delegate?.reloadData()
                     NotificationCenter.default.post(name: .home, object: nil)
                     
                     self.navigationController?.popViewController(animated: true)
@@ -119,4 +119,7 @@ extension GearEditViewController: UICollectionViewDataSource{
         self.imageCount.text = "(\(imagePicker.photoArray.count) / 5"
     }
     
+}
+protocol GearDetailReloadable {
+    func reloadData()
 }

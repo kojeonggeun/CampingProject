@@ -48,18 +48,14 @@ class MyGearViewController: UIViewController{
         myGearCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier:MyGearCollectionViewCell.identifier )
         
         myGearCollectionView.rx.setDelegate(self)
-        
-        let didSelect = myGearCollectionView.rx
-            .modelSelected(ViewGear.self)
-            .asObservable()
             
         viewModel.inputs.loadGears()
         viewModel.inputs.loadGearTypes()
-        viewModel.inputs.didSelectCell(cell: didSelect)
         
     }
     
     func setBind(){
+
         viewModel.outputs.gears
             .map{ $0.map { ViewGear($0) } }
             .bind(to: myGearCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in
@@ -80,13 +76,15 @@ class MyGearViewController: UIViewController{
                 cell.updateUI(title: element.gearName)
             }.disposed(by: disposeBag)
         
-        viewModel.outputs.didSelectViewGear
-            .subscribe(onNext:{ result in
+        myGearCollectionView.rx.modelSelected(ViewGear.self)
+            .subscribe(onNext: { result in
                 let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
                 pushVC.gearId = result.id
                 pushVC.viewModel = GearDetailViewModel(gearId: result.id)
+                
                 self.navigationController?.pushViewController(pushVC, animated: true)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
   
 

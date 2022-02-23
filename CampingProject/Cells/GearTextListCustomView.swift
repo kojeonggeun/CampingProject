@@ -75,9 +75,8 @@ class GearTextListCustomView: UIView{
         gearCapacity.text = capacity
         gearBuyDate.text = buyDate
         gearPrice.text = "\(price)"
-        gearPrice.text = desc
+        gearDesc.text = desc
     }
-    
     
     func createDatePickerView(){
         
@@ -159,7 +158,6 @@ extension GearTextListCustomView: UIPickerViewDataSource{
         return apiService.gearTypes[row].gearName
 
     }
-    
 }
 
 extension GearTextListCustomView: UIPickerViewDelegate{

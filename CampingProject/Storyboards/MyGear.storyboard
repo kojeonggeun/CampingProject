@@ -301,18 +301,12 @@
                                         <color key="tintColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="장비 수정"/>
                                         <buttonConfiguration key="configuration" style="filled" title="장비 수정" cornerStyle="large"/>
-                                        <connections>
-                                            <action selector="gearEdit:" destination="M0N-Qk-oPP" eventType="touchUpInside" id="Ol9-4D-Ks6"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zik-Tb-gaV">
                                         <rect key="frame" x="97.5" y="0.0" width="87.5" height="34.5"/>
                                         <color key="tintColor" systemColor="systemRedColor"/>
                                         <state key="normal" title="장비 삭제"/>
                                         <buttonConfiguration key="configuration" style="filled" title="장비 삭제" cornerStyle="large"/>
-                                        <connections>
-                                            <action selector="showDeleteAlert:" destination="M0N-Qk-oPP" eventType="touchUpInside" id="aE4-dj-Rwh"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -376,7 +370,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="DX2-uq-6tE"/>
                     <connections>
+                        <outlet property="gearDeleteButton" destination="zik-Tb-gaV" id="2dn-0L-poL"/>
                         <outlet property="gearDetailCollectionView" destination="zfg-vY-fLI" id="nK5-vy-8fK"/>
+                        <outlet property="gearEditButton" destination="P84-vl-bZL" id="i6g-KR-7Of"/>
                         <outlet property="pageControl" destination="z25-C0-ON3" id="Jcn-kI-v2m"/>
                     </connections>
                 </viewController>

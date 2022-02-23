@@ -78,7 +78,7 @@ class APIManager{
     }
     
 //    장비 수정
-    func editGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,image: [UIImage], imageName: [String], item: [ImageData]) -> Observable<Void>{
+    func editGear(gearId: Int,name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String ,desc: String,image: [UIImage], imageName: [String], item: [ImageData]) -> Observable<Void>{
         return Observable.create() { emitter in
             let headers: HTTPHeaders = [
                         "Content-type": "multipart/form-data",
@@ -86,7 +86,7 @@ class APIManager{
             
             let parameters: [String : Any] = ["name" : name , "gearTypeId": type,
                                       "color": color, "company": company,
-                                      "capacity": capacity, "price": price,
+                                              "capacity": capacity, "price": price, "description": desc,
                                       "buyDt": date]
         
             AF.upload(multipartFormData: { multipartFormData in

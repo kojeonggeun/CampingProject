@@ -29,9 +29,9 @@ class SearchUserDetailViewController: UIViewController {
     var viewModel = SearchUserDetailViewModel()
     
     var userId: Int = 0
-
     
     let disposeBag = DisposeBag()
+    var myGearSB: UIStoryboard?
     var user: UserInfo? = nil
     
     
@@ -39,13 +39,22 @@ class SearchUserDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setView()
+        setBind()
+        
+    }
+    
+    func setView(){
         self.navigationItem.leftBarButtonItem?.title = ""
         
         friendCollectionView.register(UINib(nibName:String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: MyGearCollectionViewCell.identifier)
-        let myGearSB: UIStoryboard = UIStoryboard(name: "MyGear", bundle: nil)
+        
+        myGearSB = UIStoryboard(name: "MyGear", bundle: nil)
         
         viewModel.inputs.loadSearchInfo(id: userId)
-        
+    }
+    
+    func setBind(){
         viewModel.outputs.searchUser
             .subscribe(onNext: { userInfo in
                 self.navigationItem.title = userInfo.user?.email
@@ -71,11 +80,12 @@ class SearchUserDetailViewController: UIViewController {
             }.disposed(by: disposeBag)
         
 //        TODO: 로그인한 model id와 검색한 유저의 model id 가지고 장비 수정 및 삭제 권한 부여해줘야 함
+        
         friendCollectionView.rx.modelSelected(ViewGear.self)
-            .subscribe(onNext:{ user in
-                let pushVC = myGearSB.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
-                pushVC.gearId = user.id
-                pushVC.viewModel = GearDetailViewModel(gearId: user.id)
+            .subscribe(onNext:{ gear in
+                let pushVC = self.myGearSB?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
+                pushVC.gearId = gear.id
+                pushVC.viewModel = GearDetailViewModel(gearId: gear.id)
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
             .disposed(by: disposeBag)
@@ -98,8 +108,8 @@ class SearchUserDetailViewController: UIViewController {
                 }
   
             }.disposed(by: disposeBag)
-
     }
+    
 }
 
 extension SearchUserDetailViewController: UICollectionViewDelegateFlowLayout{

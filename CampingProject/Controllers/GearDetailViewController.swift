@@ -11,7 +11,8 @@ import TextFieldEffects
 import RxSwift
 import RxCocoa
 
-class GearDetailViewController: UIViewController {
+
+class GearDetailViewController: UIViewController, GearDetailReloadable {
     static let identifier: String = "GearDetailViewController"
     
     var gearId: Int = 0
@@ -24,10 +25,11 @@ class GearDetailViewController: UIViewController {
     var gearDetail: GearDetail?
     var viewModel: GearDetailViewModel!
     
+    
     init(viewModel: GearDetailViewModel){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
+
     }
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -42,14 +44,12 @@ class GearDetailViewController: UIViewController {
         super.viewDidLoad()
         setView()
         setBind()
-        setNotification()
+        
     }
     
-    func setNotification(){
-        NotificationCenter.default.rx.notification(.edit)
-                    .subscribe(onNext: { [weak self] _ in
-                        self?.viewModel.inputs.loadGearDetail()
-                    }).disposed(by: disposeBag)
+    func reloadData(){
+        self.viewModel.inputs.loadGearDetail()
+        
     }
     
     func setView(){
@@ -59,6 +59,34 @@ class GearDetailViewController: UIViewController {
         pageControl.currentPageIndicatorTintColor = UIColor.red
         
         viewModel.inputs.loadGearDetail()
+        
+        gearDeleteButton.rx.tap
+            .subscribe(onNext:{
+                let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
+                    self.viewModel.inputs.deleteButtonTouched.accept(())
+                    NotificationCenter.default.post(name: .home, object: nil)
+                    self.navigationController?.popViewController(animated: true)
+                })
+                alert.addAction(UIAlertAction(title: "취소", style: .default) { action in
+                    return
+                })
+                self.present(alert, animated: true)
+                
+                
+            })
+            .disposed(by: disposeBag)
+        
+        gearEditButton.rx.tap
+            .subscribe({[weak self] _ in
+                guard let self = self else { return }
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearEditView") as! GearEditViewController
+                pushVC.gearId = self.gearId
+                pushVC.gearDetail = self.gearDetail
+                pushVC.delegate = self
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
+            .disposed(by: disposeBag)
         
     }
     
@@ -79,28 +107,8 @@ class GearDetailViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var gearDetailCollectionView: UICollectionView!
     
-    @IBAction func showDeleteAlert(_ sender: Any) {
-        let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "삭제", style: .default) { action in
-            self.userGearVM.deleteUserGear(gearId: self.gearId)
-            
-            self.navigationController?.popViewController(animated: true)
-            
-        })
-        alert.addAction(UIAlertAction(title: "취소", style: .default) { action in
-            return
-        })
-        present(alert, animated: true)
-
-    }
-    @IBAction func gearEdit(_ sender: Any) {
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "GearEditView") as! GearEditViewController
-        pushVC.gearId = self.gearId
-        pushVC.gearDetail = self.gearDetail
-        
-        self.navigationController?.pushViewController(pushVC, animated: true)
-
-    }
+    @IBOutlet weak var gearEditButton: UIButton!
+    @IBOutlet weak var gearDeleteButton: UIButton!
 
 }
 extension GearDetailViewController: UICollectionViewDelegate{

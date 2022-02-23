@@ -53,6 +53,7 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
         searchText
             .do{ self.text = $0; self.refreshTriggered()}
             .subscribe(onNext:{ input in
+                print(self._searchUsers.value)
                 self.fetchData(page:self.page)
         })
         .disposed(by: self.disposeBag)
@@ -87,7 +88,7 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
         self.store.searchUserRx(searchText: text,page: page)
             .subscribe(onNext:{[weak self] result in
                 guard let self = self else { return }
-                
+
                 if !result.users.isEmpty || !self._searchUsers.value.isEmpty{
                     self.handleData(data: result)
                     self.isLoadingSpinnerAvaliable.accept(false)
