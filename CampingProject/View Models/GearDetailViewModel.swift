@@ -49,14 +49,12 @@ class GearDetailViewModel: GearDetailViewModelType, GearDetailInput, GearDetailO
     func loadGearDetail(){
         let userId: Int = apiManager.userInfo!.user!.id
         
-        print(userId, self.gearId)
         store.loadDetailUserGearRx(userId: userId, gearId: self.gearId)
             .subscribe(onNext: {
                 self.gearDetail.onNext($0)
             }).disposed(by: disposeBag)
         
     }
-    
     public var inputs: GearDetailInput { return self }
     public var outputs: GearDetailOutput { return self }
     

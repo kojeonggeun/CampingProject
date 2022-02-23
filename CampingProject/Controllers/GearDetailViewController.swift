@@ -24,7 +24,7 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
     
     var gearDetail: GearDetail?
     var viewModel: GearDetailViewModel!
-    
+    var isPermission:Bool = true
     
     init(viewModel: GearDetailViewModel){
         self.viewModel = viewModel
@@ -59,6 +59,8 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
         pageControl.currentPageIndicatorTintColor = UIColor.red
         
         viewModel.inputs.loadGearDetail()
+        gearDeleteButton.isHidden = !isPermission
+        gearEditButton.isHidden = !isPermission
         
         gearDeleteButton.rx.tap
             .subscribe(onNext:{

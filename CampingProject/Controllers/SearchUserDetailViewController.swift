@@ -86,6 +86,7 @@ class SearchUserDetailViewController: UIViewController {
                 let pushVC = self.myGearSB?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
                 pushVC.gearId = gear.id
                 pushVC.viewModel = GearDetailViewModel(gearId: gear.id)
+                pushVC.isPermission = false
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
             .disposed(by: disposeBag)

@@ -26,6 +26,7 @@ public protocol SearchUserDetailViewModelType {
 
 class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetailInput, SearchUserDetailOutput {
     let store = Store.shared
+    let userId: Int = APIManager.shared.userInfo!.user!.id
     let disposeBag = DisposeBag()
     
     private let _searchGears = PublishRelay<[CellData]>()
@@ -46,6 +47,7 @@ class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetail
     }
     
     func loadSearchInfo(id: Int){
+        print(id, userId)
         store.loadSearchUserGearRx(userId: id)
             .subscribe(onNext: { gears in
                 self._searchGears.accept(gears)
