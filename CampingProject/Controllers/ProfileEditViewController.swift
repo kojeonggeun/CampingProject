@@ -71,7 +71,6 @@ class ProfileEditViewController: UIViewController {
         self.profileName.text = name
         self.profileIntro.text = aboutMe
             
-        
         DispatchQueue.global().async {
             let url = URL(string: self.image)
             let data = try? Data(contentsOf: url!)

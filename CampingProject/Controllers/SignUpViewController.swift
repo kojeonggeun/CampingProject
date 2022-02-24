@@ -58,7 +58,7 @@ class SignUpViewController: UIViewController {
                   pushVC.email = self.emailTextField.text!
                   self.navigationController?.pushViewController(pushVC, animated: true)
               }
-          }).disposed(by: disposeBag)
+          }).disposed(by: disposseBag)
 
     }
     

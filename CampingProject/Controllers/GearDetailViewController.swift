@@ -59,6 +59,7 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
         pageControl.currentPageIndicatorTintColor = UIColor.red
         
         viewModel.inputs.loadGearDetail()
+        print(isPermission)
         gearDeleteButton.isHidden = !isPermission
         gearEditButton.isHidden = !isPermission
         

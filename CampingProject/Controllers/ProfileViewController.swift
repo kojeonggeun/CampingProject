@@ -74,7 +74,6 @@ class ProfileViewController: UIViewController, ReloadData {
  
     }
     
-    
     @IBOutlet weak var gearQuantity: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
 
@@ -87,18 +86,11 @@ class ProfileViewController: UIViewController, ReloadData {
     @IBAction func moveFollower(_ sender: Any) {
         
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followerView") as! FollowerViewController
-        
-        for i in apiManger.followers{
-            pushVC.followerData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "follower"))
-        }
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     @IBAction func moveFollowing(_ sender: Any) {
         
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followingView") as! FollowingViewController
-        for i in apiManger.followings{
-            pushVC.followingData.append(FriendViewModel(searchFriend: Friend(id: i.id, friendId: i.friendId, name: i.name, profileUrl: i.profileUrl, email: i.email, status: i.status), friendType: "following"))
-        }
         self.navigationController?.pushViewController(pushVC, animated: true)
         
     }

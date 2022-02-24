@@ -55,7 +55,6 @@ class MyGearViewController: UIViewController{
     }
     
     func setBind(){
-
         viewModel.outputs.gears
             .map{ $0.map { ViewGear($0) } }
             .bind(to: myGearCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier,cellType: MyGearCollectionViewCell.self)) { (row, element, cell) in

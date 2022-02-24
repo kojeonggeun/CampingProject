@@ -9,17 +9,6 @@
 import UIKit
 import RxSwift
 
-protocol CellRepresentable {
-    var searchData: SearchUser { get }
-    func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
-}
-
-protocol FollowRepresentable {
-    var searchFriend: Friend { get }
-    func cellForRowAt(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
-}
-
-
 protocol ViewModel {
     associatedtype Input
     associatedtype Output

@@ -29,7 +29,7 @@ class SearchUserDetailViewController: UIViewController {
     var viewModel = SearchUserDetailViewModel()
     
     var userId: Int = 0
-    
+    var isCheckable: Bool = false
     let disposeBag = DisposeBag()
     var myGearSB: UIStoryboard?
     var user: UserInfo? = nil
@@ -38,7 +38,6 @@ class SearchUserDetailViewController: UIViewController {
 //    MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setView()
         setBind()
         
@@ -51,10 +50,18 @@ class SearchUserDetailViewController: UIViewController {
         
         myGearSB = UIStoryboard(name: "MyGear", bundle: nil)
         
+        viewModel.outputs.isCheckable
+            .subscribe(onNext:{ check in
+                self.isCheckable = check
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.inputs.loadSearchInfo(id: userId)
     }
     
     func setBind(){
+        
+            
         viewModel.outputs.searchUser
             .subscribe(onNext: { userInfo in
                 self.navigationItem.title = userInfo.user?.email
@@ -63,8 +70,7 @@ class SearchUserDetailViewController: UIViewController {
                 self.userFollower.text = "\(userInfo.followerCnt)"
                 self.userFollowing.text = "\(userInfo.followingCnt)"
                 self.userGear.text = "\(userInfo.gearCnt)"
-                
-                self.userDesc.text = userInfo.user?.phone
+                self.userDesc.text = userInfo.user?.aboutMe
                 
                 if userInfo.status == "FOLLOWING"{
                     self.followButton.setTitle("팔로잉☑️", for: .normal)
@@ -80,13 +86,13 @@ class SearchUserDetailViewController: UIViewController {
             }.disposed(by: disposeBag)
         
 //        TODO: 로그인한 model id와 검색한 유저의 model id 가지고 장비 수정 및 삭제 권한 부여해줘야 함
-        
         friendCollectionView.rx.modelSelected(ViewGear.self)
-            .subscribe(onNext:{ gear in
+            .subscribe(onNext:{[weak self] gear in
+                guard let self = self else { return }
                 let pushVC = self.myGearSB?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as! GearDetailViewController
                 pushVC.gearId = gear.id
                 pushVC.viewModel = GearDetailViewModel(gearId: gear.id)
-                pushVC.isPermission = false
+                pushVC.isPermission = self.isCheckable
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
             .disposed(by: disposeBag)

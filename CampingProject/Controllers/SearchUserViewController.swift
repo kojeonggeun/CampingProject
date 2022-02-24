@@ -18,7 +18,7 @@ class SearchUserViewController: UIViewController {
     let apiManager = APIManager.shared
     let disposeBag = DisposeBag()
     
-    var searchData: [CellRepresentable] = []
+    
     var cellHeightsDictionary: NSMutableDictionary = [:]
     var store = Store.shared
     var searchInputText: String = ""
@@ -119,41 +119,7 @@ class SearchUserViewController: UIViewController {
 
 
 extension SearchUserViewController: UITableViewDelegate{
-
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offsetY = scrollView.contentOffset.y
-//        let contentSize = scrollView.contentSize.height
-//        let boundsSizeHeight = scrollView.bounds.size.height
-//
-//        if offsetY > (contentSize - boundsSizeHeight){
-//            if !fetchingMore{
-//                beginBatchFetch()
-//            }
-//        }
-//    }
-////
-//    func beginBatchFetch() {
-//        fetchingMore = true
-//
-//        DispatchQueue.main.async {
-//                self.searchTableView.reloadSections(IndexSet(integer: 0), with: .none)
-//        }
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-//            self.page += 1
-//            self.viewModel.inputs.page.accept(self.page)
-//            self.apiManager.searchUser(searchText: self.searchInputText,page: self.page, completion: { data in
-////                self.appendSearchData(data: data)
-//                DispatchQueue.main.async {
-//
-//                    self.fetchingMore = false
-//                    self.searchTableView.reloadData()
-//                }
-//            })
-//        })
-//    }
-//
-    
-    
+        
 //    셀의 높이를 저장
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cellHeightsDictionary.setObject(cell.frame.size.height, forKey: indexPath as NSCopying)
@@ -168,29 +134,6 @@ extension SearchUserViewController: UITableViewDelegate{
     }
 }
 
-
-
-extension SearchUserViewController: UISearchBarDelegate{
-}
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        searchInputText = searchText
-//        self.searchData.removeAll()
-//        self.page = 0
-//
-//        apiManager.searchUser(searchText: searchText, completion: { data in
-////            self.appendSearchData(data: data)
-//            DispatchQueue.main.async {
-//                self.searchTableView.reloadData()
-//            }
-//        })
-//    }
-//
-////    func appendSearchData(data: [SearchUser]){
-////        for i in data{
-////            self.searchData.append(SearchResultViewModel(searchData: SearchUser(id: i.id, name: i.name, email: i.email, phone: i.phone, userImageId: i.userImageId, userImageUrl: i.userImageUrl, isPublic: i.isPublic),searchInputText: self.searchInputText))
-////        }
-////    }
-//}
 
 
 
