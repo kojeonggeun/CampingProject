@@ -17,13 +17,14 @@ class SearchUserViewController: UIViewController {
 
     let apiManager = APIManager.shared
     let disposeBag = DisposeBag()
-    
+    let store = Store.shared
+    let viewModel = SearchResultViewModel()
     
     var cellHeightsDictionary: NSMutableDictionary = [:]
-    var store = Store.shared
+    
     var searchInputText: String = ""
 
-    let viewModel = SearchResultViewModel()
+    
  
     private lazy var viewSpinner: UIView = {
         let view = UIView(frame: CGRect(

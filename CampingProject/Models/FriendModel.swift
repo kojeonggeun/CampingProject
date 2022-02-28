@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Friends: Decodable {
+public struct Friends: Decodable {
     var description: String
     var friends: [Friend]
 }
 
-struct Friend: Decodable {
+public struct Friend: Decodable {
     var id: Int
     var friendId: Int
     var name: String

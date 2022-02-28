@@ -97,6 +97,7 @@ class SearchUserDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        // FIXME: 팔로잉 버튼 수정해야함
         followButton.rx.tap
             .bind {
                 if self.user?.status == "FOLLOWING" {
