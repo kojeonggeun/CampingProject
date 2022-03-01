@@ -61,6 +61,7 @@ class AddGearViewController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: "장비 등록이 완료 되었습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { code in
+            
             self.viewModel.loadGears()
             self.navigationController?.popViewController(animated: true)
             

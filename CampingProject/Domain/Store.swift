@@ -128,16 +128,7 @@ class Store {
         }
     }
     
-    func loadGearDetailImagesRx(id: Int) -> Observable<[UIImage]>{
-        return Observable.create() { emitter in
-            self.api.loadGearDetailImages(gearId: id) { result in
-                    emitter.onNext(result)
-                    emitter.onCompleted()
-                }
-            return Disposables.create()
-        }
-    }
-    
+ 
     func loadSearchUserGearRx(userId: Int) -> Observable<[CellData]>{
         return Observable.create() { emitter in
             self.api.loadSearchUserGear(id:userId) { result in

@@ -69,9 +69,6 @@ class FollowerViewController: UIViewController {
         follwerSearchBar.rx.text.orEmpty
             .debounce(RxTimeInterval.milliseconds(5), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .subscribe({
-                print($0)
-            })
 //            .bind(to: viewModel.inputs.searchText)
 //            .disposed(by: disposeBag)
     }

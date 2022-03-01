@@ -36,24 +36,21 @@ class MyGearCollectionViewCell: UICollectionViewCell {
         
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] gear in
-                if gear.imageUrl != "camera.circle"{
-                    AF.request(gear.imageUrl).responseImage { response in
-                        switch response.result{
-                        case .success(let image):
-                            self!.collectionViewCellImage.image = image
-                        case .failure(let err):
-                            print(err)
-                        }
-                    }
-                } else {
-                    self!.collectionViewCellImage.image = UIImage(systemName: gear.imageUrl)
-                }
-                
+         
+                self?.loadImage(urlString: gear.imageUrl)
                 self?.collectionViewCellGearType.text = gear.type
                 self?.collectionViewCellText.text = gear.name
                 self?.collectionViewCellDate.text = gear.date
                 
             }).disposed(by: cellDisposeBag)
+    }
+    func loadImage(urlString: String){
+        let url = URL(string: urlString)
+        if urlString != "camera.circle" {
+            collectionViewCellImage.kf.setImage(with: url, placeholder: nil, completionHandler: nil)
+        } else {
+            collectionViewCellImage.image = UIImage(systemName: urlString)
+        }
     }
 
     override func prepareForReuse() {

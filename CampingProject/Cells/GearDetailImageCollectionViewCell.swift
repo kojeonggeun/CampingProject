@@ -34,24 +34,18 @@ class GearDetailImageCollectionViewCell: UICollectionViewCell {
         
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] gear in
-//                임시 이미지 변환 코드
-                if gear.url != "camera.circle"{
-                    AF.request(gear.url).responseImage { response in
-                        switch response.result{
-                        case .success(let image):
-                            
-                            self!.gearDetailImage.image = image
-                        case .failure(let err):
-                            print(err)
-                        }
-                    }
-                } else {
-                    self!.gearDetailImage.image = UIImage(systemName: gear.url)
-                }
+                self?.loadImage(urlString: gear.url)
                 
             }).disposed(by: cellDisposeBag)
     }
-
+    func loadImage(urlString: String){
+        let url = URL(string: urlString)
+        if urlString != "camera.circle" {
+            gearDetailImage.kf.setImage(with: url, placeholder: nil, completionHandler: nil)
+        } else {
+            gearDetailImage.image = UIImage(systemName: urlString)
+        }
+    }
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()

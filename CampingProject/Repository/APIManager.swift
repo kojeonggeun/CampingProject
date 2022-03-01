@@ -187,40 +187,6 @@ class APIManager{
         }
     }
     
-    
-    func loadGearDetailImages(gearId: Int, completion: @escaping ([UIImage]) -> Void){
-        AF.request(urlUser + "gear"+"/images/\(gearId)", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
-            .responseDecodable(of:[ImageData].self)  { (response) in
-            switch response.result {
-            case .success(_):
-                let images = response.value!
-                if !images.isEmpty{
-                    var gearImages: [UIImage] = []
-                    for (i,image) in images.enumerated(){
-                        AF.request(image.url).responseImage { response in
-                            switch response.result{
-                            case .success(let image):
-                                gearImages.append(image)
-                                if i == images.count - 1{
-                                    completion(gearImages)
-                                }
-                            case .failure(let err):
-                                print(err)
-                            }
-                        }
-                    }
-                } else {
-                    let image = UIImage(systemName:"camera.circle")!
-                    completion([image])
-                }
-            case .failure(let error):
-                print("🚫loadGearDetailImages  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
-            } // end switch
-        }
-    }
-    
-  
-    
     func loadSearchUserGear(id: Int, completion: @escaping ([CellData]) -> Void ) {
         AF.request(url + "user/\(id)/gear", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of:[CellData].self)  { (response) in
@@ -238,13 +204,12 @@ class APIManager{
     
 //    유저 검색
     func searchUser(searchText: String, page: Int = 0, completion: @escaping (Result<SearchResult, AFError>) -> Void){
-        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 5]
+        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 15]
         
         AF.request(url+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of: SearchResult.self) { (response) in
             switch response.result {
-            case .success(let data):
-                let searchResult = response.value!
+            case .success(_):
                 completion(response.result)
                
             case .failure(let error):

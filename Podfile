@@ -14,5 +14,6 @@ target 'CampingProject' do
  pod 'RxSwift'
  pod 'RxCocoa'
  pod 'RxViewController'
+ pod 'Kingfisher'
 
 end

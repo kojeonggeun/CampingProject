@@ -92,6 +92,7 @@ class MyGearViewController: UIViewController{
 
     @IBAction func addGearMove(_ sender: Any) {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddGearView") as! AddGearViewController
+        pushVC.viewModel = viewModel
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     @IBAction func unwind(_ sender: Any) {

@@ -47,7 +47,6 @@ class MainTabBarController: UITabBarController {
     }
 
     @objc private func swipeGesture(swipe: UISwipeGestureRecognizer){
-        print("awd")
         switch swipe.direction{
         case .left:
             if selectedIndex > 0 {
