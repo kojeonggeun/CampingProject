@@ -40,49 +40,50 @@ class ProfileViewModel: ProfileViewModelType, ProfileInput, ProfileOutput {
     var inputs: ProfileInput { return self }
     var outputs: ProfileOutput { return self }
     
-    private var follower = BehaviorRelay<Int>(value: 0)
-    private var following = BehaviorRelay<Int>(value: 0)
-    private var gear = BehaviorRelay<Int>(value: 0)
+    private var _follower = BehaviorRelay<Int>(value: 0)
+    private var _following = BehaviorRelay<Int>(value: 0)
+    private var _gear = BehaviorRelay<Int>(value: 0)
     
     var profileInfo = PublishSubject<UserInfo>()
     
-    var followerCount:Observable<Int> { return self.follower.asObservable() }
-    var followingCount:Observable<Int> { return self.following.asObservable() }
-    var gearCount:Observable<Int> { return self.gear.asObservable() }
+    var followerCount:Observable<Int> { return self._follower.asObservable() }
+    var followingCount:Observable<Int> { return self._following.asObservable() }
+    var gearCount:Observable<Int> { return self._gear.asObservable() }
    
     func loadProfileInfo() {
         store.loadFollowerRx()
             .subscribe(onNext: {[weak self] follower in
-                self?.follower.accept(follower.friends.count)
-            }).disposed(by: disposeBag)
+                self?._follower.accept(follower.contents.count)
+            })
+            .disposed(by: disposeBag)
         
         store.loadFollowingRx()
             .subscribe(onNext: {[weak self] following in
-                self?.following.accept(following.friends.count)
-            }).disposed(by: disposeBag)
+                self?._following.accept(following.contents.count)
+            })
+            .disposed(by: disposeBag)
         
         UserViewModel().userObservable
             .subscribe(onNext:{[weak self] userInfo in
                 self?.profileInfo.onNext(userInfo)
-                self?.gear.accept(userInfo.gearCnt)
-        }).disposed(by: disposeBag)
+                self?._gear.accept(userInfo.gearCnt)
+        })
+        .disposed(by: disposeBag)
     }
     
     
     func reloadFollowing(){
         self.store.loadFollowingRx()
             .subscribe(onNext: {[weak self] following in
-                self?.following.accept(following.friends.count)
-        }).disposed(by: disposeBag)
+                self?._following.accept(following.contents.count)
+        })
+        .disposed(by: disposeBag)
     }
 
     func clearUserCount(){
-        follower.accept(0)
-        following.accept(0)
+        _follower.accept(0)
+        _following.accept(0)
     }
-    
-  
-    
 }
 
 

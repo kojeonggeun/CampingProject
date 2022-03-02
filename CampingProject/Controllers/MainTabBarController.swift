@@ -13,10 +13,6 @@ import RxCocoa
 class MainTabBarController: UITabBarController {
     
     let store = Store.shared
-    
-    let userGearVM = UserGearViewModel.shared
-    let viewModel = ProfileViewModel.shared
-
     let apiManger = APIManager.shared
     let disposeBag = DisposeBag()
     

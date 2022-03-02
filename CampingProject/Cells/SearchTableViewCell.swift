@@ -29,7 +29,6 @@ class SearchTableViewCell: UITableViewCell{
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     required init?(coder: NSCoder) {

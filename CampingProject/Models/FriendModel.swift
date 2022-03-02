@@ -8,8 +8,8 @@
 import Foundation
 
 public struct Friends: Decodable {
-    var description: String
-    var friends: [Friend]
+    var contents: [Friend]
+    var total: Int
 }
 
 public struct Friend: Decodable {
@@ -19,4 +19,14 @@ public struct Friend: Decodable {
     var profileUrl: String
     var email: String
     var status: String
+    
+    init(name: String){
+        self.id = 0
+        self.friendId = 0
+        self.name = name
+        self.profileUrl = ""
+        self.email = ""
+        self.status = ""
+    }
+    
 }

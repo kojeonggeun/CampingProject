@@ -20,9 +20,6 @@ class APIManager{
     var gearTypes: [GearType] = []
     var userGears: [CellData] = []
 
-    var friendInfo: [UserInfo] = []
-    var followers: [Friend] = []
-    var followings: [Friend] = []
     var userInfo: UserInfo? = nil
   
     
@@ -204,7 +201,7 @@ class APIManager{
     
 //    유저 검색
     func searchUser(searchText: String, page: Int = 0, completion: @escaping (Result<SearchResult, AFError>) -> Void){
-        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 15]
+        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 10]
         
         AF.request(url+"user/search/" , method: .get, parameters: parameters, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of: SearchResult.self) { (response) in
@@ -226,7 +223,6 @@ class APIManager{
     비공개 일 경우 요청 & 승인 과정을 거쳐야 함
 */
     func followRequst(id: Int, isPublic: Bool, completion: @escaping (Bool) -> Void){
-        
         AF.request(urlUser + "friend/\(id)",
                    method: .post,
                    encoding:JSONEncoding.default,
@@ -357,9 +353,6 @@ class APIManager{
             .responseDecodable(of: UserInfo.self) { response in
                 switch response.result {
                 case .success(_):
-                    self.friendInfo.removeAll()
-                    
-                    self.friendInfo.append(response.value!)
 
                     completion(response.result)
                 case .failure(let error):
@@ -407,16 +400,11 @@ class APIManager{
         }
     }
  
-    func loadFollower(completion: @escaping (Result<Friends, AFError>) -> Void){
-        AF.request(urlUser + "friend/follower" ,method: .get , encoding:URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
+    func loadFollower(searchText: String, page: Int = 0, completion: @escaping (Result<Friends, AFError>) -> Void){
+        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 10]
+        AF.request(urlUser + "friend/follower/" ,method: .get , parameters: parameters, encoding:URLEncoding.default,headers: headerInfo()).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success(_):
-                self.followers.removeAll()
-                let data = response.value!
-                
-                self.followers = data.friends.map({ data in
-                    return data
-                })
                 completion(response.result)
             case .failure(let error):
                 print("🚫 loadFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -424,20 +412,14 @@ class APIManager{
         }
     }
     
-    func loadFollowing(completion:  @escaping (Result<Friends, AFError>) -> Void){
-  
+    func loadFollowing(searchText: String, page: Int = 0, completion: @escaping (Result<Friends, AFError>) -> Void){
+        let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 10]
         
-        AF.request(urlUser + "friend/following" ,method: .get , encoding:URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
+        
+        AF.request(urlUser + "friend/following/" ,method: .get , parameters: parameters, encoding:URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success(_):
-                self.followings.removeAll()
-                let data = response.value!
-                
-                self.followings = data.friends.map({ data in
-                    return data
-                })
                 completion(response.result)
-                
             case .failure(let error):
                 print("🚫 loadFollowing Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }

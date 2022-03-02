@@ -74,11 +74,13 @@ class SearchUserViewController: UIViewController {
                 if element.id == 0 {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptySearchResultCell.identifier, for: IndexPath(row: row, section: 0)) as? EmptySearchResultCell
                     else{ return UITableViewCell()}
+                    self.searchTableView.allowsSelection = false
                     cell.updateLabel(text: element.name)
                     return cell
                 } else {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier,for: IndexPath(row: row, section: 0)) as? SearchTableViewCell
                     else { return UITableViewCell()}
+                    self.searchTableView.allowsSelection = true
                     cell.onData.accept(element)
                     return cell
                 }

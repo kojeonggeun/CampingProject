@@ -55,8 +55,8 @@ class SearchUserDetailViewController: UIViewController {
                 self.isCheckable = check
             })
             .disposed(by: disposeBag)
-        
         viewModel.inputs.loadSearchInfo(id: userId)
+        friendCollectionView.rx.setDelegate(self)
     }
     
     func setBind(){
@@ -114,10 +114,9 @@ class SearchUserDetailViewController: UIViewController {
                         self.profileVM.reloadFollowing()
                     })
                 }
-  
+
             }.disposed(by: disposeBag)
     }
-    
 }
 
 extension SearchUserDetailViewController: UICollectionViewDelegateFlowLayout{
@@ -132,6 +131,7 @@ extension SearchUserDetailViewController: UICollectionViewDelegateFlowLayout{
             return CGSize(width: width, height: height)
         
         }
+        
         let width = collectionView.bounds.width / 4
         let height = collectionView.bounds.height / 1.7
         

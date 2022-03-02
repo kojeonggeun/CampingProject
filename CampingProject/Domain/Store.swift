@@ -87,9 +87,9 @@ class Store {
     }
     
     
-    func loadFollowerRx() -> Observable<Friends>{
+    func loadFollowerRx(searchText: String = "", page: Int = 0) -> Observable<Friends>{
         return Observable.create() { emitter in
-            self.api.loadFollower() { result in
+            self.api.loadFollower(searchText: searchText, page: page) { result in
                 switch result {
                 case let .success(data):
                     emitter.onNext(data)
@@ -102,9 +102,9 @@ class Store {
         }
     }
    
-    func loadFollowingRx() -> Observable<Friends>{
+    func loadFollowingRx(searchText: String = "", page: Int = 0) -> Observable<Friends>{
         return Observable.create() { emitter in
-            self.api.loadFollowing() { result in
+            self.api.loadFollowing(searchText: searchText, page: page) { result in
                 switch result {
                 case let .success(data):
                     emitter.onNext(data)

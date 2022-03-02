@@ -1,9 +1,8 @@
-
 //
-//  SearchResultViewModel.swift
+//  FollowingViewModel.swift
 //  CampingProject
 //
-//  Created by 고정근 on 2021/11/03.
+//  Created by 고정근 on 2022/03/02.
 //
 
 import Foundation
@@ -11,33 +10,37 @@ import UIKit
 import RxSwift
 import RxRelay
 
-public protocol SearchResultInput{
-    var searchText: PublishRelay<String> { get }
+public protocol FollowingInput {
+    func loadFollowings()
+    
     var fetchMoreDatas: PublishRelay<Void> { get }
+    var searchText: PublishRelay<String> { get }
 }
 
-public protocol SearchResultOutput{
-    var searchUsers: Observable<[SearchUser]> { get }
+public protocol FollowingOutput {
+    var followings: Observable<[Friend]> { get }
     var isLoadingSpinnerAvaliable: PublishRelay<Bool> { get }
 }
 
-public protocol SearchResultViewModelType {
-    var inputs: SearchResultInput { get }
-    var outputs: SearchResultOutput { get }
+public protocol FollowingViewModelType {
+    var inputs: FollowingInput { get }
+    var outputs: FollowingOutput { get }
+    
 }
 
-class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchResultOutput  {
+class FollowingViewModel: FollowingInput,FollowingOutput, FollowingViewModelType {
     let store = Store.shared
     let disposeBag = DisposeBag()
     
-    var inputs: SearchResultInput { return self }
-    var outputs: SearchResultOutput { return self }
+    var inputs: FollowingInput { return self }
+    var outputs: FollowingOutput { return self }
     
-    private let _searchUsers = BehaviorRelay<[SearchUser]>(value: [])
+    private var _followings: BehaviorRelay<[Friend]> = BehaviorRelay<[Friend]>(value: [])
     
-    var searchUsers: Observable<[SearchUser]> { return _searchUsers.asObservable() }
-    var searchText: PublishRelay<String> = PublishRelay<String>()
+    var followings: Observable<[Friend]>{ return self._followings.asObservable()}
+    
     var fetchMoreDatas: PublishRelay<Void> = PublishRelay<Void>()
+    var searchText: PublishRelay<String> = PublishRelay<String>()
     var isLoadingSpinnerAvaliable: PublishRelay<Bool> = PublishRelay<Bool>()
     
     private var text = ""
@@ -49,17 +52,16 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
     init(){
         searchText
             .do{ self.text = $0; self.refreshTriggered()}
-            .subscribe(onNext:{ input in
+            .subscribe(onNext:{ text in
                 self.fetchData(page:self.page)
-        })
-        .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
         
         fetchMoreDatas.subscribe(onNext:{[weak self] _ in
             guard let self = self else { return }
             self.fetchData(page: self.page)
         })
         .disposed(by: disposeBag)
-        
     }
     
     func fetchData(page: Int){
@@ -80,40 +82,49 @@ class SearchResultViewModel: SearchResultViewModelType,SearchResultInput,SearchR
             isLoadingSpinnerAvaliable.accept(false)
         }
         
-        self.store.searchUserRx(searchText: text,page: page)
+        self.store.loadFollowingRx(searchText: text,page: page)
             .subscribe(onNext:{[weak self] result in
                 guard let self = self else { return }
-                
-                if !result.users.isEmpty || !self._searchUsers.value.isEmpty{
+                if !result.contents.isEmpty || !self._followings.value.isEmpty{
                     self.handleData(data: result)
                     self.isLoadingSpinnerAvaliable.accept(false)
                     self.isPaginationRequestStillResume = false
-                } else {
-                    self._searchUsers.accept([SearchUser.init(name: self.text)])
+                } else if self.text != ""{
+                    self._followings.accept([Friend.init(name: self.text)])
                 }
             })
             .disposed(by: disposeBag)
     }
 //    다음 page의 데이터를 가져와 합친 후 page 를 +1 해준다.
-    func handleData(data: SearchResult ) {
+    func handleData(data: Friends ) {
 //      가져오는 리스트의 size는 5로 고정
+        
         totalPage = data.total / size
         
-        let newData = data.users
+        let newData = data.contents
+        
         if page == 0 {
             self.totalPage = data.total
-            self._searchUsers.accept(newData)
+            self._followings.accept(newData)
         }
         else {
-            let oldDatas = self._searchUsers.value
-            self._searchUsers.accept(oldDatas + newData)
+            let oldDatas = self._followings.value
+            self._followings.accept(oldDatas + newData)
         }
         page += 1
     }
-    
+
+    func loadFollowings(){
+        store.loadFollowingRx()
+            .subscribe(onNext: { following in
+                self._followings.accept(following.contents)
+            })
+            .disposed(by: disposeBag)
+    }
+
     func refreshTriggered() {
         isPaginationRequestStillResume = false
         page = 0
-        self._searchUsers.accept([])
+        self._followings.accept([])
     }
 }

@@ -11,10 +11,7 @@ import RxSwift
 import RxCocoa
 
 class ProfileViewController: UIViewController, ReloadData {
-    let userGearVM = UserGearViewModel.shared
-    let viewModel = ProfileViewModel()
-    let store: Store = Store.shared
-    let apiManger = APIManager.shared
+    let viewModel = ProfileViewModel.shared
     let disposeBag = DisposeBag()
     
     var imageUrl: String = ""
@@ -22,14 +19,12 @@ class ProfileViewController: UIViewController, ReloadData {
 //  MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderWidth = 5
         profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
 
         profileIntro.isEditable = false
-        
         setBind()
     }
 

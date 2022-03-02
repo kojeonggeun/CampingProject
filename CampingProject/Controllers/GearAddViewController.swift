@@ -19,7 +19,6 @@ class AddGearViewController: UIViewController {
     var apiManager: APIManager = APIManager.shared
     
     let imagePicker = ImagePickerManager()
-    let userGearViewModel = UserGearViewModel.shared
     let disposeBag = DisposeBag()
     var viewModel: MyGearViewModel!
     
@@ -41,7 +40,7 @@ class AddGearViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(gearSave(_:)))
         
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
+        gearCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
         imageCount.text = "(\(imagePicker.photoArray.count) / 5"
     }
     

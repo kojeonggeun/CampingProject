@@ -18,7 +18,6 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
     var gearId: Int = 0
     
     let apiManager = APIManager.shared
-    let userGearVM = UserGearViewModel.shared
     let store = Store.shared
     let disposeBag:DisposeBag = DisposeBag()
     
