@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 import RxSwift
 
-class MyGearNC : UINavigationController {
+class MyGearNC: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = self.viewControllers[0] as! MyGearViewController
+        guard let view = self.viewControllers[0] as? MyGearViewController else {return}
         view.viewModel = MyGearViewModel()
     }
 }
-

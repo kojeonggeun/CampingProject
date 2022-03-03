@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 
 enum API {
-    static let BASE_URL = "http://camtorage.bamdule.com/camtorage/api/"
-    static let BASE_URL_MYSELF = "http://camtorage.bamdule.com/camtorage/api/myself/"
-    
+    static let BaseUrl = "http://camtorage.bamdule.com/camtorage/api/"
+    static let BaseUrlMyself = "http://camtorage.bamdule.com/camtorage/api/myself/"
+
 }
 
-enum DB{
+enum DB {
     static let userDefaults = UserDefaults.standard
 }
-

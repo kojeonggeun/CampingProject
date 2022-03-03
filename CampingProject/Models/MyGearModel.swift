@@ -21,8 +21,6 @@ public struct CellData: Decodable {
     var imageUrl: String?
 }
 
-
-
 public struct GearDetail: Decodable {
     var id: Int
     var name: String?
@@ -35,9 +33,7 @@ public struct GearDetail: Decodable {
     var buyDt: String?
     var description: String?
     var images: [ImageData]
-    
-    
-    
+
 }
 struct ImageData: Decodable {
     var imageId: Int

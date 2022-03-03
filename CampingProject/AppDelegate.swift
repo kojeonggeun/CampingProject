@@ -7,14 +7,12 @@
 
 import UIKit
 
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-     
+
         return true
     }
 
@@ -30,13 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-        
+
     }
 
- 
 }
 
-extension UIViewController{
+extension UIViewController {
     // 화면을 터치하면 키보드 내려가게
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
            self.view.endEditing(true)
@@ -54,7 +51,8 @@ extension NSNotification.Name {
     static let edit = NSNotification.Name("reloadAgfterEdit")
     static let delete = NSNotification.Name("reloadAfterDelete")
     static let home = NSNotification.Name("reloadAfterMyGearVC")
-  
+    static let change = NSNotification.Name("changePassword")
+    static let disregister = NSNotification.Name("disregister")
     
-}
 
+}

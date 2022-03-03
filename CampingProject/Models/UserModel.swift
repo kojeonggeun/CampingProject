@@ -14,11 +14,11 @@ public struct UserInfo: Codable {
     var gearCnt: Int
     var boardCnt: Int
     var status: String?
-  
+
     enum CodingKeys: CodingKey {
         case user, followerCnt, followingCnt, gearCnt, boardCnt, status
     }
-    
+
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         user = (try? values.decode(User.self, forKey: .user)) ?? nil
@@ -41,4 +41,3 @@ struct User: Codable {
     var aboutMe: String = ""
 
 }
-

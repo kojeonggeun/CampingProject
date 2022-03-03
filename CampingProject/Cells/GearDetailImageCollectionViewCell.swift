@@ -11,12 +11,12 @@ import Alamofire
 import RxSwift
 
 class GearDetailImageCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var gearDetailImage: UIImageView!
-    
-    static let identifier:String = "GearDetailImageCollectionViewCell"
+
+    static let identifier: String = "GearDetailImageCollectionViewCell"
     private let cellDisposeBag = DisposeBag()
-    
+
     var disposeBag = DisposeBag()
     var onData: AnyObserver<ImageData>
 
@@ -24,21 +24,21 @@ class GearDetailImageCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         gearDetailImage.layer.cornerRadius = 10
     }
-    
+
     required init?(coder: NSCoder) {
-        
+
         let data = PublishSubject<ImageData>()
         onData = data.asObserver()
-        
+
         super.init(coder: coder)
-        
+
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] gear in
                 self?.loadImage(urlString: gear.url)
-                
+
             }).disposed(by: cellDisposeBag)
     }
-    func loadImage(urlString: String){
+    func loadImage(urlString: String) {
         let url = URL(string: urlString)
         if urlString != "camera.circle" {
             gearDetailImage.kf.setImage(with: url, placeholder: nil, completionHandler: nil)

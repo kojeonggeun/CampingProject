@@ -9,28 +9,28 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SignUpViewModel:ViewModel {
+class SignUpViewModel: ViewModel {
 // TODO: do 활용 얼럿 창
-    
-    struct Input{
+
+    struct Input {
         let checkEmail: Observable<String>
     }
-    
-    struct Output{
+
+    struct Output {
         let hideLabel: Observable<Bool>
         let showNextPage: Observable<Bool>
     }
-    
+
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let store = Store.shared
         let hidingLabel = PublishRelay<Bool>()
-        
+
         input.checkEmail
-            .flatMap{ store.emailDuplicateCheckRx(email: $0) }
-            .subscribe(onNext:{ result in
+            .flatMap { store.emailDuplicateCheckRx(email: $0) }
+            .subscribe(onNext: { result in
                 hidingLabel.accept(!result)
             }).disposed(by: disposeBag)
-        
+
         return Output.init(hideLabel: hidingLabel.asObservable(), showNextPage: hidingLabel.asObservable())
     }
 }

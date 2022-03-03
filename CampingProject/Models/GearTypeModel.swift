@@ -12,14 +12,11 @@ struct Response: Decodable {
 public struct GearType: Decodable {
     var gearID: Int
     var gearName: String
-    
-    enum CodingKeys : String, CodingKey{
+
+    enum CodingKeys: String, CodingKey {
         case gearID = "id"
         case gearName =  "name"
-        
+
     }
-    
+
 }
-
-
-

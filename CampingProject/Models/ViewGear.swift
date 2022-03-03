@@ -14,7 +14,6 @@ public struct ViewGear {
     var date: String
     var imageUrl: String
 
-    
     init(_ item: CellData) {
         id = item.id
         name = item.name ?? ""
@@ -23,13 +22,12 @@ public struct ViewGear {
         imageUrl = item.imageUrl!
 
     }
-    init(id: Int ,name: String, type: String, date: String, imageUrl: String) {
+    init(id: Int, name: String, type: String, date: String, imageUrl: String) {
         self.id = id
         self.name = name
         self.type = type
         self.date = date
         self.imageUrl = imageUrl
     }
-    
-    
+
 }

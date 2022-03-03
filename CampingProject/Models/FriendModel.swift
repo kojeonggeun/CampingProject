@@ -19,8 +19,8 @@ public struct Friend: Decodable {
     var profileUrl: String
     var email: String
     var status: String
-    
-    init(name: String){
+
+    init(name: String) {
         self.id = 0
         self.friendId = 0
         self.name = name
@@ -28,5 +28,5 @@ public struct Friend: Decodable {
         self.email = ""
         self.status = ""
     }
-    
+
 }

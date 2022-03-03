@@ -26,57 +26,55 @@ public protocol SignInOutput {
 public protocol SignInViewModelType {
     var inputs: SignInlInput { get }
     var outputs: SignInOutput { get }
-    
+
 }
 
-class SignInViewModel: SignInViewModelType, SignInlInput, SignInOutput{
+class SignInViewModel: SignInViewModelType, SignInlInput, SignInOutput {
     var inputs: SignInlInput { return self }
     var outputs: SignInOutput { return self }
-    
+
     var emailValueChanged: PublishRelay<String> = PublishRelay<String>()
     var pwValueChanged: PublishRelay<String> = PublishRelay<String>()
-    
+
     var autoLoginStatusChanged: PublishRelay<Bool> = PublishRelay<Bool>()
     var autoLogin: Observable<Bool>
 
     var emailVaild: Observable<Bool>
     var passwordVaild: Observable<Bool>
-    
+
     var loginButtonTouched: PublishRelay<Void> = PublishRelay<Void>()
     var loginResult: PublishSubject<Bool> = PublishSubject<Bool>()
-    
 
     let disposeBag = DisposeBag()
-    
-    init(){
+
+    init() {
         let store = Store.shared
         let apiManager = APIManager.shared
-        
+
         let email = emailValueChanged.asObservable()
         let password = pwValueChanged.asObservable()
-        let combindLoginInfo = Observable.combineLatest(email, password){ ($0,$1) }
-        
+        let combindLoginInfo = Observable.combineLatest(email, password) { ($0, $1) }
+
         autoLogin = autoLoginStatusChanged.asObservable()
-        
-        emailVaild = email.map{ apiManager.isValidEmail(email: $0)}
-        passwordVaild = password.skip(1).map{ apiManager.isValidPassword(password: $0)}
-        
+
+        emailVaild = email.map { apiManager.isValidEmail(email: $0)}
+        passwordVaild = password.skip(1).map { apiManager.isValidPassword(password: $0)}
+
         loginButtonTouched.withLatestFrom(combindLoginInfo)
             .subscribe(onNext: { [weak self] info in
                 store.loginRx(email: info.0, password: info.1)
-                    .subscribe(onNext:{ result in
+                    .subscribe(onNext: { result in
                         UserViewModel()
                         self?.loginResult.onNext(result)
                     }).disposed(by: self!.disposeBag)
             })
             .disposed(by: disposeBag)
-        
+
         Observable.combineLatest(autoLogin, loginResult) { $0 && $1 }
             .subscribe(onNext: { result in
                 DB.userDefaults.set(result, forKey: "Auto")
             })
             .disposed(by: disposeBag)
-        
-       
+
     }
 }

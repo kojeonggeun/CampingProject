@@ -1,7 +1,5 @@
 PODS:
   - Alamofire (5.5.0)
-  - AlamofireImage (4.2.0):
-    - Alamofire (~> 5.4)
   - BSImagePicker (3.3.1)
   - Kingfisher (7.2.0)
   - RxCocoa (6.5.0):
@@ -17,7 +15,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
-  - AlamofireImage (~> 4.1)
   - BSImagePicker (~> 3.1)
   - Kingfisher
   - RxCocoa
@@ -28,7 +25,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - AlamofireImage
     - BSImagePicker
     - Kingfisher
     - RxCocoa
@@ -39,7 +35,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
-  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -48,6 +43,6 @@ SPEC CHECKSUMS:
   RxViewController: 56486fa0afd629a1d6b5ba077f3b8cd9dc31b5d2
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: b569c48e22acb72c337769aadb7fdf0df14e714d
+PODFILE CHECKSUM: 7f7de5551ceb0edce20d3a7ad7f22e1e6d3aefd4
 
 COCOAPODS: 1.11.0

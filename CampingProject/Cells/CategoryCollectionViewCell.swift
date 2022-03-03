@@ -10,31 +10,30 @@ import UIKit
 import RxSwift
 
 class CategoryCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var categoryButton: UIButton!
-    
+
     var disposeBag = DisposeBag()
-    static let identifier:String  = "CategoryCollectionViewCell"
-    
+    static let identifier: String  = "CategoryCollectionViewCell"
+
     override func prepareForReuse() {
       super.prepareForReuse()
-          
+
       disposeBag = DisposeBag()
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         categoryButton.tintColor = .white
-        categoryButton.titleLabel?.font = UIFont.systemFont(ofSize:15, weight: .bold)
+        categoryButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         categoryButton.layer.cornerRadius = 5
     }
-       
-    func updateUI(title: String){
-        
+
+    func updateUI(title: String) {
+
         categoryButton.setTitle("\(title)", for: .normal)
 //        컬러는 따로 받아서 여러가지 색 사용
 //        categoryButton.backgroundColor = UIColor.lightGray
     }
 }
-

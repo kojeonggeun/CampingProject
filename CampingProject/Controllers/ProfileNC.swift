@@ -8,12 +8,10 @@
 import Foundation
 import UIKit
 
+class ProfileNC: UINavigationController {
 
-class ProfileNC : UINavigationController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 
 }

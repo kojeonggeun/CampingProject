@@ -13,24 +13,27 @@ import RxCocoa
 class ProfileViewController: UIViewController, ReloadData {
     let viewModel = ProfileViewModel.shared
     let disposeBag = DisposeBag()
-    
+
     var imageUrl: String = ""
+
     
-//  MARK: LifeCycles
+// MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "설정 이미지로 변환해야한다", style: .plain, target: self, action: #selector(showPreferences))
+        
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderWidth = 5
         profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
-
+      
         profileIntro.isEditable = false
+        viewModel.inputs.loadProfileInfo()
         setBind()
     }
 
+   
     func setBind() {
-        viewModel.inputs.loadProfileInfo()
-        
         viewModel.outputs.followerCount
             .map { "\($0)"}
             .asDriver(onErrorJustReturn: "0")
@@ -49,9 +52,9 @@ class ProfileViewController: UIViewController, ReloadData {
             .drive(self.gearQuantity.rx.text)
             .disposed(by: self.disposeBag)
 
-        
         viewModel.outputs.profileInfo
             .subscribe(onNext: { userInfo in
+                print("viewViewView")
                 if userInfo.user?.userImageUrl != "" {
                     self.imageUrl = userInfo.user!.userImageUrl
                 } else {
@@ -61,12 +64,21 @@ class ProfileViewController: UIViewController, ReloadData {
                 let url = URL(string: self.imageUrl)
                 let data = try? Data(contentsOf: url!)
                 let image = UIImage(data: data!)
-                
+
                 self.profileImage.image = image
                 self.profileName.text = userInfo.user?.name
                 self.profileIntro.text = userInfo.user?.aboutMe
             }).disposed(by: disposeBag)
- 
+
+    }
+    @objc func showPreferences(){
+        let preferencesViewController = PreferencesViewController()
+        
+        let navigationC = UINavigationController(rootViewController: preferencesViewController)
+        navigationC.modalPresentationStyle = .custom
+        navigationC.transitioningDelegate = self
+        present(navigationC, animated: true, completion: nil)
+        
     }
     
     @IBOutlet weak var gearQuantity: UILabel!
@@ -77,23 +89,30 @@ class ProfileViewController: UIViewController, ReloadData {
 
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profileIntro: UITextView!
-    
+
     @IBAction func moveFollower(_ sender: Any) {
-        
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followerView") as! FollowerViewController
+
+        guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followerView") as? FollowerViewController else {return}
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     @IBAction func moveFollowing(_ sender: Any) {
-        
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followingView") as! FollowingViewController
+
+        guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "followingView") as? FollowingViewController else {return}
         self.navigationController?.pushViewController(pushVC, animated: true)
-        
+
     }
     @IBAction func showProfileEdit(_ sender: Any) {
-        let pushEditVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as! ProfileEditViewController
+        guard let pushEditVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as? ProfileEditViewController else {return}
         pushEditVC.image = imageUrl
         pushEditVC.delegate = self
         self.navigationController?.pushViewController(pushEditVC, animated: true)
-        
+
+    }
+}
+
+
+extension ProfileViewController: UIViewControllerTransitioningDelegate{
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        HalfModalPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

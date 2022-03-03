@@ -116,7 +116,7 @@ import UIKit
     }
     
     private func rectForBorder(_ bounds: CGRect) -> CGRect {
-        var newRect:CGRect
+        var newRect: CGRect
         
         if isFirstResponder {
             newRect = CGRect(x: 0, y: bounds.size.height - font!.lineHeight + textFieldInsets.y - borderThickness.active, width: bounds.size.width, height: borderThickness.active)

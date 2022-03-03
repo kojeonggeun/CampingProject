@@ -66,6 +66,12 @@
 		CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC479E2732C9C900537E5A /* CellProtocol.swift */; };
 		CBDC47A12734187700537E5A /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC47A02734187700537E5A /* FriendModel.swift */; };
 		CBDF37C827CF5FAA00C8BA13 /* FollowingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37C727CF5FAA00C8BA13 /* FollowingViewModel.swift */; };
+		CBDF37D127D091FE00C8BA13 /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */; };
+		CBDF37D327D0AD7400C8BA13 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37D227D0AD7400C8BA13 /* PreferencesViewController.swift */; };
+		CBDF37D927D0B80C00C8BA13 /* PreferencesTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDF37D827D0B80C00C8BA13 /* PreferencesTableView.xib */; };
+		CBDF37DB27D0B81800C8BA13 /* PreferencesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37DA27D0B81800C8BA13 /* PreferencesTableView.swift */; };
+		CBDF37DD27D0BC9E00C8BA13 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37DC27D0BC9E00C8BA13 /* ChangePasswordViewController.swift */; };
+		CBDF37DF27D0BD7800C8BA13 /* DisregisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */; };
 		CBF37200270C6FCF0028533C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF371FF270C6FCF0028533C /* UserModel.swift */; };
 		CBF791F427366EDC0089EE48 /* FollowerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF791F327366EDC0089EE48 /* FollowerViewModel.swift */; };
 		CBF791F62737B0300089EE48 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF791F52737B0300089EE48 /* FollowingViewController.swift */; };
@@ -148,6 +154,12 @@
 		CBDC479E2732C9C900537E5A /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		CBDC47A02734187700537E5A /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
 		CBDF37C727CF5FAA00C8BA13 /* FollowingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewModel.swift; sourceTree = "<group>"; };
+		CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
+		CBDF37D227D0AD7400C8BA13 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		CBDF37D827D0B80C00C8BA13 /* PreferencesTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesTableView.xib; sourceTree = "<group>"; };
+		CBDF37DA27D0B81800C8BA13 /* PreferencesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTableView.swift; sourceTree = "<group>"; };
+		CBDF37DC27D0BC9E00C8BA13 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisregisterViewController.swift; sourceTree = "<group>"; };
 		CBF371FF270C6FCF0028533C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		CBF791F327366EDC0089EE48 /* FollowerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerViewModel.swift; sourceTree = "<group>"; };
 		CBF791F52737B0300089EE48 /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
@@ -281,9 +293,13 @@
 				CBD44FB0276D971500D1B3EA /* SearchUserDetailViewController.swift */,
 				CBDC478E2729467900537E5A /* FollowerViewController.swift */,
 				CBF791F52737B0300089EE48 /* FollowingViewController.swift */,
+				CBDF37D227D0AD7400C8BA13 /* PreferencesViewController.swift */,
+				CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */,
 				CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */,
 				CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */,
 				CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */,
+				CBDF37DC27D0BC9E00C8BA13 /* ChangePasswordViewController.swift */,
+				CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -351,6 +367,8 @@
 				CBDC479627302B8000537E5A /* EmptySearchResultCell.xib */,
 				CBDC479827302B9100537E5A /* LoadingCell.swift */,
 				CBDC479A27302B9C00537E5A /* LoadingCell.xib */,
+				CBDF37DA27D0B81800C8BA13 /* PreferencesTableView.swift */,
+				CBDF37D827D0B80C00C8BA13 /* PreferencesTableView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -446,6 +464,7 @@
 				CB491B9926FC3A8100D2481F /* GearTextListCustomView.xib in Resources */,
 				CB6037C426B2728F0023042F /* Assets.xcassets in Resources */,
 				CBDC479727302B8000537E5A /* EmptySearchResultCell.xib in Resources */,
+				CBDF37D927D0B80C00C8BA13 /* PreferencesTableView.xib in Resources */,
 				CB6037C226B2728F0023042F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBDC478D272823B100537E5A /* EmptySearchResultCell.swift in Sources */,
+				CBDF37D127D091FE00C8BA13 /* HalfModalPresentationController.swift in Sources */,
 				CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */,
 				CB534DF726C2664A0022EA20 /* MyGearCollectionViewCell.swift in Sources */,
 				CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */,
@@ -515,6 +535,7 @@
 				CB90E3FD27185A3F00CD2B1C /* SearchUserViewController.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CBDC479D2732C97700537E5A /* SearchResultViewModel.swift in Sources */,
+				CBDF37DB27D0B81800C8BA13 /* PreferencesTableView.swift in Sources */,
 				CBDC47A12734187700537E5A /* FriendModel.swift in Sources */,
 				CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */,
 				CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */,
@@ -527,6 +548,7 @@
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
 				CBAA3ADA27914F7400E75B51 /* SearchUserDetailViewModel.swift in Sources */,
 				CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */,
+				CBDF37DF27D0BD7800C8BA13 /* DisregisterViewController.swift in Sources */,
 				CBB519FA26FF7187005F8B00 /* ImagePickerManager.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
 				CBB3216F27AE5D50005D2A3C /* UserViewModel.swift in Sources */,
@@ -545,6 +567,7 @@
 				CB90E3FF271860E900CD2B1C /* SearchUserModel.swift in Sources */,
 				CB6037D326B28A530023042F /* Store.swift in Sources */,
 				CB58A79826E5F136006C80EA /* GearDetailViewController.swift in Sources */,
+				CBDF37DD27D0BC9E00C8BA13 /* ChangePasswordViewController.swift in Sources */,
 				CBB7EA9727A26669002CC1B1 /* PaswordViewController.swift in Sources */,
 				CBB3216D27AE4FE3005D2A3C /* GearDetailViewModel.swift in Sources */,
 				CB6037BD26B2728E0023042F /* SceneDelegate.swift in Sources */,
@@ -552,6 +575,7 @@
 				CBBB2A9D26F238BF006B2E3C /* CategoryCollectionViewController.swift in Sources */,
 				CBD5F5D626E9E0B500E09B0D /* UserGearViewModel.swift in Sources */,
 				CBB7EA9527A12D12002CC1B1 /* EmailCertificationViewController.swift in Sources */,
+				CBDF37D327D0AD7400C8BA13 /* PreferencesViewController.swift in Sources */,
 				CBB049BE27BF7D9C0059D452 /* SearchTableViewCell.swift in Sources */,
 				CBF37200270C6FCF0028533C /* UserModel.swift in Sources */,
 				CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */,

@@ -15,11 +15,11 @@ class MyGearCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var collectionViewCellGearType: UILabel!
     @IBOutlet weak var collectionViewCellText: UILabel!
     @IBOutlet weak var collectionViewCellDate: UILabel!
-    
+
     static let identifier = "MyGearCollectionViewCell"
 
     private let cellDisposeBag = DisposeBag()
-    
+
     var disposeBag = DisposeBag()
     let onData: AnyObserver<ViewGear>
 
@@ -27,24 +27,24 @@ class MyGearCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         collectionViewCellImage.layer.cornerRadius = 7
     }
-    
+
     required init?(coder: NSCoder) {
         let data = PublishSubject<ViewGear>()
         onData = data.asObserver()
-        
+
         super.init(coder: coder)
-        
+
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] gear in
-         
+
                 self?.loadImage(urlString: gear.imageUrl)
                 self?.collectionViewCellGearType.text = gear.type
                 self?.collectionViewCellText.text = gear.name
                 self?.collectionViewCellDate.text = gear.date
-                
+
             }).disposed(by: cellDisposeBag)
     }
-    func loadImage(urlString: String){
+    func loadImage(urlString: String) {
         let url = URL(string: urlString)
         if urlString != "camera.circle" {
             collectionViewCellImage.kf.setImage(with: url, placeholder: nil, completionHandler: nil)
@@ -58,6 +58,3 @@ class MyGearCollectionViewCell: UICollectionViewCell {
         disposeBag = DisposeBag()
     }
 }
-
-
-
