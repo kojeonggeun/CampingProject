@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreferencesTableView" id="c0H-yW-2TC" customClass="PreferencesTableView" customModule="CampingProject" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreferencesTableViewCell" id="c0H-yW-2TC" customClass="PreferencesTableViewCell" customModule="CampingProject" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c0H-yW-2TC" id="Gap-wd-lYz">
@@ -26,9 +26,9 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="preferencesTitle" destination="ZbG-Qf-0GT" id="iQ2-eA-1k3"/>
+                <outlet property="preferencesTitle" destination="ZbG-Qf-0GT" id="Bdy-XG-q9k"/>
             </connections>
-            <point key="canvasLocation" x="186.95652173913044" y="96.428571428571431"/>
+            <point key="canvasLocation" x="39" y="-92"/>
         </tableViewCell>
     </objects>
 </document>

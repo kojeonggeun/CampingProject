@@ -51,6 +51,7 @@ class HalfModalPresentationController: UIPresentationController{
          super.containerViewDidLayoutSubviews()
          blurEffectView.frame = containerView!.bounds
          presentedView?.frame = frameOfPresentedViewInContainerView
+         presentedView?.layer.cornerRadius = 22
          
      }
      

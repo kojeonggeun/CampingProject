@@ -7,36 +7,32 @@
 
 import Foundation
 import UIKit
+import PanModal
 
-class PreferencesViewController: UIViewController {
-    
-    let myTableView: UITableView = UITableView()
-    let items: [String] = ["비밀번호 변경", "회원 탈퇴", "정보"]
+class NavigationController: UINavigationController{
+    var id: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        guard let view = self.viewControllers[0] as? PreferencesViewController else {return}
+        view.profileView = id
+    }
+}
+
+class PreferencesViewController: UIViewController{
+    
+    @IBOutlet weak var preferencesTableView: UITableView!
+    
+    let items: [String] = ["비밀번호 변경", "회원 탈퇴", "정보"]
+    var profileView: UIViewController?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        preferencesTableView.dataSource = self
+        preferencesTableView.delegate = self
         
-        myTableView.dataSource = self
-        myTableView.delegate = self
-        myTableView.register(UINib(nibName: String(describing: PreferencesTableView.self), bundle: nil), forCellReuseIdentifier: PreferencesTableView.identifier)
-        
-        self.view.addSubview(self.myTableView)
-        
-        self.myTableView.translatesAutoresizingMaskIntoConstraints = false
-           self.view.addConstraint(NSLayoutConstraint(item: self.myTableView,
-             attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top,
-             multiplier: 1.0, constant: 0))
-           self.view.addConstraint(NSLayoutConstraint(item: self.myTableView,
-             attribute: .bottom, relatedBy: .equal, toItem: self.view,
-             attribute: .bottom, multiplier: 1.0, constant: 0))
-           self.view.addConstraint(NSLayoutConstraint(item: self.myTableView,
-             attribute: .leading, relatedBy: .equal, toItem: self.view,
-             attribute: .leading, multiplier: 1.0, constant: 0))
-           self.view.addConstraint(NSLayoutConstraint(item: self.myTableView,
-             attribute: .trailing, relatedBy: .equal, toItem: self.view,
-             attribute: .trailing, multiplier: 1.0, constant: 0))
-         
+        preferencesTableView.register(UINib(nibName: String(describing: PreferencesTableViewCell.self), bundle: nil), forCellReuseIdentifier: PreferencesTableViewCell.identifier)
     }
 }
 
@@ -46,7 +42,7 @@ extension PreferencesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PreferencesTableView.identifier, for: indexPath) as? PreferencesTableView else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PreferencesTableViewCell.identifier, for: indexPath) as? PreferencesTableViewCell else {return UITableViewCell()}
         cell.preferencesTitle.text = items[indexPath.row]
         
         return cell
@@ -56,8 +52,19 @@ extension PreferencesViewController: UITableViewDataSource {
 extension PreferencesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
-//        self.dismiss(animated: true, completion: nil)
-        
+        if indexPath.row == 0 {
+            guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: ChangePasswordViewController.identifier) as? ChangePasswordViewController else {return}
+            self.dismiss(animated: true, completion: {
+                self.profileView?.navigationController?.pushViewController(pushVC, animated: true)
+            })
+            
+        } else {
+            guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: DisregisterViewController.identifier) as? DisregisterViewController else {return}
+            self.dismiss(animated: true, completion: {
+                self.profileView?.navigationController?.pushViewController(pushVC, animated: true)
+            })
+        }
+      
     }
 }
+

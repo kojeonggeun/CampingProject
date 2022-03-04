@@ -68,8 +68,8 @@
 		CBDF37C827CF5FAA00C8BA13 /* FollowingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37C727CF5FAA00C8BA13 /* FollowingViewModel.swift */; };
 		CBDF37D127D091FE00C8BA13 /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */; };
 		CBDF37D327D0AD7400C8BA13 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37D227D0AD7400C8BA13 /* PreferencesViewController.swift */; };
-		CBDF37D927D0B80C00C8BA13 /* PreferencesTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDF37D827D0B80C00C8BA13 /* PreferencesTableView.xib */; };
-		CBDF37DB27D0B81800C8BA13 /* PreferencesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37DA27D0B81800C8BA13 /* PreferencesTableView.swift */; };
+		CBDF37D927D0B80C00C8BA13 /* PreferencesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDF37D827D0B80C00C8BA13 /* PreferencesTableViewCell.xib */; };
+		CBDF37DB27D0B81800C8BA13 /* PreferencesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37DA27D0B81800C8BA13 /* PreferencesTableViewCell.swift */; };
 		CBDF37DD27D0BC9E00C8BA13 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37DC27D0BC9E00C8BA13 /* ChangePasswordViewController.swift */; };
 		CBDF37DF27D0BD7800C8BA13 /* DisregisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */; };
 		CBF37200270C6FCF0028533C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF371FF270C6FCF0028533C /* UserModel.swift */; };
@@ -156,8 +156,8 @@
 		CBDF37C727CF5FAA00C8BA13 /* FollowingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewModel.swift; sourceTree = "<group>"; };
 		CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
 		CBDF37D227D0AD7400C8BA13 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		CBDF37D827D0B80C00C8BA13 /* PreferencesTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesTableView.xib; sourceTree = "<group>"; };
-		CBDF37DA27D0B81800C8BA13 /* PreferencesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTableView.swift; sourceTree = "<group>"; };
+		CBDF37D827D0B80C00C8BA13 /* PreferencesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesTableViewCell.xib; sourceTree = "<group>"; };
+		CBDF37DA27D0B81800C8BA13 /* PreferencesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTableViewCell.swift; sourceTree = "<group>"; };
 		CBDF37DC27D0BC9E00C8BA13 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisregisterViewController.swift; sourceTree = "<group>"; };
 		CBF371FF270C6FCF0028533C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -367,8 +367,8 @@
 				CBDC479627302B8000537E5A /* EmptySearchResultCell.xib */,
 				CBDC479827302B9100537E5A /* LoadingCell.swift */,
 				CBDC479A27302B9C00537E5A /* LoadingCell.xib */,
-				CBDF37DA27D0B81800C8BA13 /* PreferencesTableView.swift */,
-				CBDF37D827D0B80C00C8BA13 /* PreferencesTableView.xib */,
+				CBDF37DA27D0B81800C8BA13 /* PreferencesTableViewCell.swift */,
+				CBDF37D827D0B80C00C8BA13 /* PreferencesTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -464,7 +464,7 @@
 				CB491B9926FC3A8100D2481F /* GearTextListCustomView.xib in Resources */,
 				CB6037C426B2728F0023042F /* Assets.xcassets in Resources */,
 				CBDC479727302B8000537E5A /* EmptySearchResultCell.xib in Resources */,
-				CBDF37D927D0B80C00C8BA13 /* PreferencesTableView.xib in Resources */,
+				CBDF37D927D0B80C00C8BA13 /* PreferencesTableViewCell.xib in Resources */,
 				CB6037C226B2728F0023042F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,7 +535,7 @@
 				CB90E3FD27185A3F00CD2B1C /* SearchUserViewController.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CBDC479D2732C97700537E5A /* SearchResultViewModel.swift in Sources */,
-				CBDF37DB27D0B81800C8BA13 /* PreferencesTableView.swift in Sources */,
+				CBDF37DB27D0B81800C8BA13 /* PreferencesTableViewCell.swift in Sources */,
 				CBDC47A12734187700537E5A /* FriendModel.swift in Sources */,
 				CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */,
 				CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 
 
 class DisregisterViewController: UIViewController{
+    static let identifier = "DisregisterViewController"
     override func viewDidLoad() {
         super.viewDidLoad()
     }

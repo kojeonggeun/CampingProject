@@ -471,6 +471,53 @@
             </objects>
             <point key="canvasLocation" x="-2680" y="1973"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2YA-un-ZPB">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdX-cf-GXp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="NavigationController" id="c7n-2V-rTE" customClass="NavigationController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uy3-8G-VzT">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rHa-bN-vuE" kind="relationship" relationship="rootViewController" id="tc4-jq-dWS"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-437" y="2497"/>
+        </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="gFn-KV-cIX">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kBr-zI-8xB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="PreferencesViewController" id="rHa-bN-vuE" customClass="PreferencesViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aRN-V0-euV">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="an7-0b-Nyy">
+                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ft9-Je-w6U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ft9-Je-w6U" firstAttribute="bottom" secondItem="an7-0b-Nyy" secondAttribute="bottom" id="Im1-oZ-3D3"/>
+                            <constraint firstItem="Ft9-Je-w6U" firstAttribute="trailing" secondItem="an7-0b-Nyy" secondAttribute="trailing" id="QOM-qI-024"/>
+                            <constraint firstItem="an7-0b-Nyy" firstAttribute="leading" secondItem="Ft9-Je-w6U" secondAttribute="leading" id="u7U-Sn-ENb"/>
+                            <constraint firstItem="an7-0b-Nyy" firstAttribute="top" secondItem="Ft9-Je-w6U" secondAttribute="top" id="xNf-vD-vbM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="TXD-WZ-QLj"/>
+                    <connections>
+                        <outlet property="preferencesTableView" destination="an7-0b-Nyy" id="ulO-up-V45"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="421.53846153846155" y="2496.6824644549761"/>
+        </scene>
         <!--Profile Edit View Controller-->
         <scene sceneID="5Xr-F8-fGg">
             <objects>
@@ -558,6 +605,7 @@
         <!--Change Password View Controller-->
         <scene sceneID="V1x-bz-Oel">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wsM-hE-02a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ChangePasswordViewController" id="ltX-4r-voW" customClass="ChangePasswordViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O7A-Qz-YDc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
@@ -612,7 +660,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wsM-hE-02a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="421.53846153846155" y="1748.8151658767772"/>
         </scene>

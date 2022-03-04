@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-
+import PanModal
 class ProfileViewController: UIViewController, ReloadData {
     let viewModel = ProfileViewModel.shared
     let disposeBag = DisposeBag()
@@ -54,7 +54,6 @@ class ProfileViewController: UIViewController, ReloadData {
 
         viewModel.outputs.profileInfo
             .subscribe(onNext: { userInfo in
-                print("viewViewView")
                 if userInfo.user?.userImageUrl != "" {
                     self.imageUrl = userInfo.user!.userImageUrl
                 } else {
@@ -72,12 +71,12 @@ class ProfileViewController: UIViewController, ReloadData {
 
     }
     @objc func showPreferences(){
-        let preferencesViewController = PreferencesViewController()
         
-        let navigationC = UINavigationController(rootViewController: preferencesViewController)
-        navigationC.modalPresentationStyle = .custom
-        navigationC.transitioningDelegate = self
-        present(navigationC, animated: true, completion: nil)
+        guard let VC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationController") as? NavigationController else {return}
+        VC.modalPresentationStyle = .custom
+        VC.transitioningDelegate = self
+        VC.id = self
+        present(VC, animated: true, completion: nil)
         
     }
     
