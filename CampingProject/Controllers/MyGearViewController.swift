@@ -96,7 +96,6 @@ class MyGearViewController: UIViewController {
     @IBAction func unwind(_ sender: Any) {
         DB.userDefaults.removeObject(forKey: "token")
         DB.userDefaults.set(false, forKey: "Auto")
-        ProfileViewModel.shared.clearUserCount()
 
         performSegue(withIdentifier: "unwindVC1", sender: self)
     }

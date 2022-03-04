@@ -2,7 +2,6 @@ PODS:
   - Alamofire (5.5.0)
   - BSImagePicker (3.3.1)
   - Kingfisher (7.2.0)
-  - PanModal (1.2.7)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -18,7 +17,6 @@ DEPENDENCIES:
   - Alamofire (~> 5.2)
   - BSImagePicker (~> 3.1)
   - Kingfisher
-  - PanModal
   - RxCocoa
   - RxSwift
   - RxViewController
@@ -29,7 +27,6 @@ SPEC REPOS:
     - Alamofire
     - BSImagePicker
     - Kingfisher
-    - PanModal
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -40,13 +37,12 @@ SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
-  PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   RxViewController: 56486fa0afd629a1d6b5ba077f3b8cd9dc31b5d2
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: 3ed72b148adc35530e7f8b031d02961a08d57a82
+PODFILE CHECKSUM: 42c136a5f256d9ff7fcd0597104bb3deb2a06000
 
 COCOAPODS: 1.11.0

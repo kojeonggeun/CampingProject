@@ -7,15 +7,15 @@
 
 import Foundation
 import UIKit
-import PanModal
 
 class NavigationController: UINavigationController{
     var id: UIViewController?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let view = self.viewControllers[0] as? PreferencesViewController else {return}
         view.profileView = id
+        
     }
 }
 

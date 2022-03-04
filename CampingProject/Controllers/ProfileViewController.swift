@@ -9,14 +9,13 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-import PanModal
-class ProfileViewController: UIViewController, ReloadData {
-    let viewModel = ProfileViewModel.shared
-    let disposeBag = DisposeBag()
 
+class ProfileViewController: UIViewController {
+    let viewModel = ProfileViewModel()
+    let disposeBag = DisposeBag()
+    let store = Store.shared
     var imageUrl: String = ""
 
-    
 // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,54 +27,62 @@ class ProfileViewController: UIViewController, ReloadData {
         profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
       
         profileIntro.isEditable = false
-        viewModel.inputs.loadProfileInfo()
+        
         setBind()
+     
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.inputs.loadProfileInfo()
+    }
    
     func setBind() {
         viewModel.outputs.followerCount
             .map { "\($0)"}
             .asDriver(onErrorJustReturn: "0")
             .drive(self.follower.rx.text)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         viewModel.outputs.followingCount
             .map { "\($0)" }
             .asDriver(onErrorJustReturn: "0")
             .drive(self.following.rx.text)
-            .disposed(by: self.disposeBag)
-
+            .disposed(by: disposeBag)
+        
         viewModel.outputs.gearCount
             .map { "\($0)" }
             .asDriver(onErrorJustReturn: "0")
             .drive(self.gearQuantity.rx.text)
-            .disposed(by: self.disposeBag)
-
-        viewModel.outputs.profileInfo
-            .subscribe(onNext: { userInfo in
+            .disposed(by: disposeBag)
+        
+        viewModel.outputs.profile
+            .subscribe(onNext:{ userInfo in
                 if userInfo.user?.userImageUrl != "" {
                     self.imageUrl = userInfo.user!.userImageUrl
                 } else {
                     self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
                 }
-
+    
                 let url = URL(string: self.imageUrl)
                 let data = try? Data(contentsOf: url!)
                 let image = UIImage(data: data!)
-
                 self.profileImage.image = image
+
                 self.profileName.text = userInfo.user?.name
                 self.profileIntro.text = userInfo.user?.aboutMe
             }).disposed(by: disposeBag)
 
     }
+    
+  
     @objc func showPreferences(){
         
         guard let VC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationController") as? NavigationController else {return}
         VC.modalPresentationStyle = .custom
         VC.transitioningDelegate = self
         VC.id = self
+        
         present(VC, animated: true, completion: nil)
         
     }
@@ -103,7 +110,6 @@ class ProfileViewController: UIViewController, ReloadData {
     @IBAction func showProfileEdit(_ sender: Any) {
         guard let pushEditVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileEditViewController") as? ProfileEditViewController else {return}
         pushEditVC.image = imageUrl
-        pushEditVC.delegate = self
         self.navigationController?.pushViewController(pushEditVC, animated: true)
 
     }

@@ -119,8 +119,8 @@ class EmailCertificationViewController: UIViewController {
     }
 
     func updateTimerLabel() {
-        var minutes = self.sec / 60
-        var seconds = self.sec % 60
+        let minutes = self.sec / 60
+        let seconds = self.sec % 60
             if self.sec > 0 {
                self.certificationTimer.text = String(format: "%02d:%02d", minutes, seconds )
 

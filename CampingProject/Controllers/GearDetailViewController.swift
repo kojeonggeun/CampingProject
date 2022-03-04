@@ -57,7 +57,6 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
         pageControl.currentPageIndicatorTintColor = UIColor.red
 
         viewModel.inputs.loadGearDetail()
-        print(isPermission)
         gearDeleteButton.isHidden = !isPermission
         gearEditButton.isHidden = !isPermission
 
@@ -92,7 +91,7 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
 
     func setBind() {
         viewModel.outputs.showGearDetail
-            .do { self.gearDetail = $0 }
+            .do { self.gearDetail = $0}
             .map { $0.images }
             .do {
                 self.pageControl.numberOfPages = $0.count

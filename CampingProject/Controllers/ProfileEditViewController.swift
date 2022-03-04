@@ -17,7 +17,7 @@ class ProfileEditViewController: UIViewController {
     @IBOutlet weak var profileName: HoshiTextField!
 
     var image: String = ""
-    var delegate: ReloadData?
+    var imageName: String = ""
 
     let imagePicker = UIImagePickerController()
     let store = Store.shared
@@ -32,12 +32,12 @@ class ProfileEditViewController: UIViewController {
 //    }
 
     @IBAction func saveProfile(_ sender: Any) {
-        apiManager.saveUserProfileImage(image: profileImageView.image!, imageName: "asd", completion: { imageCheck in
+        apiManager.saveUserProfileImage(image: profileImageView.image!, imageName: self.imageName, completion: { imageCheck in
+            
             if imageCheck {
                 self.apiManager.saveUserProfile(name: self.profileName.text!, phone: "", aboutMe: self.profileIntro.text!, public: true, completion: { saveCheck in
                     if saveCheck {
-                        self.delegate?.setBind()
-                        
+
                         let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
                             self.navigationController?.popViewController(animated: true)
@@ -89,19 +89,15 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
             newImage = possibleImage // 크롭 했을 경우 수정된 이미지가 있을 경우
         } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             newImage = possibleImage // 원본 이미지가 있을 경우
+            
         }
-
+        
         if let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            var fileName = url.lastPathComponent
-            var fileType = url.pathExtension
-            print(fileName, fileType)
+            let fileName = url.lastPathComponent
+            self.imageName = fileName
         }
         self.profileImageView.image = newImage
         picker.dismiss(animated: true, completion: nil)
 
     }
-}
-
-protocol ReloadData {
-    func setBind()
 }

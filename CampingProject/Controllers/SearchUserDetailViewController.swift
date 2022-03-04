@@ -25,7 +25,7 @@ class SearchUserDetailViewController: UIViewController {
     static let identifier = "SearchUserDetailViewController"
     var apiManager = APIManager.shared
     var store = Store.shared
-    var profileVM = ProfileViewModel.shared
+
     var viewModel = SearchUserDetailViewModel()
 
     var userId: Int = 0
@@ -103,13 +103,13 @@ class SearchUserDetailViewController: UIViewController {
                         .subscribe(onNext: { _ in
                             self.followButton.setTitle("팔로우", for: .normal)
                             self.followButton.tintColor = .blue
-                            self.profileVM.reloadFollowing()
+                            
                         }).disposed(by: self.disposeBag)
                 } else {
                     self.apiManager.followRequst(id: self.user!.user!.id, isPublic: self.user!.user!.isPublic, completion: { _ in
                         self.followButton.setTitle("팔로잉☑️", for: .normal)
                         self.followButton.tintColor = .brown
-                        self.profileVM.reloadFollowing()
+                        
                     })
                 }
 

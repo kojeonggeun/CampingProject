@@ -64,7 +64,6 @@ class SignInViewModel: SignInViewModelType, SignInlInput, SignInOutput {
             .subscribe(onNext: { [weak self] info in
                 store.loginRx(email: info.0, password: info.1)
                     .subscribe(onNext: { result in
-                        UserViewModel()
                         self?.loginResult.onNext(result)
                     }).disposed(by: self!.disposeBag)
             })

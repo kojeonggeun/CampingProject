@@ -16,7 +16,5 @@ public struct GearType: Decodable {
     enum CodingKeys: String, CodingKey {
         case gearID = "id"
         case gearName =  "name"
-
     }
-
 }

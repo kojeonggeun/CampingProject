@@ -8,15 +8,15 @@
 import Foundation
 import Alamofire
 
-class GearTypeViewModel {
-    private let manager = APIManager.shared
-
-    var gearTypes: [GearType] {
-        return manager.gearTypes
-    }
-
-    func gearTypeNumberOfSections() -> Int {
-        return gearTypes.count
-    }
-
-}
+//class GearTypeViewModel {
+//    private let manager = APIManager.shared
+//
+//    var gearTypes: [GearType] {
+//        return manager.gearTypes
+//    }
+//
+//    func gearTypeNumberOfSections() -> Int {
+//        return gearTypes.count
+//    }
+//
+//}

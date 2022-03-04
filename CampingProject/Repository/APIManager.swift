@@ -309,8 +309,6 @@ class APIManager {
             }
     }
 //    유저 정보 로드
-//    TODO: Obserble 만들어야함
-
     func loadUserInfo(completion: @escaping (Result<UserInfo, AFError>) -> Void) {
         let headers: HTTPHeaders = ["Authorization": returnToken()]
         AF.request(urlUser,
@@ -322,7 +320,6 @@ class APIManager {
                 switch response.result {
                 case .success:
                     self.userInfo = response.value!
-
                     completion(response.result)
                 case .failure(let error):
                     print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -365,8 +362,8 @@ class APIManager {
         }).response { response in
             switch response.result {
             case .success:
-                completion(true)
 
+                completion(true)
             case .failure(let error):
                 print(error)
                 completion(false)
@@ -380,8 +377,8 @@ class APIManager {
         AF.request(urlUser, method: .put, parameters: parameters, encoding: URLEncoding.default, headers: headerInfo()).responseJSON { response in
             switch response.result {
             case .success:
+                
                 completion(true)
-
             case .failure(let error):
                 print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
