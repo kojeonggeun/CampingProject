@@ -10,34 +10,33 @@ import UIKit
 import RxSwift
 import RxRelay
 
-public protocol FollowingInput {
-    func loadFollowings()
+//public protocol FollowingInput {
+//    func loadFollowings()
+//    var fetchMoreDatas: PublishRelay<Void> { get }
+//    var searchText: PublishRelay<String> { get }
+//}
+//
+//public protocol FollowingOutput {
+//    var followings: Observable<[Friend]> { get }
+//    var isLoadingSpinnerAvaliable: PublishRelay<Bool> { get }
+//}
+//
+//public protocol FollowingViewModelType {
+//    var inputs: FollowingInput { get }
+//    var outputs: FollowingOutput { get }
+//
+//}
 
-    var fetchMoreDatas: PublishRelay<Void> { get }
-    var searchText: PublishRelay<String> { get }
-}
-
-public protocol FollowingOutput {
-    var followings: Observable<[Friend]> { get }
-    var isLoadingSpinnerAvaliable: PublishRelay<Bool> { get }
-}
-
-public protocol FollowingViewModelType {
-    var inputs: FollowingInput { get }
-    var outputs: FollowingOutput { get }
-
-}
-
-class FollowingViewModel: FollowingInput, FollowingOutput, FollowingViewModelType {
+class FollowingViewModel: FollowInput, FollowOutput, FollowViewModelType {
     let store = Store.shared
     let disposeBag = DisposeBag()
 
-    var inputs: FollowingInput { return self }
-    var outputs: FollowingOutput { return self }
+    var inputs: FollowInput { return self }
+    var outputs: FollowOutput { return self }
 
     private var _followings: BehaviorRelay<[Friend]> = BehaviorRelay<[Friend]>(value: [])
 
-    var followings: Observable<[Friend]> { return self._followings.asObservable()}
+    var follow: Observable<[Friend]> { return self._followings.asObservable()}
 
     var fetchMoreDatas: PublishRelay<Void> = PublishRelay<Void>()
     var searchText: PublishRelay<String> = PublishRelay<String>()
@@ -113,7 +112,7 @@ class FollowingViewModel: FollowingInput, FollowingOutput, FollowingViewModelTyp
         page += 1
     }
 
-    func loadFollowings() {
+    func loadFollow() {
         store.loadFollowingRx()
             .subscribe(onNext: { following in
                 self._followings.accept(following.contents)

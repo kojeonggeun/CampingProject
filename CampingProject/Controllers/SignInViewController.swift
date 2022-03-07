@@ -26,10 +26,10 @@ class SignInViewController: UIViewController {
     let viewModel = SignInViewModel()
     let disposeBag = DisposeBag()
 
-    @IBAction func unwindVC1 (segue: UIStoryboardSegue) {}
+    @IBAction func unwindVC1 (segue: UIStoryboardSegue) {
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
     }
 
     // MARK: LifeCycles
@@ -93,7 +93,7 @@ class SignInViewController: UIViewController {
             self.fieldDataInit()
 
             if DB.userDefaults.bool(forKey: "Auto") && DB.userDefaults.value(forKey: "token") != nil {
-                print(DB.userDefaults.value(forKey: "token"))
+                
                 self.apiManager.loginCheck { comple in
                     if comple {
                         self.performSegue(withIdentifier: "MainTabBarController", sender: nil)

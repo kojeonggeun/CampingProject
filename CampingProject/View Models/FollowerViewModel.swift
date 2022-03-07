@@ -10,32 +10,32 @@ import UIKit
 import RxSwift
 import RxRelay
 
-public protocol FollowerInput {
-    func loadFollwers()
-    var fetchMoreDatas: PublishRelay<Void> { get }
-    var searchText: PublishRelay<String> { get }
-}
+//public protocol FollowerInput {
+//    func loadFollwers()
+//    var fetchMoreDatas: PublishRelay<Void> { get }
+//    var searchText: PublishRelay<String> { get }
+//}
+//
+//public protocol FollowerOutput {
+//    var followers: Observable<[Friend]> { get }
+//    var isLoadingSpinnerAvaliable: PublishRelay<Bool> { get }
+//}
+//
+//public protocol FollowerViewModelType {
+//    var inputs: FollowerInput { get }
+//    var outputs: FollowerOutput { get }
+//}
 
-public protocol FollowerOutput {
-    var follwers: Observable<[Friend]> { get }
-    var isLoadingSpinnerAvaliable: PublishRelay<Bool> { get }
-}
-
-public protocol FollowerViewModelType {
-    var inputs: FollowerInput { get }
-    var outputs: FollowerOutput { get }
-}
-
-class FollowerViewModel: FollowerInput, FollowerOutput, FollowerViewModelType {
+class FollowerViewModel: FollowInput, FollowOutput, FollowViewModelType {
     let store = Store.shared
     let disposeBag = DisposeBag()
 
-    var inputs: FollowerInput { return self }
-    var outputs: FollowerOutput { return self }
+    var inputs: FollowInput { return self }
+    var outputs: FollowOutput { return self }
 
     private var _follwers: BehaviorRelay<[Friend]> = BehaviorRelay<[Friend]>(value: [])
 
-    var follwers: Observable<[Friend]> { return self._follwers.asObservable()}
+    var follow: Observable<[Friend]> { return self._follwers.asObservable()}
 
     var fetchMoreDatas: PublishRelay<Void> = PublishRelay<Void>()
     var searchText: PublishRelay<String> = PublishRelay<String>()
@@ -109,7 +109,7 @@ class FollowerViewModel: FollowerInput, FollowerOutput, FollowerViewModelType {
         }
         page += 1
     }
-    func loadFollwers() {
+    func loadFollow() {
         store.loadFollowerRx()
             .subscribe(onNext: { follwer in
                 self._follwers.accept(follwer.contents)

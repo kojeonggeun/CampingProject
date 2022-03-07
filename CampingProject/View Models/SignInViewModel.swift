@@ -48,8 +48,8 @@ class SignInViewModel: SignInViewModelType, SignInlInput, SignInOutput {
     let disposeBag = DisposeBag()
 
     init() {
-        let store = Store.shared
-        let apiManager = APIManager.shared
+        let store = Store()
+        let apiManager = APIManager()
 
         let email = emailValueChanged.asObservable()
         let password = pwValueChanged.asObservable()

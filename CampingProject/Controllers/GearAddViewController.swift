@@ -50,8 +50,10 @@ class AddGearViewController: UIViewController {
         guard let capacity = customView.gearCapacity.text else { return }
         guard let date = customView.gearBuyDate.text else { return }
         guard let price = customView.gearPrice.text else { return }
+        guard let desc = customView.gearDesc.text else { return }
 
-        self.apiManager.addGear(name: name, type: self.customView.gearTypeId, color: color, company: company, capacity: capacity, date: date, price: price, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
+        
+        self.apiManager.addGear(name: name, type: self.customView.gearTypeId, color: color, company: company, capacity: capacity, date: date, price: price,desc: desc, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
             .subscribe()
             .disposed(by: disposeBag)
 

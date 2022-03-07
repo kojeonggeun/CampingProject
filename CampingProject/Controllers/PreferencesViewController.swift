@@ -23,7 +23,7 @@ class PreferencesViewController: UIViewController{
     
     @IBOutlet weak var preferencesTableView: UITableView!
     
-    let items: [String] = ["비밀번호 변경", "회원 탈퇴", "정보"]
+    let items: [String] = ["비밀번호 변경", "회원 탈퇴", "로그 아웃"]
     var profileView: UIViewController?
     
     override func viewDidLoad() {
@@ -52,18 +52,28 @@ extension PreferencesViewController: UITableViewDataSource {
 extension PreferencesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: ChangePasswordViewController.identifier) as? ChangePasswordViewController else {return}
             self.dismiss(animated: true, completion: {
                 self.profileView?.navigationController?.pushViewController(pushVC, animated: true)
             })
-            
-        } else {
+        case 1:
             guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: DisregisterViewController.identifier) as? DisregisterViewController else {return}
             self.dismiss(animated: true, completion: {
                 self.profileView?.navigationController?.pushViewController(pushVC, animated: true)
             })
+        case 2:
+            self.dismiss(animated: true, completion: {
+                DB.userDefaults.removeObject(forKey: "token")
+                DB.userDefaults.set(false, forKey: "Auto")
+
+                self.profileView?.dismiss(animated: true, completion: nil)
+            })
+        default:
+            break
         }
+        
       
     }
 }

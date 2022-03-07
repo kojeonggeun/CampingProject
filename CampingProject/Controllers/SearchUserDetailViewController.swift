@@ -124,8 +124,6 @@ extension SearchUserDetailViewController: UICollectionViewDelegateFlowLayout {
 
         let width = (collectionView.frame.width - margin * 2 - itemSpacing) / 2
         let height = width * 10/7.5
-        print(width)
-        print(height)
 
         return CGSize(width: width, height: height)
     }

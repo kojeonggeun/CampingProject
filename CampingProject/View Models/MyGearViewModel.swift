@@ -47,6 +47,9 @@ class MyGearViewModel: MyGearInput, MyGearOutput, MyGearViewModelType {
     }
 
     func loadGears() {
+        store.loadUserInfoRx()
+            .subscribe(onNext: { _ in})
+            .disposed(by: disposeBag)
         store.loadUserGearRx().map { $0 }.subscribe(onNext: {
             self._gears.accept($0)
         })

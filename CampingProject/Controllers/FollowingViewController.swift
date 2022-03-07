@@ -51,11 +51,11 @@ class FollowingViewController: UIViewController {
         followingTableView.register(UINib(nibName: String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
         followingTableView.register(UINib(nibName: String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
 
-        viewModel.inputs.loadFollowings()
+        viewModel.inputs.loadFollow()
 
     }
     func setBind() {
-        viewModel.outputs.followings
+        viewModel.outputs.follow
             .asDriver(onErrorJustReturn: [])
             .drive(followingTableView.rx.items) { (tableView, row, element) in
                 if element.id == 0 {
@@ -89,7 +89,7 @@ class FollowingViewController: UIViewController {
             let boundsSizeHeight = self.followingTableView.bounds.size.height - 50
 
             if offsetY > (contentSize - boundsSizeHeight) {
-                self.viewModel.fetchMoreDatas.accept(())
+                self.viewModel.inputs.fetchMoreDatas.accept(())
             }
         }
         .disposed(by: disposeBag)

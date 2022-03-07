@@ -474,7 +474,6 @@
         <!--Navigation Controller-->
         <scene sceneID="2YA-un-ZPB">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IdX-cf-GXp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="NavigationController" id="c7n-2V-rTE" customClass="NavigationController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uy3-8G-VzT">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
@@ -484,13 +483,13 @@
                         <segue destination="rHa-bN-vuE" kind="relationship" relationship="rootViewController" id="tc4-jq-dWS"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdX-cf-GXp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-437" y="2497"/>
         </scene>
         <!--Preferences View Controller-->
         <scene sceneID="gFn-KV-cIX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kBr-zI-8xB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="PreferencesViewController" id="rHa-bN-vuE" customClass="PreferencesViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aRN-V0-euV">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
@@ -515,6 +514,7 @@
                         <outlet property="preferencesTableView" destination="an7-0b-Nyy" id="ulO-up-V45"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kBr-zI-8xB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="421.53846153846155" y="2496.6824644549761"/>
         </scene>
@@ -659,13 +659,19 @@
                         <viewLayoutGuide key="safeArea" id="c4A-vZ-l7M"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="doneButton" destination="XEn-NO-xrw" id="9zR-IO-e33"/>
+                        <outlet property="passwordCheckField" destination="Q0V-cZ-knK" id="KHH-Qb-e4y"/>
+                        <outlet property="passwordField" destination="fZa-Rs-smW" id="JNY-M0-Wkc"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="421.53846153846155" y="1748.8151658767772"/>
+            <point key="canvasLocation" x="422" y="1752"/>
         </scene>
         <!--Disregister View Controller-->
         <scene sceneID="Jfg-kI-iXh">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ol9-mV-UQH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="DisregisterViewController" id="lph-2O-Oyh" customClass="DisregisterViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lp2-hN-YtO">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
@@ -736,7 +742,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ol9-mV-UQH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1136.9230769230769" y="1751.6587677725117"/>
         </scene>

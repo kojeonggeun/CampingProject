@@ -11,8 +11,7 @@ import RxSwift
 
 
 // TODO: Domain 별로 나눠야 함
-class Store {
-
+public class Store {
     static let shared = Store()
     let api = APIManager.shared
 

@@ -51,12 +51,12 @@ class FollowerViewController: UIViewController {
         followerTableView.register(UINib(nibName: String(describing: SearchTableViewCell.self), bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
         followerTableView.register(UINib(nibName: String(describing: EmptySearchResultCell.self), bundle: nil), forCellReuseIdentifier: "EmptySearchResultCell")
 
-        viewModel.inputs.loadFollwers()
+        viewModel.inputs.loadFollow()
 
     }
 
     func setBind() {
-        viewModel.outputs.follwers
+        viewModel.outputs.follow
             .asDriver(onErrorJustReturn: [])
             .drive(followerTableView.rx.items) { (tableView, row, element) in
                 if element.id == 0 {
@@ -90,7 +90,7 @@ class FollowerViewController: UIViewController {
             let boundsSizeHeight = self.followerTableView.bounds.size.height - 50
 
             if offsetY > (contentSize - boundsSizeHeight) {
-                self.viewModel.fetchMoreDatas.accept(())
+                self.viewModel.inputs.fetchMoreDatas.accept(())
             }
         }
         .disposed(by: disposeBag)

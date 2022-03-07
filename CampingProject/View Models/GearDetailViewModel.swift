@@ -47,8 +47,9 @@ class GearDetailViewModel: GearDetailViewModelType, GearDetailInput, GearDetailO
 
     }
     func loadGearDetail() {
+//        FIXME: 유저 아이디 고민
         let userId: Int = apiManager.userInfo!.user!.id
-
+        
         store.loadDetailUserGearRx(userId: userId, gearId: self.gearId)
             .subscribe(onNext: {
                 self.gearDetail.onNext($0)

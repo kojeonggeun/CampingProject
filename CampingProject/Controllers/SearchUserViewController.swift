@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-
+//  FIXME: 친구가 아닌 친구검색
 class SearchUserViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!

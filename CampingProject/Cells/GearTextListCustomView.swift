@@ -112,10 +112,15 @@ class GearTextListCustomView: UIView {
         pickerView.backgroundColor = .white
 
         gearType.inputView = pickerView
-
+        
+        gearType.text = apiService.gearTypes[0].gearName
+        gearTypeId = apiService.gearTypes[0].gearID
+        selectType = apiService.gearTypes[0].gearName
+        
         let button = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissPickerView))
         let toolBar = createToolbar(item: button)
-
+        
+        
         gearType.inputAccessoryView = toolBar
     }
 
@@ -127,7 +132,6 @@ class GearTextListCustomView: UIView {
     @objc func dismissPickerView() {
         gearType.text = selectType
         gearType.resignFirstResponder()
-        selectType = ""
 
         endEditing(true)
     }
@@ -161,7 +165,9 @@ extension GearTextListCustomView: UIPickerViewDataSource {
 
 extension GearTextListCustomView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            
         selectType = apiService.gearTypes[row].gearName
         gearTypeId = apiService.gearTypes[row].gearID
+                
     }
 }

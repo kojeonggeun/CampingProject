@@ -77,12 +77,11 @@ class ProfileViewController: UIViewController {
     
   
     @objc func showPreferences(){
-        
         guard let VC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationController") as? NavigationController else {return}
         VC.modalPresentationStyle = .custom
         VC.transitioningDelegate = self
         VC.id = self
-        
+
         present(VC, animated: true, completion: nil)
         
     }

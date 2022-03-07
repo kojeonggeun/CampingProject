@@ -9,19 +9,17 @@ import Foundation
 import Alamofire
 import RxSwift
 
-class APIManager {
+public class APIManager {
 
     static let shared = APIManager()
 
     let url = API.BaseUrl
     let urlUser = API.BaseUrlMyself
-
     var gearTypes: [GearType] = []
-
     var userInfo: UserInfo?
 
 //    장비 저장
-    func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, image: [UIImage], imageName: [String]) -> Observable<Void> {
+    func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, desc:String ,image: [UIImage], imageName: [String]) -> Observable<Void> {
         return Observable.create { emitter in
             let headers: HTTPHeaders = [
                         "Content-type": "multipart/form-data",
@@ -31,7 +29,7 @@ class APIManager {
             let parameters: [String: Any] = ["name": name, "gearTypeId": type,
                                               "color": color, "company": company,
                                               "capacity": capacity, "price": price,
-                                              "buyDt": date
+                                             "buyDt": date, "description":desc
             ]
 
             AF.upload(multipartFormData: { multipartFormData in
@@ -48,7 +46,7 @@ class APIManager {
 
                 print("Upload Progress: \(progress.fractionCompleted)")
 
-            }).responseJSON { response in
+            }).response { response in
                 switch response.result {
                 case .success:
 
@@ -146,7 +144,7 @@ class APIManager {
         }
     }
 
-//  유저 장비 로드
+//  내 장비 로드
     func loadUserGear(completion: @escaping (Result<[CellData], AFError>) -> Void) {
         AF.request(urlUser + "gear", method: .get, encoding: URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of: [CellData].self) { (response) in
@@ -161,6 +159,7 @@ class APIManager {
             }
         }
     }
+//    내 장비 상세
     func loadDetailUserGear(userId: Int, gearId: Int, completion: @escaping (Result<GearDetail, AFError>) -> Void) {
         AF.request(url + "user/\(userId)/gear/\(gearId)", method: .get, encoding: URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of: GearDetail.self) { (response) in
@@ -175,7 +174,7 @@ class APIManager {
             }
         }
     }
-
+// 유저장비검색
     func loadSearchUserGear(id: Int, completion: @escaping ([CellData]) -> Void ) {
         AF.request(url + "user/\(id)/gear", method: .get, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of: [CellData].self) { (response) in
@@ -256,12 +255,12 @@ class APIManager {
                    encoding: URLEncoding.default,
                    headers: nil)
             .validate(statusCode: 200..<300)
-            .responseJSON { (response) in
+            .responseDecodable(of: Login.self) { (response) in
                 switch response.result {
                 case .success(let value):
-                    guard let json = value as? NSDictionary else {return}
-                    DB.userDefaults.set(["token": json["token"], "email": json["email"]], forKey: "token")
-                    print(json["token"])
+                    print(value.token)
+                    DB.userDefaults.set(["token": value.token, "email": value.email], forKey: "token")
+
                     completion(true)
                 case .failure(let error):
                     print("🚫 login Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -326,6 +325,22 @@ class APIManager {
                 }
             }
     }
+    
+    func changePassword(password: String, id: Int){
+            let parameters: Parameters = ["password": password, "userId": id]
+
+            AF.request(self.urlUser + "password", method: .put, parameters: parameters, encoding: URLEncoding.default, headers: self.headerInfo()).response { response in
+                switch response.result {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    
+                    print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                }
+            }
+    
+    }
+    
 //    친구 정보 로드
     func loadFriendInfo(friendId: Int, completion: @escaping (Result<UserInfo, AFError>) -> Void) {
 

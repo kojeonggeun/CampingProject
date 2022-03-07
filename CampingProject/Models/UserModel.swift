@@ -41,3 +41,8 @@ struct User: Codable {
     var aboutMe: String = ""
 
 }
+
+struct Login: Decodable{
+    var token: String = ""
+    var email: String = ""
+}
