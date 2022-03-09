@@ -27,7 +27,6 @@ class MyGearViewController: UIViewController {
         setView()
         setBind()
         setNotification()
-
     }
 
     func setNotification() {
@@ -44,10 +43,9 @@ class MyGearViewController: UIViewController {
     func setView() {
         let config = UIImage.SymbolConfiguration(scale: .small)
         navigationController?.tabBarItem.image = UIImage(systemName: "house.fill", withConfiguration: config)
-        myGearCollectionView.register(UINib(nibName: String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: MyGearCollectionViewCell.identifier )
+        myGearCollectionView.register(UINib(nibName: String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: MyGearCollectionViewCell.identifier)
 
         myGearCollectionView.rx.setDelegate(self)
-
         viewModel.inputs.loadGears()
         viewModel.inputs.loadGearTypes()
 

@@ -14,7 +14,7 @@ public class APIManager {
     static let shared = APIManager()
 
     let url = API.BaseUrl
-    let urlUser = API.BaseUrlMyself
+    let urlMyself = API.BaseUrlMyself
     var gearTypes: [GearType] = []
     var userInfo: UserInfo?
 
@@ -42,7 +42,7 @@ public class APIManager {
                     multipartFormData.append(image[num].jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: imageName[num], mimeType: "image/jpg")
                 }
 
-            }, to: self.urlUser + "gear", method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
+            }, to: self.urlMyself + "gear", method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
 
                 print("Upload Progress: \(progress.fractionCompleted)")
 
@@ -64,7 +64,7 @@ public class APIManager {
 //    장비 삭제
     func deleteGear(gearId: Int) {
 
-        AF.request(urlUser + "gear/\(gearId)", method: .delete, headers: self.headerInfo()).validate(statusCode: 200..<300).response { (_) in
+        AF.request(urlMyself + "gear/\(gearId)", method: .delete, headers: self.headerInfo()).validate(statusCode: 200..<300).response { (_) in
             NotificationCenter.default.post(name: .delete, object: nil)
         }
     }
@@ -95,7 +95,7 @@ public class APIManager {
                     multipartFormData.append(image[num].jpegData(compressionQuality: 1)!, withName: "gearImages[\(num)].image", fileName: imageName[num], mimeType: "image/jpg")
 
                 }
-            }, to: self.urlUser + "gear/\(gearId)", method: .put, headers: headers).uploadProgress(queue: .main, closure: { progress in
+            }, to: self.urlMyself + "gear/\(gearId)", method: .put, headers: headers).uploadProgress(queue: .main, closure: { progress in
 
                 print("Upload Progress: \(progress.fractionCompleted)")
 
@@ -146,7 +146,7 @@ public class APIManager {
 
 //  내 장비 로드
     func loadUserGear(completion: @escaping (Result<[CellData], AFError>) -> Void) {
-        AF.request(urlUser + "gear", method: .get, encoding: URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
+        AF.request(urlMyself + "gear", method: .get, encoding: URLEncoding.default, headers: self.headerInfo()).validate(statusCode: 200..<300)
             .responseDecodable(of: [CellData].self) { (response) in
             switch response.result {
             case .success:
@@ -211,7 +211,7 @@ public class APIManager {
     비공개 일 경우 요청 & 승인 과정을 거쳐야 함
 */
     func followRequst(id: Int, isPublic: Bool, completion: @escaping (Bool) -> Void) {
-        AF.request(urlUser + "friend/\(id)",
+        AF.request(urlMyself + "friend/\(id)",
                    method: .post,
                    encoding: JSONEncoding.default,
                    headers: self.headerInfo())
@@ -260,7 +260,7 @@ public class APIManager {
                 case .success(let value):
                     print(value.token)
                     DB.userDefaults.set(["token": value.token, "email": value.email], forKey: "token")
-
+                    print(DB.userDefaults.value(forKey: "token"))
                     completion(true)
                 case .failure(let error):
                     print("🚫 login Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
@@ -268,6 +268,36 @@ public class APIManager {
                 }
             }
     }
+//  회원 탈퇴
+    func disregister(){
+        AF.request(urlMyself, method: .delete, encoding: URLEncoding.default, headers: headerInfo()).validate(statusCode: 200..<300).response { response in
+            switch response.result {
+            case .success(let data):
+                print(data)
+            case .failure(let error):
+                print("🚫 Register Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
+    }
+    
+   
+    
+//    비밀번호 인증
+    func passwordCertification(password: String, completion: @escaping (Bool) -> Void){
+        let params: Parameters = ["password": password]
+        
+        AF.request(urlMyself + "password/certification", method: .post, parameters: params, encoding: URLEncoding.default, headers: headerInfo()).validate(statusCode: 200..<300).response { response in
+            switch response.result {
+            case .success(let data):
+                completion(true)
+            case .failure(let error):
+                completion(false)
+                print("🚫 Register Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
+    }
+    
+    
 
 // 이메일 중복검사
     func checkEmailDuplicate(email: String, completion: @escaping (Bool) -> Void) {
@@ -287,11 +317,11 @@ public class APIManager {
 
 //    토큰 유무 확인하여 로그인
     func loginCheck(completion: @escaping (Bool) -> Void ) {
-        let headers: HTTPHeaders = ["Authorization": returnToken()]
-        AF.request(urlUser,
+        
+        AF.request(urlMyself,
                    method: .get,
                    encoding: URLEncoding.default,
-                   headers: headers)
+                   headers: headerInfo())
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let data):
@@ -309,11 +339,11 @@ public class APIManager {
     }
 //    유저 정보 로드
     func loadUserInfo(completion: @escaping (Result<UserInfo, AFError>) -> Void) {
-        let headers: HTTPHeaders = ["Authorization": returnToken()]
-        AF.request(urlUser,
+        
+        AF.request(urlMyself,
                    method: .get,
                    encoding: URLEncoding.default,
-                   headers: headers)
+                   headers: headerInfo())
 
             .responseDecodable(of: UserInfo.self) { (response) in
                 switch response.result {
@@ -326,10 +356,10 @@ public class APIManager {
             }
     }
     
-    func changePassword(password: String, id: Int){
-            let parameters: Parameters = ["password": password, "userId": id]
+    func changePassword(password: String){
+            let parameters: Parameters = ["password": password]
 
-            AF.request(self.urlUser + "password", method: .put, parameters: parameters, encoding: URLEncoding.default, headers: self.headerInfo()).response { response in
+            AF.request(self.urlMyself + "password", method: .put, parameters: parameters, encoding: URLEncoding.default, headers: self.headerInfo()).response { response in
                 switch response.result {
                 case .success(let data):
                     print(data)
@@ -338,18 +368,17 @@ public class APIManager {
                     print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                 }
             }
-    
     }
     
 //    친구 정보 로드
     func loadFriendInfo(friendId: Int, completion: @escaping (Result<UserInfo, AFError>) -> Void) {
 
-        let headers: HTTPHeaders = ["Authorization": returnToken()]
+        
 
         AF.request(url+"/user/\(friendId)",
                    method: .get,
                    encoding: URLEncoding.default,
-                   headers: headers)
+                   headers: headerInfo())
             .responseDecodable(of: UserInfo.self) { response in
                 switch response.result {
                 case .success:
@@ -370,7 +399,7 @@ public class APIManager {
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(image.jpegData(compressionQuality: 1)!, withName: "userImage", fileName: imageName, mimeType: "image/jpg")
 
-        }, to: urlUser + "image", method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
+        }, to: urlMyself + "image", method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
 
             print("Upload Progress: \(progress.fractionCompleted)")
 
@@ -389,7 +418,7 @@ public class APIManager {
     func saveUserProfile(name: String, phone: String, aboutMe: String, public: Bool, completion: @escaping (Bool) -> Void) {
         let parameters: Parameters = ["name": name, "aboutMe": aboutMe]
 
-        AF.request(urlUser, method: .put, parameters: parameters, encoding: URLEncoding.default, headers: headerInfo()).responseJSON { response in
+        AF.request(urlMyself, method: .put, parameters: parameters, encoding: URLEncoding.default, headers: headerInfo()).responseJSON { response in
             switch response.result {
             case .success:
                 
@@ -402,7 +431,7 @@ public class APIManager {
 
     func loadFollower(searchText: String, page: Int = 0, completion: @escaping (Result<Friends, AFError>) -> Void) {
         let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 10]
-        AF.request(urlUser + "friend/follower/", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
+        AF.request(urlMyself + "friend/follower/", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success:
                 completion(response.result)
@@ -415,7 +444,7 @@ public class APIManager {
     func loadFollowing(searchText: String, page: Int = 0, completion: @escaping (Result<Friends, AFError>) -> Void) {
         let parameters: [String: Any] = ["searchText": searchText, "page": page, "size": 10]
 
-        AF.request(urlUser + "friend/following/", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
+        AF.request(urlMyself + "friend/following/", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headerInfo()).responseDecodable(of: Friends.self) { response in
             switch response.result {
             case .success:
                 completion(response.result)
@@ -427,7 +456,7 @@ public class APIManager {
 
     func deleteFollower(id: Int, completion: @escaping ((Bool) -> Void)) {
 
-        AF.request(urlUser + "friend/\(id)", method: .delete, encoding: URLEncoding.default, headers: headerInfo()).response { response in
+        AF.request(urlMyself + "friend/\(id)", method: .delete, encoding: URLEncoding.default, headers: headerInfo()).response { response in
             switch response.result {
             case .success:
                 completion(true)

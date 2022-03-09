@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-class GearTextListCustomView: UIView {
+class GearTextListCustomView: UIView{
 
     @IBOutlet weak var gearType: UITextField!
     @IBOutlet weak var gearName: UITextField!
@@ -32,6 +32,7 @@ class GearTextListCustomView: UIView {
 
         gearPrice.keyboardType = .numberPad
         gearType.tintColor = .clear
+        addDoneButtonOnNumpad(textField: gearPrice)
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,14 +50,25 @@ class GearTextListCustomView: UIView {
         guard let view = loadViewFromNib(nib: className) else { return }
 
         view.translatesAutoresizingMaskIntoConstraints = false
-
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
+        gearDesc.delegate = self
         createPickerView()
         createDatePickerView()
 
         self.addSubview(view)
 
+    }
+    func addDoneButtonOnNumpad(textField: UITextField) {
+            
+            let keypadToolbar: UIToolbar = UIToolbar()
+            
+            keypadToolbar.items=[
+                UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: textField, action: #selector(UITextField.resignFirstResponder)),
+                UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+            ]
+            keypadToolbar.sizeToFit()
+            
+            textField.inputAccessoryView = keypadToolbar
     }
 
     func loadViewFromNib(nib: String) -> UIView? {
@@ -153,13 +165,10 @@ extension GearTextListCustomView: UIPickerViewDataSource {
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return apiService.gearTypes.count
-
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
         return apiService.gearTypes[row].gearName
-
     }
 }
 
@@ -170,4 +179,12 @@ extension GearTextListCustomView: UIPickerViewDelegate {
         gearTypeId = apiService.gearTypes[row].gearID
                 
     }
+}
+
+extension GearTextListCustomView: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }

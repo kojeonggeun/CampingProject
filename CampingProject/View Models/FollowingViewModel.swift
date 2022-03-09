@@ -10,22 +10,6 @@ import UIKit
 import RxSwift
 import RxRelay
 
-//public protocol FollowingInput {
-//    func loadFollowings()
-//    var fetchMoreDatas: PublishRelay<Void> { get }
-//    var searchText: PublishRelay<String> { get }
-//}
-//
-//public protocol FollowingOutput {
-//    var followings: Observable<[Friend]> { get }
-//    var isLoadingSpinnerAvaliable: PublishRelay<Bool> { get }
-//}
-//
-//public protocol FollowingViewModelType {
-//    var inputs: FollowingInput { get }
-//    var outputs: FollowingOutput { get }
-//
-//}
 
 class FollowingViewModel: FollowInput, FollowOutput, FollowViewModelType {
     let store = Store.shared

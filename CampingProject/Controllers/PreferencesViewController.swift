@@ -67,14 +67,12 @@ extension PreferencesViewController: UITableViewDelegate {
             self.dismiss(animated: true, completion: {
                 DB.userDefaults.removeObject(forKey: "token")
                 DB.userDefaults.set(false, forKey: "Auto")
-
+                
                 self.profileView?.dismiss(animated: true, completion: nil)
             })
         default:
             break
         }
-        
-      
     }
 }
 

@@ -31,6 +31,8 @@
 		CB9595D427BB5BA4006AC55E /* CampingProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9595D327BB5BA4006AC55E /* CampingProjectTests.swift */; };
 		CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */; };
 		CBA2327326BE763200946DA0 /* MyGearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA2327226BE763200946DA0 /* MyGearViewController.swift */; };
+		CBA8D2C527D88E48002D977E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8D2C427D88E48002D977E /* Extensions.swift */; };
+		CBA8D2C727D8AC01002D977E /* DisregisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8D2C627D8AC01002D977E /* DisregisterViewModel.swift */; };
 		CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */; };
 		CBAA3ACE2787DFB100E75B51 /* SearchUserNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */; };
 		CBAA3AD02787EC0300E75B51 /* ProfileNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */; };
@@ -116,6 +118,8 @@
 		CB9595D127BB5BA4006AC55E /* CampingProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampingProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9595D327BB5BA4006AC55E /* CampingProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampingProjectTests.swift; sourceTree = "<group>"; };
 		CBA2327226BE763200946DA0 /* MyGearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewController.swift; sourceTree = "<group>"; };
+		CBA8D2C427D88E48002D977E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CBA8D2C627D8AC01002D977E /* DisregisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisregisterViewModel.swift; sourceTree = "<group>"; };
 		CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewModel.swift; sourceTree = "<group>"; };
 		CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserNC.swift; sourceTree = "<group>"; };
 		CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNC.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 			children = (
 				CB93BE1726D3BEAF0018AB0D /* Constants.swift */,
 				CBDC479E2732C9C900537E5A /* CellProtocol.swift */,
+				CBA8D2C427D88E48002D977E /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */,
 				CBB3216C27AE4FE3005D2A3C /* GearDetailViewModel.swift */,
 				CBB519F926FF7187005F8B00 /* ImagePickerManager.swift */,
+				CBA8D2C627D8AC01002D977E /* DisregisterViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -530,12 +536,14 @@
 				CBDC47A12734187700537E5A /* FriendModel.swift in Sources */,
 				CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */,
 				CBB51A042702F61E005F8B00 /* ProfileViewController.swift in Sources */,
+				CBA8D2C727D8AC01002D977E /* DisregisterViewModel.swift in Sources */,
 				CB6037D126B289980023042F /* SignUpViewController.swift in Sources */,
 				CBD44FB1276D971500D1B3EA /* SearchUserDetailViewController.swift in Sources */,
 				CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */,
 				CBAF1062277AD79F007DF1FC /* ProfileViewModel.swift in Sources */,
 				CBDF37C827CF5FAA00C8BA13 /* FollowingViewModel.swift in Sources */,
 				CBDC478F2729467900537E5A /* FollowerViewController.swift in Sources */,
+				CBA8D2C527D88E48002D977E /* Extensions.swift in Sources */,
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
 				CBAA3ADA27914F7400E75B51 /* SearchUserDetailViewModel.swift in Sources */,
 				CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */,

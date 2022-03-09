@@ -41,14 +41,12 @@ class ChangePasswordViewController: UIViewController {
         
         doneButton.rx.tap
             .subscribe(onNext:{
-                self.apiManager.changePassword(password: self.passwordField.text!, id: self.apiManager.userInfo!.user!.id)
+                self.apiManager.changePassword(password: self.passwordField.text!)
                 let alert = UIAlertController(title: "변경 완료", message: "비밀번호가 변경되었습니다", preferredStyle: .alert)
                 alert.addAction(.init(title: "확인", style: .cancel, handler: {_ in 
                     self.navigationController?.popViewController(animated: true)
                 }))
-
                 self.present(alert, animated: true, completion: nil)
-                
             })
             .disposed(by: disposeBag)
     

@@ -54,6 +54,15 @@ public class Store {
             return Disposables.create()
         }
     }
+    func passwordCertificationRx(password: String) -> Observable<Bool> {
+        return Observable.create { emitter in
+            self.api.passwordCertification(password: password) { result in
+                    emitter.onNext(result)
+                    emitter.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
 
     func loadUserGearRx() -> Observable<[CellData]> {
         return Observable.create { emitter in

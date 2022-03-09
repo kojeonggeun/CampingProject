@@ -65,7 +65,6 @@ class AddGearViewController: UIViewController {
 
         })
         self.present(alert, animated: true)
-
     }
 
     @IBOutlet weak var gearCollectionView: UICollectionView!
