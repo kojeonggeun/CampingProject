@@ -9,8 +9,17 @@ import Alamofire
 import RxSwift
 import RxCocoa
 
+class SignUpNavigationViewController: UINavigationController{
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
+
 class SignUpViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var checkEmail: UILabel!
     @IBOutlet weak var emailNextButton: UIButton!
@@ -53,10 +62,11 @@ class SignUpViewController: UIViewController {
               if $0 {
                   guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: EmailCertificationViewController.identifier) as? EmailCertificationViewController else {return}
                   pushVC.email = self.emailTextField.text!
+                  pushVC.certificationType = emailType.REGISTER
                   self.navigationController?.pushViewController(pushVC, animated: true)
               }
-            }).disposed(by: disposeBag)
-
+            })
+            .disposed(by: disposeBag)
     }
 
     // 키보드 리턴키 눌렀을때 키보드 사라지게

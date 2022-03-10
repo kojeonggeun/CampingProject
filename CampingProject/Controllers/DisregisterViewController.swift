@@ -43,12 +43,13 @@ class DisregisterViewController: UIViewController{
                 self.viewModel.inputs.deleteUser.accept(())
                 self.dismiss(animated: true, completion: nil)
             })
+            .disposed(by: disposeBag)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.addKeyboardNotifications()
+        addKeyboardNotifications()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

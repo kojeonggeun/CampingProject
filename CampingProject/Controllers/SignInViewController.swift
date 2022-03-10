@@ -20,7 +20,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var appleLoginView: UIStackView!
     @IBOutlet weak var loginStateButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
-
+    @IBOutlet weak var registerButton: UIButton!
+    
     let store: Store = Store.shared
     let apiManager: APIManager = APIManager.shared
     let viewModel = SignInViewModel()
@@ -31,7 +32,18 @@ class SignInViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
-
+    
+    @IBAction func findPassword(_ sender: UIButton) {
+        guard let VC = self.storyboard?.instantiateViewController(withIdentifier: "ResetPWEmailViewController") as? ResetPWEmailViewController else {return}
+        let nav = UINavigationController(rootViewController: VC)
+        self.present(nav, animated: true, completion: nil)
+    }
+    @IBAction func signUp(_ sender: UIButton) {
+        guard let VC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpNavigationViewController") as? SignUpNavigationViewController else {return}
+        
+        self.present(VC, animated: true, completion: nil)
+    }
+    
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +114,7 @@ class SignInViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
 
+        
     }
     func fieldDataInit() {
         emailTextField.text = ""

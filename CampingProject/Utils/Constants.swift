@@ -17,3 +17,8 @@ enum API {
 enum DB {
     static let userDefaults = UserDefaults.standard
 }
+
+enum emailType:String {
+    case REGISTER = "REGISTER"
+    case FIND_PASSWORD = "FIND_PASSWORD"
+}

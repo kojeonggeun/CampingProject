@@ -13,9 +13,9 @@
         <!--Sign Up View Controller-->
         <scene sceneID="4h1-RN-XsF">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="oLR-L4-H28" customClass="SignUpViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" modalPresentationStyle="fullScreen" id="oLR-L4-H28" customClass="SignUpViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M5n-Nl-ukV">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일주소" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9NR-K6-Zpz">
@@ -65,6 +65,7 @@
                         <outlet property="checkEmail" destination="DkG-s0-Kio" id="ZBF-Xc-uMp"/>
                         <outlet property="emailNextButton" destination="ENw-Wa-O7E" id="TCj-9n-W4a"/>
                         <outlet property="emailTextField" destination="9NR-K6-Zpz" id="tTg-oy-WRI"/>
+                        <outlet property="titleLabel" destination="tAZ-rf-9zb" id="il3-Ns-hdR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LyM-0u-qVR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -74,7 +75,7 @@
         <!--Email Certification View Controller-->
         <scene sceneID="mmx-pv-J5g">
             <objects>
-                <viewController storyboardIdentifier="EmailVerificationViewController" id="elP-hm-uE4" customClass="EmailCertificationViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailCertificationViewController" id="elP-hm-uE4" customClass="EmailCertificationViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="79D-L8-dOR">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -709,7 +710,7 @@
                                 <buttonConfiguration key="configuration" style="filled" title="탈퇴 하기"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="탈퇴 시 정보는 전부 삭제됩니다.                       한번 삭제된 정보는 복구가 불가능합니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5s-Gh-OXx">
-                                <rect key="frame" x="47" y="197" width="315" height="71"/>
+                                <rect key="frame" x="47" y="221" width="315" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1082,7 +1083,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="회원가입"/>
                                 <connections>
-                                    <segue destination="BK3-tj-nN4" kind="showDetail" id="kw6-MX-EGN"/>
+                                    <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f5Y-VF-ORQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e03-ML-wPH">
@@ -1109,6 +1110,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="비밀번호 찾기"/>
+                                <connections>
+                                    <action selector="findPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uBt-Lj-Nwe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -1121,6 +1125,7 @@
                         <outlet property="loginCheckLabel" destination="Rre-ev-o7C" id="xVa-Fd-CF0"/>
                         <outlet property="loginStateButton" destination="OdB-G6-SW5" id="dUD-dH-uS6"/>
                         <outlet property="passwordTextField" destination="74c-nf-WwY" id="d8s-Ne-pDX"/>
+                        <outlet property="registerButton" destination="gc5-Ci-sCw" id="3GA-fN-4Ig"/>
                         <segue destination="3kT-bX-9Nt" kind="presentation" identifier="MainTabBarController" id="Agz-tT-q9r"/>
                     </connections>
                 </viewController>
@@ -1128,10 +1133,10 @@
             </objects>
             <point key="canvasLocation" x="-2135" y="-585"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Sign Up Navigation View Controller-->
         <scene sceneID="Lmf-NK-foV">
             <objects>
-                <navigationController modalPresentationStyle="fullScreen" id="BK3-tj-nN4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SignUpNavigationViewController" modalPresentationStyle="fullScreen" id="BK3-tj-nN4" customClass="SignUpNavigationViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2ft-1d-Wv7">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1144,10 +1149,10 @@
             </objects>
             <point key="canvasLocation" x="-1203" y="-585"/>
         </scene>
-        <!--View Controller-->
+        <!--ResetPW View Controller-->
         <scene sceneID="QJl-7q-CNy">
             <objects>
-                <viewController id="W8g-zN-h0T" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetPWViewController" id="W8g-zN-h0T" customClass="ResetPWViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1ot-nS-HQ4">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1200,10 +1205,15 @@
                         <viewLayoutGuide key="safeArea" id="6Nu-OV-bDV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="changeButton" destination="CDF-zp-VuF" id="HCk-z4-wlm"/>
+                        <outlet property="checkPasswordField" destination="fwr-8Y-k7d" id="HO9-ec-HpH"/>
+                        <outlet property="passwordField" destination="dMz-rO-WVq" id="BOl-MS-LqM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OvG-EB-uG7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1018" y="82"/>
+            <point key="canvasLocation" x="1820" y="81.753554502369667"/>
         </scene>
         <!--myGearNC-->
         <scene sceneID="JhR-p3-UXk">
@@ -1214,6 +1224,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7G-Lq-PTV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-644" y="146"/>
+        </scene>
+        <!--ResetPW Email View Controller-->
+        <scene sceneID="0Nz-Fz-EgB">
+            <objects>
+                <viewController storyboardIdentifier="ResetPWEmailViewController" modalPresentationStyle="fullScreen" id="OuD-6G-7y0" customClass="ResetPWEmailViewController" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8gX-0h-p64">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="비밀번호를 잊어버리셨나요?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEL-Jw-lD9">
+                                <rect key="frame" x="17" y="88" width="346" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="가입하신 이메일 주소를 통해                               비밀번호를 재설정 할 수 있어요" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9a-Pk-Q3V">
+                                <rect key="frame" x="17" y="148" width="346" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일주소" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="04J-3u-iIE">
+                                <rect key="frame" x="64" y="279" width="250" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OC1-64-oRJ">
+                                <rect key="frame" x="66" y="626" width="250" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="다음으로" cornerStyle="capsule"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="j6P-Bk-cK0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="knO-24-Zxb"/>
+                    <connections>
+                        <outlet property="emailField" destination="04J-3u-iIE" id="SPs-z2-af3"/>
+                        <outlet property="nextButton" destination="OC1-64-oRJ" id="yE1-s9-hGP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KtC-U7-f1M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1070.7692307692307" y="81.753554502369667"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0O4-qG-IoG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zAi-4V-l8L" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4iq-PF-549">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OuD-6G-7y0" kind="relationship" relationship="rootViewController" id="YlX-eB-bP7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="opG-nS-ceW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141.53846153846155" y="81.753554502369667"/>
         </scene>
     </scenes>
     <designables>

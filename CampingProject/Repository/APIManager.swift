@@ -467,13 +467,13 @@ public class APIManager {
         }
     }
 
-    func requestEmailCertificationCode(email: String, completion: @escaping (Bool) -> Void) {
-        let parameter: Parameters = ["email": email]
+    func requestEmailCertificationCode(email: String,type: emailType, completion: @escaping (Bool) -> Void) {
+        let parameter: Parameters = ["email": email, "emailCertificationType": type.rawValue]
         let headers: HTTPHeaders = [
                 "Content-Type": "application/x-www-form-urlencoded"
                 ]
 
-        AF.request(url + "email/send-certification-code/", method: .post, parameters: parameter, encoding: URLEncoding.default, headers: headers).response { response in
+        AF.request(url + "certification/email", method: .post, parameters: parameter, encoding: URLEncoding.default, headers: headers).response { response in
             switch response.result {
             case .success:
                 completion(true)
@@ -485,12 +485,13 @@ public class APIManager {
         }
     }
 
-    func checkEmailCertificationCode(email: String, code: String, completion: @escaping (Bool) -> Void) {
-        let parameter: Parameters = ["email": email, "code": code]
+    func checkEmailCertificationCode(email: String, code: String,type:emailType, completion: @escaping (Bool) -> Void) {
+        let parameter: Parameters = ["email": email, "code": code, "emailCertificationType": type.rawValue]
+    
         let headers: HTTPHeaders = [
                 "Content-Type": "application/x-www-form-urlencoded"
                 ]
-        AF.request(url + "email/check-certification-code/", method: .post, parameters: parameter, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300)
+        AF.request(url + "certification/email/validation", method: .post, parameters: parameter, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300)
             .response { response in
             switch response.result {
             case .success:
@@ -500,7 +501,6 @@ public class APIManager {
             case .failure(let error):
                 print("🚫 checkEmail Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                 completion(false)
-
             }
         }
     }

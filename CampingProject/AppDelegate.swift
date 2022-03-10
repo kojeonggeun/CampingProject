@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension UIViewController {
     // 화면을 터치하면 키보드 내려가게
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("asss")
             self.view.endEditing(true)
         }
 }

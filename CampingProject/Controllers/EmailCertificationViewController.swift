@@ -19,11 +19,12 @@ class EmailCertificationViewController: UIViewController {
     @IBOutlet weak var certificationCheckButton: UIButton!
 
     @IBOutlet weak var checkCertificationLabel: UILabel!
-    static let identifier = "EmailVerificationViewController"
+    static let identifier = "EmailCertificationViewController"
 
     let apiManager = APIManager.shared
 
     var email = String()
+    var certificationType:emailType!
     var sec: Int = 180
     var timer: Timer?
 
@@ -62,7 +63,7 @@ class EmailCertificationViewController: UIViewController {
 
         present(alertController, animated: true)
 
-        apiManager.requestEmailCertificationCode(email: email) { _ in
+        apiManager.requestEmailCertificationCode(email: email,type: certificationType) { _ in
             self.dismiss(animated: true)
             let alert = UIAlertController(title: "인증 요청 성공", message: "이메일을 확인해 주세요", preferredStyle: .alert)
             alert.addAction(.init(title: "확인", style: .cancel))
@@ -75,7 +76,7 @@ class EmailCertificationViewController: UIViewController {
 //    인증 번호 확인
     @IBAction func checkCertification(_ sender: Any) {
         let code = certificationCodeTextField.text!
-        apiManager.checkEmailCertificationCode(email: email, code: code, completion: { result in
+        apiManager.checkEmailCertificationCode(email: email, code: code,type:certificationType, completion: { result in
             if result {
                 self.passwordNextButton.isEnabled = true
                 self.checkCertificationLabel.text = "인증이 완료되었습니다"
@@ -92,9 +93,19 @@ class EmailCertificationViewController: UIViewController {
 
 //  컨트롤러 이동
     @IBAction func moveController(_ sender: Any) {
-        guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: PasswordViewController.identifier) as? PasswordViewController else {return}
-        pushVC.email = email
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        switch certificationType {
+        case .REGISTER:
+            guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: PasswordViewController.identifier) as? PasswordViewController else {return}
+            pushVC.email = email
+            self.navigationController?.pushViewController(pushVC, animated: true)
+            
+        case .FIND_PASSWORD:
+            guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: ResetPWViewController.identifier) as? ResetPWViewController else {return}
+            
+            self.navigationController?.pushViewController(pushVC, animated: true)
+        default:
+            break
+        }
     }
 
 //    인증코드 자릿수 체크(8자리)

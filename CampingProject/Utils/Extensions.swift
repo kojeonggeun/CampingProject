@@ -22,7 +22,8 @@ extension UIViewController {
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
-                self.view.transform = CGAffineTransform(translationX: 0, y: -(keyboardSize.height + self.tabBarController!.view.frame.origin.y))
+//                뷰가 키보드와 tabbarCon - tabbar만큼 올라감
+                self.view.transform = CGAffineTransform(translationX: 0, y: -(keyboardSize.height - self.tabBarController!.tabBar.frame.size.height))
             })
         }
     }

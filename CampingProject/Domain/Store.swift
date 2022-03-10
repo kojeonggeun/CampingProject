@@ -171,7 +171,7 @@ public class Store {
 
     func requestEmailCertificationCodeRx(email: String) -> Observable<Bool> {
         return Observable.create { emitter in
-            self.api.requestEmailCertificationCode(email: email) { result in
+            self.api.requestEmailCertificationCode(email: email,type: emailType.REGISTER) { result in
                 emitter.onNext(result)
                 emitter.onCompleted()
             }
