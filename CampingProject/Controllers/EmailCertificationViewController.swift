@@ -95,14 +95,15 @@ class EmailCertificationViewController: UIViewController {
     @IBAction func moveController(_ sender: Any) {
         switch certificationType {
         case .REGISTER:
-            guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: PasswordViewController.identifier) as? PasswordViewController else {return}
-            pushVC.email = email
-            self.navigationController?.pushViewController(pushVC, animated: true)
+            guard let passwordVC = self.storyboard?.instantiateViewController(withIdentifier: PasswordViewController.identifier) as? PasswordViewController else {return}
+            passwordVC.email = email
+            self.navigationController?.pushViewController(passwordVC, animated: true)
             
         case .FIND_PASSWORD:
-            guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: ResetPWViewController.identifier) as? ResetPWViewController else {return}
-            
-            self.navigationController?.pushViewController(pushVC, animated: true)
+            guard let resetVC = self.storyboard?.instantiateViewController(withIdentifier: ResetPWViewController.identifier) as? ResetPWViewController else {return}
+            resetVC.email = email
+            resetVC.code = self.certificationCodeTextField.text!
+            self.navigationController?.pushViewController(resetVC, animated: true)
         default:
             break
         }

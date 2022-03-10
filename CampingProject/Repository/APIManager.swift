@@ -297,6 +297,22 @@ public class APIManager {
         }
     }
     
+//    비밀번호 찾기 -> 번경
+    func findPassword(code:String, email:String, password:String){
+        let params: Parameters = ["code": code, "email": email, "password":password]
+        
+        
+        AF.request(url + "forgotten-info/user/password", method: .patch, parameters: params, encoding: URLEncoding.default, headers: headerInfo()).validate(statusCode: 200..<300).response { response in
+            switch response.result {
+            case .success(let data):
+
+                print(data)
+            case .failure(let error):
+
+                print("🚫 Register Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            }
+        }
+    }
     
 
 // 이메일 중복검사
@@ -355,7 +371,7 @@ public class APIManager {
                 }
             }
     }
-    
+//    비밀번호 변경
     func changePassword(password: String){
             let parameters: Parameters = ["password": password]
 
