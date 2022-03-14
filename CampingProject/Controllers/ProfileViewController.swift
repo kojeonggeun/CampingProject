@@ -19,8 +19,8 @@ class ProfileViewController: UIViewController {
 // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "설정 이미지로 변환해야한다", style: .plain, target: self, action: #selector(showPreferences))
-        
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"a", style: .plain, target: self, action: #selector(showPreferences))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showPreferences))
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderWidth = 5
         profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -58,6 +58,7 @@ class ProfileViewController: UIViewController {
         
         viewModel.outputs.profile
             .subscribe(onNext:{ userInfo in
+                print(userInfo.user?.userImageUrl)
                 if userInfo.user?.userImageUrl != "" {
                     self.imageUrl = userInfo.user!.userImageUrl
                 } else {
@@ -68,7 +69,7 @@ class ProfileViewController: UIViewController {
                 let data = try? Data(contentsOf: url!)
                 let image = UIImage(data: data!)
                 self.profileImage.image = image
-
+                
                 self.profileName.text = userInfo.user?.name
                 self.profileIntro.text = userInfo.user?.aboutMe
             }).disposed(by: disposeBag)

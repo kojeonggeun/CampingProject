@@ -44,15 +44,15 @@ class AddGearViewController: UIViewController {
 
     @objc func gearSave(_ sender: UIButton) {
 
-        guard let name = customView.gearName.text else { return }
-        guard let color = customView.gearColor.text else { return }
-        guard let company = customView.gearCompany.text else { return }
-        guard let capacity = customView.gearCapacity.text else { return }
-        guard let date = customView.gearBuyDate.text else { return }
-        guard let price = customView.gearPrice.text else { return }
-        guard let desc = customView.gearDesc.text else { return }
+        let name = customView.gearName.text ?? "이름 없음"
+        let color = customView.gearColor.text ?? "d"
+        let company = customView.gearCompany.text ?? "d"
+        let capacity = customView.gearCapacity.text ?? "d"
+        let date = customView.gearBuyDate.text ?? "d"
+        let price = customView.gearPrice.text ?? "0"
+        let desc = customView.gearDesc.text ?? "d"
 
-        
+  
         self.apiManager.addGear(name: name, type: self.customView.gearTypeId, color: color, company: company, capacity: capacity, date: date, price: price,desc: desc, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
             .subscribe()
             .disposed(by: disposeBag)

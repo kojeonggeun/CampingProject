@@ -7,19 +7,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 class MyGearViewController: UIViewController {
+    
+    let apiManager = APIManager.shared
     var collectionIndexPath = IndexPath()
-
-    var viewModel: MyGearViewModel!
+    var viewModel = MyGearViewModel()
     var disposeBag: DisposeBag = DisposeBag()
-
-    init(viewModel: MyGearViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-
-    }
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-    }
 
     // MARK: LifeCycles
     override func viewDidLoad() {
@@ -76,7 +68,8 @@ class MyGearViewController: UIViewController {
             .subscribe(onNext: { result in
                 guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as? GearDetailViewController else {return}
                 pushVC.gearId = result.id
-                pushVC.viewModel = GearDetailViewModel(gearId: result.id)
+                
+                pushVC.viewModel = GearDetailViewModel(gearId: result.id,userId: self.apiManager.userInfo!.user!.id)
 
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })

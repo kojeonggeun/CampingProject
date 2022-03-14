@@ -37,11 +37,12 @@ class DisregisterViewModel: DisregisterInput, DisregisterOutput, DisregisterView
     
     let disposeBag = DisposeBag()
     init(){
+        let store = Store.shared
         
         passwordText
-            .flatMap{ Store().passwordCertificationRx(password: $0)}
-            .subscribe(onNext:{ [weak self ] data in
-                self?._result.accept(data)
+            .flatMap{ store.passwordCertificationRx(password: $0)}
+            .subscribe(onNext:{ [weak self ] result in
+                self?._result.accept(result)
             })
             .disposed(by: disposeBag)
         

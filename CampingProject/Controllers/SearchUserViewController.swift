@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 //  FIXME: 친구가 아닌 친구검색
+// FIXME: 친구에서 상세보기 구현해야함
 class SearchUserViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!

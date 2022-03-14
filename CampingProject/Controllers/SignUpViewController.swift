@@ -16,7 +16,6 @@ class SignUpNavigationViewController: UINavigationController{
     }
 }
 
-
 class SignUpViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!

@@ -13,32 +13,38 @@ import RxCocoa
 class ChangePasswordViewController: UIViewController {
     static let identifier = "ChangePasswordViewController"
 
+    @IBOutlet weak var presentPassword: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordCheckField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
     let disposeBag = DisposeBag()
     let apiManager = APIManager.shared
-    
+    let store = Store.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         passwordField.addLeftPadding()
         passwordCheckField.addLeftPadding()
-
+        presentPassword.addLeftPadding()
+        
+        let presentPW = presentPassword.rx.text.orEmpty.asObservable()
+        let presentPWVaild = presentPW.skip(1).flatMap{ self.store.passwordCertificationRx(password: $0) }
+        
         let pwInput = passwordCheckField.rx.text.orEmpty.asObservable()
-        let pwVaild = pwInput.skip(1).map { APIManager().isValidPassword(password: $0) }
+        let pwVaild = pwInput.skip(1).map { self.apiManager.isValidPassword(password: $0) }
         
         let repwInput = passwordCheckField.rx.text.orEmpty.asObservable()
         let repwValid = repwInput.skip(1).map { self.passwordField.text! == $0 }
         
-        Observable.combineLatest(pwVaild, repwValid, resultSelector: {$0 && $1})
+        Observable.combineLatest(pwVaild, repwValid, presentPWVaild, resultSelector: {$0 && $1 && $2})
             .subscribe(onNext: { result in
                 self.doneButton.isEnabled = result
             })
             .disposed(by: disposeBag)
-        
+     
+  
         doneButton.rx.tap
             .subscribe(onNext:{
                 self.apiManager.changePassword(password: self.passwordField.text!)

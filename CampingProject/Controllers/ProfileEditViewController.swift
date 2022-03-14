@@ -8,6 +8,7 @@
 import UIKit
 import TextFieldEffects
 import Photos
+import RxSwift
 
 class ProfileEditViewController: UIViewController {
 
@@ -22,32 +23,21 @@ class ProfileEditViewController: UIViewController {
     let imagePicker = UIImagePickerController()
     let store = Store.shared
     let apiManager = APIManager.shared
-
+    let disposeBag = DisposeBag()
+    
     @IBAction func imageSelectButton(_ sender: Any) {
         self.present(self.imagePicker, animated: true)
     }
 
-//    @IBAction func dismiss(_ sender: Any) {
-//        self.dismiss(animated: true, completion: nil )
-//    }
 
     @IBAction func saveProfile(_ sender: Any) {
-        apiManager.saveUserProfileImage(image: profileImageView.image!, imageName: self.imageName, completion: { imageCheck in
-            
-            if imageCheck {
-                self.apiManager.saveUserProfile(name: self.profileName.text!, phone: "", aboutMe: self.profileIntro.text!, public: true, completion: { saveCheck in
-                    if saveCheck {
-
-                        let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
-                            self.navigationController?.popViewController(animated: true)
-                        })
-                        self.present(alert, animated: true)
-                    }
-                })
-            }
-        })
-
+        
+        apiManager.saveUserProfileImage(image: profileImageView.image!, imageName: self.imageName)
+            .subscribe(onNext:{ [weak self] imageSave in
+                self?.saveUserProfile()
+                
+            }).disposed(by: disposeBag)
+        
     }
 
 // MARK: LifeCycles
@@ -76,6 +66,16 @@ class ProfileEditViewController: UIViewController {
                 self.profileImageView.image = image
             }
         }
+    }
+    func saveUserProfile(){
+        self.apiManager.saveUserProfile(name: self.profileName.text!, phone: "", aboutMe: self.profileIntro.text!, public: true)
+            .subscribe(onNext:{ save in
+                let alert = UIAlertController(title: nil, message: "프로필 수정 되었습니다", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                self.present(alert, animated: true)
+            }).disposed(by: disposeBag)
     }
 }
 

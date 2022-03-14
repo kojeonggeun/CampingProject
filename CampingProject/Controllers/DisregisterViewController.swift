@@ -16,15 +16,17 @@ class DisregisterViewController: UIViewController{
     
     @IBOutlet weak var disregisterButton: UIButton!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var checkLabel: UILabel!
     
     let disposeBag = DisposeBag()
     let viewModel = DisregisterViewModel()
-    
+    var passwordErrorHeight: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        passwordErrorHeight =  checkLabel.heightAnchor.constraint(equalToConstant: 0)
         passwordField.delegate = self
-        
+
         passwordField.rx
         .controlEvent(.editingDidEnd)
         .withLatestFrom(passwordField.rx.text.orEmpty)
@@ -34,9 +36,18 @@ class DisregisterViewController: UIViewController{
         viewModel.outputs.result
             .subscribe(onNext:{ [weak self] result in
                 self?.disregisterButton.isEnabled = result
+                
+                if result {
+                    self?.passwordErrorHeight.isActive = true
+                }else {
+                    self?.passwordErrorHeight.isActive = false
+                }
+                
+                UIView.animate(withDuration: 0.3){
+                    self?.view.layoutIfNeeded()
+                }
             })
             .disposed(by: disposeBag)
-        
         
         disregisterButton.rx.tap
             .subscribe(onNext:{

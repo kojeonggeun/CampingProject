@@ -36,9 +36,6 @@
 		CBA8D2C927D9CC87002D977E /* ResetPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8D2C827D9CC87002D977E /* ResetPWViewController.swift */; };
 		CBA8D2CB27D9D6F4002D977E /* ResetPWEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8D2CA27D9D6F4002D977E /* ResetPWEmailViewController.swift */; };
 		CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */; };
-		CBAA3ACE2787DFB100E75B51 /* SearchUserNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */; };
-		CBAA3AD02787EC0300E75B51 /* ProfileNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */; };
-		CBAA3AD22787EC0D00E75B51 /* MyGearNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */; };
 		CBAA3ADA27914F7400E75B51 /* SearchUserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */; };
 		CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103226C5510A0058F440 /* GearAddViewController.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
@@ -125,9 +122,6 @@
 		CBA8D2C827D9CC87002D977E /* ResetPWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPWViewController.swift; sourceTree = "<group>"; };
 		CBA8D2CA27D9D6F4002D977E /* ResetPWEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPWEmailViewController.swift; sourceTree = "<group>"; };
 		CBAA3ACB2786D74100E75B51 /* MyGearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearViewModel.swift; sourceTree = "<group>"; };
-		CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserNC.swift; sourceTree = "<group>"; };
-		CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNC.swift; sourceTree = "<group>"; };
-		CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearNC.swift; sourceTree = "<group>"; };
 		CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDetailViewModel.swift; sourceTree = "<group>"; };
 		CBAB103226C5510A0058F440 /* GearAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearAddViewController.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
@@ -302,9 +296,6 @@
 				CBDF37DC27D0BC9E00C8BA13 /* ChangePasswordViewController.swift */,
 				CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */,
 				CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */,
-				CBAA3ACD2787DFB100E75B51 /* SearchUserNC.swift */,
-				CBAA3ACF2787EC0300E75B51 /* ProfileNC.swift */,
-				CBAA3AD12787EC0D00E75B51 /* MyGearNC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -558,13 +549,10 @@
 				CBB519FA26FF7187005F8B00 /* ImagePickerManager.swift in Sources */,
 				CBA2326F26BA6B8300946DA0 /* SignInViewController.swift in Sources */,
 				CBF791F62737B0300089EE48 /* FollowingViewController.swift in Sources */,
-				CBAA3AD02787EC0300E75B51 /* ProfileNC.swift in Sources */,
 				CB9595CC27BA930E006AC55E /* SignInViewModel.swift in Sources */,
 				CBDC479F2732C9C900537E5A /* CellProtocol.swift in Sources */,
 				CBB99AFE27AB85FB00166526 /* SignUpViewModel.swift in Sources */,
 				CB3C9F1926D79F5B00404D05 /* MyGearModel.swift in Sources */,
-				CBAA3ACE2787DFB100E75B51 /* SearchUserNC.swift in Sources */,
-				CBAA3AD22787EC0D00E75B51 /* MyGearNC.swift in Sources */,
 				CB4F6777279D4B0E0098C79D /* ViewGear.swift in Sources */,
 				CBB51A002700BBA9005F8B00 /* GearEditViewController.swift in Sources */,
 				CBDC479927302B9100537E5A /* LoadingCell.swift in Sources */,

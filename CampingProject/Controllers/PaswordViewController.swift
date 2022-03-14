@@ -51,7 +51,7 @@ class PasswordViewController: UIViewController {
         signUpButton.rx.tap
             .subscribe(onNext: {[weak self] _ in
                 guard let self = self else { return }
-                self.apiManager.register(email: self.email, password: self.pwTextField.text!, name: self.nickNameField.text ?? "")
+                self.apiManager.register(email: self.email, password: self.pwTextField.text!, name: self.nickNameField.text! ?? "")
                 let alert = UIAlertController(title: "회원 가입", message: "가입이 완료 되었습니다", preferredStyle: .alert)
                 alert.addAction(.init(title: "확인", style: .cancel, handler: {_ in
                     self.navigationController?.dismiss(animated: true, completion: nil)

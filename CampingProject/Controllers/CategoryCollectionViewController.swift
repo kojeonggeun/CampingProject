@@ -15,7 +15,7 @@ class CategoryCollectionViewController: UIViewController {
     static let identifier: String  = "CategoryCollectionViewController"
 
     let disposeBag = DisposeBag()
-
+    let apiManager = APIManager.shared
     var viewModel: MyGearViewModel!
 
     var gearTypeNum: Int = 0
@@ -33,6 +33,7 @@ class CategoryCollectionViewController: UIViewController {
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewModel.gearTypes.do { self.gearType = $0[self.gearTypeNum].gearName }.subscribe().disposed(by: disposeBag)
         self.title = gearType
 
@@ -58,7 +59,7 @@ class CategoryCollectionViewController: UIViewController {
             .subscribe(onNext: { cell in
                 guard let pushVC = self.storyboard?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as? GearDetailViewController else {return}
                 pushVC.gearId = cell.id
-                pushVC.viewModel = GearDetailViewModel(gearId: cell.id)
+                pushVC.viewModel = GearDetailViewModel(gearId: cell.id, userId: self.apiManager.userInfo!.user!.id)
                 self.navigationController?.pushViewController(pushVC, animated: true)
             }).disposed(by: disposeBag)
     }

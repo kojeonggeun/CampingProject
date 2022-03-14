@@ -23,7 +23,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" smartQuotesType="no" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
                                         <real key="value" value="-1"/>
@@ -31,7 +31,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이메일을 입력해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAZ-rf-9zb">
-                                <rect key="frame" x="36" y="95" width="319" height="79"/>
+                                <rect key="frame" x="36" y="117" width="319" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
@@ -104,7 +104,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
                                         <real key="value" value="-1"/>
@@ -201,19 +201,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호 (8~20자리 영어+숫자+특수문자)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9s-g7-H3n">
                                 <rect key="frame" x="64" y="415" width="273" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GPy-YP-wWT">
-                                <rect key="frame" x="64" y="299" width="273" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.93333333730000001" green="0.93333333730000001" blue="0.93333333730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
@@ -240,12 +228,19 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="회원 가입" cornerStyle="capsule"/>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n0F-Ab-9A8">
+                                <rect key="frame" x="64" y="298" width="273" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93333333730000001" green="0.93333333730000001" blue="0.93333333730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3AD-Qx-fdQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="nickNameField" destination="GPy-YP-wWT" id="ZPh-GL-ppa"/>
+                        <outlet property="nickNameField" destination="n0F-Ab-9A8" id="QYh-IE-etL"/>
                         <outlet property="pwTextField" destination="T9s-g7-H3n" id="YKg-bD-Ajt"/>
                         <outlet property="repwTextField" destination="NRt-IO-czl" id="mGO-lG-t1P"/>
                         <outlet property="signUpButton" destination="RER-OP-fqI" id="01d-70-uy6"/>
@@ -258,7 +253,7 @@
         <!--친구-->
         <scene sceneID="OsH-y0-yvy">
             <objects>
-                <navigationController storyboardIdentifier="searchUserNC" id="w0b-zc-7Bf" customClass="SearchUserNC" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="w0b-zc-7Bf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="친구" id="Svp-Ab-6bG">
                         <imageReference key="image" image="person.2.fill" catalog="system" symbolScale="small"/>
                     </tabBarItem>
@@ -342,13 +337,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qm2-wl-X5C">
-                                <rect key="frame" x="43" y="204" width="44.333333333333343" height="20.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="43" y="204" width="293" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="eaE-YB-Y9W">
-                                <rect key="frame" x="149" y="116.00000000000001" width="206.33333333333337" height="48.666666666666671"/>
+                                <rect key="frame" x="150.33333333333331" y="116.00000000000001" width="206.33333333333331" height="48.666666666666671"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3L4-2q-cyJ">
                                         <rect key="frame" x="0.0" y="0.0" width="44.333333333333336" height="48.666666666666664"/>
@@ -368,7 +363,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cNx-7C-Uc5">
-                                        <rect key="frame" x="88.333333333333343" y="0.0" width="44.333333333333343" height="48.666666666666664"/>
+                                        <rect key="frame" x="88.333333333333314" y="0.0" width="44.333333333333343" height="48.666666666666664"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGX-Ph-VOH">
                                                 <rect key="frame" x="17" y="0.0" width="10.333333333333336" height="20.333333333333332"/>
@@ -385,7 +380,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kai-Ww-yL8">
-                                        <rect key="frame" x="176.66666666666669" y="0.0" width="29.666666666666657" height="48.666666666666664"/>
+                                        <rect key="frame" x="176.66666666666666" y="0.0" width="29.666666666666657" height="48.666666666666664"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njN-QN-jMB">
                                                 <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="20.333333333333332"/>
@@ -404,27 +399,25 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="간단 소개" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjK-l9-GNF">
-                                <rect key="frame" x="34.666666666666657" y="239.33333333333334" width="63.333333333333343" height="20.333333333333343"/>
+                                <rect key="frame" x="35" y="236" width="320" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQf-Pu-Ab0">
-                                <rect key="frame" x="34" y="286.66666666666669" width="322" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="ymi-3L-NOB"/>
-                                </constraints>
+                                <rect key="frame" x="34" y="264" width="336" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="팔로우"/>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6uR-iw-cIl">
-                                <rect key="frame" x="17.000000000000007" y="86" width="98.666666666666686" height="100"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6uR-iw-cIl">
+                                <rect key="frame" x="17" y="86" width="100" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="mIv-R1-9q7"/>
+                                    <constraint firstAttribute="width" constant="100" id="HNf-NY-FI1"/>
+                                    <constraint firstAttribute="height" constant="100" id="pGJ-gq-PjN"/>
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="A8F-I4-1Tq">
-                                <rect key="frame" x="0.0" y="339" width="390" height="471"/>
+                                <rect key="frame" x="0.0" y="317.66666666666674" width="390" height="474.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="MmM-Oo-3Fv">
                                     <size key="itemSize" width="150" height="235"/>
@@ -438,23 +431,24 @@
                         <viewLayoutGuide key="safeArea" id="wTX-oG-M19"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="zQf-Pu-Ab0" firstAttribute="top" secondItem="TjK-l9-GNF" secondAttribute="bottom" constant="27.000000000000057" id="03G-7w-7aq"/>
-                            <constraint firstItem="6uR-iw-cIl" firstAttribute="top" secondItem="wTX-oG-M19" secondAttribute="top" constant="42" id="3zM-hm-gzQ"/>
-                            <constraint firstItem="A8F-I4-1Tq" firstAttribute="top" secondItem="zQf-Pu-Ab0" secondAttribute="bottom" constant="18.333333333333314" id="BDW-M8-tMQ"/>
-                            <constraint firstItem="6uR-iw-cIl" firstAttribute="centerX" secondItem="TjK-l9-GNF" secondAttribute="centerX" id="BHm-5S-1jf"/>
-                            <constraint firstItem="eaE-YB-Y9W" firstAttribute="leading" secondItem="6uR-iw-cIl" secondAttribute="trailing" constant="33.333333333333314" id="Fkk-CG-znP"/>
-                            <constraint firstItem="zQf-Pu-Ab0" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="34" id="Hc4-5V-Tf1"/>
-                            <constraint firstItem="TjK-l9-GNF" firstAttribute="top" secondItem="Qm2-wl-X5C" secondAttribute="bottom" constant="14.999999999999972" id="LiA-3C-lGF"/>
-                            <constraint firstItem="Qm2-wl-X5C" firstAttribute="top" secondItem="6uR-iw-cIl" secondAttribute="bottom" constant="18" id="QsQ-nb-Mso"/>
-                            <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="eaE-YB-Y9W" secondAttribute="trailing" constant="34.666666666666629" id="YRR-QI-PVh"/>
-                            <constraint firstItem="zQf-Pu-Ab0" firstAttribute="centerX" secondItem="JXj-c8-dY7" secondAttribute="centerX" id="dbD-N7-BXS"/>
-                            <constraint firstItem="A8F-I4-1Tq" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" id="g9y-Mu-hmT"/>
-                            <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="A8F-I4-1Tq" secondAttribute="trailing" id="j1d-bt-OLQ"/>
-                            <constraint firstItem="TjK-l9-GNF" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="34.666666666666657" id="kI6-dN-fGd"/>
-                            <constraint firstItem="wTX-oG-M19" firstAttribute="bottom" secondItem="A8F-I4-1Tq" secondAttribute="bottom" id="q59-7t-aln"/>
-                            <constraint firstItem="6uR-iw-cIl" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="17" id="qzo-m6-diX"/>
-                            <constraint firstItem="eaE-YB-Y9W" firstAttribute="top" secondItem="wTX-oG-M19" secondAttribute="top" constant="72" id="sna-xb-kRU"/>
-                            <constraint firstItem="6uR-iw-cIl" firstAttribute="centerX" secondItem="Qm2-wl-X5C" secondAttribute="centerX" constant="1.3333333333333286" id="t1R-bg-2NH"/>
+                            <constraint firstItem="A8F-I4-1Tq" firstAttribute="top" secondItem="zQf-Pu-Ab0" secondAttribute="bottom" constant="22.666666666666686" id="0xC-sb-UsB"/>
+                            <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="zQf-Pu-Ab0" secondAttribute="trailing" constant="20" id="3VN-0t-EIc"/>
+                            <constraint firstItem="6uR-iw-cIl" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="17" id="3tb-KC-6Gg"/>
+                            <constraint firstItem="TjK-l9-GNF" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="35" id="4rL-9M-Zai"/>
+                            <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="Qm2-wl-X5C" secondAttribute="trailing" constant="54" id="8ES-Ka-OlL"/>
+                            <constraint firstItem="zQf-Pu-Ab0" firstAttribute="top" secondItem="TjK-l9-GNF" secondAttribute="bottom" constant="7.6666666666669698" id="9dz-hl-30p"/>
+                            <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="A8F-I4-1Tq" secondAttribute="trailing" id="AnP-MH-Qq7"/>
+                            <constraint firstItem="Qm2-wl-X5C" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="43" id="B5b-cw-BTz"/>
+                            <constraint firstItem="zQf-Pu-Ab0" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" constant="34" id="Hza-ge-ywO"/>
+                            <constraint firstItem="wTX-oG-M19" firstAttribute="bottom" secondItem="A8F-I4-1Tq" secondAttribute="bottom" constant="18" id="Vkm-2o-7WG"/>
+                            <constraint firstItem="eaE-YB-Y9W" firstAttribute="top" secondItem="wTX-oG-M19" secondAttribute="top" constant="72.000000000000014" id="YCr-ph-b0E"/>
+                            <constraint firstItem="6uR-iw-cIl" firstAttribute="top" secondItem="wTX-oG-M19" secondAttribute="top" constant="42" id="fn9-io-YCb"/>
+                            <constraint firstItem="eaE-YB-Y9W" firstAttribute="leading" secondItem="6uR-iw-cIl" secondAttribute="trailing" constant="33.333333333333314" id="i6S-bF-eDr"/>
+                            <constraint firstItem="TjK-l9-GNF" firstAttribute="leading" secondItem="Qm2-wl-X5C" secondAttribute="trailing" constant="-301" id="j9m-HH-HAC"/>
+                            <constraint firstItem="wTX-oG-M19" firstAttribute="trailing" secondItem="TjK-l9-GNF" secondAttribute="trailing" constant="35" id="k1k-iL-BVH"/>
+                            <constraint firstItem="A8F-I4-1Tq" firstAttribute="leading" secondItem="wTX-oG-M19" secondAttribute="leading" id="kH2-Yr-oBl"/>
+                            <constraint firstItem="TjK-l9-GNF" firstAttribute="top" secondItem="Qm2-wl-X5C" secondAttribute="bottom" constant="15" id="mvy-rx-jfB"/>
+                            <constraint firstItem="Qm2-wl-X5C" firstAttribute="top" secondItem="6uR-iw-cIl" secondAttribute="bottom" constant="18" id="r6Y-VV-wX5"/>
                         </constraints>
                     </view>
                     <connections>
@@ -470,7 +464,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kkY-jr-sDN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2680" y="1973"/>
+            <point key="canvasLocation" x="-2680" y="1972.7488151658767"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2YA-un-ZPB">
@@ -528,9 +522,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bwk-ab-kb6" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="63" y="377" width="264" height="35"/>
+                                <rect key="frame" x="63" y="364" width="264" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -543,12 +537,12 @@
                                         <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="1"/>
+                                        <real key="value" value="-1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="소개" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rjB-Nj-KGT" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="63" y="443" width="264" height="34"/>
+                                <rect key="frame" x="63" y="428" width="264" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
@@ -563,7 +557,7 @@
                                         <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="1"/>
+                                        <real key="value" value="-1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
@@ -581,10 +575,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkK-HT-uzc">
-                                <rect key="frame" x="158" y="495" width="75" height="35"/>
+                                <rect key="frame" x="63" y="503" width="252" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="완료"/>
+                                <buttonConfiguration key="configuration" style="filled" title="완료"/>
                                 <connections>
                                     <action selector="saveProfile:" destination="HW4-xM-HAP" eventType="touchUpInside" id="hLE-7p-RqD"/>
                                 </connections>
@@ -601,7 +595,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydF-ki-ycc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-400" y="1744"/>
+            <point key="canvasLocation" x="-400" y="1743.8388625592415"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="V1x-bz-Oel">
@@ -618,8 +612,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호 (8~20자리 영어+숫자+특수문자)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZa-Rs-smW">
-                                <rect key="frame" x="59" y="269" width="273" height="60"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="새로운 비밀번호" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZa-Rs-smW">
+                                <rect key="frame" x="59" y="355" width="273" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -630,8 +624,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호 확인" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0V-cZ-knK">
-                                <rect key="frame" x="59" y="348" width="273" height="60"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="새로운 비밀번호 다시 입력" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0V-cZ-knK">
+                                <rect key="frame" x="59" y="429" width="273" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -655,6 +649,18 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="현재 비밀번호" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="geD-iw-U9R">
+                                <rect key="frame" x="59" y="284" width="273" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="c4A-vZ-l7M"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -663,6 +669,7 @@
                         <outlet property="doneButton" destination="XEn-NO-xrw" id="9zR-IO-e33"/>
                         <outlet property="passwordCheckField" destination="Q0V-cZ-knK" id="KHH-Qb-e4y"/>
                         <outlet property="passwordField" destination="fZa-Rs-smW" id="JNY-M0-Wkc"/>
+                        <outlet property="presentPassword" destination="geD-iw-U9R" id="v5Z-Xm-sHo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsM-hE-02a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -677,24 +684,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="회원탈퇴 안내" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxt-h0-poG">
-                                <rect key="frame" x="109" y="80" width="172" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원탈퇴 안내" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxt-h0-poG">
+                                <rect key="frame" x="109.00000000000001" y="80" width="162.33333333333337" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="비밀번호 인증" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7K5-nI-IZh">
-                                <rect key="frame" x="70" y="560" width="247" height="20.333333333333371"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 인증" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7K5-nI-IZh">
+                                <rect key="frame" x="70" y="560.66666666666663" width="250" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4xt-NN-iec">
-                                <rect key="frame" x="70" y="589" width="250" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4xt-NN-iec">
+                                <rect key="frame" x="70" y="589.66666666666663" width="250" height="45"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="UCy-ld-FpB"/>
+                                    <constraint firstAttribute="height" constant="45" id="xjd-fC-Kgp"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
@@ -703,45 +711,82 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoJ-pX-WRg">
-                                <rect key="frame" x="70" y="651" width="250" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoJ-pX-WRg">
+                                <rect key="frame" x="70" y="675" width="250" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="dD0-LL-A19"/>
+                                    <constraint firstAttribute="width" constant="250" id="dDb-Jc-nsP"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="탈퇴 하기"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="탈퇴 시 정보는 전부 삭제됩니다.                       한번 삭제된 정보는 복구가 불가능합니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5s-Gh-OXx">
-                                <rect key="frame" x="47" y="221" width="315" height="71"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호가 틀렸습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvn-9w-drI">
+                                <rect key="frame" x="70" y="641.66666666666663" width="250" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1. 사용자 계정 정보 삭제" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZL-4t-JPD">
-                                <rect key="frame" x="78" y="429" width="244" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2. 프로필 정보 삭제" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8n-WO-qGY">
-                                <rect key="frame" x="67" y="459" width="234" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3. 장비 정보 삭제" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h10-nO-JUa">
-                                <rect key="frame" x="54" y="489" width="247" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9PW-UI-Q3u">
+                                <rect key="frame" x="49" y="168.00000000000003" width="288" height="300.66666666666674"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="탈퇴 시 정보는 전부 삭제됩니다.                       한번 삭제된 정보는 복구가 불가능합니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5s-Gh-OXx">
+                                        <rect key="frame" x="0.0" y="8" width="315" height="71"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1. 사용자 계정 정보 삭제" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZL-4t-JPD">
+                                        <rect key="frame" x="32" y="146" width="244" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2. 프로필 정보 삭제" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8n-WO-qGY">
+                                        <rect key="frame" x="21" y="176" width="234" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3. 장비 정보 삭제" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h10-nO-JUa">
+                                        <rect key="frame" x="8" y="206" width="247" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YWZ-R9-BoQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7K5-nI-IZh" firstAttribute="top" secondItem="9PW-UI-Q3u" secondAttribute="bottom" constant="92" id="4d2-kn-fI2"/>
+                            <constraint firstItem="YoJ-pX-WRg" firstAttribute="leading" secondItem="YWZ-R9-BoQ" secondAttribute="leading" constant="70" id="6Oh-uj-XpT"/>
+                            <constraint firstItem="YoJ-pX-WRg" firstAttribute="top" secondItem="uvn-9w-drI" secondAttribute="bottom" constant="13" id="88m-5a-cAS"/>
+                            <constraint firstItem="YWZ-R9-BoQ" firstAttribute="trailing" secondItem="YoJ-pX-WRg" secondAttribute="trailing" constant="70" id="CJb-os-f1B"/>
+                            <constraint firstItem="YWZ-R9-BoQ" firstAttribute="bottom" secondItem="YoJ-pX-WRg" secondAttribute="bottom" constant="90" id="KWg-Lv-bzq"/>
+                            <constraint firstItem="9PW-UI-Q3u" firstAttribute="leading" secondItem="YWZ-R9-BoQ" secondAttribute="leading" constant="49" id="LxE-Le-Kx0"/>
+                            <constraint firstItem="4xt-NN-iec" firstAttribute="leading" secondItem="YWZ-R9-BoQ" secondAttribute="leading" constant="70" id="NVF-kn-ls1"/>
+                            <constraint firstItem="9PW-UI-Q3u" firstAttribute="top" secondItem="fxt-h0-poG" secondAttribute="bottom" constant="52" id="Xpo-RK-MNZ"/>
+                            <constraint firstItem="fxt-h0-poG" firstAttribute="top" secondItem="YWZ-R9-BoQ" secondAttribute="top" constant="36" id="Y6s-dn-S9r"/>
+                            <constraint firstItem="7K5-nI-IZh" firstAttribute="leading" secondItem="YWZ-R9-BoQ" secondAttribute="leading" constant="70" id="Yv0-tD-0Uq"/>
+                            <constraint firstItem="uvn-9w-drI" firstAttribute="top" secondItem="4xt-NN-iec" secondAttribute="bottom" constant="7" id="d5C-cP-jdP"/>
+                            <constraint firstItem="YWZ-R9-BoQ" firstAttribute="trailing" secondItem="uvn-9w-drI" secondAttribute="trailing" constant="70" id="edT-2k-NvS"/>
+                            <constraint firstItem="YWZ-R9-BoQ" firstAttribute="trailing" secondItem="4xt-NN-iec" secondAttribute="trailing" constant="70" id="fnF-j6-Mnl"/>
+                            <constraint firstItem="4xt-NN-iec" firstAttribute="top" secondItem="7K5-nI-IZh" secondAttribute="bottom" constant="8.6666666666666288" id="gxK-5X-Kuo"/>
+                            <constraint firstItem="uvn-9w-drI" firstAttribute="leading" secondItem="YWZ-R9-BoQ" secondAttribute="leading" constant="70" id="ioe-kY-poN"/>
+                            <constraint firstItem="fxt-h0-poG" firstAttribute="leading" secondItem="YWZ-R9-BoQ" secondAttribute="leading" constant="109" id="kL2-G0-jkn"/>
+                            <constraint firstItem="YWZ-R9-BoQ" firstAttribute="trailing" secondItem="9PW-UI-Q3u" secondAttribute="trailing" constant="53" id="mxO-tG-Ceu"/>
+                            <constraint firstItem="YWZ-R9-BoQ" firstAttribute="trailing" secondItem="fxt-h0-poG" secondAttribute="trailing" constant="118.66666666666663" id="tFr-sh-3tO"/>
+                            <constraint firstItem="YWZ-R9-BoQ" firstAttribute="trailing" secondItem="7K5-nI-IZh" secondAttribute="trailing" constant="70" id="w7z-xT-pTH"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="checkLabel" destination="uvn-9w-drI" id="1Oz-Dt-UX7"/>
                         <outlet property="disregisterButton" destination="YoJ-pX-WRg" id="QoT-wS-xFe"/>
                         <outlet property="passwordField" destination="4xt-NN-iec" id="ur3-aD-eSb"/>
                     </connections>
@@ -753,7 +798,7 @@
         <!--마이페이지-->
         <scene sceneID="88f-Nk-hCw">
             <objects>
-                <navigationController storyboardIdentifier="profileNC" id="spn-Vf-dHl" customClass="ProfileNC" customModule="CampingProject" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="spn-Vf-dHl" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="마이페이지" id="svW-ff-4Tz">
                         <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="small"/>
                     </tabBarItem>
@@ -860,15 +905,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LVm-Vp-EYM">
-                                <rect key="frame" x="65" y="465.66666666666669" width="260" height="124.33333333333331"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRb-vr-zNE">
-                                <rect key="frame" x="74" y="656" width="99" height="31"/>
+                                <rect key="frame" x="64" y="444" width="261" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" cornerStyle="medium">
@@ -889,12 +927,19 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hjk-Lf-oyJ">
                                 <rect key="frame" x="144" y="228" width="100" height="100"/>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개간단한 자기소개" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LVm-Vp-EYM">
+                                <rect key="frame" x="65" y="517" width="260" height="124.33333333333331"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3vb-r8-8Oa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="3kr-sk-Fby" firstAttribute="top" secondItem="Hjk-Lf-oyJ" secondAttribute="bottom" constant="8.3333333333333144" id="2ZJ-AD-0tf"/>
-                            <constraint firstItem="LVm-Vp-EYM" firstAttribute="top" secondItem="mFC-lY-RMf" secondAttribute="bottom" constant="57.333333333333314" id="5mH-jm-BTB"/>
                             <constraint firstItem="f7E-HV-tx1" firstAttribute="leading" secondItem="3vb-r8-8Oa" secondAttribute="leading" id="61J-Ay-qcX"/>
                             <constraint firstItem="3kr-sk-Fby" firstAttribute="top" secondItem="f7E-HV-tx1" secondAttribute="bottom" constant="57.666666666666742" id="6j4-al-Y4s"/>
                             <constraint firstItem="Hjk-Lf-oyJ" firstAttribute="leading" secondItem="3vb-r8-8Oa" secondAttribute="leading" constant="144" id="8gU-7v-Bvy"/>
@@ -903,13 +948,10 @@
                             <constraint firstItem="f7E-HV-tx1" firstAttribute="top" secondItem="Hjk-Lf-oyJ" secondAttribute="top" constant="-190" id="WB6-DI-1i1"/>
                             <constraint firstItem="f7E-HV-tx1" firstAttribute="centerX" secondItem="mFC-lY-RMf" secondAttribute="centerX" id="b1z-A9-mI4"/>
                             <constraint firstItem="f7E-HV-tx1" firstAttribute="centerX" secondItem="3kr-sk-Fby" secondAttribute="centerX" id="f4m-iZ-FWm"/>
-                            <constraint firstItem="f7E-HV-tx1" firstAttribute="centerX" secondItem="LVm-Vp-EYM" secondAttribute="centerX" id="frb-30-bwu"/>
                             <constraint firstItem="3vb-r8-8Oa" firstAttribute="trailing" secondItem="mFC-lY-RMf" secondAttribute="trailing" constant="65" id="ihB-rc-6JU"/>
                             <constraint firstAttribute="bottom" secondItem="f7E-HV-tx1" secondAttribute="bottom" constant="565.33333333333326" id="srv-aK-lNj"/>
                             <constraint firstItem="mFC-lY-RMf" firstAttribute="top" secondItem="3kr-sk-Fby" secondAttribute="bottom" constant="27" id="uN3-L8-1ec"/>
                             <constraint firstItem="mFC-lY-RMf" firstAttribute="leading" secondItem="3vb-r8-8Oa" secondAttribute="leading" constant="65" id="vME-aL-gci"/>
-                            <constraint firstItem="LVm-Vp-EYM" firstAttribute="leading" secondItem="mFC-lY-RMf" secondAttribute="leading" id="wRo-vw-7Zc"/>
-                            <constraint firstItem="3vb-r8-8Oa" firstAttribute="bottom" secondItem="LVm-Vp-EYM" secondAttribute="bottom" constant="171" id="z69-wN-d6j"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="마이페이지" id="hD9-4c-vCT"/>
@@ -925,7 +967,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KJP-SK-onK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-329" y="1027"/>
+            <point key="canvasLocation" x="-329.23076923076923" y="1026.5402843601896"/>
         </scene>
         <!--Follower View Controller-->
         <scene sceneID="bPf-do-Aa7">
@@ -1050,19 +1092,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="이메일주소" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uqb-PF-qkB">
-                                <rect key="frame" x="55" y="306" width="285" height="34"/>
+                                <rect key="frame" x="55" y="335" width="285" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="74c-nf-WwY">
-                                <rect key="frame" x="55" y="350" width="285" height="34"/>
+                                <rect key="frame" x="55" y="379" width="285" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="로그인 상태 유지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sId-il-9TL">
-                                <rect key="frame" x="73" y="398" width="79.666666666666671" height="22"/>
+                                <rect key="frame" x="73" y="427" width="79.666666666666671" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -1070,7 +1112,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdB-G6-SW5">
-                                <rect key="frame" x="55" y="398" width="102" height="22"/>
+                                <rect key="frame" x="55" y="427" width="102" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -1079,15 +1121,17 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gc5-Ci-sCw">
-                                <rect key="frame" x="150" y="618" width="90" height="30"/>
+                                <rect key="frame" x="55" y="529" width="285" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="회원가입"/>
+                                <buttonConfiguration key="configuration" style="filled" title="회원가입"/>
                                 <connections>
                                     <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f5Y-VF-ORQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e03-ML-wPH">
-                                <rect key="frame" x="55" y="463" width="285" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e03-ML-wPH">
+                                <rect key="frame" x="55" y="491" width="285" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -1099,14 +1143,18 @@
                                 </buttonConfiguration>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rre-ev-o7C">
-                                <rect key="frame" x="83" y="430" width="224" height="21"/>
+                                <rect key="frame" x="83" y="459" width="224" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_black" translatesAutoresizingMaskIntoConstraints="NO" id="OCy-aY-h1d">
+                                <rect key="frame" x="74" y="105" width="240" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z3g-Co-rVV">
-                                <rect key="frame" x="147" y="509" width="101" height="31"/>
+                                <rect key="frame" x="135" y="575" width="124" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="비밀번호 찾기"/>
@@ -1131,7 +1179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2135" y="-585"/>
+            <point key="canvasLocation" x="-2135.3846153846152" y="-585.07109004739334"/>
         </scene>
         <!--Sign Up Navigation View Controller-->
         <scene sceneID="Lmf-NK-foV">
@@ -1215,10 +1263,10 @@
             </objects>
             <point key="canvasLocation" x="1820" y="81.753554502369667"/>
         </scene>
-        <!--myGearNC-->
+        <!--MyGearNC-->
         <scene sceneID="JhR-p3-UXk">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="myGearNC" storyboardName="MyGear" referencedIdentifier="myGearNC" id="Jxv-k6-J0E" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="MyGear" referencedIdentifier="MyGearNC" id="Jxv-k6-J0E" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="J9d-h5-lU0"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7G-Lq-PTV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1300,7 +1348,7 @@
     </scenes>
     <designables>
         <designable name="bwk-ab-kb6">
-            <size key="intrinsicContentSize" width="31.333333333333332" height="16"/>
+            <size key="intrinsicContentSize" width="39" height="19.666666666666668"/>
         </designable>
         <designable name="rjB-Nj-KGT">
             <size key="intrinsicContentSize" width="24.333333333333332" height="18.666666666666668"/>
@@ -1310,6 +1358,7 @@
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
+        <image name="logo_black" width="400" height="400"/>
         <image name="person.2.fill" catalog="system" width="128" height="80"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-
+import Kingfisher
 class SearchUserDetailViewController: UIViewController {
 
     @IBOutlet weak var userImage: UIImageView!
@@ -52,6 +52,9 @@ class SearchUserDetailViewController: UIViewController {
         viewModel.outputs.isCheckable
             .subscribe(onNext: { check in
                 self.isCheckable = check
+            
+                self.followButton.isHidden = check
+                
             })
             .disposed(by: disposeBag)
         viewModel.inputs.loadSearchInfo(id: userId)
@@ -59,21 +62,25 @@ class SearchUserDetailViewController: UIViewController {
     }
 
     func setBind() {
-
+        
         viewModel.outputs.searchUser
             .subscribe(onNext: { userInfo in
                 self.navigationItem.title = userInfo.user?.email
-                self.user = userInfo
                 self.userName.text = userInfo.user?.name
                 self.userFollower.text = "\(userInfo.followerCnt)"
                 self.userFollowing.text = "\(userInfo.followingCnt)"
                 self.userGear.text = "\(userInfo.gearCnt)"
                 self.userDesc.text = userInfo.user?.aboutMe
-
-                if userInfo.status == "FOLLOWING"{
-                    self.followButton.setTitle("팔로잉☑️", for: .normal)
-                    self.followButton.tintColor = .brown
+                var imageUrl = ""
+                if userInfo.user?.userImageUrl != "" {
+                    imageUrl = userInfo.user!.userImageUrl
+                } else {
+                    imageUrl = "https://doodleipsum.com/700/avatar-2?i"
                 }
+                let url = URL(string: imageUrl)
+                self.userImage.kf.setImage(with: url, placeholder: nil, completionHandler: nil)
+                
+             
             })
             .disposed(by: disposeBag)
 
@@ -82,38 +89,56 @@ class SearchUserDetailViewController: UIViewController {
             .bind(to: friendCollectionView.rx.items(cellIdentifier: MyGearCollectionViewCell.identifier, cellType: MyGearCollectionViewCell.self)) { (_, element, cell) in
                     cell.onData.onNext(element)
             }.disposed(by: disposeBag)
-
-//        TODO: 로그인한 model id와 검색한 유저의 model id 가지고 장비 수정 및 삭제 권한 부여해줘야 함
+        
         friendCollectionView.rx.modelSelected(ViewGear.self)
             .subscribe(onNext: {[weak self] gear in
                 guard let self = self else { return }
                 guard let pushVC = self.myGearSB?.instantiateViewController(withIdentifier: GearDetailViewController.identifier) as? GearDetailViewController else {return}
                 pushVC.gearId = gear.id
-                pushVC.viewModel = GearDetailViewModel(gearId: gear.id)
+                pushVC.viewModel = GearDetailViewModel(gearId: gear.id, userId: self.userId)
                 pushVC.isPermission = self.isCheckable
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
             .disposed(by: disposeBag)
-
+        
+        viewModel.outputs.isStatus
+            .subscribe(onNext:{ status in
+                if status == "FOLLOWING"{
+                    self.followButton.setTitle("팔로잉☑️", for: .normal)
+                    self.followButton.setTitleColor(.black, for: .normal)
+                    self.followButton.tintColor = .clear
+                    self.followButton.layer.borderWidth = 0.4
+                    self.followButton.layer.cornerRadius = 5
+                    let newColor = UIColor.lightGray.cgColor
+                    self.followButton.layer.borderColor = newColor
+                } else {
+                    self.followButton.setTitle("팔로우", for: .normal)
+                    self.followButton.setTitleColor(.white, for: .normal)
+                    self.followButton.tintColor = .systemBlue
+                    self.followButton.layer.borderWidth = 0.4
+                    self.followButton.layer.cornerRadius = 5
+                    let newColor = UIColor.lightGray.cgColor
+                    self.followButton.layer.borderColor = newColor
+                }
+            }).disposed(by: disposeBag)
         // FIXME: 팔로잉 버튼 수정해야함
         followButton.rx.tap
-            .bind {
-                if self.user?.status == "FOLLOWING" {
-                    self.store.loadDeleteFollowergRx(id: self.user!.user!.id)
-                        .subscribe(onNext: { _ in
-                            self.followButton.setTitle("팔로우", for: .normal)
-                            self.followButton.tintColor = .blue
-                            
-                        }).disposed(by: self.disposeBag)
-                } else {
-                    self.apiManager.followRequst(id: self.user!.user!.id, isPublic: self.user!.user!.isPublic, completion: { _ in
-                        self.followButton.setTitle("팔로잉☑️", for: .normal)
-                        self.followButton.tintColor = .brown
-                        
-                    })
-                }
-
-            }.disposed(by: disposeBag)
+            .bind(to: viewModel.inputs.followButtonTouched)
+            .disposed(by: disposeBag)
+    
+//    if self.user?.status == "FOLLOWING" {
+//        self.store.loadDeleteFollowergRx(id: self.user!.user!.id)
+//            .subscribe(onNext: { _ in
+//                self.followButton.setTitle("팔로우", for: .normal)
+//                self.followButton.tintColor = .blue
+//
+//            }).disposed(by: self.disposeBag)
+//    } else {
+//        self.apiManager.followRequst(id: self.userId, isPublic: self.user!.user!.isPublic, completion: { _ in
+//            self.followButton.setTitle("팔로잉☑️", for: .normal)
+//            self.followButton.tintColor = .brown
+//
+//        })
     }
 }
 

@@ -31,6 +31,7 @@ public class APIManager {
                                               "capacity": capacity, "price": price,
                                              "buyDt": date, "description":desc
             ]
+            
 
             AF.upload(multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
@@ -205,20 +206,17 @@ public class APIManager {
         }
     }
 
-/*
-    친구를 요청하게 되면 계정 공개일 경우
-    팔로잉 추가, 상대방은 팔로워 추가
-    비공개 일 경우 요청 & 승인 과정을 거쳐야 함
-*/
-    func followRequst(id: Int, isPublic: Bool, completion: @escaping (Bool) -> Void) {
+    
+    func followRequst(id: Int, completion: @escaping (Bool) -> Void) {
         AF.request(urlMyself + "friend/\(id)",
                    method: .post,
                    encoding: JSONEncoding.default,
                    headers: self.headerInfo())
             .validate(statusCode: 200..<300)
-            .responseJSON { (response) in
+            .response { (response) in
                 switch response.result {
                 case .success:
+    
                     completion(true)
 
                 case .failure(let error):
@@ -234,7 +232,7 @@ public class APIManager {
         // POST 로 보낼 정보
         let params: Parameters = ["email": email, "password": password, "name": name]
 
-        AF.request(url + "user", method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type": "application/x-www-form-urlencoded"]).responseJSON { response in
+        AF.request(url + "user", method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type": "application/x-www-form-urlencoded"]).response { response in
 
             switch response.result {
             case .success:
@@ -275,7 +273,7 @@ public class APIManager {
             case .success(let data):
                 print(data)
             case .failure(let error):
-                print("🚫 Register Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                print("🚫 disregister Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
@@ -292,7 +290,7 @@ public class APIManager {
                 completion(true)
             case .failure(let error):
                 completion(false)
-                print("🚫 Register Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                print("🚫 passwordCertification Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
@@ -309,7 +307,7 @@ public class APIManager {
                 print(data)
             case .failure(let error):
 
-                print("🚫 Register Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                print("🚫 findPassword Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
@@ -406,43 +404,52 @@ public class APIManager {
             }
     }
 
-    func saveUserProfileImage(image: UIImage, imageName: String, completion: @escaping (Bool) -> Void) {
-        let headers: HTTPHeaders = [
-                    "Content-type": "multipart/form-data",
-                    "Authorization": returnToken()
-                ]
+    func saveUserProfileImage(image: UIImage, imageName: String) -> Observable<Bool> {
+        return Observable.create { emitter in
+            let headers: HTTPHeaders = [
+                        "Content-type": "multipart/form-data",
+                        "Authorization": self.returnToken()
+                    ]
 
-        AF.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(image.jpegData(compressionQuality: 1)!, withName: "userImage", fileName: imageName, mimeType: "image/jpg")
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(image.jpegData(compressionQuality: 1)!, withName: "userImage", fileName: imageName, mimeType: "image/jpg")
 
-        }, to: urlMyself + "image", method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
+            }, to: self.urlMyself + "image", method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
 
-            print("Upload Progress: \(progress.fractionCompleted)")
+                print("Upload Progress: \(progress.fractionCompleted)")
 
-        }).response { response in
-            switch response.result {
-            case .success:
-
-                completion(true)
-            case .failure(let error):
-                print(error)
-                completion(false)
+            }).response { response in
+                switch response.result {
+                case .success:
+                    emitter.onNext(true)
+                    emitter.onCompleted()
+                case .failure(let error):
+                    emitter.onError(error)
+                }
             }
+            return Disposables.create()
         }
+        
     }
 
-    func saveUserProfile(name: String, phone: String, aboutMe: String, public: Bool, completion: @escaping (Bool) -> Void) {
+    func saveUserProfile(name: String, phone: String, aboutMe: String, public: Bool) -> Observable<Bool> {
         let parameters: Parameters = ["name": name, "aboutMe": aboutMe]
-
-        AF.request(urlMyself, method: .put, parameters: parameters, encoding: URLEncoding.default, headers: headerInfo()).responseJSON { response in
-            switch response.result {
-            case .success:
-                
-                completion(true)
-            case .failure(let error):
-                print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+        return Observable.create { emitter in
+            AF.request(self.urlMyself, method: .put, parameters: parameters, encoding: URLEncoding.default, headers: self.headerInfo()).response { response in
+                switch response.result {
+                case .success:
+                    
+                    emitter.onNext(true)
+                    emitter.onCompleted()
+                case .failure(let error):
+                    emitter.onError(error)
+                    print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                }
             }
+            return Disposables.create()
         }
+
+        
     }
 
     func loadFollower(searchText: String, page: Int = 0, completion: @escaping (Result<Friends, AFError>) -> Void) {
@@ -492,8 +499,10 @@ public class APIManager {
         AF.request(url + "certification/email", method: .post, parameters: parameter, encoding: URLEncoding.default, headers: headers).response { response in
             switch response.result {
             case .success:
+                
                 completion(true)
             case .failure(let error):
+                
                 print("🚫 deleteFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                 completion(false)
 

@@ -60,6 +60,7 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
         gearDeleteButton.isHidden = !isPermission
         gearEditButton.isHidden = !isPermission
 
+        
         gearDeleteButton.rx.tap
             .subscribe(onNext: {
                 let alert = UIAlertController(title: nil, message: "장비를 삭제 하시겠습니까?", preferredStyle: .alert)

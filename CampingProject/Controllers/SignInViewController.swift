@@ -67,10 +67,12 @@ class SignInViewController: UIViewController {
 
         let emailVaild = viewModel.outputs.emailVaild
         let passwordVaild = viewModel.outputs.passwordVaild
-
+        
+        
         Observable.combineLatest(emailVaild, passwordVaild, resultSelector: {$0 && $1})
         .subscribe(onNext: { result in
             self.loginButton.isEnabled = result
+            self.loginCheckLabel.isHidden = true
         })
         .disposed(by: disposeBag)
 
@@ -96,6 +98,7 @@ class SignInViewController: UIViewController {
                 if result {
                     self?.performSegue(withIdentifier: "MainTabBarController", sender: nil)
                 } else {
+                    self?.loginCheckLabel.isHidden = false
                     self?.loginCheckLabel.text = "이메일 또는 비밀번호가 틀립니다."
                 }
             })
@@ -105,7 +108,7 @@ class SignInViewController: UIViewController {
             self.fieldDataInit()
 
             if DB.userDefaults.bool(forKey: "Auto") && DB.userDefaults.value(forKey: "token") != nil {
-                
+                print(DB.userDefaults.value(forKey: "token"))
                 self.apiManager.loginCheck { comple in
                     if comple {
                         self.performSegue(withIdentifier: "MainTabBarController", sender: nil)

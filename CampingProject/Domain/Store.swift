@@ -122,17 +122,25 @@ public class Store {
             return Disposables.create()
         }
     }
-
-    func loadDeleteFollowergRx(id: Int) -> Observable<Bool> {
-
+    func followRequstRx(id: Int) -> Observable<Bool> {
         return Observable.create { emitter in
-            self.api.deleteFollower(id: id) { result in
-                    emitter.onNext(result)
-                    emitter.onCompleted()
-                }
+            self.api.followRequst(id: id) { result in
+                emitter.onNext(result)
+                emitter.onCompleted()
+            }
             return Disposables.create()
         }
     }
+    func deleteFollowerRx(id: Int) -> Observable<Bool> {
+        return Observable.create { emitter in
+            self.api.deleteFollower(id: id) { result in
+                emitter.onNext(result)
+                emitter.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+    
 
     func loadSearchUserGearRx(userId: Int) -> Observable<[CellData]> {
         return Observable.create { emitter in

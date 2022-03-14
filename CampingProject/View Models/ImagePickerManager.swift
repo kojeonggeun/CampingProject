@@ -84,7 +84,7 @@ class ImagePickerManager: ImagePickerController {
                 let asset = PHAssetResource.assetResources(for: userSelectedAssets[num])
 
                 var thumbnail = UIImage()
-
+                option.deliveryMode = .opportunistic
                 option.isSynchronous = true
                 manager.requestImage(for: userSelectedAssets[num], targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: option, resultHandler: {(result, _) -> Void in
                     thumbnail = result!

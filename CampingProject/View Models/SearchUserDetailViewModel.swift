@@ -11,11 +11,13 @@ import RxCocoa
 
 public protocol SearchUserDetailInput {
     func loadSearchInfo(id: Int)
+    var followButtonTouched: PublishRelay<Void> { get }
 }
 public protocol SearchUserDetailOutput {
     var searchGears: Observable<[CellData]> { get }
     var searchUser: Observable<UserInfo> { get }
     var isCheckable: Observable<Bool> { get }
+    var isStatus: Observable<String> { get }
 }
 public protocol SearchUserDetailViewModelType {
     var inputs: SearchUserDetailInput { get }
@@ -24,16 +26,19 @@ public protocol SearchUserDetailViewModelType {
 
 class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetailInput, SearchUserDetailOutput {
     let store = Store.shared
-    let userId: Int = APIManager.shared.userInfo!.user!.id
+    let loginId: Int = APIManager.shared.userInfo!.user!.id
     let disposeBag = DisposeBag()
 
     var inputs: SearchUserDetailInput { return self }
     var outputs: SearchUserDetailOutput { return self }
 
+    var userId: Int = 0
+    
     private let _searchGears = PublishRelay<[CellData]>()
     private let _searchUser = PublishRelay<UserInfo>()
     private let _checkUserId = PublishRelay<Bool>()
-
+    private let _checkStatus = PublishRelay<String>()
+    
     var searchGears: Observable<[CellData]> {
         return _searchGears.asObservable()
     }
@@ -43,10 +48,33 @@ class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetail
     var isCheckable: Observable<Bool> {
         return _checkUserId.asObservable()
     }
+    var isStatus: Observable<String> {
+        return _checkStatus.asObservable()
+    }
+    var followButtonTouched: PublishRelay<Void> = PublishRelay<Void>()
 
+    init(){
+        
+        followButtonTouched.withLatestFrom(isStatus)
+            .subscribe(onNext:{ status in
+                if status == "NONE" {
+                    self.store.followRequstRx(id: self.userId).subscribe(onNext:{_ in
+                        self._checkStatus.accept("FOLLOWING")
+                    }).disposed(by: self.disposeBag)
+                } else {
+                    self.store.deleteFollowerRx(id: self.userId).subscribe(onNext:{_ in
+                        self._checkStatus.accept("NONE")
+                    }).disposed(by: self.disposeBag)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        
+        
+    }
     func loadSearchInfo(id: Int) {
-
-        if id == userId {
+        userId = id
+        if id == loginId {
             _checkUserId.accept(true)
         }
 
@@ -59,7 +87,10 @@ class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetail
         store.loadFriendInfoRx(userId: id)
             .subscribe(onNext: { user in
                 self._searchUser.accept(user)
+                self._checkStatus.accept(user.status!)
             })
             .disposed(by: disposeBag)
+        
+        
     }
 }
