@@ -661,7 +661,7 @@
 		35E03A110DFF2B4A2CED1C6E9C54978A /* RedirectHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RedirectHandler.swift; path = Sources/Networking/RedirectHandler.swift; sourceTree = "<group>"; };
 		367EF89071F58C1A0333B80D8270DBFA /* Kingfisher-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Kingfisher-Info.plist"; sourceTree = "<group>"; };
 		36B4D8D67D90E5BB2FDD299365AAE03E /* UICollectionView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Rx.swift"; path = "RxCocoa/iOS/UICollectionView+Rx.swift"; sourceTree = "<group>"; };
-		399B56C7C08F30BF7E705486E06E5B70 /* Pods-CampingProject */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-CampingProject"; path = Pods_CampingProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		399B56C7C08F30BF7E705486E06E5B70 /* Pods_CampingProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampingProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D6A232298128639BC3FCED5B472F2F /* RxTableViewDelegateProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxTableViewDelegateProxy.swift; path = RxCocoa/iOS/Proxies/RxTableViewDelegateProxy.swift; sourceTree = "<group>"; };
 		3A849BC29EDC415A9953EDBB8FED1A60 /* ControlProperty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ControlProperty.swift; path = RxCocoa/Traits/ControlProperty.swift; sourceTree = "<group>"; };
 		3B1B3112C02323A28F664F96F96CB743 /* ImagePickerController+Albums.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ImagePickerController+Albums.swift"; path = "Sources/Controller/ImagePickerController+Albums.swift"; sourceTree = "<group>"; };
@@ -844,7 +844,7 @@
 		99902D48A18ADB6E156D8C4E340AC94A /* ImageDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = Sources/Networking/ImageDownloader.swift; sourceTree = "<group>"; };
 		99C6307B0A16319A6884A25281F0CD03 /* RequestInterceptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestInterceptor.swift; path = Source/RequestInterceptor.swift; sourceTree = "<group>"; };
 		9AE2475D5ADA9F223C77A41D8683617C /* RxCollectionViewDataSourceType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxCollectionViewDataSourceType.swift; path = RxCocoa/iOS/Protocols/RxCollectionViewDataSourceType.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DFB3228BF7D6030FB5AD29886DFD1CB /* DiskStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DiskStorage.swift; path = Sources/Cache/DiskStorage.swift; sourceTree = "<group>"; };
 		9E17B92C86B9C52DCAC3180FDE221F62 /* TailRecursiveSink.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TailRecursiveSink.swift; path = RxSwift/Observers/TailRecursiveSink.swift; sourceTree = "<group>"; };
 		9E7EB8D998DD1847008F06C042BBD50D /* Indicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Indicator.swift; path = Sources/Views/Indicator.swift; sourceTree = "<group>"; };
@@ -1312,7 +1312,6 @@
 				294D5605807E9573A57346C4D4277EE9 /* Zip+Collection.swift */,
 				B3096BEDA9DCFF5D991DA39986E10732 /* Support Files */,
 			);
-			name = RxSwift;
 			path = RxSwift;
 			sourceTree = "<group>";
 		};
@@ -1393,7 +1392,6 @@
 				AECAB46224DBBCB4FEC6C1B628EA14E2 /* ZoomTransitionDelegate.swift */,
 				71C33AB0D74F717A49EC471E99FC3DA6 /* Support Files */,
 			);
-			name = BSImagePicker;
 			path = BSImagePicker;
 			sourceTree = "<group>";
 		};
@@ -1412,7 +1410,6 @@
 				433890BFF66649FE71F74FFEA3F82F30 /* YoshikoTextField.swift */,
 				811EF7F9BC1B883CA98259263969FB66 /* Support Files */,
 			);
-			name = TextFieldEffects;
 			path = TextFieldEffects;
 			sourceTree = "<group>";
 		};
@@ -1426,7 +1423,6 @@
 				0CEBBD1A56E2072B56E7E19B2FE1B93C /* Utils.swift */,
 				C581C65F6B3BEC987B7F2EC9848BCD35 /* Support Files */,
 			);
-			name = RxRelay;
 			path = RxRelay;
 			sourceTree = "<group>";
 		};
@@ -1575,7 +1571,6 @@
 				BBDFC8A8B3C847C736AD46937C31326C /* WKWebView+Rx.swift */,
 				541C0225BB0E114D811C085F7F3BB3CA /* Support Files */,
 			);
-			name = RxCocoa;
 			path = RxCocoa;
 			sourceTree = "<group>";
 		};
@@ -1600,7 +1595,7 @@
 				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */,
 				1F08AE4B81A4E4ECE65672A185E38F78 /* BSImagePicker */,
 				C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher */,
-				399B56C7C08F30BF7E705486E06E5B70 /* Pods-CampingProject */,
+				399B56C7C08F30BF7E705486E06E5B70 /* Pods_CampingProject.framework */,
 				BC432FD48A5932251F1CAFBC4BF74894 /* RxCocoa */,
 				FF8B264DFE802855D5D67E7CDDABFC3C /* RxRelay */,
 				809C5FAB588354C9BA37DC3EAB8CB45C /* RxSwift */,
@@ -1714,7 +1709,6 @@
 				0E13CD580013125E7CDF7D99F25097E6 /* WKInterfaceImage+Kingfisher.swift */,
 				2A59F5058781D4676523F67BD46866DF /* Support Files */,
 			);
-			name = Kingfisher;
 			path = Kingfisher;
 			sourceTree = "<group>";
 		};
@@ -1812,7 +1806,6 @@
 				D6537C8BA4BBDA705AF341F50C4D214E /* Validation.swift */,
 				50502905A46592AB34DDDC43E32551EF /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -1834,7 +1827,6 @@
 				E19D9B587DB0DF415D744ED205D28D33 /* UIViewController+Rx.swift */,
 				B87AF5827E9555F70556E3437247C9CC /* Support Files */,
 			);
-			name = RxViewController;
 			path = RxViewController;
 			sourceTree = "<group>";
 		};
@@ -2052,7 +2044,7 @@
 			);
 			name = "Pods-CampingProject";
 			productName = Pods_CampingProject;
-			productReference = 399B56C7C08F30BF7E705486E06E5B70 /* Pods-CampingProject */;
+			productReference = 399B56C7C08F30BF7E705486E06E5B70 /* Pods_CampingProject.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E8022D22FAA6690B5E1C379C1BCE1491 /* Kingfisher */ = {
