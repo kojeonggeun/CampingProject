@@ -30,11 +30,12 @@ class GearDetailViewModel: GearDetailViewModelType, GearDetailInput, GearDetailO
 
     private var gearId: Int
     private var userId: Int
-    private let gearDetail = PublishSubject<GearDetail>()
+    private let _gearDetail = PublishSubject<GearDetail>()
+    
     var deleteButtonTouched: PublishRelay<Void> = PublishRelay<Void>()
 
     public var showGearDetail: Observable<GearDetail> {
-        return gearDetail.asObserver()
+        return _gearDetail.asObserver()
     }
 
     init(gearId: Int, userId: Int) {
@@ -49,12 +50,10 @@ class GearDetailViewModel: GearDetailViewModelType, GearDetailInput, GearDetailO
 
     }
     func loadGearDetail() {
-//        FIXME: 유저 아이디 고민
-//        let userId: Int = apiManager.userInfo!.user!.id
         
         store.loadDetailUserGearRx(userId: self.userId, gearId: self.gearId)
             .subscribe(onNext: {
-                self.gearDetail.onNext($0)
+                self._gearDetail.onNext($0)
             }).disposed(by: disposeBag)
 
     }

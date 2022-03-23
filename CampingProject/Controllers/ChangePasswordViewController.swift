@@ -17,10 +17,12 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordCheckField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var passwordCheckLabel: UILabel!
     
     let disposeBag = DisposeBag()
     let apiManager = APIManager.shared
     let store = Store.shared
+    var passwordErrorHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +30,23 @@ class ChangePasswordViewController: UIViewController {
         passwordField.addLeftPadding()
         passwordCheckField.addLeftPadding()
         presentPassword.addLeftPadding()
+        passwordField.radius()
+        passwordCheckField.radius()
+        presentPassword.radius()
+        passwordErrorHeight =  passwordCheckLabel.heightAnchor.constraint(equalToConstant: 0)
         
-        let presentPW = presentPassword.rx.text.orEmpty.asObservable()
+
+        let presentPW = presentPassword.rx.controlEvent(.editingDidEnd)
+            .withLatestFrom(presentPassword.rx.text.orEmpty)
         let presentPWVaild = presentPW.skip(1).flatMap{ self.store.passwordCertificationRx(password: $0) }
+        
+        presentPWVaild.subscribe(onNext:{ check in
+            self.passwordErrorHeight.isActive = check
+        }).disposed(by: disposeBag)
+        
+        UIView.animate(withDuration: 0.3){
+            self.view.layoutIfNeeded()
+        }
         
         let pwInput = passwordCheckField.rx.text.orEmpty.asObservable()
         let pwVaild = pwInput.skip(1).map { self.apiManager.isValidPassword(password: $0) }

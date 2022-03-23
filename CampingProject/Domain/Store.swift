@@ -9,8 +9,6 @@ import Foundation
 import Alamofire
 import RxSwift
 
-
-// TODO: Domain 별로 나눠야 함
 public class Store {
     static let shared = Store()
     let api = APIManager.shared

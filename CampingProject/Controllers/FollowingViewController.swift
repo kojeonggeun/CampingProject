@@ -10,8 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-// TODO: 팔로잉했을때 프로필창에서 숫자 변화안됨
-
 class FollowingViewController: UIViewController {
     @IBOutlet weak var followingTableView: UITableView!
     @IBOutlet weak var followingSearchBar: UISearchBar!

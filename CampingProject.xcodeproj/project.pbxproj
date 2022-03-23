@@ -99,7 +99,7 @@
 		CB4F6776279D4B0E0098C79D /* ViewGear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGear.swift; sourceTree = "<group>"; };
 		CB534DF626C2664A0022EA20 /* MyGearCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGearCollectionViewCell.swift; sourceTree = "<group>"; };
 		CB58A79726E5F136006C80EA /* GearDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearDetailViewController.swift; sourceTree = "<group>"; };
-		CB6037B726B2728E0023042F /* CampingProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampingProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB6037B726B2728E0023042F /* Camtorage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camtorage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6037BA26B2728E0023042F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB6037BC26B2728E0023042F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CB6037C126B2728E0023042F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 		CB6037B826B2728E0023042F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CB6037B726B2728E0023042F /* CampingProject.app */,
+				CB6037B726B2728E0023042F /* Camtorage.app */,
 				CB9595D127BB5BA4006AC55E /* CampingProjectTests.xctest */,
 			);
 			name = Products;
@@ -370,9 +370,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CB6037B626B2728E0023042F /* CampingProject */ = {
+		CB6037B626B2728E0023042F /* Camtorage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CB6037CB26B2728F0023042F /* Build configuration list for PBXNativeTarget "CampingProject" */;
+			buildConfigurationList = CB6037CB26B2728F0023042F /* Build configuration list for PBXNativeTarget "Camtorage" */;
 			buildPhases = (
 				81FFE62D8F3BCFA27331D1EF /* [CP] Check Pods Manifest.lock */,
 				CB6037B326B2728E0023042F /* Sources */,
@@ -384,9 +384,9 @@
 			);
 			dependencies = (
 			);
-			name = CampingProject;
+			name = Camtorage;
 			productName = CampingProject;
-			productReference = CB6037B726B2728E0023042F /* CampingProject.app */;
+			productReference = CB6037B726B2728E0023042F /* Camtorage.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CB9595D027BB5BA4006AC55E /* CampingProjectTests */ = {
@@ -438,7 +438,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CB6037B626B2728E0023042F /* CampingProject */,
+				CB6037B626B2728E0023042F /* Camtorage */,
 				CB9595D027BB5BA4006AC55E /* CampingProjectTests */,
 			);
 		};
@@ -590,7 +590,7 @@
 /* Begin PBXTargetDependency section */
 		CB9595D627BB5BA4006AC55E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CB6037B626B2728E0023042F /* CampingProject */;
+			target = CB6037B626B2728E0023042F /* Camtorage */;
 			targetProxy = CB9595D527BB5BA4006AC55E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -666,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -713,6 +713,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -721,9 +722,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -745,10 +747,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Ko.CampingProject.Camtorage;
+				PRODUCT_BUNDLE_IDENTIFIER = Ko.CampingProject.CamtorageV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -766,10 +768,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Ko.CampingProject.Camtorage;
+				PRODUCT_BUNDLE_IDENTIFIER = Ko.CampingProject.CamtorageV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -825,7 +827,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CB6037CB26B2728F0023042F /* Build configuration list for PBXNativeTarget "CampingProject" */ = {
+		CB6037CB26B2728F0023042F /* Build configuration list for PBXNativeTarget "Camtorage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CB6037CC26B2728F0023042F /* Debug */,

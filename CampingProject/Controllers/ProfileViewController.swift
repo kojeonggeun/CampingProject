@@ -21,10 +21,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"a", style: .plain, target: self, action: #selector(showPreferences))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showPreferences))
-        profileImage.layer.cornerRadius = profileImage.frame.width / 2
-        profileImage.layer.borderWidth = 5
-        profileImage.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-        profileImage.layer.backgroundColor = CGColor(red: 249, green: 228, blue: 200, alpha: 1)
+        profileImage.circular(borderwidth: 4, bordercolor: UIColor.white.cgColor)
       
         profileIntro.isEditable = false
         
@@ -58,7 +55,7 @@ class ProfileViewController: UIViewController {
         
         viewModel.outputs.profile
             .subscribe(onNext:{ userInfo in
-                print(userInfo.user?.userImageUrl)
+
                 if userInfo.user?.userImageUrl != "" {
                     self.imageUrl = userInfo.user!.userImageUrl
                 } else {
@@ -114,7 +111,6 @@ class ProfileViewController: UIViewController {
 
     }
 }
-
 
 extension ProfileViewController: UIViewControllerTransitioningDelegate{
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {

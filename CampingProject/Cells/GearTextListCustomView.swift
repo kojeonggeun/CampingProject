@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 @IBDesignable
 class GearTextListCustomView: UIView{
 
@@ -95,12 +96,16 @@ class GearTextListCustomView: UIView{
         datePickerView.datePickerMode = .date
         datePickerView.timeZone = NSTimeZone.local
         datePickerView.locale = Locale(identifier: "ko_KR")
-        datePickerView.preferredDatePickerStyle = .wheels
+        
+        if #available(iOS 13.4, *) {
+            datePickerView.preferredDatePickerStyle = .wheels
+        }
         datePickerView.backgroundColor = .white
-
+        
         let doneButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissDatePickerView))
-        let toolBar = createToolbar(item: doneButton)
-
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let toolBar = createToolbar(item: [flexibleSpace,doneButton])
+        
         gearBuyDate.inputAccessoryView = toolBar
         gearBuyDate.inputView = datePickerView
     }
@@ -129,8 +134,9 @@ class GearTextListCustomView: UIView{
         gearTypeId = apiService.gearTypes[0].gearID
         selectType = apiService.gearTypes[0].gearName
         
-        let button = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissPickerView))
-        let toolBar = createToolbar(item: button)
+        let doneButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissPickerView))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let toolBar = createToolbar(item: [flexibleSpace,doneButton])
         
         
         gearType.inputAccessoryView = toolBar
@@ -148,15 +154,17 @@ class GearTextListCustomView: UIView{
         endEditing(true)
     }
 
-    func createToolbar(item: UIBarButtonItem) -> UIToolbar {
+    func createToolbar(item: [UIBarButtonItem]) -> UIToolbar {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        toolbar.setItems([item], animated: true)
+        toolbar.setItems([item[0],item[1]], animated: true)
         toolbar.isUserInteractionEnabled = true
+        
 
         return toolbar
     }
 }
+
 
 extension GearTextListCustomView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -179,6 +187,7 @@ extension GearTextListCustomView: UIPickerViewDelegate {
         gearTypeId = apiService.gearTypes[row].gearID
                 
     }
+    
 }
 
 extension GearTextListCustomView: UITextFieldDelegate{

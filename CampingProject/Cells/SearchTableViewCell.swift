@@ -29,6 +29,7 @@ class SearchTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        searchProfileImage.circular()
     }
 
     required init?(coder: NSCoder) {
@@ -58,7 +59,7 @@ class SearchTableViewCell: UITableViewCell {
 
     func loadImage(urlString: String) {
         let url = URL(string: urlString)
-
+        
         if url == nil {
             searchProfileImage.image = UIImage(systemName: "camera.circle")
         } else {
@@ -70,7 +71,7 @@ class SearchTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
-
+        
         self.searchProfileImage.image = nil
         self.searchEmail.text = nil
         self.searchName.text = nil

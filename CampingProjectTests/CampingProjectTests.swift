@@ -24,19 +24,8 @@ class CampingProjectTests: XCTestCase {
     }
 
     func testExample() throws {
-        APIManager.shared.requestEmailCertificationCode(email: email, type: type, completion: { _ in })
-//        APIManager.shared.checkEmailCertificationCode(email: email, code: "sbX8aXGg", type: type, completion: {re in
-//            print(re)
-//        })
-        APIManager.shared.register(email: "ggggg3032@gmail.com", password: "!a123123123", name: "이용자")
-        APIManager.shared.register(email: "bamdule@gmail.com", password: "!a123123123", name: "이용자")
-        APIManager.shared.register(email: "bbk302@gmail.com", password: "!a123123123", name: "이용자")
-        APIManager.shared.register(email: "carriez@naver.com", password: "!a123123123", name: "이용자")
-        APIManager.shared.register(email: "python46@naver.com", password: "!a123123123", name: "이용자")
-        APIManager.shared.register(email: "swift_love@naver.com", password: "!a123123123", name: "이용자")
-        APIManager.shared.register(email: "dududong@gmail.com", password: "!a123123123", name: "이용자")
-        APIManager.shared.register(email: "greenGu@gmail.com", password: "!a123123123", name: "이용자")
-        APIManager.shared.register(email: "KoJengGeun@gmail.com", password: "!a123123123", name: "이용자")
+
+        APIManager.shared.register(email: "appletest@apple.com", password: "appletest1!", name: "User")
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         // Any test you write for XCTest can be annotated as throws and async.

@@ -34,3 +34,24 @@ extension UIViewController {
         
     }
 }
+
+extension UIView{
+    func circular(
+    borderwidth: CGFloat = 2.0,
+    bordercolor: CGColor = UIColor.white.cgColor){
+        self.layer.cornerRadius = (self.frame.size
+            .width / 2.0)
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        
+        self.layer.borderColor = bordercolor
+        self.layer.borderWidth = borderwidth
+    }
+}
+
+extension UITextField {
+    func radius() {
+        self.layer.cornerRadius = self.frame.height / 5
+        
+    }
+}

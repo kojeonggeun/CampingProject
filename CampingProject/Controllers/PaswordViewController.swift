@@ -34,8 +34,8 @@ class PasswordViewController: UIViewController {
         pwTextField.addLeftPadding()
         repwTextField.addLeftPadding()
 
-        pwTextField.layer.cornerRadius = 10
-        repwTextField.layer.cornerRadius = 10
+        pwTextField.radius()
+        repwTextField.radius()
 
         let pwInput = pwTextField.rx.text.orEmpty.asObservable()
         let pwVaild = pwInput.skip(1).map { self.apiManager.isValidPassword(password: $0) }
@@ -58,6 +58,5 @@ class PasswordViewController: UIViewController {
                 }))
                 self.present(alert, animated: true, completion: nil)
             }).disposed(by: disposeBag)
-
     }
 }

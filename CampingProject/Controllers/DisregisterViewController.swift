@@ -26,7 +26,8 @@ class DisregisterViewController: UIViewController{
 
         passwordErrorHeight =  checkLabel.heightAnchor.constraint(equalToConstant: 0)
         passwordField.delegate = self
-
+        passwordField.radius()
+        
         passwordField.rx
         .controlEvent(.editingDidEnd)
         .withLatestFrom(passwordField.rx.text.orEmpty)
@@ -51,8 +52,15 @@ class DisregisterViewController: UIViewController{
         
         disregisterButton.rx.tap
             .subscribe(onNext:{
-                self.viewModel.inputs.deleteUser.accept(())
-                self.dismiss(animated: true, completion: nil)
+                let alert = UIAlertController(title: "회원 탈퇴", message: "정말 탈퇴 하실 껀가요??", preferredStyle: .alert)
+                alert.addAction(.init(title: "확인", style: .cancel, handler: {_ in
+                    self.viewModel.inputs.deleteUser.accept(())
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                alert.addAction(.init(title: "취소", style: .default,handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+                
             })
             .disposed(by: disposeBag)
         

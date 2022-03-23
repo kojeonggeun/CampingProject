@@ -48,10 +48,7 @@ class ProfileEditViewController: UIViewController {
         self.imagePicker.allowsEditing = true // 크롭기능 여부
         self.imagePicker.delegate = self
 
-        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
-        profileImageView.layer.borderWidth = 5
-        profileImageView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-
+        self.profileImageView.circular()
         let name = apiManager.userInfo?.user?.name
         let aboutMe = apiManager.userInfo?.user?.aboutMe
 
@@ -92,10 +89,11 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
             
         }
         
-        if let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            let fileName = url.lastPathComponent
-            self.imageName = fileName
+        if let url = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset {
+            self.imageName = url.value(forKey: "filename") as! String
         }
+        
+    
         self.profileImageView.image = newImage
         picker.dismiss(animated: true, completion: nil)
 

@@ -86,13 +86,13 @@ class ImagePickerManager: ImagePickerController {
                 var thumbnail = UIImage()
                 option.deliveryMode = .opportunistic
                 option.isSynchronous = true
-                manager.requestImage(for: userSelectedAssets[num], targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: option, resultHandler: {(result, _) -> Void in
+                
+                manager.requestImage(for: userSelectedAssets[num], targetSize: CGSize(width: 500, height: 300), contentMode: .aspectFill, options: option, resultHandler: {(result, _) -> Void in
                     thumbnail = result!
                 })
 
                 self.photoArray.append(thumbnail)
                 self.imageFileName.append(asset.first!.originalFilename)
-
                 collectionV.reloadData()
             }
             self.total = userSelectedAssets.count

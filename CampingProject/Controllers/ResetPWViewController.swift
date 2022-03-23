@@ -28,6 +28,7 @@ class ResetPWViewController: UIViewController{
         
         passwordField.addLeftPadding()
         checkPasswordField.addLeftPadding()
+        
         guard let checkEmail = email, let checkCode = code else { return }
         
         let pwInput = passwordField.rx.text.orEmpty.asObservable()

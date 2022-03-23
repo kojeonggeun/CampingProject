@@ -101,8 +101,30 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
             .bind(to: gearDetailCollectionView.rx.items(cellIdentifier: GearDetailImageCollectionViewCell.identifier, cellType: GearDetailImageCollectionViewCell.self)) { (_, element, cell) in
                 cell.onData.onNext(element)
             }.disposed(by: disposeBag)
+        
+        viewModel.outputs.showGearDetail
+            .subscribe(onNext:{ gear in
+                
+                
+                self.gearCompany.text = gear.company
+                self.gearName.text = gear.name
+                self.gearTypeName.text = "[\(gear.gearTypeName ?? "")]"
+                self.gearColor.text = gear.color
+                self.gearDesc.text = gear.description
+                self.gearBuyDt.text = gear.buyDt ?? ""
+                self.gearPrice.text = "\(gear.price ?? 0)"
+            })
+            .disposed(by: disposeBag)
     }
 
+    @IBOutlet weak var gearCompany: UILabel!
+    @IBOutlet weak var gearName: UILabel!
+    @IBOutlet weak var gearTypeName: UILabel!
+    @IBOutlet weak var gearColor: UILabel!
+    @IBOutlet weak var gearPrice: UILabel!
+    @IBOutlet weak var gearBuyDt: UILabel!
+    @IBOutlet weak var gearDesc: UILabel!
+    
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var gearDetailCollectionView: UICollectionView!
 

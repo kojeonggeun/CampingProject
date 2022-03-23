@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-//  FIXME: 친구가 아닌 친구검색
-// FIXME: 친구에서 상세보기 구현해야함
+
 class SearchUserViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
@@ -42,11 +41,25 @@ class SearchUserViewController: UIViewController {
 // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+           
+        searchTableView.addGestureRecognizer(tapGesture)
+        
         setView()
         setBind()
     }
-
+//    테이블 셀 터치 시 키보드 내려가게
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            
+            self.view.endEditing(true)
+            for textField in self.view.subviews where textField is UITextField {
+                textField.resignFirstResponder()
+            }
+        }
+        sender.cancelsTouchesInView = false
+    }
+    
     func setView() {
         let email = apiManager.userInfo?.user?.email
         self.navigationController?.navigationBar.topItem?.title = email

@@ -19,7 +19,8 @@ public class APIManager {
     var userInfo: UserInfo?
 
 //    장비 저장
-    func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, desc:String ,image: [UIImage], imageName: [String]) -> Observable<Void> {
+    func addGear(name: String, type: Int, color: String, company: String, capacity: String, date: String, price: String, desc:String,image: [UIImage], imageName: [String]) -> Observable<Void> {
+        
         return Observable.create { emitter in
             let headers: HTTPHeaders = [
                         "Content-type": "multipart/form-data",
@@ -32,21 +33,21 @@ public class APIManager {
                                              "buyDt": date, "description":desc
             ]
             
-
+            
             AF.upload(multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
+                    
                     multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
 
                 }
                 // withName에 키값 매칭되는 값을 넣어야함
                 for num in 0..<image.count {
                     multipartFormData.append(image[num].jpegData(compressionQuality: 1)!, withName: "gearImages", fileName: imageName[num], mimeType: "image/jpg")
+                    
                 }
 
             }, to: self.urlMyself + "gear", method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
-
-                print("Upload Progress: \(progress.fractionCompleted)")
-
+                print(progress.fractionCompleted)
             }).response { response in
                 switch response.result {
                 case .success:
@@ -54,7 +55,6 @@ public class APIManager {
                     emitter.onNext(())
                     emitter.onCompleted()
                 case .failure(let error):
-                    print(error)
                     emitter.onError(error)
                 }
             }
@@ -97,13 +97,9 @@ public class APIManager {
 
                 }
             }, to: self.urlMyself + "gear/\(gearId)", method: .put, headers: headers).uploadProgress(queue: .main, closure: { progress in
-
-                print("Upload Progress: \(progress.fractionCompleted)")
-
             }).responseString { response in
                 switch response.result {
                 case .success:
-
                     emitter.onNext(())
                     emitter.onCompleted()
                 case .failure(let error):
@@ -136,7 +132,6 @@ public class APIManager {
                         emitter.onNext(self.gearTypes)
                         emitter.onCompleted()
                     case .failure(let error):
-                        print(error)
                         emitter.onError(error)
 
                     }
@@ -153,9 +148,8 @@ public class APIManager {
             case .success:
                 
                 completion(response.result)
-
-            case .failure(let error):
-                print("🚫loadUserData  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
+                break
 
             }
         }
@@ -169,8 +163,8 @@ public class APIManager {
 
                 completion(response.result)
 
-            case .failure(let error):
-                print("🚫loadDetailUserGear  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
+                break
 
             }
         }
@@ -184,8 +178,8 @@ public class APIManager {
 
                 completion(response.value!)
 
-            case .failure(let error):
-                print("🚫loadSearchUserGear  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
+                break
             }
         }
     }
@@ -200,8 +194,8 @@ public class APIManager {
             case .success:
                 completion(response.result)
 
-            case .failure(let error):
-                print("🚫searchUser  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
+                break
             }
         }
     }
@@ -220,8 +214,7 @@ public class APIManager {
                     completion(true)
 
                 case .failure(let error):
-                    print(AFError.parameterEncodingFailed(reason: .customEncodingFailed(error: error)))
-                    print("🚫 followRequst Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+
                     completion(false)
                 }
             }
@@ -233,13 +226,12 @@ public class APIManager {
         let params: Parameters = ["email": email, "password": password, "name": name]
 
         AF.request(url + "user", method: .post, parameters: params, encoding: URLEncoding.default, headers: ["Content-Type": "application/x-www-form-urlencoded"]).response { response in
-
             switch response.result {
             case .success:
-                print("POST 성공")
-
-            case .failure(let error):
-                print("🚫 Register Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                break
+                
+            case .failure:
+                break
             }
         }
     }
@@ -256,12 +248,9 @@ public class APIManager {
             .responseDecodable(of: Login.self) { (response) in
                 switch response.result {
                 case .success(let value):
-                    print(value.token)
                     DB.userDefaults.set(["token": value.token, "email": value.email], forKey: "token")
-                    print(DB.userDefaults.value(forKey: "token"))
                     completion(true)
                 case .failure(let error):
-                    print("🚫 login Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                     completion(false)
                 }
             }
@@ -270,10 +259,10 @@ public class APIManager {
     func disregister(){
         AF.request(urlMyself, method: .delete, encoding: URLEncoding.default, headers: headerInfo()).validate(statusCode: 200..<300).response { response in
             switch response.result {
-            case .success(let data):
-                print(data)
-            case .failure(let error):
-                print("🚫 disregister Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .success:
+                break
+            case .failure:
+                break
             }
         }
     }
@@ -286,11 +275,11 @@ public class APIManager {
         
         AF.request(urlMyself + "password/certification", method: .post, parameters: params, encoding: URLEncoding.default, headers: headerInfo()).validate(statusCode: 200..<300).response { response in
             switch response.result {
-            case .success(let data):
+            case .success:
                 completion(true)
-            case .failure(let error):
+            case .failure:
                 completion(false)
-                print("🚫 passwordCertification Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                
             }
         }
     }
@@ -302,12 +291,11 @@ public class APIManager {
         
         AF.request(url + "forgotten-info/user/password", method: .patch, parameters: params, encoding: URLEncoding.default, headers: headerInfo()).validate(statusCode: 200..<300).response { response in
             switch response.result {
-            case .success(let data):
+            case .success(_):
+                break
+            case .failure(_):
+                break
 
-                print(data)
-            case .failure(let error):
-
-                print("🚫 findPassword Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
             }
         }
     }
@@ -323,8 +311,8 @@ public class APIManager {
                 guard let result = data as? Bool else { return }
                 completion(result)
 
-            case .failure(let error):
-                print("🚫searchUser  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
+                break
             }
         }
     }
@@ -345,8 +333,7 @@ public class APIManager {
                     } else {
                         completion(true)
                     }
-                case .failure(let error):
-                    print("🚫 loginCheck Error:\(error._code), Message: \(error.errorDescription!),\(error)")
+                case .failure(_):
                     completion(false)
                 }
             }
@@ -364,8 +351,8 @@ public class APIManager {
                 case .success:
                     self.userInfo = response.value!
                     completion(response.result)
-                case .failure(let error):
-                    print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
+                case .failure(_):
+                    break
                 }
             }
     }
@@ -375,11 +362,11 @@ public class APIManager {
 
             AF.request(self.urlMyself + "password", method: .put, parameters: parameters, encoding: URLEncoding.default, headers: self.headerInfo()).response { response in
                 switch response.result {
-                case .success(let data):
-                    print(data)
-                case .failure(let error):
+                case .success(_):
+                    break
+                case .failure(_):
                     
-                    print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                    break
                 }
             }
     }
@@ -398,8 +385,8 @@ public class APIManager {
                 case .success:
 
                     completion(response.result)
-                case .failure(let error):
-                    print("🚫 loadUserInfo Error:\(error._code), Message: \(error.errorDescription!),\(error)")
+                case .failure(_):
+                    break
                 }
             }
     }
@@ -410,15 +397,11 @@ public class APIManager {
                         "Content-type": "multipart/form-data",
                         "Authorization": self.returnToken()
                     ]
-
             AF.upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(image.jpegData(compressionQuality: 1)!, withName: "userImage", fileName: imageName, mimeType: "image/jpg")
-
-            }, to: self.urlMyself + "image", method: .post, headers: headers).uploadProgress(queue: .main, closure: { progress in
-
-                print("Upload Progress: \(progress.fractionCompleted)")
-
-            }).response { response in
+                multipartFormData.append(image.jpegData(compressionQuality: 0.5)!, withName: "userImage", fileName: imageName, mimeType: "image/jpeg")
+                  
+            }, to: self.urlMyself + "image", method: .post, headers: headers).uploadProgress(closure: { progress in
+            }).validate(statusCode: 200..<300).response { response in
                 switch response.result {
                 case .success:
                     emitter.onNext(true)
@@ -443,7 +426,6 @@ public class APIManager {
                     emitter.onCompleted()
                 case .failure(let error):
                     emitter.onError(error)
-                    print("🚫 saveUserProfile Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                 }
             }
             return Disposables.create()
@@ -458,8 +440,8 @@ public class APIManager {
             switch response.result {
             case .success:
                 completion(response.result)
-            case .failure(let error):
-                print("🚫 loadFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
+                break
             }
         }
     }
@@ -471,8 +453,8 @@ public class APIManager {
             switch response.result {
             case .success:
                 completion(response.result)
-            case .failure(let error):
-                print("🚫 loadFollowing Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
+                break
             }
         }
     }
@@ -483,8 +465,7 @@ public class APIManager {
             switch response.result {
             case .success:
                 completion(true)
-            case .failure(let error):
-                print("🚫 deleteFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
                 completion(false)
             }
         }
@@ -501,9 +482,7 @@ public class APIManager {
             case .success:
                 
                 completion(true)
-            case .failure(let error):
-                
-                print("🚫 deleteFollower Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+            case .failure(_):
                 completion(false)
 
             }
@@ -524,7 +503,8 @@ public class APIManager {
                 completion(true)
 
             case .failure(let error):
-                print("🚫 checkEmail Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
+                
+                ("🚫 checkEmail Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                 completion(false)
             }
         }

@@ -35,6 +35,7 @@ class AddGearViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "장비 등록"
+        
         let rightBarButtonItem = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(gearSave(_:)))
 
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
@@ -44,15 +45,27 @@ class AddGearViewController: UIViewController {
 
     @objc func gearSave(_ sender: UIButton) {
 
-        let name = customView.gearName.text ?? "이름 없음"
-        let color = customView.gearColor.text ?? "d"
-        let company = customView.gearCompany.text ?? "d"
-        let capacity = customView.gearCapacity.text ?? "d"
-        let date = customView.gearBuyDate.text ?? "d"
-        let price = customView.gearPrice.text ?? "0"
-        let desc = customView.gearDesc.text ?? "d"
-
-  
+        guard let name = customView.gearName.text else { return }
+        guard let color = customView.gearColor.text else { return }
+        guard let company = customView.gearCompany.text else { return }
+        guard let capacity = customView.gearCapacity.text else { return }
+        guard let date = customView.gearBuyDate.text else { return }
+        guard let price = customView.gearPrice.text else { return }
+        guard let desc = customView.gearDesc.text else { return }
+        
+        
+        let essentialFieldList = [name, color, company, capacity, date, price, desc]
+        
+        for field in essentialFieldList {
+            if field.isEmpty {
+                let alert = UIAlertController(title: nil, message: "모든 항목을 입력해주세요", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self.present(alert, animated: true)
+                return
+                
+            }
+        }
+        
         self.apiManager.addGear(name: name, type: self.customView.gearTypeId, color: color, company: company, capacity: capacity, date: date, price: price,desc: desc, image: self.imagePicker.photoArray, imageName: self.imagePicker.imageFileName)
             .subscribe()
             .disposed(by: disposeBag)
@@ -66,7 +79,8 @@ class AddGearViewController: UIViewController {
         })
         self.present(alert, animated: true)
     }
-
+    
+    
     @IBOutlet weak var gearCollectionView: UICollectionView!
     @IBOutlet weak var customView: GearTextListCustomView!
 

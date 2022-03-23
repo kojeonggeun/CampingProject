@@ -102,8 +102,8 @@ extension MyGearViewController: UICollectionViewDelegateFlowLayout {
             let height = width * 10/7.5
 
             return CGSize(width: width, height: height)
-
         }
+        
         let width = collectionView.bounds.width / 4
         let height = collectionView.bounds.height / 1.7
 

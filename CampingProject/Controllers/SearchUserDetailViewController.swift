@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Kingfisher
+
 class SearchUserDetailViewController: UIViewController {
 
     @IBOutlet weak var userImage: UIImageView!
@@ -44,7 +45,7 @@ class SearchUserDetailViewController: UIViewController {
 
     func setView() {
         self.navigationItem.leftBarButtonItem?.title = ""
-
+        userImage.circular()
         friendCollectionView.register(UINib(nibName: String(describing: MyGearCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: MyGearCollectionViewCell.identifier)
 
         myGearSB = UIStoryboard(name: "MyGear", bundle: nil)
@@ -121,24 +122,10 @@ class SearchUserDetailViewController: UIViewController {
                     self.followButton.layer.borderColor = newColor
                 }
             }).disposed(by: disposeBag)
-        // FIXME: 팔로잉 버튼 수정해야함
+        
         followButton.rx.tap
             .bind(to: viewModel.inputs.followButtonTouched)
             .disposed(by: disposeBag)
-    
-//    if self.user?.status == "FOLLOWING" {
-//        self.store.loadDeleteFollowergRx(id: self.user!.user!.id)
-//            .subscribe(onNext: { _ in
-//                self.followButton.setTitle("팔로우", for: .normal)
-//                self.followButton.tintColor = .blue
-//
-//            }).disposed(by: self.disposeBag)
-//    } else {
-//        self.apiManager.followRequst(id: self.userId, isPublic: self.user!.user!.isPublic, completion: { _ in
-//            self.followButton.setTitle("팔로잉☑️", for: .normal)
-//            self.followButton.tintColor = .brown
-//
-//        })
     }
 }
 

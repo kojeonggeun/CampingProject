@@ -54,12 +54,13 @@ class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetail
     var followButtonTouched: PublishRelay<Void> = PublishRelay<Void>()
 
     init(){
-        
+
         followButtonTouched.withLatestFrom(isStatus)
             .subscribe(onNext:{ status in
                 if status == "NONE" {
                     self.store.followRequstRx(id: self.userId).subscribe(onNext:{_ in
                         self._checkStatus.accept("FOLLOWING")
+                        
                     }).disposed(by: self.disposeBag)
                 } else {
                     self.store.deleteFollowerRx(id: self.userId).subscribe(onNext:{_ in

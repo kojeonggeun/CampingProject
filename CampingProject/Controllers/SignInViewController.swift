@@ -26,7 +26,8 @@ class SignInViewController: UIViewController {
     let apiManager: APIManager = APIManager.shared
     let viewModel = SignInViewModel()
     let disposeBag = DisposeBag()
-
+    var loginErrorHeight: NSLayoutConstraint!
+    
     @IBAction func unwindVC1 (segue: UIStoryboardSegue) {
     }
 
@@ -53,6 +54,8 @@ class SignInViewController: UIViewController {
 
     }
     func setBind() {
+        loginErrorHeight =  loginCheckLabel.heightAnchor.constraint(equalToConstant: 0)
+        
         emailTextField.rx.text.orEmpty
             .bind(to: viewModel.inputs.emailValueChanged)
             .disposed(by: disposeBag)
@@ -71,8 +74,11 @@ class SignInViewController: UIViewController {
         
         Observable.combineLatest(emailVaild, passwordVaild, resultSelector: {$0 && $1})
         .subscribe(onNext: { result in
+            
             self.loginButton.isEnabled = result
             self.loginCheckLabel.isHidden = true
+            self.loginErrorHeight.isActive = true
+            self.animation()
         })
         .disposed(by: disposeBag)
 
@@ -100,7 +106,10 @@ class SignInViewController: UIViewController {
                 } else {
                     self?.loginCheckLabel.isHidden = false
                     self?.loginCheckLabel.text = "이메일 또는 비밀번호가 틀립니다."
+                    self?.loginErrorHeight.isActive = false
                 }
+                self?.animation()
+                
             })
             .disposed(by: disposeBag)
 
@@ -116,8 +125,13 @@ class SignInViewController: UIViewController {
                 }
             }
         }).disposed(by: disposeBag)
-
         
+        
+    }
+    func animation(){
+        UIView.animate(withDuration: 0.3){
+            self.view.layoutIfNeeded()
+        }
     }
     func fieldDataInit() {
         emailTextField.text = ""
@@ -129,6 +143,5 @@ class SignInViewController: UIViewController {
         viewModel.inputs.emailValueChanged.accept("")
         viewModel.inputs.pwValueChanged.accept("")
         viewModel.inputs.autoLoginStatusChanged.accept(false)
-
     }
 }

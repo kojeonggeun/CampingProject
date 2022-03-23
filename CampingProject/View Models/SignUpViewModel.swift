@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SignUpViewModel: ViewModel {
-// TODO: do 활용 얼럿 창
+
 
     struct Input {
         let checkEmail: Observable<String>

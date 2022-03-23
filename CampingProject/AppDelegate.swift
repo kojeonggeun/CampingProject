@@ -32,6 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        //    가로모드 막기
+        return UIInterfaceOrientationMask.portrait
+    }
+
 }
 
 extension UIViewController {

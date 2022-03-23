@@ -45,8 +45,9 @@ class EmailCertificationViewController: UIViewController {
         checkEmailTextField.addLeftPadding()
         certificationCodeTextField.addLeftPadding()
 
-        checkEmailTextField.layer.cornerRadius = 10
-        certificationCodeTextField.layer.cornerRadius = 10
+        checkEmailTextField.radius()
+        certificationCodeTextField.radius()
+        
         checkEmailTextField.text = email
         checkEmailTextField.isUserInteractionEnabled = false
         checkCertificationLabel.isHidden = true
