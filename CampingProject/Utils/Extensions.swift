@@ -23,7 +23,13 @@ extension UIViewController {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
 //                뷰가 키보드와 tabbarCon - tabbar만큼 올라감
-                self.view.transform = CGAffineTransform(translationX: 0, y: -(keyboardSize.height - self.tabBarController!.tabBar.frame.size.height))
+                if self.tabBarController == nil {
+                    
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -(keyboardSize.height - self.view.frame.size.height / 5 ))
+                } else {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -(keyboardSize.height - self.tabBarController!.tabBar.frame.size.height * 2 ))
+                }
+                
             })
         }
     }

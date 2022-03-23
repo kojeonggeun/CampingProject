@@ -73,4 +73,12 @@ class ChangePasswordViewController: UIViewController {
             .disposed(by: disposeBag)
     
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardNotifications()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeKeyboardNotifications()
+    }
 }

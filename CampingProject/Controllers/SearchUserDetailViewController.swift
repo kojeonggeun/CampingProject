@@ -105,7 +105,7 @@ class SearchUserDetailViewController: UIViewController {
         viewModel.outputs.isStatus
             .subscribe(onNext:{ status in
                 if status == "FOLLOWING"{
-                    self.followButton.setTitle("팔로잉☑️", for: .normal)
+                    self.followButton.setTitle("팔로잉", for: .normal)
                     self.followButton.setTitleColor(.black, for: .normal)
                     self.followButton.tintColor = .clear
                     self.followButton.layer.borderWidth = 0.4

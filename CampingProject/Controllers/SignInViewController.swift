@@ -53,6 +53,15 @@ class SignInViewController: UIViewController {
         setBind()
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardNotifications()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeKeyboardNotifications()
+    }
+    
     func setBind() {
         loginErrorHeight =  loginCheckLabel.heightAnchor.constraint(equalToConstant: 0)
         
@@ -74,23 +83,25 @@ class SignInViewController: UIViewController {
         
         Observable.combineLatest(emailVaild, passwordVaild, resultSelector: {$0 && $1})
         .subscribe(onNext: { result in
-            
             self.loginButton.isEnabled = result
             self.loginCheckLabel.isHidden = true
             self.loginErrorHeight.isActive = true
             self.animation()
         })
         .disposed(by: disposeBag)
+    
+        loginStateButton.rx.tap.asObservable().map{ (_) -> Bool in return !self.loginStateButton.isSelected}
+            .subscribe(onNext: {[weak self] status in
+                self?.loginStateButton.isSelected = status
+                self?.viewModel.inputs.autoLoginStatusChanged.accept(status)
+            }).disposed(by: disposeBag)
+        
 
-        loginStateButton.rx.tap
-            .map { false }
-            .subscribe(onNext: { [weak self] status in
-                self?.viewModel.inputs.autoLoginStatusChanged.accept(!status)
-            })
-            .disposed(by: disposeBag)
 
+        
         viewModel.outputs.autoLogin
             .subscribe(onNext: { [weak self] result in
+                
                 if result {
                     self?.loginStateButton.tintColor = .green
                 } else {

@@ -21,6 +21,7 @@ class DisregisterViewController: UIViewController{
     let disposeBag = DisposeBag()
     let viewModel = DisregisterViewModel()
     var passwordErrorHeight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

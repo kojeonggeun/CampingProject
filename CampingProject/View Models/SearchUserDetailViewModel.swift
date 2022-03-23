@@ -56,15 +56,19 @@ class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetail
     init(){
 
         followButtonTouched.withLatestFrom(isStatus)
-            .subscribe(onNext:{ status in
-                if status == "NONE" {
+            .subscribe(onNext:{ [weak self] status in
+                guard let self = self else { return }
+    
+                if status == "NONE" || status == "FOLLOWER"{
                     self.store.followRequstRx(id: self.userId).subscribe(onNext:{_ in
                         self._checkStatus.accept("FOLLOWING")
+                        self.loadSearchInfo(id: self.userId)
                         
                     }).disposed(by: self.disposeBag)
                 } else {
                     self.store.deleteFollowerRx(id: self.userId).subscribe(onNext:{_ in
                         self._checkStatus.accept("NONE")
+                        self.loadSearchInfo(id: self.userId)
                     }).disposed(by: self.disposeBag)
                 }
             })
