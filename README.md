@@ -18,13 +18,7 @@ Swift
 
 **상세 기능**
 1. **로그인 & 회원가입**
-![Simulator Screen Shot - iPhone 12 - 2022-03-13 at 17.42.08.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f9636f59-6d7a-4053-86c7-a013c2d1ef98/Simulator_Screen_Shot_-_iPhone_12_-_2022-03-13_at_17.42.08.png)
 
-![Simulator Screen Shot - iPhone 12 - 2022-03-13 at 20.16.52.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1dda54dc-7cbe-4dee-94d0-5dbbaeee44d2/Simulator_Screen_Shot_-_iPhone_12_-_2022-03-13_at_20.16.52.png)
-
-![Simulator Screen Shot - iPhone 12 - 2022-03-13 at 17.44.08.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f596a190-2233-401c-b23f-5cf3bd1c0e19/Simulator_Screen_Shot_-_iPhone_12_-_2022-03-13_at_17.44.08.png)
-
-![Simulator Screen Shot - iPhone 12 - 2022-03-13 at 17.44.16.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c23dc267-c3a5-462f-80fb-443b88f59be3/Simulator_Screen_Shot_-_iPhone_12_-_2022-03-13_at_17.44.16.png)
 
 - 이메일 인증을 통해 중복 방지
 - 로그인 시 서버에서 JWT토큰을 사용자 인증 용도로 사용
