@@ -24,7 +24,7 @@ Swift
 - 인증을 완료하면 닉네임과 비밀번호를 입력 하면 회원 가입 완료
 
 2. **장비 저장 & 수정 & 삭제**
-<img width="726" alt="image" src="https://user-images.githubusercontent.com/21233207/159848959-70e4b2db-9f27-4210-9841-242901d420f9.png">
+<img width="733" alt="image" src="https://user-images.githubusercontent.com/21233207/159848959-70e4b2db-9f27-4210-9841-242901d420f9.png">
 
 - 등록한 장비를 리스트화 하여 볼 수 있습니다.
 - 카테고리 별로 장비를 볼 수 있습니다
@@ -33,13 +33,13 @@ Swift
 - 장비 등록 후 간편하게 수정 & 삭제 할 수 있습니다.
 
 3. **사용자 검색 & 사용자 장비 보기**
-<img width="773" alt="image" src="https://user-images.githubusercontent.com/21233207/159849207-362e8361-17a1-4a36-8518-e797ae204359.png">
+<img width="733" alt="image" src="https://user-images.githubusercontent.com/21233207/159849207-362e8361-17a1-4a36-8518-e797ae204359.png">
 
 - 다른 사용자를 검색 할 수 있습니다.
 - 검색 한 사용자의 장비를 구경 해보세요
 
 4. **프로필 관리 & 계정관리**
-<img width="757" alt="image" src="https://user-images.githubusercontent.com/21233207/159849388-697cffeb-a22d-40a3-a185-7c384e1018f8.png">
+<img width="733" alt="image" src="https://user-images.githubusercontent.com/21233207/159849388-697cffeb-a22d-40a3-a185-7c384e1018f8.png">
 
 - 나를 소개하는 프로필을 작성 할 수 있습니다.
 - 비밀번호 변경 & 회원 탈퇴 기능 제공
