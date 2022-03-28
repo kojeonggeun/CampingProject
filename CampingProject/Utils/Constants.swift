@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 enum API {
-    static let BaseUrl = "http://camtorage.bamdule.com/camtorage/api/"
-    static let BaseUrlMyself = "http://camtorage.bamdule.com/camtorage/api/myself/"
+    static let BaseUrl = "https://camtorage.bamdule.com/camtorage/api/"
+    static let BaseUrlMyself = "https://camtorage.bamdule.com/camtorage/api/myself/"
 
 }
 

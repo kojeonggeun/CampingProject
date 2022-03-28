@@ -16,6 +16,7 @@ class MyGearViewController: UIViewController {
     // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        ImagePickerManager().checkAlbumPermission()
         setView()
         setBind()
         setNotification()

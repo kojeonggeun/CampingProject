@@ -102,6 +102,8 @@ class SearchUserDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        
+
         viewModel.outputs.isStatus
             .subscribe(onNext:{ status in
                 if status == "FOLLOWING"{

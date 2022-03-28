@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -34,10 +34,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;캠토리지&quot;가 장비추가 or 프로필 이미지 기능 사용을 위해 사진 라이브러리에 접근 하도록 허락합니다</string>
 	<key>NSCameraUsageDescription</key>
-	<string>&quot;캠토리지&quot;가 카메라에 접근 하도록 허락합니다</string>
+	<string>"캠토리지"가 카메라에 접근 하도록 허락합니다</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>"캠토리지"가 장비추가 or 프로필 이미지 기능 사용을 위해 사진 라이브러리에 접근 하도록 허락합니다</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -61,8 +61,6 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -82,5 +80,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

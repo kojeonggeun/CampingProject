@@ -16,36 +16,52 @@ class ImagePickerManager: ImagePickerController {
     var photoArray = [UIImage]()
     var imageFileName = [String]()
     var total: Int = 0
-
+    var permission: Bool = false
+    
+    func checkAlbumPermission(){
+           PHPhotoLibrary.requestAuthorization( { status in
+               switch status{
+               case .authorized:
+                   self.permission = true
+               case .denied:
+                   self.permission = false
+               case .restricted, .notDetermined:
+                   print("Album: 선택하지 않음")
+               default:
+                   break
+               }
+           })
+       }
+    
     func showMultipleImagePicker(viewC: UIViewController, collection: UICollectionView, countLabel: UILabel) {
         if self.photoArray.count >= 5 {
             imageErrorAlert(viewC: viewC)
             return
         }
+        
+        
+        self.settings.selection.max = 5
+        self.settings.selection.unselectOnReachingMax = true
+        self.settings.fetch.assets.supportedMediaTypes = [.image, .video]
+        self.albumButton.tintColor = UIColor.green
+        self.cancelButton.tintColor = UIColor.red
 
-        let imagePicker = ImagePickerController()
-        imagePicker.settings.selection.max = 5
-        imagePicker.settings.selection.unselectOnReachingMax = true
-        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image, .video]
-        imagePicker.albumButton.tintColor = UIColor.green
-        imagePicker.cancelButton.tintColor = UIColor.red
-
-        imagePicker.settings.theme.selectionFillColor = UIColor.blue
-        imagePicker.settings.theme.selectionStrokeColor = UIColor.white
-        imagePicker.settings.theme.selectionShadowColor = UIColor.white
-        imagePicker.settings.theme.previewTitleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.white]
-        imagePicker.settings.theme.previewSubtitleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.white]
-        imagePicker.settings.theme.albumTitleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.settings.theme.selectionFillColor = UIColor.blue
+        self.settings.theme.selectionStrokeColor = UIColor.white
+        self.settings.theme.selectionShadowColor = UIColor.white
+        self.settings.theme.previewTitleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.settings.theme.previewSubtitleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.settings.theme.albumTitleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.white]
 
         var tempAssets = [PHAsset]()
 
-        viewC.presentImagePicker(imagePicker, select: { (asset) in
+        viewC.presentImagePicker(self, select: { (asset) in
 
             tempAssets.append(asset)
 
             if self.userSelectedAssets.count + tempAssets.count > 5 {
-                self.imageErrorAlert(viewC: imagePicker)
-                imagePicker.deselect(asset: asset)
+                self.imageErrorAlert(viewC: self)
+                self.deselect(asset: asset)
 
                 tempAssets.remove(at: tempAssets.endIndex - 1)
             }

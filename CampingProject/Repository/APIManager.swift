@@ -248,9 +248,11 @@ public class APIManager {
             .responseDecodable(of: Login.self) { (response) in
                 switch response.result {
                 case .success(let value):
+                    
                     DB.userDefaults.set(["token": value.token, "email": value.email], forKey: "token")
                     completion(true)
                 case .failure(let error):
+                    print("🚫login  Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!),\(error)")
                     completion(false)
                 }
             }

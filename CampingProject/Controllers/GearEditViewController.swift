@@ -23,29 +23,41 @@ class GearEditViewController: UIViewController {
 
     // MARK: LifeCycles
     override func viewDidLoad() {
-        super.viewDidLoad()
-
+        
+        
         self.allPhotos = PHAsset.fetchAssets(with: nil)
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
 
         if let result = gearDetail {
-
             self.gearEditCustomView.initPickerView(type: result.gearTypeName!, id: result.gearTypeId!)
             self.gearEditCustomView.updateData(type: result.gearTypeName!, name: result.name!, color: result.color!, company: result.company!, capacity: result.capacity!, buyDate: result.buyDt!, price: result.price!, desc: result.description!)
-            result.images.enumerated().forEach {
-                let asset = self.allPhotos?.object(at: $0)
-                self.imageItem.append($1)
-                let url = URL(string: $1.url)
-                let data = try? Data(contentsOf: url!)
-                self.imagePicker.photoArray.append(UIImage(data: data!)!)
+            
+            result.images.enumerated().forEach {i,item in
+                let asset = self.allPhotos?.object(at: i)
+                self.imageItem.append(item)
+                
                 self.imagePicker.userSelectedAssets.append(asset!)
-                self.imagePicker.imageFileName.append($1.orgFilename)
-
+                self.imagePicker.imageFileName.append(item.orgFilename)
+                
+                DispatchQueue.global().sync {
+                    let url = URL(string: item.url)
+                    let data = try? Data(contentsOf: url!)
+                    
+                    self.imagePicker.photoArray.append(UIImage(data: data!)!)
+                    DispatchQueue.main.async {
+                    
+                        self.imagePicker.total = self.imagePicker.photoArray.count
+                        self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
+                        self.imageCollectionView.reloadData()
+                    }
+                }
             }
-            self.imagePicker.total = self.imagePicker.photoArray.count
-            self.imageCount.text = "\(self.imagePicker.photoArray.count) / 5"
-            self.imageCollectionView.reloadData()
+           
+   
+            
+            
+            
         }
         imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
     }
@@ -97,7 +109,7 @@ extension GearEditViewController: UICollectionViewDataSource {
         cell.imageRemoveButton.superview?.tag = indexPath.section
         cell.imageRemoveButton.tag = indexPath.row
         cell.imageRemoveButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-
+        
         cell.updateUI(item: imagePicker.photoArray[indexPath.row])
 
         return cell

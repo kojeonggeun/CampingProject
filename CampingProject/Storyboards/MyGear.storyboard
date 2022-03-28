@@ -287,8 +287,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myI-fq-04T">
                                 <rect key="frame" x="0.0" y="517.5" width="414" height="260.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="프라임 디럭스5555" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ef-8K-5Ni">
-                                        <rect key="frame" x="10" y="43" width="233.5" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="5484868648648684486486" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ef-8K-5Ni">
+                                        <rect key="frame" x="10" y="43" width="304" height="36"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -299,8 +299,8 @@
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[텐트]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bT-C7-xsm">
-                                        <rect key="frame" x="252" y="43" width="71.5" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="[텐트]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bT-C7-xsm">
+                                        <rect key="frame" x="322.5" y="43" width="71.5" height="36"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -382,6 +382,7 @@
                                     <constraint firstItem="fwZ-rI-xzR" firstAttribute="leading" secondItem="1Ef-8K-5Ni" secondAttribute="leading" id="oDc-0g-Xty"/>
                                     <constraint firstItem="uqz-nO-QTy" firstAttribute="baseline" secondItem="gwE-vs-EXj" secondAttribute="firstBaseline" id="qzb-gs-xuq"/>
                                     <constraint firstItem="0hy-Hm-2tw" firstAttribute="leading" secondItem="myI-fq-04T" secondAttribute="leading" constant="20" id="rJ3-a4-I39"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6bT-C7-xsm" secondAttribute="trailing" constant="20" id="rKb-xf-cAr"/>
                                     <constraint firstItem="gwE-vs-EXj" firstAttribute="leading" secondItem="uqz-nO-QTy" secondAttribute="trailing" constant="20" id="rSJ-MO-L8G"/>
                                     <constraint firstItem="0hy-Hm-2tw" firstAttribute="centerX" secondItem="HJZ-Ye-ENf" secondAttribute="centerX" id="u7m-xp-Nk7"/>
                                     <constraint firstItem="1pm-BH-eRr" firstAttribute="top" secondItem="1Ef-8K-5Ni" secondAttribute="bottom" constant="20" id="vWX-gS-Tnf"/>
