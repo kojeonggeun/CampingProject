@@ -51,6 +51,7 @@
 		CBB7EA9727A26669002CC1B1 /* PaswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7EA9627A26669002CC1B1 /* PaswordViewController.swift */; };
 		CBB99AFE27AB85FB00166526 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB99AFD27AB85FB00166526 /* SignUpViewModel.swift */; };
 		CBBB2A9D26F238BF006B2E3C /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */; };
+		CBCD529427F4AE4A008349BD /* AppVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCD529327F4AE4A008349BD /* AppVersionManager.swift */; };
 		CBD44FB1276D971500D1B3EA /* SearchUserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD44FB0276D971500D1B3EA /* SearchUserDetailViewController.swift */; };
 		CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */; };
 		CBD5F5DC26F0C67700E09B0D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */; };
@@ -137,6 +138,7 @@
 		CBB7EA9627A26669002CC1B1 /* PaswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaswordViewController.swift; sourceTree = "<group>"; };
 		CBB99AFD27AB85FB00166526 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		CBBB2A9C26F238BF006B2E3C /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
+		CBCD529327F4AE4A008349BD /* AppVersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionManager.swift; sourceTree = "<group>"; };
 		CBD44FB0276D971500D1B3EA /* SearchUserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDetailViewController.swift; sourceTree = "<group>"; };
 		CBD5F5D326E9DD2F00E09B0D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		CBD5F5DB26F0C67700E09B0D /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				CBDF37DC27D0BC9E00C8BA13 /* ChangePasswordViewController.swift */,
 				CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */,
 				CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */,
+				CBCD529327F4AE4A008349BD /* AppVersionManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				CBF37200270C6FCF0028533C /* UserModel.swift in Sources */,
 				CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */,
 				CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */,
+				CBCD529427F4AE4A008349BD /* AppVersionManager.swift in Sources */,
 				CBD5F5D426E9DD2F00E09B0D /* APIManager.swift in Sources */,
 				CBA2327326BE763200946DA0 /* MyGearViewController.swift in Sources */,
 			);

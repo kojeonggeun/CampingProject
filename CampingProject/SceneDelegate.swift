@@ -10,34 +10,14 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        print("willConnectTo")
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        let oldVersion = CheckAppVersion.appVersion
-        let latestVersion = CheckAppVersion.latestVersion()
-        let compareResult = oldVersion!.compare(latestVersion!, options: .numeric)
-        
-        switch compareResult {
-        case .orderedAscending:
-            let alert = UIAlertController(title: "업데이트 가능", message: "캠토리지의 새로운 버전이 있습니다. 이제 \(latestVersion!)버전으로 업데이트 하십시오.", preferredStyle: .alert)
-            alert.addAction(.init(title: "업데이트", style: .default, handler: {_ in
-                CheckAppVersion.openAppStore(urlStr: CheckAppVersion.url)
-            }))
-            alert.addAction(.init(title: "다음에", style: .default, handler: {_ in
-                
-            }))
-            DispatchQueue.main.async {
-                self.window?.rootViewController?.present(alert, animated: true, completion: nil)
-            }
-        case .orderedDescending:
-            break
-           
-        case .orderedSame:
-            break
-        }
+            
+    
         
 
         guard let _ = (scene as? UIWindowScene) else { return }

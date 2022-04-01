@@ -31,6 +31,7 @@ enum AppstoreOpenError: Error {
 struct CheckAppVersion {
     
     static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    
     static let bundleIdentifier = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String
     static let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
     static let appleID = "1615353997"

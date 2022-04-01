@@ -51,13 +51,13 @@ class ProfileViewModel: ProfileViewModelType, ProfileInput, ProfileOutput {
         
         store.loadFollowerRx()
             .subscribe(onNext: {[weak self] follower in
-                self?._follower.accept(follower.contents.count)
+                self?._follower.accept(follower.total)
             })
             .disposed(by: disposeBag)
 
         store.loadFollowingRx()
             .subscribe(onNext: {[weak self] following in
-                self?._following.accept(following.contents.count)
+                self?._following.accept(following.total)
             })
             .disposed(by: disposeBag)
         
