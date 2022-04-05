@@ -61,7 +61,7 @@ class SearchTableViewCell: UITableViewCell {
         let url = URL(string: urlString)
         
         if url == nil {
-            searchProfileImage.image = UIImage(systemName: "camera.circle")
+            searchProfileImage.image = UIImage(named: "traveller")
         } else {
             searchProfileImage.kf.setImage(with: url, placeholder: nil, completionHandler: nil)
         }

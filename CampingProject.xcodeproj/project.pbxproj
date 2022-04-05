@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A44600B86842A1BE6FD9D4C /* Pods_Camtorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F9DD0937EF913B506CB393 /* Pods_Camtorage.framework */; };
 		CB0355BE270DD4F800564675 /* MyGear.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB0355BD270DD4F800564675 /* MyGear.storyboard */; };
 		CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */; };
 		CB3347A826DD16C200DE0126 /* GearDetailImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3347A726DD16C200DE0126 /* GearDetailImageCollectionViewCell.swift */; };
@@ -39,6 +40,7 @@
 		CBAA3ADA27914F7400E75B51 /* SearchUserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */; };
 		CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103226C5510A0058F440 /* GearAddViewController.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
+		CBAD6D1A27FC32660002D11C /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD6D1927FC32660002D11C /* LaunchView.swift */; };
 		CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */; };
 		CBAF1062277AD79F007DF1FC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */; };
 		CBB049BE27BF7D9C0059D452 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB049BD27BF7D9C0059D452 /* SearchTableViewCell.swift */; };
@@ -75,7 +77,6 @@
 		CBF791F427366EDC0089EE48 /* FollowerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF791F327366EDC0089EE48 /* FollowerViewModel.swift */; };
 		CBF791F62737B0300089EE48 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF791F52737B0300089EE48 /* FollowingViewController.swift */; };
 		CBFCD5B62715695F00EF80CE /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */; };
-		F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +90,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19F9DD0937EF913B506CB393 /* Pods_Camtorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Camtorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A88B34B3C81915DD3DE3712 /* Pods-Camtorage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camtorage.release.xcconfig"; path = "Target Support Files/Pods-Camtorage/Pods-Camtorage.release.xcconfig"; sourceTree = "<group>"; };
 		41765E29EA73FAA1FE98B10C /* Pods-CampingProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.debug.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.debug.xcconfig"; sourceTree = "<group>"; };
+		C715EE58FC7709E5C69DD0DD /* Pods-Camtorage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camtorage.debug.xcconfig"; path = "Target Support Files/Pods-Camtorage/Pods-Camtorage.debug.xcconfig"; sourceTree = "<group>"; };
 		CB0355BD270DD4F800564675 /* MyGear.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyGear.storyboard; sourceTree = "<group>"; };
 		CB19B4CC26B7CF0000473DF4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CB19B4CE26B940F700473DF4 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 		CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDetailViewModel.swift; sourceTree = "<group>"; };
 		CBAB103226C5510A0058F440 /* GearAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearAddViewController.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
+		CBAD6D1927FC32660002D11C /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBB049BD27BF7D9C0059D452 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -163,7 +168,6 @@
 		CBF791F52737B0300089EE48 /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		CBFCD5B52715695F00EF80CE /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampingProject.release.xcconfig"; path = "Target Support Files/Pods-CampingProject/Pods-CampingProject.release.xcconfig"; sourceTree = "<group>"; };
-		DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampingProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9DF84DB14C8711B6D744C67 /* Pods_CampingProject.framework in Frameworks */,
+				6A44600B86842A1BE6FD9D4C /* Pods_Camtorage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +192,7 @@
 		2EBE6B2F1D683B1C9DC05A88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DFD96AD126B1D1782CFDB3A4 /* Pods_CampingProject.framework */,
+				19F9DD0937EF913B506CB393 /* Pods_Camtorage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -198,6 +202,8 @@
 			children = (
 				41765E29EA73FAA1FE98B10C /* Pods-CampingProject.debug.xcconfig */,
 				D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */,
+				C715EE58FC7709E5C69DD0DD /* Pods-Camtorage.debug.xcconfig */,
+				1A88B34B3C81915DD3DE3712 /* Pods-Camtorage.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 				CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */,
 				CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */,
 				CBCD529327F4AE4A008349BD /* AppVersionManager.swift */,
+				CBAD6D1927FC32660002D11C /* LaunchView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -491,7 +498,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CampingProject-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Camtorage-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -504,15 +511,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CampingProject/Pods-CampingProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Camtorage/Pods-Camtorage-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CampingProject/Pods-CampingProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Camtorage/Pods-Camtorage-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CampingProject/Pods-CampingProject-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Camtorage/Pods-Camtorage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -529,6 +536,7 @@
 				CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */,
 				CB491B9726FC31ED00D2481F /* GearTextListCustomView.swift in Sources */,
 				CB3347A826DD16C200DE0126 /* GearDetailImageCollectionViewCell.swift in Sources */,
+				CBAD6D1A27FC32660002D11C /* LaunchView.swift in Sources */,
 				CB90E3FD27185A3F00CD2B1C /* SearchUserViewController.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CBDC479D2732C97700537E5A /* SearchResultViewModel.swift in Sources */,
@@ -741,10 +749,11 @@
 		};
 		CB6037CC26B2728F0023042F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41765E29EA73FAA1FE98B10C /* Pods-CampingProject.debug.xcconfig */;
+			baseConfigurationReference = C715EE58FC7709E5C69DD0DD /* Pods-Camtorage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = CampingProject/CampingProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9ML8D6SAST;
@@ -763,10 +772,11 @@
 		};
 		CB6037CD26B2728F0023042F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D67CE54C131ABBCF98AD7B2B /* Pods-CampingProject.release.xcconfig */;
+			baseConfigurationReference = 1A88B34B3C81915DD3DE3712 /* Pods-Camtorage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = CampingProject/CampingProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9ML8D6SAST;

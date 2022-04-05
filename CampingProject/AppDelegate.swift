@@ -13,11 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-         
-        
-        AppVersionManager.sharedManager.asdf()
-   
-        sleep(UInt32(1.5))
         
         return true
     }

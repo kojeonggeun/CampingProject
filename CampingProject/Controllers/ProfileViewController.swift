@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"a", style: .plain, target: self, action: #selector(showPreferences))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showPreferences))
-        profileImage.circular(borderwidth: 4, bordercolor: UIColor.white.cgColor)
+        profileImage.circular(borderwidth: 2, bordercolor: UIColor.white.cgColor)
       
         profileIntro.isEditable = false
         
@@ -58,14 +58,17 @@ class ProfileViewController: UIViewController {
 
                 if userInfo.user?.userImageUrl != "" {
                     self.imageUrl = userInfo.user!.userImageUrl
+                    let url = URL(string: self.imageUrl)
+                    let data = try? Data(contentsOf: url!)
+                    let image = UIImage(data: data!)
+                    self.profileImage.image = image
+                    
                 } else {
-                    self.imageUrl = "https://doodleipsum.com/700/avatar-2?i"
+                    self.profileImage.image = UIImage(named: "traveller")
                 }
     
-                let url = URL(string: self.imageUrl)
-                let data = try? Data(contentsOf: url!)
-                let image = UIImage(data: data!)
-                self.profileImage.image = image
+                
+                
                 
                 self.profileName.text = userInfo.user?.name
                 self.profileIntro.text = userInfo.user?.aboutMe
