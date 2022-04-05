@@ -59,5 +59,5 @@
 - 회원 탈퇴 시 개인정보는 영구 삭제
 <hr>
 
-**개인정보 처리방침**
+**개인정보 처리방침** <br>
 https://github.com/kojeonggeun/CamtoragePrivacyPolicy
