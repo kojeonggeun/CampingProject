@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
          
         
-        AppVersionManager.sharedManager.asdf()
+        AppVersionManager.sharedManager.checkVersion()
    
         sleep(UInt32(1.5))
         

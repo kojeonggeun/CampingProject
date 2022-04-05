@@ -52,7 +52,6 @@ class ResetPWViewController: UIViewController{
                     self.navigationController?.dismiss(animated: true, completion: nil)
                 }))
                 self.present(alert, animated: true, completion: nil)
-                
             }).disposed(by: disposeBag)
         
     }

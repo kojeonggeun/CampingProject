@@ -1338,7 +1338,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호를 변경해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kle-sD-M1X">
-                                <rect key="frame" x="60" y="124" width="294" height="33.5"/>
+                                <rect key="frame" x="10" y="124" width="394" height="33.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1396,9 +1396,9 @@
                             <constraint firstItem="apR-ab-fnQ" firstAttribute="top" secondItem="kle-sD-M1X" secondAttribute="bottom" constant="60" id="TkH-H5-2r4"/>
                             <constraint firstItem="fwr-8Y-k7d" firstAttribute="top" secondItem="dMz-rO-WVq" secondAttribute="bottom" constant="20" id="Vct-7K-yNK"/>
                             <constraint firstItem="6Nu-OV-bDV" firstAttribute="trailing" secondItem="apR-ab-fnQ" secondAttribute="trailing" constant="60" id="eWb-bO-Boo"/>
-                            <constraint firstItem="kle-sD-M1X" firstAttribute="leading" secondItem="6Nu-OV-bDV" secondAttribute="leading" constant="60" id="gAB-2o-UsY"/>
+                            <constraint firstItem="kle-sD-M1X" firstAttribute="leading" secondItem="6Nu-OV-bDV" secondAttribute="leading" constant="10" id="gAB-2o-UsY"/>
                             <constraint firstItem="6Nu-OV-bDV" firstAttribute="trailing" secondItem="fwr-8Y-k7d" secondAttribute="trailing" constant="60" id="hG4-w1-12Z"/>
-                            <constraint firstItem="6Nu-OV-bDV" firstAttribute="trailing" secondItem="kle-sD-M1X" secondAttribute="trailing" constant="60" id="jhb-81-DvO"/>
+                            <constraint firstItem="6Nu-OV-bDV" firstAttribute="trailing" secondItem="kle-sD-M1X" secondAttribute="trailing" constant="10" id="jhb-81-DvO"/>
                             <constraint firstItem="CDF-zp-VuF" firstAttribute="top" secondItem="fwr-8Y-k7d" secondAttribute="bottom" constant="150" id="kVO-mS-lzQ"/>
                             <constraint firstItem="6Nu-OV-bDV" firstAttribute="trailing" secondItem="CDF-zp-VuF" secondAttribute="trailing" constant="60" id="knd-Xo-d1A"/>
                             <constraint firstItem="dMz-rO-WVq" firstAttribute="leading" secondItem="6Nu-OV-bDV" secondAttribute="leading" constant="60" id="sUF-PK-ELv"/>
