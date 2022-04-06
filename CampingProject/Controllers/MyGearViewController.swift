@@ -73,8 +73,7 @@ class MyGearViewController: UIViewController {
                 pushVC.viewModel = GearDetailViewModel(gearId: result.id,userId: self.apiManager.userInfo!.user!.id)
 
                 self.navigationController?.pushViewController(pushVC, animated: true)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
 
     @IBOutlet weak var myGearCollectionView: UICollectionView!

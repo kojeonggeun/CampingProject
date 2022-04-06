@@ -71,8 +71,7 @@ class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetail
                         self.loadSearchInfo(id: self.userId)
                     }).disposed(by: self.disposeBag)
                 }
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         
         
@@ -86,15 +85,13 @@ class SearchUserDetailViewModel: SearchUserDetailViewModelType, SearchUserDetail
         store.loadSearchUserGearRx(userId: id)
             .subscribe(onNext: { gears in
                 self._searchGears.accept(gears)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
         store.loadFriendInfoRx(userId: id)
             .subscribe(onNext: { user in
                 self._searchUser.accept(user)
                 self._checkStatus.accept(user.status!)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         
     }

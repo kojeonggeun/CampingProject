@@ -111,29 +111,30 @@ public class APIManager {
 
     }
 //    장비타입 로드
-    func loadGearType() -> Observable<[GearType]> {
+    func loadConfig() -> Observable<Response> {
         return Observable.create { emitter in
+            let parameters: [String: Any] = ["device":"iOS"]
             AF.request(self.url + "common/config",
                        method: .get,
-                       parameters: nil,
+                       parameters: parameters,
                        encoding: URLEncoding.default,
                        headers: nil)
                 .validate(statusCode: 200..<300)
                 .responseDecodable(of: Response.self) { (response) in
-
                     switch response.result {
                     case .success:
+                        
                         let gears = response.value!
                         self.gearTypes.removeAll()
 
                         for type in gears.gearTypes {
                             self.gearTypes.append(type)
                         }
-                        emitter.onNext(self.gearTypes)
+                        
+                        emitter.onNext(gears)
                         emitter.onCompleted()
                     case .failure(let error):
                         emitter.onError(error)
-
                     }
                 }
             return Disposables.create()

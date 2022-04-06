@@ -38,8 +38,7 @@ class ResetPWEmailViewController:UIViewController{
                 VC.email = self.emailField.text!
                 VC.certificationType = emailType.FIND_PASSWORD
                 self.navigationController?.pushViewController(VC, animated: true)
-            }
-            ).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
             
     }
 }

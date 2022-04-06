@@ -56,8 +56,7 @@ class SearchUserDetailViewController: UIViewController {
             
                 self.followButton.isHidden = check
                 
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         viewModel.inputs.loadSearchInfo(id: userId)
         friendCollectionView.rx.setDelegate(self)
     }
@@ -82,8 +81,7 @@ class SearchUserDetailViewController: UIViewController {
                 self.userImage.kf.setImage(with: url, placeholder: nil, completionHandler: nil)
                 
              
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
         viewModel.outputs.searchGears
             .map { $0.map { ViewGear($0) } }
@@ -99,8 +97,7 @@ class SearchUserDetailViewController: UIViewController {
                 pushVC.viewModel = GearDetailViewModel(gearId: gear.id, userId: self.userId)
                 pushVC.isPermission = self.isCheckable
                 self.navigationController?.pushViewController(pushVC, animated: true)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         
 

@@ -23,8 +23,6 @@ class GearEditViewController: UIViewController {
 
     // MARK: LifeCycles
     override func viewDidLoad() {
-        
-        
         self.allPhotos = PHAsset.fetchAssets(with: nil)
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(gearEdit))
@@ -53,11 +51,6 @@ class GearEditViewController: UIViewController {
                     }
                 }
             }
-           
-   
-            
-            
-            
         }
         imageCollectionView.register(UINib(nibName: "GearImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imageCell")
     }
@@ -84,8 +77,7 @@ class GearEditViewController: UIViewController {
                 })
                 self.present(alert, animated: true, completion: nil)
 
-            })
-            .disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
 
     }
 

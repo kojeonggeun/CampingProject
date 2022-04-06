@@ -87,8 +87,7 @@ class SignInViewController: UIViewController {
             self.loginCheckLabel.isHidden = true
             self.loginErrorHeight.isActive = true
             self.animation()
-        })
-        .disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
     
         loginStateButton.rx.tap.asObservable().map{ (_) -> Bool in return !self.loginStateButton.isSelected}
             .subscribe(onNext: {[weak self] status in
@@ -107,8 +106,7 @@ class SignInViewController: UIViewController {
                 } else {
                     self?.loginStateButton.tintColor = .lightGray
                 }
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
         viewModel.outputs.loginResult
             .subscribe(onNext: { [weak self] result in
@@ -121,8 +119,7 @@ class SignInViewController: UIViewController {
                 }
                 self?.animation()
                 
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
         rx.viewWillAppear.subscribe({_ in
             self.fieldDataInit()

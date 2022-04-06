@@ -65,8 +65,7 @@ class SignUpViewController: UIViewController {
                   pushVC.certificationType = emailType.REGISTER
                   self.navigationController?.pushViewController(pushVC, animated: true)
               }
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
 
     // 키보드 리턴키 눌렀을때 키보드 사라지게

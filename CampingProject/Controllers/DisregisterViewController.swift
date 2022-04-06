@@ -48,8 +48,7 @@ class DisregisterViewController: UIViewController{
                 UIView.animate(withDuration: 0.3){
                     self?.view.layoutIfNeeded()
                 }
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         disregisterButton.rx.tap
             .subscribe(onNext:{
@@ -59,11 +58,8 @@ class DisregisterViewController: UIViewController{
                     self.dismiss(animated: true, completion: nil)
                 }))
                 alert.addAction(.init(title: "취소", style: .default,handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                
-                
-            })
-            .disposed(by: disposeBag)
+                self.present(alert, animated: true, completion: nil)  
+            }).disposed(by: disposeBag)
         
     }
     

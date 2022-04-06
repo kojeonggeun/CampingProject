@@ -1188,10 +1188,10 @@
             </objects>
             <point key="canvasLocation" x="-2055" y="146"/>
         </scene>
-        <!--Launch View-->
+        <!--Launch View Controller-->
         <scene sceneID="AgO-iy-I5W">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="udl-Jz-LtY" customClass="LaunchView" customModule="Camtorage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="udl-Jz-LtY" customClass="LaunchViewController" customModule="Camtorage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mJC-io-5zU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1536,7 +1536,7 @@
         <!--Navigation Controller-->
         <scene sceneID="0O4-qG-IoG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zAi-4V-l8L" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="overFullScreen" id="zAi-4V-l8L" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4iq-PF-549">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

@@ -62,7 +62,6 @@ class AddGearViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "확인", style: .default))
                 self.present(alert, animated: true)
                 return
-                
             }
         }
         

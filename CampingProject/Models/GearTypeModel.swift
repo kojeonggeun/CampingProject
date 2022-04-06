@@ -5,8 +5,9 @@
 //  Created by 고정근 on 2021/08/13.
 //
 
-struct Response: Decodable {
+public struct Response: Decodable {
     var gearTypes: [GearType] = []
+    let appVersion: AppVersion
 }
 
 public struct GearType: Decodable {
@@ -17,4 +18,10 @@ public struct GearType: Decodable {
         case gearID = "id"
         case gearName =  "name"
     }
+}
+
+public struct AppVersion: Decodable {
+    let device: String
+    let minimumVersion: String
+
 }

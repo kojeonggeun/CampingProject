@@ -69,8 +69,7 @@ class FollowingViewController: UIViewController {
                     cell.onFriend.accept(element)
                     return cell
                 }
-            }
-            .disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
 
         followingSearchBar.rx.text.orEmpty
             .debounce(RxTimeInterval.milliseconds(5), scheduler: MainScheduler.instance)
@@ -89,16 +88,14 @@ class FollowingViewController: UIViewController {
             if offsetY > (contentSize - boundsSizeHeight) {
                 self.viewModel.inputs.fetchMoreDatas.accept(())
             }
-        }
-        .disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
 
         viewModel.outputs.isLoadingSpinnerAvaliable
             .subscribe { [weak self] isAvaliable in
             guard let isAvaliable = isAvaliable.element,
                   let self = self else { return }
             self.followingTableView.tableFooterView = isAvaliable ? self.viewSpinner : UIView(frame: .zero)
-        }
-        .disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
 
         followingTableView.rx.modelSelected(Friend.self)
             .subscribe(onNext: { friend in

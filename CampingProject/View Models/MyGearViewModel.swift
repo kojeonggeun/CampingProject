@@ -32,12 +32,7 @@ class MyGearViewModel: MyGearInput, MyGearOutput, MyGearViewModelType {
 
     private let _gears = BehaviorRelay<[CellData]>(value: [])
     private let _gearTypes = BehaviorRelay<[GearType]>(value: [])
-    private let _viewGear = PublishRelay<ViewGear>()
-
-    var didSelectViewGear: Observable<ViewGear> {
-        return _viewGear.asObservable()
-    }
-
+ 
     var gears: Observable<[CellData]> {
         return _gears.asObservable()
     }
@@ -59,10 +54,11 @@ class MyGearViewModel: MyGearInput, MyGearOutput, MyGearViewModelType {
     }
 
     func loadGearTypes() {
-        apiManager.loadGearType().map { $0 }.subscribe(onNext: {
-            self._gearTypes.accept($0)
-        })
-        .disposed(by: disposeBag)
+        apiManager.loadConfig()
+            .map { $0.gearTypes }
+            .subscribe(onNext: {
+                self._gearTypes.accept($0)
+            }).disposed(by: disposeBag)
     }
 
     var inputs: MyGearInput { return self }

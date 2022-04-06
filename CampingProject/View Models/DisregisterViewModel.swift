@@ -43,8 +43,7 @@ class DisregisterViewModel: DisregisterInput, DisregisterOutput, DisregisterView
             .flatMap{ store.passwordCertificationRx(password: $0)}
             .subscribe(onNext:{ [weak self ] result in
                 self?._result.accept(result)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         deleteUser.subscribe({ _ in
             APIManager().disregister()

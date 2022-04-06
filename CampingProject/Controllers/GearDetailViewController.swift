@@ -74,8 +74,7 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
                 })
                 self.present(alert, animated: true)
 
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
         gearEditButton.rx.tap
             .subscribe({[weak self] _ in
@@ -85,8 +84,7 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
                 pushVC.gearDetail = self.gearDetail
                 pushVC.delegate = self
                 self.navigationController?.pushViewController(pushVC, animated: true)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
     }
 
@@ -113,8 +111,7 @@ class GearDetailViewController: UIViewController, GearDetailReloadable {
                 self.gearDesc.text = gear.description
                 self.gearBuyDt.text = gear.buyDt ?? ""
                 self.gearPrice.text = "\(gear.price ?? 0)"
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
 
     @IBOutlet weak var gearCompany: UILabel!

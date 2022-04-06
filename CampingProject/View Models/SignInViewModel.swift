@@ -66,14 +66,12 @@ class SignInViewModel: SignInViewModelType, SignInlInput, SignInOutput {
                     .subscribe(onNext: { result in
                         self?.loginResult.onNext(result)
                     }).disposed(by: self!.disposeBag)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
         Observable.combineLatest(autoLogin, loginResult) { $0 && $1 }
             .subscribe(onNext: { result in
                 DB.userDefaults.set(result, forKey: "Auto")
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
     }
 }

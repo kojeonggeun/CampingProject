@@ -37,14 +37,12 @@ class FollowingViewModel: FollowInput, FollowOutput, FollowViewModelType {
             .do { self.text = $0; self.refreshTriggered()}
             .subscribe(onNext: { _ in
                 self.fetchData(page: self.page)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
 
         fetchMoreDatas.subscribe(onNext: {[weak self] _ in
             guard let self = self else { return }
             self.fetchData(page: self.page)
-        })
-        .disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     func fetchData(page: Int) {
@@ -75,8 +73,7 @@ class FollowingViewModel: FollowInput, FollowOutput, FollowViewModelType {
                 } else if self.text != ""{
                     self._followings.accept([Friend.init(name: self.text)])
                 }
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
 //    다음 page의 데이터를 가져와 합친 후 page 를 +1 해준다.
     func handleData(data: Friends ) {
@@ -100,8 +97,7 @@ class FollowingViewModel: FollowInput, FollowOutput, FollowViewModelType {
         store.loadFollowingRx()
             .subscribe(onNext: { following in
                 self._followings.accept(following.contents)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
 
     func refreshTriggered() {

@@ -93,16 +93,14 @@ class SearchUserViewController: UIViewController {
                     cell.onData.accept(element)
                     return cell
                 }
-            }
-            .disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
 
         viewModel.outputs.isLoadingSpinnerAvaliable
             .subscribe { [weak self] isAvaliable in
             guard let isAvaliable = isAvaliable.element,
                   let self = self else { return }
             self.searchTableView.tableFooterView = isAvaliable ? self.viewSpinner : UIView(frame: .zero)
-        }
-        .disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
 
         searchTableView.rx.didScroll
             .subscribe { [weak self] _ in
@@ -115,8 +113,7 @@ class SearchUserViewController: UIViewController {
             if offsetY > (contentSize - boundsSizeHeight) {
                 self.viewModel.fetchMoreDatas.accept(())
             }
-        }
-        .disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
 
         searchTableView.rx.modelSelected(SearchUser.self)
             .subscribe(onNext: { user in

@@ -45,8 +45,7 @@ class GearDetailViewModel: GearDetailViewModelType, GearDetailInput, GearDetailO
 
         deleteButtonTouched.subscribe({ _ in
             self.apiManager.deleteGear(gearId: self.gearId)
-        })
-        .disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
 
     }
     func loadGearDetail() {

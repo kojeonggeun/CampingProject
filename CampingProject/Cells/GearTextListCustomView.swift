@@ -21,7 +21,7 @@ class GearTextListCustomView: UIView{
     @IBOutlet weak var gearPrice: UITextField!
     @IBOutlet weak var gearDesc: UITextField!
 
-    var apiService: APIManager = APIManager.shared
+    var apiManager: APIManager = APIManager.shared
     var gearTypeId: Int = 0
     var selectType: String = ""
 
@@ -130,9 +130,9 @@ class GearTextListCustomView: UIView{
 
         gearType.inputView = pickerView
         
-        gearType.text = apiService.gearTypes[0].gearName
-        gearTypeId = apiService.gearTypes[0].gearID
-        selectType = apiService.gearTypes[0].gearName
+        gearType.text = apiManager.gearTypes[0].gearName
+        gearTypeId = apiManager.gearTypes[0].gearID
+        selectType = apiManager.gearTypes[0].gearName
         
         let doneButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(dismissPickerView))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -172,19 +172,19 @@ extension GearTextListCustomView: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return apiService.gearTypes.count
+        return apiManager.gearTypes.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return apiService.gearTypes[row].gearName
+        return apiManager.gearTypes[row].gearName
     }
 }
 
 extension GearTextListCustomView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
             
-        selectType = apiService.gearTypes[row].gearName
-        gearTypeId = apiService.gearTypes[row].gearID
+        selectType = apiManager.gearTypes[row].gearName
+        gearTypeId = apiManager.gearTypes[row].gearID
                 
     }
     

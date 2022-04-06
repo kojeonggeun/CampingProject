@@ -44,8 +44,7 @@ class SearchTableViewCell: UITableViewCell {
                 self?.searchEmail.text = user.email
                 self?.searchName.text = user.name
 
-            })
-            .disposed(by: cellDisposeBag)
+            }).disposed(by: cellDisposeBag)
 
         onFriend
             .observe(on: MainScheduler.instance)
@@ -53,8 +52,7 @@ class SearchTableViewCell: UITableViewCell {
                 self?.loadImage(urlString: user.profileUrl)
                 self?.searchEmail.text = user.email
                 self?.searchName.text = user.name
-            })
-            .disposed(by: cellDisposeBag)
+            }).disposed(by: cellDisposeBag)
     }
 
     func loadImage(urlString: String) {

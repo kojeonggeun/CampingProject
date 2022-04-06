@@ -57,8 +57,7 @@ class ChangePasswordViewController: UIViewController {
         Observable.combineLatest(pwVaild, repwValid, presentPWVaild, resultSelector: {$0 && $1 && $2})
             .subscribe(onNext: { result in
                 self.doneButton.isEnabled = result
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
      
   
         doneButton.rx.tap
@@ -69,8 +68,7 @@ class ChangePasswordViewController: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     
     }
     override func viewWillAppear(_ animated: Bool) {

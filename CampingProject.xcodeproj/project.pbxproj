@@ -40,7 +40,7 @@
 		CBAA3ADA27914F7400E75B51 /* SearchUserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */; };
 		CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103226C5510A0058F440 /* GearAddViewController.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
-		CBAD6D1A27FC32660002D11C /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD6D1927FC32660002D11C /* LaunchView.swift */; };
+		CBAD6D1A27FC32660002D11C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD6D1927FC32660002D11C /* LaunchViewController.swift */; };
 		CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */; };
 		CBAF1062277AD79F007DF1FC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */; };
 		CBB049BE27BF7D9C0059D452 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB049BD27BF7D9C0059D452 /* SearchTableViewCell.swift */; };
@@ -130,7 +130,7 @@
 		CBAA3AD927914F7400E75B51 /* SearchUserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDetailViewModel.swift; sourceTree = "<group>"; };
 		CBAB103226C5510A0058F440 /* GearAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearAddViewController.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
-		CBAD6D1927FC32660002D11C /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		CBAD6D1927FC32660002D11C /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBB049BD27BF7D9C0059D452 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -264,6 +264,7 @@
 		CB93BE1626D3BE970018AB0D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CBCD529327F4AE4A008349BD /* AppVersionManager.swift */,
 				CB93BE1726D3BEAF0018AB0D /* Constants.swift */,
 				CBDC479E2732C9C900537E5A /* CellProtocol.swift */,
 				CBA8D2C427D88E48002D977E /* Extensions.swift */,
@@ -304,8 +305,7 @@
 				CBDF37DC27D0BC9E00C8BA13 /* ChangePasswordViewController.swift */,
 				CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */,
 				CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */,
-				CBCD529327F4AE4A008349BD /* AppVersionManager.swift */,
-				CBAD6D1927FC32660002D11C /* LaunchView.swift */,
+				CBAD6D1927FC32660002D11C /* LaunchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -536,7 +536,7 @@
 				CBAA3ACC2786D74100E75B51 /* MyGearViewModel.swift in Sources */,
 				CB491B9726FC31ED00D2481F /* GearTextListCustomView.swift in Sources */,
 				CB3347A826DD16C200DE0126 /* GearDetailImageCollectionViewCell.swift in Sources */,
-				CBAD6D1A27FC32660002D11C /* LaunchView.swift in Sources */,
+				CBAD6D1A27FC32660002D11C /* LaunchViewController.swift in Sources */,
 				CB90E3FD27185A3F00CD2B1C /* SearchUserViewController.swift in Sources */,
 				CB6037BB26B2728E0023042F /* AppDelegate.swift in Sources */,
 				CBDC479D2732C97700537E5A /* SearchResultViewModel.swift in Sources */,
