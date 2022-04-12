@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 import RxSwift
 import RxViewController
-// import AuthenticationServices
+import AuthenticationServices
 
 @available(iOS 13.0, *)
-class SignInViewController: UIViewController {
-
+class SignInViewController: UIViewController{
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginCheckLabel: UILabel!
@@ -21,6 +21,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var loginStateButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    
+    @IBOutlet weak var appleLoginStackView: UIStackView!
     
     let store: Store = Store.shared
     let apiManager: APIManager = APIManager.shared
@@ -50,6 +52,9 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
 
         passwordTextField.isSecureTextEntry = true
+        
+        setAppleLoginBtn()
+//        performExistingAccountSetupFlows()
         setBind()
 
     }
@@ -61,6 +66,15 @@ class SignInViewController: UIViewController {
         super.viewWillDisappear(animated)
         removeKeyboardNotifications()
     }
+    
+    func setAppleLoginBtn(){
+        let authorizationButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
+        authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+        
+        self.appleLoginStackView.addArrangedSubview(authorizationButton)
+    }
+    
+  
     
     func setBind() {
         loginErrorHeight =  loginCheckLabel.heightAnchor.constraint(equalToConstant: 0)
@@ -125,7 +139,6 @@ class SignInViewController: UIViewController {
             self.fieldDataInit()
 
             if DB.userDefaults.bool(forKey: "Auto") && DB.userDefaults.value(forKey: "token") != nil {
-                print(DB.userDefaults.value(forKey: "token"))
                 self.apiManager.loginCheck { comple in
                     if comple {
                         self.performSegue(withIdentifier: "MainTabBarController", sender: nil)
@@ -151,5 +164,67 @@ class SignInViewController: UIViewController {
         viewModel.inputs.emailValueChanged.accept("")
         viewModel.inputs.pwValueChanged.accept("")
         viewModel.inputs.autoLoginStatusChanged.accept(false)
+    }
+}
+extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
+    @objc func handleAuthorizationAppleIDButtonPress() {
+        print("Awd")
+        
+        
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+            
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+        
+        
+    }
+    
+
+    func performExistingAccountSetupFlows() {
+      // Prepare requests for both Apple ID and password providers.
+      let requests = [ASAuthorizationAppleIDProvider().createRequest(),
+                      ASAuthorizationPasswordProvider().createRequest()]
+            
+      // Create an authorization controller with the given requests.
+      let authorizationController = ASAuthorizationController(authorizationRequests: requests)
+      authorizationController.delegate = self
+      authorizationController.presentationContextProvider = self
+      authorizationController.performRequests()
+    }
+}
+
+extension SignInViewController: ASAuthorizationControllerDelegate{
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        print(authorization.credential)
+        print(authorization)
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            // Create an account in your system.
+            let userIdentifier = appleIDCredential.user
+            let userFirstName = appleIDCredential.fullName?.givenName
+            let userLastName = appleIDCredential.fullName?.familyName
+            let userEmail = appleIDCredential.email
+
+            print(userIdentifier,userFirstName,userLastName,userEmail)
+            //Navigate to other view controller
+            } else if let passwordCredential = authorization.credential as? ASPasswordCredential {
+                // Sign in using an existing iCloud Keychain credential.
+                let username = passwordCredential.user
+                let password = passwordCredential.password
+
+                print(username, password)
+                //Navigate to other view controller
+            }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print(error)
     }
 }

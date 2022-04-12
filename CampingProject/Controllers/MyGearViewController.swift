@@ -20,6 +20,7 @@ class MyGearViewController: UIViewController {
         setView()
         setBind()
         setNotification()
+        
     }
 
     func setNotification() {

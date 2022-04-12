@@ -41,6 +41,7 @@
 		CBAB103326C5510A0058F440 /* GearAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103226C5510A0058F440 /* GearAddViewController.swift */; };
 		CBAB103826C666FA0058F440 /* GearTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB103726C666FA0058F440 /* GearTypeModel.swift */; };
 		CBAD6D1A27FC32660002D11C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD6D1927FC32660002D11C /* LaunchViewController.swift */; };
+		CBAD6D2E280546DD0002D11C /* SignWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD6D2D280546DD0002D11C /* SignWithApple.swift */; };
 		CBADAE6226CB7D60006DC556 /* GearImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */; };
 		CBAF1062277AD79F007DF1FC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */; };
 		CBB049BE27BF7D9C0059D452 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB049BD27BF7D9C0059D452 /* SearchTableViewCell.swift */; };
@@ -131,6 +132,7 @@
 		CBAB103226C5510A0058F440 /* GearAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearAddViewController.swift; sourceTree = "<group>"; };
 		CBAB103726C666FA0058F440 /* GearTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTypeModel.swift; sourceTree = "<group>"; };
 		CBAD6D1927FC32660002D11C /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		CBAD6D2D280546DD0002D11C /* SignWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignWithApple.swift; sourceTree = "<group>"; };
 		CBADAE6126CB7D60006DC556 /* GearImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		CBAF1061277AD79F007DF1FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBB049BD27BF7D9C0059D452 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				CBDF37DE27D0BD7800C8BA13 /* DisregisterViewController.swift */,
 				CBDF37D027D091FE00C8BA13 /* HalfModalPresentationController.swift */,
 				CBAD6D1927FC32660002D11C /* LaunchViewController.swift */,
+				CBAD6D2D280546DD0002D11C /* SignWithApple.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				CBDC478F2729467900537E5A /* FollowerViewController.swift in Sources */,
 				CBA8D2C527D88E48002D977E /* Extensions.swift in Sources */,
 				CB19B4CF26B940F700473DF4 /* MainTabBarController.swift in Sources */,
+				CBAD6D2E280546DD0002D11C /* SignWithApple.swift in Sources */,
 				CBAA3ADA27914F7400E75B51 /* SearchUserDetailViewModel.swift in Sources */,
 				CB93BE1826D3BEAF0018AB0D /* Constants.swift in Sources */,
 				CBDF37DF27D0BD7800C8BA13 /* DisregisterViewController.swift in Sources */,
@@ -686,6 +690,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -743,7 +748,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
@@ -762,7 +767,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Ko.CampingProject.CamtorageV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -785,7 +790,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Ko.CampingProject.CamtorageV1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

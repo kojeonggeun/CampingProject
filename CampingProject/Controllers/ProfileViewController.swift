@@ -67,9 +67,6 @@ class ProfileViewController: UIViewController {
                     self.profileImage.image = UIImage(named: "traveller")
                 }
     
-                
-                
-                
                 self.profileName.text = userInfo.user?.name
                 self.profileIntro.text = userInfo.user?.aboutMe
             }).disposed(by: disposeBag)

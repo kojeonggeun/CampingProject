@@ -31,15 +31,14 @@ enum AppstoreOpenError: Error {
 struct CheckAppVersion {
     
     static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-    
-    static let bundleIdentifier = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String
-    static let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+//    static let bundleIdentifier = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String
+//    static let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
     static let appleID = "1615353997"
-    static let url = "itms-apps://itunes.apple.com/app/apple-store/\(appleID)"
+    static let url = "https://itunes.apple.com/lookup?id=\(appleID)"
     
     static func latestVersion() -> String? {
     
-         guard let url = URL(string: "http://itunes.apple.com/lookup?id=\(appleID)"),
+         guard let url = URL(string: url),
                let data = try? Data(contentsOf: url),
                let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
                let results = json["results"] as? [[String: Any]],
