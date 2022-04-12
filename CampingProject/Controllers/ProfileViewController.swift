@@ -15,7 +15,19 @@ class ProfileViewController: UIViewController {
     let disposeBag = DisposeBag()
     let store = Store.shared
     var imageUrl: String = ""
+    var data: Data?
 
+    lazy var activityView: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView(frame: CGRect(x: 110, y: 35, width: view.frame.width, height: view.frame.height))
+        loading.hidesWhenStopped = true
+        loading.style = UIActivityIndicatorView.Style.medium
+        loading.center = self.view.center
+        loading.backgroundColor = .lightGray
+        loading.alpha = 0.9
+        view.addSubview(loading)
+        return loading
+    }()
+    
 // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +36,7 @@ class ProfileViewController: UIViewController {
         profileImage.circular(borderwidth: 2, bordercolor: UIColor.white.cgColor)
       
         profileIntro.isEditable = false
-        
+
         setBind()
      
     }
@@ -35,6 +47,8 @@ class ProfileViewController: UIViewController {
     }
    
     func setBind() {
+        
+        activityView.startAnimating()
         viewModel.outputs.followerCount
             .map { "\($0)"}
             .asDriver(onErrorJustReturn: "0")
@@ -54,13 +68,19 @@ class ProfileViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.outputs.profile
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .do{
+                let url = URL(string: $0.user!.userImageUrl)
+                self.data = try? Data(contentsOf: url!)
+            }
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext:{ userInfo in
 
                 if userInfo.user?.userImageUrl != "" {
                     self.imageUrl = userInfo.user!.userImageUrl
-                    let url = URL(string: self.imageUrl)
-                    let data = try? Data(contentsOf: url!)
-                    let image = UIImage(data: data!)
+                    
+                    
+                    let image = UIImage(data: self.data!)
                     self.profileImage.image = image
                     
                 } else {
@@ -69,6 +89,8 @@ class ProfileViewController: UIViewController {
     
                 self.profileName.text = userInfo.user?.name
                 self.profileIntro.text = userInfo.user?.aboutMe
+                
+                self.activityView.stopAnimating()
             }).disposed(by: disposeBag)
 
     }
